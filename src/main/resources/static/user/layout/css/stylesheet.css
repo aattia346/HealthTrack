@@ -1,0 +1,67 @@
+/*************************** login page *****************************/
+
+.login-body{
+    background-color: #F2F2F2;
+}
+.frame{
+    background-color: #fff;
+    border-radius: 10px;
+}
+.login-header h3{
+    border-radius: 10px;
+    margin: 66px -15px 0px;
+    font-weight: 700;
+    font-size: 32px;
+    box-shadow: 0 0 3px 1px #ddd;
+    background-color: #fff;
+    padding: 10px 0px;
+    color: #49bcf5;
+}
+.login-container .login-form{
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 35px 24px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+.login-container form label{
+    margin-bottom: 13px;
+}
+.login-container form input[type="submit"]{
+    margin-top: 20px;
+}
+.login-container a{
+    margin-bottom: 20px;
+}
+.wrong-input{
+    color: #f00;
+    font-size: 12px;
+}
+
+
+/*======================================================================================*/
+/*======================================================================================*/
+
+/***************************** registeration page **************************************/
+
+.name input{
+    width: 49%;
+    display: inline;
+}
+@media only screen and (max-width: 500px) {
+    .name input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+.name label{
+    margin-right: 16px;
+}
+.wrong-input-register-page-1{
+	margin-top: 5px;
+	width: 41%;
+	display: inline-block;
+}
+.wrong-input-register-input-2{
+	display: inline-block;
+}
