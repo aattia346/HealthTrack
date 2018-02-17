@@ -1,17 +1,29 @@
-<% String title="Hospital"; %>
-	 <%@include  file="../includes/header.jsp" %>
+<%@page import="java.util.List"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="com.gp.user.Department"%>
+<%@page import="com.gp.user.HospitalDao"%>
+<%@page import="com.gp.user.Hospital"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String title="Hospital";
+
+HttpSession hospitalSession = request.getSession();
+
+int hospitalId = (Integer)hospitalSession.getAttribute("hospitalId");
+Hospital H = HospitalDao.getHospitalById(hospitalId);
+List<Department> depts = HospitalDao.getDeptsByHospitalID(H.getId());
+request.setAttribute("depts", depts);
+PrintWriter pw = new PrintWriter(System.out);
+%>
+<%@include  file="../includes/header.jsp" %>
 	 <div class="overlay">
         
             <div class="hospital">
 
                 <div class="hospital-head">
-                    <h2 class="hospital-title">Dar Elfo2ad</h2>
+                    <h2 class="hospital-title"><%= H.getName() %></h2>
 
-                    <p class="hospital-desc lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum
-                    </p>
+                    <p class="hospital-desc lead"><%= H.getIntro() %></p>
                 </div>
-
-
                 <img src="/user/layout/images/dar_elfo2ad.jpg" class="hospital-img">
                 </div>
         </div>
@@ -22,38 +34,33 @@
 
                 <div class="col-sm-12 hospital-depts">
                     <div class="hospital-info">
-                        <h4 class="about-title">Name: </h4><p class="about-detail">Dar Elfo2ad</p>
+                        <h4 class="about-title">Name: </h4><p class="about-detail"><%= H.getName() %></p>
                     </div>
                     <div class="hospital-info">
-                        <h4 class="about-title">Address: </h4><p class="about-detail">6 october city infront of mall arabia</p>
+                        <h4 class="about-title">Address: </h4><p class="about-detail"><%= H.getAddress() %></p>
                     </div>
                     <div class="hospital-info">
-                        <h4 class="about-title">Location: </h4><p class="about-detail"><a href="#">find dar elfo2ad in google maps</a></p>
+                        <h4 class="about-title">Location: </h4><p class="about-detail"><a href="#">find <%= H.getName() %> in google maps</a></p>
                     </div>
                     <div class="hospital-info">
-                        <h4 class="about-title">Website: </h4><p class="about-detail"><a href="#">url of the hospital</a></p>
+                        <h4 class="about-title">Website: </h4><p class="about-detail"><a target="_blank" href="<%= H.getWebsite()%>"><%= H.getWebsite()%></a></p>
                     </div>
                     <div class="hospital-info">
-                        <h4 class="about-title">Phone Number: </h4><p class="about-detail">19777</p>
+                        <h4 class="about-title">Phone Number: </h4><p class="about-detail"><%= H.getPhone()%></p>
                     </div>
                     <div class="hospital-info">
-                        <h4 class="about-title">Review </h4><p class="about-detail">4.3</p>
+                        <h4 class="about-title">Review </h4><p class="about-detail"><%= H.getReview() %></p>
                     </div>
                 </div>
                 
                 <div class="col-sm-3 hospital-depts">
                     <h4 class="text-center">Hospital Department</h4>
                     <ul class="list-unstyled">
-                        <li id="dep1" class="text-center">dept1</li>
-                        <li id="dep2" class="text-center">dept2</li>
-                        <li id="dep3" class="text-center">dept3</li>
-                        <li id="dep4" class="text-center">dept4</li>
-                        <li class="text-center">dept1</li>
-                        <li class="text-center">dept1</li>
-                        <li class="text-center">dept1</li>
-                        <li class="text-center">dept1</li>
-                        <li class="text-center">dept1</li>
-                        <li class="text-center">dept1</li>
+                    	
+                    	<c:forEach  var="dept" items="${depts}">
+					       <li id="dep${dept.id}" class="text-center">${dept.name}</li>
+                         </c:forEach>
+                  
                     </ul>
                 </div>
 

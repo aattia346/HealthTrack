@@ -2,6 +2,9 @@ package com.gp.controllers;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +32,18 @@ public class ProfilesController {
     }
 	
 	@RequestMapping(value="/HealthTrack/profile/{type}/{userId}", method = RequestMethod.GET)
-    public ModelAndView profile(@PathVariable("userId") int id, @PathVariable("type") String type,ModelAndView mav, ModelMap m) 
+    public ModelAndView profile(HttpServletRequest request, @PathVariable("userId") int id, @PathVariable("type") String type,ModelAndView mav, ModelMap m) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			m.addAttribute("id", id);
 			String url = "/user/profiles/" + type;
 			mav.setViewName(url);
+			
+			if(type.equalsIgnoreCase("hospital")) {
+				HttpSession session = request.getSession();
+				session.setAttribute("hospitalId", id);
+			}
 		}else {
 			mav.setViewName("/user/login");
 		}
