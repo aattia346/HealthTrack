@@ -27,13 +27,15 @@ public class ProfilesController {
 		
         return mav;
     }
+	
 	@RequestMapping(value="/HealthTrack/profile/{type}/{userId}", method = RequestMethod.GET)
     public ModelAndView profile(@PathVariable("userId") int id, @PathVariable("type") String type,ModelAndView mav, ModelMap m) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			m.addAttribute("id", id);
-			mav.setViewName("/user/profiles/user");
+			String url = "/user/profiles/" + type;
+			mav.setViewName(url);
 		}else {
 			mav.setViewName("/user/login");
 		}

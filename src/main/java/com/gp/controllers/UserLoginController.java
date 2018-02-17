@@ -33,7 +33,6 @@ public class UserLoginController {
 		if(session.isNew()) {
 			mav.setViewName("/user/login");
 		}else {
-			System.out.println(session.getAttribute("username"));
 			mav.setViewName("redirect:/HealthTrack");			
 		}
         return mav;

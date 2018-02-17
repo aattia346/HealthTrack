@@ -65,3 +65,141 @@
 .wrong-input-register-input-2{
 	display: inline-block;
 }
+/*======================================================================================*/
+/*======================================================================================*/
+
+/*****************************Hospital page **************************************/
+.hospital-img{
+    height: 400px;
+    width: 100%;
+}
+.hospital-body{
+    background-color: #F3F4EF;
+}
+.hospital-body .container{
+    background-color: #F3F4EF;
+}
+.hospital-depts{
+    border-top: 5px solid #49BCF5;
+    margin: 4% 3% 3% 5%;
+    min-height: 300px;
+    border-radius:  0 0 20px 20px;
+    background-color: #fff;
+}
+.hospital{
+    position: relative;
+}
+.hospital-head{
+    position: absolute;
+    left: 183px;
+    top: 58px;
+}
+.hospital-title{
+    color: #fff;
+}
+.hospital-desc{
+    max-width: 587px;
+    max-height: 59px;
+    overflow: hidden;
+    color: #fff;
+}
+.overlay{
+    background: #000;
+    opacity: .8;
+}
+.about-title{
+    display: inline-block;
+    width: 40%;
+    color: #777;
+}
+.about-detail{
+    display: inline-block;
+}
+.hospital-depts h4{
+    color: #777;
+    margin-top: 20px;
+}
+.hospital-depts ul{
+    margin-top: 30px;
+}
+.hospital-depts ul li{
+   	line-height: 1.8;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 0px -14px;
+    background-color: #49BCF5;
+    width: 112%;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+.hospital-service{
+    max-height: 400px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.hospital-service .caption img{
+    width: 100%;
+}
+.hospital-service .caption p{
+    margin-top: 13px;
+    color: #777;
+    font-size: 16px;
+}
+.hospital-service .caption{
+    padding-bottom: 0;
+}
+.services-available{
+    margin-bottom: 37px;
+}
+.hospital-depts .col-sm-4{
+    width: 201px;
+}
+.hospital-depts ul li:hover{
+    cursor: pointer;
+}
+/*======================================================================================*/
+/*======================================================================================*/
+
+/*****************************Service page **************************************/
+.service-img{
+    margin-top: 80px;
+    background: #fff;
+    border-radius: 10px;
+}
+.service-img img{
+    width: 100%;
+    height: 300px;
+}
+.service-booking h4{
+    margin-bottom: 11px;
+}
+.service-booking{
+    margin-left: 0;
+}
+.service-booking form .personal-info{
+    margin-top: 18px;
+}
+.booking-date{
+    border: 1px solid #49bcf5;
+    border-radius: 11px;
+    padding: 3px;
+}
+input[type="submit"]{
+    font-weight: bold;
+}
+.last-updated{
+    margin-top: 17px;
+    font-size: 13px;
+    color: #999;
+}
+.service-info .about-title{
+    width: 50%;
+}
+@media only screen and (max-width: 500px) {
+    .service-info .about-title{
+    width: 100%;
+    }
+    .service-booking input[type="submit"] {
+        margin-top: 20px;
+    }
+}
