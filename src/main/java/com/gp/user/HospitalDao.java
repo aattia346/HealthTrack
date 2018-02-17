@@ -35,10 +35,25 @@ public class HospitalDao {
 		ps.setInt(1, hospitalId);
 		ResultSet result = ps.executeQuery();
 		List<Department> list = new ArrayList<Department>();
-		result.next();
 		while(result.next()) {
 			Department d = new Department(result.getInt(1), result.getInt(2), result.getString(3));
 			list.add(d);
+		}
+		return list;
+	}
+	
+	public static List<Service> getServicessByDeptID(int deptId) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM service WHERE dept_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, deptId);
+		ResultSet result = ps.executeQuery();
+		List<Service> list = new ArrayList<Service>();
+		while(result.next()) {
+			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), result.getString(5), result.getDate(6), result.getDate(7));
+			list.add(s);
 		}
 		return list;
 	}
