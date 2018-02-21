@@ -8,9 +8,8 @@ $(document).ready(function(){
         var id = $(this).attr("id");
         console.log(id);
         var selector = "." + id;
-        console.log(selector);
-        $(selector).removeClass("hidden").siblings("a").addClass("hidden");       
-        $(selector).removeClass("hidden");
+        $(selector).removeClass("hidden").siblings("a").addClass("hidden");
+        
     });
 
 });	
