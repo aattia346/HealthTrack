@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="com.gp.user.Department"%>
-<%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.HospitalDao"%>
 <%@page import="com.gp.user.Hospital"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -12,6 +12,7 @@ int hospitalId = (Integer)hospitalSession.getAttribute("hospitalId");
 Hospital H = HospitalDao.getHospitalById(hospitalId);
 List<Department> depts = HospitalDao.getDeptsByHospitalID(H.getId());
 request.setAttribute("depts", depts);
+PrintWriter pw = new PrintWriter(System.out);
 %>
 <%@include  file="../includes/header.jsp" %>
 	 <div class="overlay">
@@ -57,7 +58,7 @@ request.setAttribute("depts", depts);
                     <ul class="list-unstyled">
                     	
                     	<c:forEach  var="dept" items="${depts}">
-					       <li id="department${dept.id}" class="text-center">${dept.name}</li>
+					       <li id="dep${dept.id}" class="text-center">${dept.name}</li>
                          </c:forEach>
                   
                     </ul>
@@ -65,7 +66,43 @@ request.setAttribute("depts", depts);
 
                 <div class="col-sm-7 hospital-depts">
                     <h4 class="text-center services-available">Services Available</h4>
+                    <a href="#" class="dep1 hidden">
+                    <div class="thumbnail hospital-service col-sm-4">             
+                        <div class="caption">
+                            <img src="/user/layout/images/dar_elfo2ad.jpg">
+                            <p class="lead">Service Name 1</p>
+                        </div>
+                    </div>
+                    </a>
                     
+                    <a href="#" class="dep2 hidden">
+                    <div class="thumbnail hospital-service col-sm-4">             
+                        <div class="caption">
+                            <img src="/user/layout/images/dar_elfo2ad.jpg">
+                            <p class="lead">Service Name 2 </p>
+                        </div>
+                    </div>
+                    </a>
+                    
+                    <a href="#" class="dep3 hidden">
+                    <div class="thumbnail hospital-service col-sm-4">             
+                        <div class="caption">
+                            <img src="/user/layout/images/dar_elfo2ad.jpg">
+                            <p class="lead">Service Name 3</p>
+                        </div>
+                    </div>
+                    </a>
+                    
+                    <a href="#" class="dep4 hidden">
+                    <div class="thumbnail hospital-service col-sm-4">             
+                        <div class="caption">
+                            <img src="/user/layout/images/dar_elfo2ad.jpg">
+                            <p class="lead">Service Name 4</p>
+                        </div>
+                    </div>
+                    </a>
+                    
+<<<<<<< HEAD
                     <% for(Department d:depts){           
 							List<Service> services = HospitalDao.getServicessByDeptID(d.getId());                    
                     		request.setAttribute("services", services); %>
@@ -81,6 +118,8 @@ request.setAttribute("depts", depts);
 	                    		</c:forEach>                    	
                 <%    }
                     	%>
+=======
+>>>>>>> refs/remotes/origin/master
                 </div>
 
             </div>
