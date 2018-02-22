@@ -12,5 +12,15 @@ $(document).ready(function(){
         $(selector).removeClass("hidden").siblings("a").addClass("hidden");       
         $(selector).removeClass("hidden");
     });
+	
+	var bookFrom="2018-1-1";
+	bookFrom = $(".hospital-body input[type='hidden']").val();
+	$('#calendar').fullCalendar({
+        defaultView: 'month',
+        validRange: {
+        start: bookFrom
+        }
+         
+    });
 
 });	

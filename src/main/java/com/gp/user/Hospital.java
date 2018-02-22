@@ -3,21 +3,19 @@ package com.gp.user;
 public class Hospital extends User{
 
 	int id, adminId;
-	String name, phone, website, address, intro;
+	String hospitalName, phone, website, address, intro, googleMapsUrl;
 	float lat, lang, review;
 
 	public Hospital() {
 		super();
 	}
-
-	
 	
 	public Hospital(int id, int adminId, String name, String phone, String website, String address, String intro,
 			float lat, float lang, float review) {
 		super();
 		this.id = id;
 		this.adminId = adminId;
-		this.name = name;
+		this.hospitalName = name;
 		this.phone = phone;
 		this.website = website;
 		this.address = address;
@@ -31,7 +29,13 @@ public class Hospital extends User{
 		return intro;
 	}
 
+	public String getGoogleMapsUrl() {
+		return googleMapsUrl;
+	}
 
+	public void setGoogleMapsUrl(String googleMapsUrl) {
+		this.googleMapsUrl = googleMapsUrl;
+	}
 
 	public void setIntro(String intro) {
 		this.intro = intro;
@@ -64,13 +68,13 @@ public class Hospital extends User{
 	public void setAdminId(int adminId) {
 		this.adminId = adminId;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getHospitalName() {
+		return hospitalName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
 	}
 
 	public String getPhone() {

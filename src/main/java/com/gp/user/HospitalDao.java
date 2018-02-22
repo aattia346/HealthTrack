@@ -52,7 +52,7 @@ public class HospitalDao {
 		ResultSet result = ps.executeQuery();
 		List<Service> list = new ArrayList<Service>();
 		while(result.next()) {
-			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), result.getString(5), result.getDate(6), result.getDate(7));
+			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), result.getDate(5), result.getDate(6));
 			list.add(s);
 		}
 		return list;

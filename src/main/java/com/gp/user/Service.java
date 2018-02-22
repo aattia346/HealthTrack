@@ -2,61 +2,37 @@ package com.gp.user;
 
 import java.util.Date;
 
-public class Service {
+public class Service extends Department{
 	
 	int id;
-	String name;
+	String serviceName;
 	int centerId;
 	int deptId;
+	Date bookedTill;
+	Date lastUpdated;
 	String fees;
-	Date bookedTill = new Date();
-	Date lastUpdate = new Date();
-	
-	public Service(int id, String name, int centerId, int deptId, String fees, Date bookedTill, Date lastUpdate) {
+	float serviceReview;
+
+	public Service(int id, String name, int centerId, int deptId, Date bookedTill, Date lastUpdated) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.serviceName = name;
 		this.centerId = centerId;
 		this.deptId = deptId;
-		this.fees = fees;
 		this.bookedTill = bookedTill;
-		this.lastUpdate = lastUpdate;
+		this.lastUpdated = lastUpdated;
 	}
 
 	public Service() {
 		super();
 	}
 
-	public int getId() {
-		return id;
+	public float getServiceReview() {
+		return serviceReview;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getCenterId() {
-		return centerId;
-	}
-
-	public void setCenterId(int centerId) {
-		this.centerId = centerId;
-	}
-
-	public int getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(int deptId) {
-		this.deptId = deptId;
+	public void setServiceReview(float serviceReview) {
+		this.serviceReview = serviceReview;
 	}
 
 	public String getFees() {
@@ -75,13 +51,44 @@ public class Service {
 		this.bookedTill = bookedTill;
 	}
 
-	public Date getLastUpdate() {
-		return lastUpdate;
+	public Date getLastUpdated() {
+		return lastUpdated;
 	}
 
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
-	
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public int getCenterId() {
+		return centerId;
+	}
+
+	public void setCenterId(int centerId) {
+		this.centerId = centerId;
+	}
+
+	public int getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
+	}
+
 }

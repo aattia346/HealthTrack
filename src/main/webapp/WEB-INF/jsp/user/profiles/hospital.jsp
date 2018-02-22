@@ -19,7 +19,7 @@ request.setAttribute("depts", depts);
             <div class="hospital">
 
                 <div class="hospital-head">
-                    <h2 class="hospital-title"><%= H.getName() %></h2>
+                    <h2 class="hospital-title"><%= H.getHospitalName() %></h2>
 
                     <p class="hospital-desc lead"><%= H.getIntro() %></p>
                 </div>
@@ -33,13 +33,13 @@ request.setAttribute("depts", depts);
 
                 <div class="col-sm-12 hospital-depts">
                     <div class="hospital-info">
-                        <h4 class="about-title">Name: </h4><p class="about-detail"><%= H.getName() %></p>
+                        <h4 class="about-title">Name: </h4><p class="about-detail"><%= H.getHospitalName() %></p>
                     </div>
                     <div class="hospital-info">
                         <h4 class="about-title">Address: </h4><p class="about-detail"><%= H.getAddress() %></p>
                     </div>
                     <div class="hospital-info">
-                        <h4 class="about-title">Location: </h4><p class="about-detail"><a href="#">find <%= H.getName() %> in google maps</a></p>
+                        <h4 class="about-title">Location: </h4><p class="about-detail"><a href="#">find <%= H.getHospitalName() %> in google maps</a></p>
                     </div>
                     <div class="hospital-info">
                         <h4 class="about-title">Website: </h4><p class="about-detail"><a target="_blank" href="<%= H.getWebsite()%>"><%= H.getWebsite()%></a></p>
@@ -70,7 +70,7 @@ request.setAttribute("depts", depts);
 							List<Service> services = HospitalDao.getServicessByDeptID(d.getId());                    
                     		request.setAttribute("services", services); %>
 	                    		<c:forEach  var="service" items="${services}">
-					       			<a href="#" class="department${service.getDeptId()} hidden">
+					       			<a href="/HealthTrack/profile/service/${service.id}" class="department${service.getDeptId()} hidden">
 					                    <div class="thumbnail hospital-service col-sm-4">             
 					                        <div class="caption">
 					                            <img src="/user/layout/images/dar_elfo2ad.jpg">

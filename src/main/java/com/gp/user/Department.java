@@ -1,14 +1,15 @@
 package com.gp.user;
 
-public class Department {
+public class Department extends Hospital{
 	
 	int id, hospitalId;
-	String Name;
+	String deptName;
+	
 	public Department(int id, int hospitalId, String name) {
 		super();
 		this.id = id;
 		this.hospitalId = hospitalId;
-		Name = name;
+		deptName = name;
 	}
 	public Department() {
 		super();
@@ -25,13 +26,12 @@ public class Department {
 	public void setHospitalId(int hospitalId) {
 		this.hospitalId = hospitalId;
 	}
-	public String getName() {
-		return Name;
+	public String getDeptName() {
+		return deptName;
 	}
-	public void setName(String name) {
-		Name = name;
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 	
 	
-
 }
