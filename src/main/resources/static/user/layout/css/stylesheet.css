@@ -47,6 +47,7 @@
 .name input{
     width: 49%;
     display: inline;
+    margin-left: 2px;
 }
 @media only screen and (max-width: 500px) {
     .name input {
@@ -213,4 +214,7 @@ input[type="submit"]{
 }
 .service-booking input[type="submit"]{
 	margin-top: 20px;
+}
+.service-booking form .personal-info{
+	margin-top: 58px;
 }

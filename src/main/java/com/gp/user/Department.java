@@ -2,24 +2,29 @@ package com.gp.user;
 
 public class Department extends Hospital{
 	
-	int id, hospitalId;
+	int deptId, hospitalId;
 	String deptName;
+
 	
-	public Department(int id, int hospitalId, String name) {
+	public Department(int deptId, int hospitalId, String deptName) {
 		super();
-		this.id = id;
+		this.deptId = deptId;
 		this.hospitalId = hospitalId;
-		deptName = name;
+		this.deptName = deptName;
 	}
+
+	public int getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(int deptId) {
+		this.deptId = deptId;
+	}
+
 	public Department() {
 		super();
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public int getHospitalId() {
 		return hospitalId;
 	}

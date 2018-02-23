@@ -2,7 +2,7 @@ package com.gp.user;
 
 public class Hospital extends User{
 
-	int id, adminId;
+	int hospitalId, adminId;
 	String hospitalName, phone, website, address, intro, googleMapsUrl;
 	float lat, lang, review;
 
@@ -10,20 +10,25 @@ public class Hospital extends User{
 		super();
 	}
 	
-	public Hospital(int id, int adminId, String name, String phone, String website, String address, String intro,
-			float lat, float lang, float review) {
+	
+
+	public Hospital(int hospitalId, int adminId, String hospitalName, String phone, String website, String address,
+			String intro, String googleMapsUrl, float lat, float lang, float review) {
 		super();
-		this.id = id;
+		this.hospitalId = hospitalId;
 		this.adminId = adminId;
-		this.hospitalName = name;
+		this.hospitalName = hospitalName;
 		this.phone = phone;
 		this.website = website;
 		this.address = address;
 		this.intro = intro;
+		this.googleMapsUrl = googleMapsUrl;
 		this.lat = lat;
 		this.lang = lang;
 		this.review = review;
 	}
+
+
 
 	public String getIntro() {
 		return intro;
@@ -53,13 +58,19 @@ public class Hospital extends User{
 	}
 
 
-	public int getId() {
-		return id;
+	
+
+	public int getHospitalId() {
+		return hospitalId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+
+	public void setHospitalId(int hospitalId) {
+		this.hospitalId = hospitalId;
 	}
+
+
 
 	public int getAdminId() {
 		return adminId;

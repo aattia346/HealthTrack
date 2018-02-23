@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -66,15 +69,14 @@ public class Validation {
 		return exist;
 	}
 	
-	public static boolean valideteName(String name) {
+	public static boolean validateName(String name) {
 		
 		return Pattern.matches("\\S[a-zA-Z]*", name.trim());
 	}
 	
-	public static boolean validatePhone(int phone) {
+	public static boolean validatePhone(String phone) {
 	
-		int length = (int) Math.log10(phone) + 1;
-		System.out.println(length);
+		int length = phone.length();
 		if(length!=11) {
 			return false;
 		}else {
@@ -163,9 +165,29 @@ public class Validation {
 		
 		return Pattern.matches("\\S[0-9]*", Integer.toString(num));
 	}
-public static boolean validateNumber(String num) {
+	public static boolean validateNumber(String num) {
 		
 		return Pattern.matches("\\S[0-9]*", num);
 	}
+
+	public static boolean validateBookDate(int serviceId, Date bookDate)
+	throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+		boolean valid = true;
+				
+		
+		List<Booking> bookings = ServiceDao.getBookingsByServiceId(serviceId);
+		
+		for(Booking B : bookings) {
+			
+			if((bookDate.after(B.getDateFrom()) || bookDate.equals(B.getDateFrom())) && (bookDate.before(B.getDateTo()) ||bookDate.equals(B.getDateTo())) ){
+				valid = false;
+			}
+			
+		}
+		
+		return valid;
+}
+
  }
 

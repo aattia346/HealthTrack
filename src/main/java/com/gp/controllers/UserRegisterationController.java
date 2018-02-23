@@ -77,17 +77,16 @@ public class UserRegisterationController {
 		String username			= request.getParameter("username");
 		String password			= request.getParameter("password");
 		String confirmPassword	= request.getParameter("confirmPassword");
-		String phoneAsString 	= request.getParameter("phone");
-		int phone				= Integer.parseInt(phoneAsString);
+		String phone 			= request.getParameter("phone");
 		String email			= request.getParameter("email");
 		
 		boolean errors = true;
 		
-		if(!Validation.valideteName(firstName)) {
+		if(!Validation.validateName(firstName)) {
 			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid First Name</p>");
 			errors = false;
 		}
-		if(!Validation.valideteName(lastName)) {
+		if(!Validation.validateName(lastName)) {
 			model.addAttribute("invalidLastName", "<p class=\"wrong-input wrong-input-register-input-2\">Invalid Last Name</p>");
 			errors = false;
 		}
@@ -128,7 +127,7 @@ public class UserRegisterationController {
 			user.setId(UserDao.insertUser(user));
 			//start the storage to the database		
 			
-			Person person = new Person(user.getId(), firstName, lastName, email, phoneAsString, 0);
+			Person person = new Person(user.getId(), firstName, lastName, email, phone, 0);
 			PersonDao.insertPerson(person);
 			
 			HttpSession session = request.getSession();		

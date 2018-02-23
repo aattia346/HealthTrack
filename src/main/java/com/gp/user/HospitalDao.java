@@ -22,7 +22,7 @@ public class HospitalDao {
 		result.next();
 		Hospital hospital = new Hospital(result.getInt(1), id, result.getString(2), result.getString(6),
 										result.getString(7), result.getString(9), result.getString(10),
-										result.getFloat(4), result.getFloat(5), result.getFloat(8));
+										result.getString(10),result.getFloat(4), result.getFloat(5), result.getFloat(8));
 		return hospital;
 	}
 	
@@ -42,9 +42,8 @@ public class HospitalDao {
 		}
 		return list;
 	}
-<<<<<<< HEAD
 	
-	public static List<Service> getServicessByDeptID(int deptId) 
+	public static List<Service> getServicesByDeptID(int deptId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
 		Connection con = DBConnection.getConnection();
@@ -54,12 +53,11 @@ public class HospitalDao {
 		ResultSet result = ps.executeQuery();
 		List<Service> list = new ArrayList<Service>();
 		while(result.next()) {
-			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), result.getDate(5), result.getDate(6));
+			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), 
+					result.getDate(5), result.getDate(6), result.getString(7), result.getFloat(8));
 			list.add(s);
 		}
 		return list;
 	}
-=======
->>>>>>> refs/remotes/origin/master
 
 }

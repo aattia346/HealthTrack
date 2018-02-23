@@ -3,37 +3,53 @@
 <%@page import="com.gp.user.ServiceDao"%>
 <%@page import="com.gp.user.HospitalDao"%>
 <%@page import="com.gp.user.Hospital"%>
+<%@page import="com.gp.user.User"%>
+<%@page import="com.gp.user.UserDao"%>
+<%@page import="com.gp.user.Booking"%>
 <%@page import="java.util.Date"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% 	
 	String title="Service"; 
 
 	HttpSession hospitalSession = request.getSession();
 	int serviceId = (Integer)hospitalSession.getAttribute("serviceId");
+	boolean showForm = false;
+	User user = new User();
+	String usernameSession = (String)hospitalSession.getAttribute("username");
+	if(usernameSession != null){
+		user = UserDao.getUserByUsername(usernameSession);
+		if(user.getType().equalsIgnoreCase("person")){
+			showForm = true;
+		}
+	}
 	
 	Service S = ServiceDao.getServiceById(serviceId);
-	
 	Calendar calendar = Calendar.getInstance();
-	calendar.setTime(S.getBookedTill());
+	Date today = Calendar.getInstance().getTime();
+	calendar.setTime(today);
 	calendar.add(Calendar.DAY_OF_MONTH, 2);	
-	Date bookFrom = calendar.getTime();
-	
-	SimpleDateFormat bookFromFormat = new SimpleDateFormat ("yyyy-MM-dd");
-	String bookFromInMyFormat = bookFromFormat.format(bookFrom);
+
+	SimpleDateFormat todayFormat = new SimpleDateFormat ("yyyy-MM-dd");
+	String todayInMyFormat = todayFormat.format(today);
 	
 	calendar.add(Calendar.DAY_OF_MONTH, 1);
 	Date bookTo = calendar.getTime();
-	String bookToInMyFormat = bookFromFormat.format(bookTo);
+	String bookToInMyFormat = todayFormat.format(bookTo);
 	
 	SimpleDateFormat bookedTillFormat = new SimpleDateFormat ("E yyyy-MM-dd");
-	String bookedTillInMyFormat = bookedTillFormat.format(bookFrom);
+	String bookedTillInMyFormat = bookedTillFormat.format(today);
 
+	
 %>
 <%@include  file="../includes/header.jsp" %>
 
 <div class="hospital-body">
-        	<input type="hidden" class="booking-date" required  value="<%= bookFromInMyFormat %>">
+        	<input type="hidden" class="booking-date" required  value="<%= todayInMyFormat %>">
             <div class="container">
 
                 <div class="row service-img">
@@ -70,38 +86,42 @@
 
                 </div>
                 
+                <% if(showForm){ %>                
+                
                 <div class="col-sm-12 hospital-depts service-booking">
                     <h3 class="text-center">Book ICU</h3>
-                    <form method="post" action="#">
+                    <form method="post" action="/HealthTrack/Service/<%=S.getServiceId() %>/Booking/Submit">
+                        
+                        <input type="hidden" value="<%= user.getId() %>" name="userId">
                         
                         <div class="col-sm-6 personal-info">
                     
                             <div class="form-group name">
-                                    <input type="text" class="form-control input-sm" name="firstName" placeholder="First Name" required> 
+                                    <input type="text" required maxlength="15" class="form-control input-sm" name="firstName" placeholder="Patient First Name" > 
 
-                                    <input type="text" class="form-control input-sm" name="lastName" placeholder="Last Name" required> 
+                                    <input type="text" required maxlength="15" class="form-control input-sm" name="lastName" placeholder="Patient Last Name" > 
                             </div>
+                            ${invalidName}
                             <div class="form-group">
-                                    <input type="number" class="form-control input-sm" name="age" placeholder="Age" required> 
+                                    <input type="number" required min="0" max = "120" class="form-control input-sm" name="age" placeholder="Patient Age" > 
                             </div>
+                          
                             <div class="form-group">
-                                    <input type="email" class="form-control input-sm" name="email" placeholder="Enter Valid Email" required> 
+                                    <input type="text" required maxlength="11" class="form-control input-sm" name="phone" placeholder="Phone Number(optional)"> 
                             </div>
-                            <div class="form-group">
-                                    <input type="text" class="form-control input-sm" name="phone" placeholder="Phone Number(optional)"> 
-                            </div>
-                        
+                        	${invalidPhone}
                             <div class="hospital-info">
                                 <h4 class="about-title">Booked Till: </h4><p class="about-detail"><%= bookedTillInMyFormat %></p><p class="last-updated pull-right">last updated: 10/1/2018</p>
                             </div>
                             <div>
                                 <h4 class="about-title">Book From: </h4>
-                                <input type="date" class="booking-date" required  min="<%= bookFromInMyFormat %>" value="<%= bookFromInMyFormat %>">
+                                <input type="date" required class="booking-date" name="bookFrom"  min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
                             </div>  
                             <div>
                                 <h4 class="about-title">To: </h4>
-                                <input type="date" class="booking-date" required min="<%= bookFromInMyFormat %>" value="<%= bookToInMyFormat %>">
+                                <input type="date" required class="booking-date" name="bookTo" min="<%= todayInMyFormat %>" value="<%= bookToInMyFormat %>">
                             </div>
+                            ${invalidDate}
                         </div>
                         <div class="col-sm-6 calendar" id='calendar'></div>
 
@@ -111,9 +131,78 @@
                     </form>
                     
                 </div>
+                
+                <% } else if(user.getId()== S.getAdminId()){
+                
+                	List<Booking> bookings = ServiceDao.getBookingsByServiceId(serviceId);
+                	
+                	request.setAttribute("bookings", bookings);
+                
+                %>
+                	<h2> Bookings </h2>
+                	<c:forEach var="booking" items="${bookings}">
+                		<div>
+                			<p>${booking.bookingId}</p>
+                			<p>${booking.firstName}</p>
+                			<p>${booking.lastName}</p>
+                			<p>${booking.age}</p>
+                			<p>${booking.dateFrom}</p>
+                			<p>${booking.dateTo}</p>
+                			<p>${booking.timeFrom}</p>
+                			<p>${booking.timeTo}</p>
+                			<a href="/healthTrack/Service/DeleteBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-danger confirm-delete-booking">Delete</a>
+                			<c:if test="${booking.status==0}">
+                				<a href="/healthTrack/Service/VerifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Verify</a>
+							</c:if>
+							<c:if test="${booking.status==1}">
+                				<a href="/healthTrack/Service/UnverifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">Unverify</a>
+							</c:if>
+                			
+                		</div>
+                		<hr>
+                	</c:forEach>
+
+               <% }else{ %>
+            	   
+            	   <div> if you want to book this service please login or signup</div>
+           <%    }
+                	%>
+                
 
             </div>
         </div>
-        
-	 
+        	 
 <%@include  file="../includes/footer.jsp" %>
+<%
+
+List<Booking> bookings = ServiceDao.getBookingsByServiceId(serviceId);
+
+%>
+<script>
+var d = new Date();
+var theCurrentYear = d.getFullYear() + "-1-1";
+
+var bookFrom="2018-1-1";
+bookFrom = $(".hospital-body input[type='hidden']").val();
+$('#calendar').fullCalendar({
+    defaultView: 'month',
+    validRange: {
+    start: theCurrentYear
+    },
+    events: [
+    	<% for(Booking B : bookings){
+    	System.out.println(B.getDateFrom());
+    	System.out.println(B.getDateTo());
+    	%>
+    		{
+    			title: "Booked",
+    			start: "<%= B.getDateFrom()%>",
+    			end: "<%= B.getDateTo()%>"
+    			
+    		},
+    	
+    <%	} %>
+    ]
+    
+});
+</script>

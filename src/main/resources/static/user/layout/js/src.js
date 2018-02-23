@@ -9,17 +9,25 @@ $(document).ready(function(){
         console.log(id);
         var selector = "." + id;
         $(selector).removeClass("hidden").siblings("a").addClass("hidden");
-        
+        $(selector).removeClass("hidden");
     });
 	
-	var bookFrom="2018-1-1";
-	bookFrom = $(".hospital-body input[type='hidden']").val();
-	$('#calendar').fullCalendar({
-        defaultView: 'month',
-        validRange: {
-        start: bookFrom
-        }
-         
+	$(".confirm-delete-booking").click(function(){
+        
+        return confirm("Are you sure you want to delete this booking?");
+        
     });
+	$(".confirm-verify-booking").click(function(){
+	        
+	        return confirm("Are you sure you want to verify this booking?");
+	        
+	    });
+	$(".confirm-unverify-booking").click(function(){
+	    
+	    return confirm("Are you sure you want to unverify this booking?");
+	    
+	});
+	
+	
 
 });	

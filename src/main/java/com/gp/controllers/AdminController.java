@@ -1,7 +1,5 @@
 package com.gp.controllers;
 
-import java.sql.SQLException;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 	
 	@RequestMapping(value="/admin")
-	public String admin(Model model) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public String admin(Model model){
 		
 		return "/admin/test";
 	}

@@ -2,9 +2,9 @@ package com.gp.user;
 
 import java.util.Date;
 
-public class Service extends Department{
+public class Service extends Department {
 	
-	int id;
+	int serviceId;
 	String serviceName;
 	int centerId;
 	int deptId;
@@ -13,14 +13,19 @@ public class Service extends Department{
 	String fees;
 	float serviceReview;
 
-	public Service(int id, String name, int centerId, int deptId, Date bookedTill, Date lastUpdated) {
+	
+
+	public Service(int serviceId, String serviceName, int centerId, int deptId, Date bookedTill, Date lastUpdated,
+			String fees, float serviceReview) {
 		super();
-		this.id = id;
-		this.serviceName = name;
+		this.serviceId = serviceId;
+		this.serviceName = serviceName;
 		this.centerId = centerId;
 		this.deptId = deptId;
 		this.bookedTill = bookedTill;
 		this.lastUpdated = lastUpdated;
+		this.fees = fees;
+		this.serviceReview = serviceReview;
 	}
 
 	public Service() {
@@ -59,14 +64,15 @@ public class Service extends Department{
 		this.lastUpdated = lastUpdated;
 	}
 
-	public int getId() {
-		return id;
+	
+	public int getServiceId() {
+		return serviceId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setServiceId(int serviceId) {
+		this.serviceId = serviceId;
 	}
-	
+
 	public String getServiceName() {
 		return serviceName;
 	}

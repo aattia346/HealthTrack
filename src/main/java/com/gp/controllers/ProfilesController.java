@@ -77,4 +77,19 @@ public class ProfilesController {
         return mav;
 	
 	}
+	
+	@RequestMapping(value="/HealthTrack/profile/user/{id}", method = RequestMethod.GET)   
+	public ModelAndView personPage(HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav) 
+    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("service_id", "service", Integer.toString(id))) {
+			String url = "/user/profiles/user";
+			mav.setViewName(url);			
+		}else {
+			mav.setViewName("/user/login");
+		}
+		
+        return mav;
+	
+	}
 }
