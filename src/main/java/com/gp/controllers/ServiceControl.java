@@ -63,7 +63,7 @@ public class ServiceControl {
 		if(errors) {
 			mav.setViewName("/user/profiles/service");
 		}else {
-			ServiceDao.insertBookingDays(serviceId, userId, firstName, lastName, age, bookFromAsDate, bookToAsDate);
+			ServiceDao.insertBookingDays(serviceId, userId, firstName, lastName, age, bookFromAsDate, bookToAsDate, phone);
 			mav.setViewName("user/profiles/user");
 		}
 		

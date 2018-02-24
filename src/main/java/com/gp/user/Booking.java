@@ -5,13 +5,13 @@ import java.util.Date;
 public class Booking extends Service{
 
 	int bookingId, serviceId, userId;
-	String firstName, lastName;
+	String firstName, lastName, bookingPhone;
 	int age;
-	Date dateFrom, dateTo, timeFrom, timeTo;
+	Date dateFrom, dateTo, timeFrom, timeTo, timeOfBooking;
 	int status;
 	
 	public Booking(int bookingId, int serviceId, int userId, String firstName, String lastName, int age, Date dateFrom,
-			Date dateTo, Date timeFrom, Date timeTo, int status) {
+			Date dateTo, Date timeFrom, Date timeTo, int status, Date timeOfBooking, String bookingPhone) {
 		super();
 		this.bookingId = bookingId;
 		this.serviceId = serviceId;
@@ -20,17 +20,41 @@ public class Booking extends Service{
 		this.lastName = lastName;
 		this.age = age;
 		this.dateFrom = dateFrom;
+		this.timeOfBooking = timeOfBooking;
 		this.dateTo = dateTo;
 		this.timeFrom = timeFrom;
 		this.timeTo = timeTo;
 		this.status = status;
+		this.bookingPhone = bookingPhone;
 	}
 
 	
+	public String getBookingPhone() {
+		return bookingPhone;
+	}
+
+
+	public void setBookingPhone(String bookingPhone) {
+		this.bookingPhone = bookingPhone;
+	}
+
+
 	public int getStatus() {
 		return status;
 	}
 	
+	
+	
+	public Date getTimeOfBooking() {
+		return timeOfBooking;
+	}
+
+
+	public void setTimeOfBooking(Date timeOfBooking) {
+		this.timeOfBooking = timeOfBooking;
+	}
+
+
 	public void setStatus(int status) {
 		this.status = status;
 	}

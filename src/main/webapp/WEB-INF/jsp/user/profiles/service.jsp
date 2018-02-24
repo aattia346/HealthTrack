@@ -41,10 +41,6 @@
 	Date bookTo = calendar.getTime();
 	String bookToInMyFormat = todayFormat.format(bookTo);
 	
-	SimpleDateFormat bookedTillFormat = new SimpleDateFormat ("E yyyy-MM-dd");
-	String bookedTillInMyFormat = bookedTillFormat.format(today);
-
-	
 %>
 <%@include  file="../includes/header.jsp" %>
 
@@ -109,10 +105,7 @@
                             <div class="form-group">
                                     <input type="text" required maxlength="11" class="form-control input-sm" name="phone" placeholder="Phone Number(optional)"> 
                             </div>
-                        	${invalidPhone}
-                            <div class="hospital-info">
-                                <h4 class="about-title">Booked Till: </h4><p class="about-detail"><%= bookedTillInMyFormat %></p><p class="last-updated pull-right">last updated: 10/1/2018</p>
-                            </div>
+                        	${invalidPhone}                          
                             <div>
                                 <h4 class="about-title">Book From: </h4>
                                 <input type="date" required class="booking-date" name="bookFrom"  min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
@@ -175,7 +168,7 @@
 <%@include  file="../includes/footer.jsp" %>
 <%
 
-List<Booking> bookings = ServiceDao.getBookingsByServiceId(serviceId);
+List<Booking> bookings = ServiceDao.getUnverifiedBookingsByServiceId(serviceId);
 
 %>
 <script>
@@ -191,13 +184,19 @@ $('#calendar').fullCalendar({
     },
     events: [
     	<% for(Booking B : bookings){
-    	System.out.println(B.getDateFrom());
-    	System.out.println(B.getDateTo());
+    		
+    	Date dateTo = new Date();
+    	Calendar c = Calendar.getInstance(); 
+    	c.setTime(B.getDateTo());
+    	c.add(Calendar.DAY_OF_MONTH , 1);
+    	dateTo = c.getTime();
+    	String dateToInMyFormat = todayFormat.format(dateTo);
+ 
     	%>
     		{
     			title: "Booked",
     			start: "<%= B.getDateFrom()%>",
-    			end: "<%= B.getDateTo()%>"
+    			end: "<%= dateToInMyFormat %>"
     			
     		},
     	
