@@ -28,13 +28,4 @@ $(document).ready(function(){
 	    
 	});
 	
-	$(".edite-booking-btn").click(function(){
-		console.log("pressed");
-        var id = $(this).attr("id");
-        console.log(id);
-        var selector = "." + id;
-        $(selector).toggleClass("hidden");
-    });
-	
-
 });	

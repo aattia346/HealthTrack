@@ -18,18 +18,20 @@
 <h1> Update service information</h1>
 <form method="post" action="update">
              <table>
+                  <tr>
+                    <td><label>Service Name</label></td>
+                    <td><input type="text" name="Name"></td>
+                </tr>
+                
+              <!--     <tr>
+                    <td><label>Available from</label></td>
+                    <td><input type="text" name="available_from"></td>
+                </tr>
+                 --> 
+         
                  <tr>
-                    <td><label>Status</label></td>
-                    <td><input type="text" name="state"></td>
-                </tr>
-              
-                <tr>
-                    <td><label>fees</label></td>
+                    <td><label>Fees</label></td>
                     <td><input type="text" name="fees"></td>
-                </tr>
-                <tr>
-                    <td><label>rating</label></td>
-                    <td><input type="text" name="rating"></td>
                 </tr>
           <!--   <tr> <td><label>Time available</label></td>  <td><input type="int" name="Time_available" value=></td> </tr>      --> 
    

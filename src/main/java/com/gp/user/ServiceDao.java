@@ -81,7 +81,7 @@ public class ServiceDao {
 		java.sql.Date sqlDateTo = new java.sql.Date(bookToAsDate.getTime());
 		
 		Connection con = DBConnection.getConnection();
-		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, date_from, date_to, status, time_of_booking) VALUES(?,?,?,?,?,?,?,?, now(),?";
+		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, date_from, date_to, status, time_of_booking, booking_phone) VALUES(?,?,?,?,?,?,?,?, now(),?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, serviceId);
 		ps.setInt(2, userId);
@@ -91,7 +91,7 @@ public class ServiceDao {
 		ps.setDate(6, sqlDateFrom);
 		ps.setDate(7, sqlDateTo);
 		ps.setInt(8, 0);
-		ps.setString(10, phone);
+		ps.setString(9, phone);
 		ps.executeUpdate();
 		
 	}
