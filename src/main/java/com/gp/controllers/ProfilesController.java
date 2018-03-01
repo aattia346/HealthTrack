@@ -43,13 +43,11 @@ public class ProfilesController {
     }
 	
 	@RequestMapping(value="/HealthTrack/profile/hospital/{userId}", method = RequestMethod.GET)
-    public ModelAndView profile(HttpServletRequest request, @PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    public ModelAndView profile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
-			m.addAttribute("id", id);
-			HttpSession session = request.getSession();
-			session.setAttribute("hospitalId", id);
+			m.addAttribute("hospitalId", id);
 			String url = "/user/profiles/hospital";
 			mav.setViewName(url);
 		}else {

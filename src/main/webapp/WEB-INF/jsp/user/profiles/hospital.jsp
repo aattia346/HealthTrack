@@ -12,9 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% String title="Hospital";
 
-HttpSession hospitalSession = request.getSession();
-
-int hospitalId = (Integer)hospitalSession.getAttribute("hospitalId");
+int hospitalId = (Integer)request.getAttribute("hospitalId");
 Hospital H = HospitalDao.getHospitalById(hospitalId);
 
 List<Department> depts = HospitalDao.getDeptsByHospitalID(H.getHospitalId());
@@ -23,11 +21,9 @@ request.setAttribute("depts", depts);
 
 PrintWriter pw = new PrintWriter(System.out);
 
-Calendar calendar = Calendar.getInstance();
 Date today = Calendar.getInstance().getTime();
-
-
 %>
+
 <%@include  file="../includes/header.jsp" %>
 	 <div class="overlay">
         

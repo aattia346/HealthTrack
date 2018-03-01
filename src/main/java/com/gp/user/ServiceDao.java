@@ -73,7 +73,40 @@ public class ServiceDao {
 		
 		return bookedDates;
 	}
-
+	
+	public static List<Booking> getVerifiedBookingsByServiceId(int serviceId) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+				
+				List<Booking> bookedDates = new ArrayList<Booking>();
+				
+				Connection con = DBConnection.getConnection();
+				String sql="SELECT * FROM booking where service_id=? AND status=1";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, serviceId);
+				ResultSet result = ps.executeQuery();
+				//result.next();
+				
+				while(result.next()) {
+					Booking B = new Booking();
+					B.setBookingId(result.getInt(1));
+					B.setServiceId(result.getInt(2));
+					B.setUserId(result.getInt(3));
+					B.setFirstName(result.getString(4));
+					B.setLastName(result.getString(5));
+					B.setAge(result.getInt(6));
+					B.setDateFrom(result.getDate(7));
+					B.setDateTo(result.getDate(8));
+					B.setTimeFrom(result.getDate(9));
+					B.setTimeTo(result.getDate(10));
+					B.setStatus(result.getInt(11));
+					B.setTimeOfBooking(result.getDate(12));
+					B.setBookingPhone(result.getString(13));
+					bookedDates.add(B);
+				}
+				
+				return bookedDates;
+			}
+	
 	public static void insertBookingDays(int serviceId, int userId, String firstName, String lastName, int age, Date bookFromAsDate, Date bookToAsDate, String phone)
 	throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -81,7 +114,7 @@ public class ServiceDao {
 		java.sql.Date sqlDateTo = new java.sql.Date(bookToAsDate.getTime());
 		
 		Connection con = DBConnection.getConnection();
-		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, date_from, date_to, status, time_of_booking) VALUES(?,?,?,?,?,?,?,?, now(),?";
+		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, date_from, date_to, status, time_of_booking, booking_phone) VALUES(?,?,?,?,?,?,?,?, now(),?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, serviceId);
 		ps.setInt(2, userId);
@@ -91,7 +124,7 @@ public class ServiceDao {
 		ps.setDate(6, sqlDateFrom);
 		ps.setDate(7, sqlDateTo);
 		ps.setInt(8, 0);
-		ps.setString(10, phone);
+		ps.setString(9, phone);
 		ps.executeUpdate();
 		
 	}

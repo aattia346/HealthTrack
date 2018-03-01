@@ -103,7 +103,7 @@
                             </div>
                           
                             <div class="form-group">
-                                    <input type="text" required maxlength="11" class="form-control input-sm" name="phone" placeholder="Phone Number(optional)"> 
+                                    <input type="text" required maxlength="11" class="form-control input-sm" name="phone" placeholder="Phone Number" required> 
                             </div>
                         	${invalidPhone}                          
                             <div>
@@ -168,7 +168,7 @@
 <%@include  file="../includes/footer.jsp" %>
 <%
 
-List<Booking> bookings = ServiceDao.getUnverifiedBookingsByServiceId(serviceId);
+List<Booking> bookings = ServiceDao.getVerifiedBookingsByServiceId(serviceId);
 
 %>
 <script>

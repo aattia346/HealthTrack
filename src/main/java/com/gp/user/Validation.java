@@ -174,9 +174,8 @@ public class Validation {
 	throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 		boolean valid = true;
-				
-		
-		List<Booking> bookings = ServiceDao.getBookingsByServiceId(serviceId);
+						
+		List<Booking> bookings = ServiceDao.getVerifiedBookingsByServiceId(serviceId);
 		
 		for(Booking B : bookings) {
 			
@@ -187,7 +186,7 @@ public class Validation {
 		}
 		
 		return valid;
+	}
+	
 }
-
- }
 

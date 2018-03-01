@@ -35,7 +35,7 @@ public class HospitalDao {
 		ps.setInt(1, hospitalId);
 		ResultSet result = ps.executeQuery();
 		List<Department> list = new ArrayList<Department>();
-		result.next();
+		//result.next();
 		while(result.next()) {
 			Department d = new Department(result.getInt(1), result.getInt(2), result.getString(3));
 			list.add(d);
