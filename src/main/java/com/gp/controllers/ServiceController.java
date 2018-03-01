@@ -20,11 +20,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.service.serviceClass;
 import com.gp.service.serviceDao;
+<<<<<<< HEAD:src/main/java/com/gp/controllers/serviceController.java
 import com.gp.user.Booking;
 import com.gp.user.ServiceDao;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
+=======
+import com.gp.user.Service;
+>>>>>>> 1fc503671eb2dfe859289eb3f637d75de05cd73e:src/main/java/com/gp/controllers/ServiceController.java
 
 
 @RestController
@@ -37,18 +41,21 @@ public class ServiceController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/HealthTrack/insert", method = RequestMethod.POST)
-    public ModelAndView  insert(HttpServletRequest request, serviceClass s, ModelMap model, ModelAndView mav)throws InstantiationException,
-    IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+	@RequestMapping(value = "/HealthTrack/insert")
+    public ModelAndView  insert(HttpServletRequest request, Service s, ModelMap model, ModelAndView mav)throws InstantiationException,
+    IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException {
 		
 		//int phone = Integer.parseInt(phoneAsString);
-	   	String username = request.getParameter("state");
+	   	String servicename = request.getParameter("Name");
 	   	String fees = request.getParameter("fees");
-		String rating = request.getParameter("rating"); 
-		s.setstatus(username);
-	     s.setfees(fees);
-	     s.setrating(rating);
-	    serviceDao.insertservice(s);
+	  // 	String lastUpdate =request.getParameter("lastUpdate");
+	  	String  sqlDatetill= request.getParameter("available");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date available_from1 = format.parse(sqlDatetill);	
+		String  sqlDateto= request.getParameter("available2");
+		Date available_to = format.parse(sqlDateto);		
+		serviceDao.insertservice(servicename, fees,available_from1,available_to );
+	   
 	   	mav.setViewName("user/hospital_admin/ViewServices");
 	   	return mav;
 	}
@@ -57,7 +64,7 @@ public class ServiceController {
 	@RequestMapping(value="/HealthTrack/view")
 	public ModelAndView viewservice()throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
-	List<serviceClass> service =serviceDao.getAllRecords();
+	List<Service> service =serviceDao.getAllRecords();
 	 
 	  
 		return new ModelAndView( "user/hospital_admin/ViewServices","List",service);
@@ -65,7 +72,7 @@ public class ServiceController {
 	
 	@RequestMapping(value="/HealthTrack/deleteservice/{id}", method=RequestMethod.GET)
 	public ModelAndView deleteservice(@PathVariable int id)throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		serviceClass s=serviceDao.getserviceById(id);
+		Service s=serviceDao.getserviceById(id);
 		
 		serviceDao.delete(s);
 		serviceDao.update(s);
@@ -75,7 +82,7 @@ public class ServiceController {
 	
 	@RequestMapping(value="/HealthTrack/editservice/{id}")
 	public ModelAndView editservice(@PathVariable int id,ModelMap model, HttpServletRequest request,serviceClass service)throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		serviceClass s =serviceDao.getserviceById(id);
+		Service s =serviceDao.getserviceById(id);
 		HttpSession session = request.getSession();		
 	   		session.setAttribute("id", id);
 		return new ModelAndView("user/hospital_admin/editserviceform","command",s);
@@ -84,24 +91,25 @@ public class ServiceController {
 
 	@RequestMapping(value="/HealthTrack/editservice/update", method=RequestMethod.POST)
 	public ModelAndView editsave(ModelMap model, HttpServletRequest request,ModelAndView mav)throws InstantiationException,
-    IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException  {
+    IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException  {
 		HttpSession session = request.getSession();
 		int id=(int) session.getAttribute("id");
-		serviceClass s =serviceDao.getserviceById(id);
-		String username = request.getParameter("state");
+		Service s =serviceDao.getserviceById(id);
+		String servicename = request.getParameter("Name");
 	   	String fees = request.getParameter("fees");
-		String rating = request.getParameter("rating"); 
-		s.setstatus(username);
-	     s.setfees(fees);
-	     s.setrating(rating);
+		String  sqlDatetill= request.getParameter("available");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date available_from1 = format.parse(sqlDatetill);	
+		String  sqlDateto= request.getParameter("available2");
+		Date available_to = format.parse(sqlDateto);	
+		s.setServiceName(servicename);
+		s.setAvailable_from(available_from1);
+		s.setAvailable_to(available_to);
+	    s.setFees(fees);
 		System.out.println(s.getId());
-		 // System.out.println(s.getserviceId());
-		    System.out.println(s.getfees());
-		    System.out.println(s.getrating());
-		//serviceDao.insertservice(s);
-	serviceDao.update(s);
+	    serviceDao.update(s);
 		
-		System.out.println(s.getserviceId());
+		//System.out.println(s.getserviceId());
 		  mav.setViewName("user/hospital_admin/ViewServices");
 		return   mav;
      }

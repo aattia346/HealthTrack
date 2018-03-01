@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<%@ page import=' com.gp.service.serviceClass' %>
+<%@ page import=' com.gp.user.Service' %>
 <%@ page import='com.gp.service.serviceDao' %>
 
 <%@ page import='java.util.*' %>
@@ -21,30 +21,34 @@
 
 <tr>
 <th>Id</th>
-<th>Status</th>
+<th>Service Name</th>
+<th>Available From</th> 
+<th>Available To</th> 
 <th>Fees</th>
-<th>rating</th>
 
 <%--    <th>Time available</th> --%>
 
 </tr>
 
 <%
-List<serviceClass> list =serviceDao.getAllRecords();%>
-<% for (serviceClass s:list){ %>
+List<Service> list =serviceDao.getAllRecords();%>
+<% for (Service s:list){ %>
 <tbody>
 <c:foreach>
 <tr>
-<td><%=s.getId() %></td>
-<td><%=s.getstatus() %></td>
-<td><%=s.getfees() %></td>
-<td><%=s.getrating() %></td>
+<td><%=s.getServiceId() %></td>
+<td><%=s.getServiceName() %></td>
+<td> <%=s.getAvailable_from() %></td>
+<td> <%=s.getAvailable_to() %></td>
+<td><%=s.getFees() %></td>
+
+
 
 
 <%--   <td><%=s.getTime()%></td> --%>
 
-<td><a href='/HealthTrack/deleteservice/<%=s.getId()%>'>Delete</a></td>
-<td><a href='/HealthTrack/editservice/<%=s.getId()%>'>Edit</a></td>
+<td><a href='/HealthTrack/deleteservice/<%=s.getServiceId()%>'>Delete</a></td>
+<td><a href='/HealthTrack/editservice/<%=s.getServiceId()%>'>Edit</a></td>
 
 
 

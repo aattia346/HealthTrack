@@ -12,8 +12,8 @@ public class Service extends Department {
 	Date lastUpdated;
 	String fees;
 	float serviceReview;
-
-	
+	Date available_from;
+	Date available_to;
 
 	public Service(int serviceId, String serviceName, int centerId, int deptId, Date bookedTill, Date lastUpdated,
 			String fees, float serviceReview) {
@@ -26,7 +26,8 @@ public class Service extends Department {
 		this.lastUpdated = lastUpdated;
 		this.fees = fees;
 		this.serviceReview = serviceReview;
-	}
+		
+			}
 
 	public Service() {
 		super();
@@ -96,5 +97,21 @@ public class Service extends Department {
 	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
+	public Date getAvailable_from() {
+		return available_from;
+	}
+
+	public void setAvailable_from(Date available_from) {
+		this.available_from = available_from;
+	}
+	
+	public Date getAvailable_to() {
+		return available_from;
+	}
+
+	public void setAvailable_to(Date available_to) {
+		this.available_to = available_to;
+	}
+
 
 }
