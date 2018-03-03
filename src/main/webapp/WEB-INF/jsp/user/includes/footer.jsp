@@ -7,11 +7,7 @@
         <script src='/user/layout/js/moment.min.js'></script>
         <script src='/user/layout/js/fullcalendar.js'></script>
         <script src="/user/layout/js/src.js"></script>
-        <script
-         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&
-         libraries=places&callback=initMap"
-         async defer>
-        </script>
+        
     </body>
 </html>
 

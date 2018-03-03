@@ -43,14 +43,22 @@ for(Service service : servicesOfCenters){
 }
 
 %>
-<div class="container find-servcie-container">
+
+ <div class="container find-service-container">
         
             <h3>Find A Service : </h3>
             <div class="row">
                 
-                <div class="col-sm-3 choose-service">
+                <div class="enter-address col-sm-11 col-sm-offset-1">
                     
-                    <div class="panel panel-default service-options">
+                    <h4 class="col-sm-2">Enter An Address</h4>
+                        <div class="col-sm-4">
+                            <input id="pac-input" type="text" class="input-sm form-control" placeholder="Search By Place">
+                    	</div>
+            </div>
+                <div class="col-sm-offset-1 col-sm-3 choose-service">
+                    
+                    <div class="panel panel-default ">
                       <div class="panel-heading">
                         <h3 class="panel-title text-center">Services</h3>
                       </div>
@@ -66,43 +74,13 @@ for(Service service : servicesOfCenters){
                     
                 </div>
                 
-                <div class="col-sm-8">
+                <div class="col-sm-8" id="map"></div>
                 
-                    <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location">
-
-                    <input id="destination-input" class="controls" type="text" placeholder="Enter a destination location">
-
-                    <div id="mode-selector" class="controls">
-                      <input type="radio" name="type" id="changemode-walking" checked="checked">
-                      <label for="changemode-walking">Walking</label>
-
-                      <input type="radio" name="type" id="changemode-transit">
-                      <label for="changemode-transit">Transit</label>
-
-                      <input type="radio" name="type" id="changemode-driving">
-                      <label for="changemode-driving">Driving</label>
-                    </div>
-
-                    <div id="map"></div>
-                    
-                </div>
-                
-                </div>
-            
-                <div id="infowindow-content">
-                  <img src="" width="16" height="16" id="place-icon">
-                  <span id="place-name"  class="title"></span><br>
-                  <span id="place-address"></span>
-                </div>
-                <div class="row">
-                    
-                <div class="services-information-panels">   
-                
-                <div class="col-sm-6 services-information">
+                <div class="col-sm-offset-1 col-sm-5 services-information">
                     
                     <div class="panel panel-default ">
                       <div class="panel-heading">
-                        <h3 class="panel-title text-center">Service Location Summary</h3>
+                        <h3 class="panel-title text-center">Services Information Summary</h3>
                       </div>
                       <div class="panel-body">
                           
@@ -110,18 +88,17 @@ for(Service service : servicesOfCenters){
                     </div>
                 </div>
                 
-                <div class="col-sm-6 services-information">
+                <div class="col-sm-5 services-information">
                     
                     <div class="panel panel-default ">
                       <div class="panel-heading">
-                        <h3 class="panel-title text-center">Services Information</h3>
+                        <h3 class="panel-title text-center">Services Information Summary</h3>
                       </div>
                       <div class="panel-body">
                           
                       </div>
                     </div>
                 </div>
-                </div> 
             
             </div>
         
@@ -129,225 +106,151 @@ for(Service service : servicesOfCenters){
 
 <%@include  file="includes/footer.jsp" %>
 <script>
+var selectedService = "all";
+Center = {lat:30.181724, lng : 31.112288};
 
-var map;
-var chosenLocations = "all";
-var Center = Center = {lat:30.030759, lng : 31.112288};
-var colors = [];
-colors["hospital"]  = "ff0";
-colors["clinic"]    = "00f";
-colors["center"]    = "0ff";
 $("input[type='radio'][name='service']").change(function(){
-    chosenLocations = $(this).val();
-    initMapWithMarkers(chosenLocations);
+        
+    selectedService = $(this).val();
+    
+    initAutocomplete();
+    });
+function initAutocomplete() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: Center,
+      zoom: 12,
+      mapTypeId: 'roadmap'
     });
 var locations = [
-                    [30.030759 , 31.229189 , "El-kasr El-3ene" , "f00" , "hospital" , ""],
-                    [30.048872 , 31.242359 , "El-Helal Hospital" , "00f" , "clinic" , ""],
-                    [30.030216 , 31.231368 , "Elkasr El-faransawy" , "f00" , "hospital" , ""],
-                    [30.181248 , 31.106173 , "Mubarak Center" , "00f" , "clinic" , "https://www.google.com.eg"],
-                             ];
+                [30.030759 , 31.229189 , "El-kasr El-3ene" , "f00" , "hospital" , ""],
+                [30.048872 , 31.242359 , "El-Helal Hospital" , "00f" , "clinic" , ""],
+                [30.030216 , 31.231368 , "Elkasr El-faransawy" , "f00" , "hospital" , ""],
+                [30.181248 , 31.106173 , "Mubarak Center" , "00f" , "clinic" , "https://www.google.com.eg"],
+                         ];
 
-var finalLocations=[[]];
-var finalLocationIndex = 0;
-if(chosenLocations=="all"){
-    finalLocations = locations;
-}else{
-    for(i=0; i<locations.length; i++){
-        if(locations[i][4]==chosenLocations){
-            finalLocations[finalLocationIndex][0] = locations[i][0];
-            finalLocations[finalLocationIndex][1] = locations[i][1];
-            finalLocations[finalLocationIndex][2] = locations[i][2];
-            finalLocations[finalLocationIndex][3] = locations[i][3];
-            finalLocations[finalLocationIndex][4] = locations[i][4];
-            finalLocations[finalLocationIndex][5] = locations[i][5];
-            finalLocationIndex++;
+          var infowindow = new google.maps.InfoWindow();
+
+          for (i = 0; i < locations.length; i++) {  
+              
+              if(locations[i][4]==selectedService || selectedService=="all"){
+
+            var pinIcon = new google.maps.MarkerImage(
+            "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|".concat(locations[i][3]), 
+            null, /* size is determined at runtime */
+            null, /* origin is 0,0 */
+            null, /* anchor is bottom center of the scaled image */
+            new google.maps.Size(20, 34)
+            );  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+            map: map,
+            title: locations[i][2],
+            icon: pinIcon,
+            url: locations[i][5]
+          });
+                  
+        google.maps.event.addListener(marker, 'click', function() {
+            window.open(this.url , '_blank');
+        });
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+              }
         }
-    }
-}
-function initMapWithMarkers() {
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    console.log(input);
+    var searchBox = new google.maps.places.SearchBox(input);
+   // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+
+    var markers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
         
-        map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 6,
-                  center: Center
-                });
-            
-        for (i = 0; i < locations.length; i++) {  
-                if(locations[i][4]==chosenLocations){
+      //markers = [];
 
-                var pinIcon = new google.maps.MarkerImage(
-                "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|".concat(locations[i][3]), 
-                null, /* size is determined at runtime */
-                null, /* origin is 0,0 */
-                null, /* anchor is bottom center of the scaled image */
-                new google.maps.Size(20, 34)
-                );  
-              marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i][0], locations[i][1]),
-                map: map,
-                title: locations[i][2],
-                icon: pinIcon,
-                url: locations[i][5]
-              });                      
-            google.maps.event.addListener(marker, 'click', function() {
-                window.open(this.url , '_blank');
-            });
-              google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                  infowindow.setContent(locations[i][0]);
-                  infowindow.open(map, marker);
-                }
-              })(marker, i));
-                  }
-            }
-                new AutocompleteDirectionsHandler(map);
-
-        }
-
-function initMap(chosenLocation) {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 30.0169184, lng: 31.259684},
-          zoom: 6
-});  
-    
-       for (i = 0; i < finalLocations.length; i++) {  
-
-                var pinIcon = new google.maps.MarkerImage(
-                "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|".concat(finalLocations[i][3]), 
-                null, /* size is determined at runtime */
-                null, /* origin is 0,0 */
-                null, /* anchor is bottom center of the scaled image */
-                new google.maps.Size(20, 34)
-                );  
-              marker = new google.maps.Marker({
-                position: new google.maps.LatLng(finalLocations[i][0], finalLocations[i][1]),
-                map: map,
-                title: finalLocations[i][2],
-                icon: pinIcon,
-                url: finalLocations[i][5]
-              });                      
-            google.maps.event.addListener(marker, 'click', function() {
-                window.open(this.url , '_blank');
-            });
-              google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                  infowindow.setContent(finalLocations[i][0]);
-                  infowindow.open(map, marker);
-                }
-              })(marker, i));
-            }
-       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
-    new AutocompleteDirectionsHandler(map);
-      }
-
-function AutocompleteDirectionsHandler(map) {
-        this.map = map;
-        this.originPlaceId = null;
-        this.destinationPlaceId = null;
-        this.travelMode = 'WALKING';
-        var originInput = document.getElementById('origin-input');
-        var destinationInput = document.getElementById('destination-input');
-        var modeSelector = document.getElementById('mode-selector');
-        this.directionsService = new google.maps.DirectionsService;
-        this.directionsDisplay = new google.maps.DirectionsRenderer;
-        this.directionsDisplay.setMap(map);
-
-        var originAutocomplete = new google.maps.places.Autocomplete(
-            originInput, {placeIdOnly: true});
-        var destinationAutocomplete = new google.maps.places.Autocomplete(
-            destinationInput, {placeIdOnly: true});
-
-        this.setupClickListener('changemode-walking', 'WALKING');
-        this.setupClickListener('changemode-transit', 'TRANSIT');
-        this.setupClickListener('changemode-driving', 'DRIVING');
-
-        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
-      }
-
-      // Sets a listener on a radio button to change the filter type on Places
-      // Autocomplete.
-      AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
-        var radioButton = document.getElementById(id);
-        var me = this;
-        radioButton.addEventListener('click', function() {
-          me.travelMode = mode;
-          me.route();
-        });
-      };
-
-      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
-        var me = this;
-        autocomplete.bindTo('bounds', this.map);
-        autocomplete.addListener('place_changed', function() {
-          var place = autocomplete.getPlace();
-          if (!place.place_id) {
-            window.alert("Please select an option from the dropdown list.");
-            return;
-          }
-          if (mode === 'ORIG') {
-            me.originPlaceId = place.place_id;
-          } else {
-            me.destinationPlaceId = place.place_id;
-          }
-          me.route();
-        });
-
-      };
-
-      AutocompleteDirectionsHandler.prototype.route = function() {
-        if (!this.originPlaceId || !this.destinationPlaceId) {
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
           return;
         }
-        var me = this;
+        var icon = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
 
-        this.directionsService.route({
-          origin: {'placeId': this.originPlaceId},
-          destination: {'placeId': this.destinationPlaceId},
-          travelMode: this.travelMode
-        }, function(response, status) {
-          if (status === 'OK') {
-            me.directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      };
+        // Create a marker for each place.
+        markers.push(new google.maps.Marker({
+          map: map,
+          icon: icon,
+          title: place.name,
+          position: place.geometry.location
+        }));
 
-$("#findme").click(function(){
-    findMe();
-});
-function findMe(){
-    infoWindow = new google.maps.InfoWindow;
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            Center = pos;
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
         } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+          bounds.extend(place.geometry.location);
         }
-}
+      });
+      map.fitBounds(bounds);
+    });
+    infoWindow = new google.maps.InfoWindow;
+      var btn = document.getElementById("findme");
+  btn.onclick = function(){
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                };
+                Center=pos;
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Location found.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+              }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+              });
+            } else {
+              // Browser doesn't support Geolocation
+              handleLocationError(false, infoWindow, map.getCenter());
+            }
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                                  'Error: The Geolocation service failed.' :
+                                  'Error: Your browser doesn\'t support geolocation.');
+            infoWindow.open(map);
+              
+          }
+      
+          }
+  }
 
 </script>
+<script
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&libraries=places&callback=initAutocomplete"
+         async defer>
+        </script>
