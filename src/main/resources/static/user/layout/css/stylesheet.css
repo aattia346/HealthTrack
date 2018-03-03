@@ -69,7 +69,7 @@
 /*======================================================================================*/
 /*======================================================================================*/
 
-/*****************************Hospital page **************************************/
+/***************************** Hospital page **************************************/
 .hospital-img{
     height: 400px;
     width: 100%;
@@ -161,7 +161,7 @@
 /*======================================================================================*/
 /*======================================================================================*/
 
-/*****************************Service page **************************************/
+/***************************** Service page **************************************/
 .service-img{
     margin-top: 80px;
     background: #fff;
@@ -217,4 +217,149 @@ input[type="submit"]{
 }
 .service-booking form .personal-info{
 	margin-top: 58px;
+}
+/*======================================================================================*/
+/*======================================================================================*/
+
+/***************************** Navbar **************************************/
+.login-register{
+    padding-top: 18px;
+    padding-bottom: 15px;
+}
+.login-register a{
+    font-weight: 700;
+    font-size: 15px;
+}
+.navbar-inverse {
+    background-color: #49BCF5;
+    border-color: #49BCF5;
+}
+.navbar-inverse .navbar-nav > li > a, .login-register a, .login-register span {
+    font-weight: 700;
+    color: #fff;
+    padding-top: 18px;
+}
+.login-register span{
+    margin-left: 3px;
+    margin-right: 3px;
+    font-size: 14px;
+}
+.navbar-inverse .navbar-brand{
+    font-size: 20px;
+    color: #fff;
+    font-weight: 900;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #49BCF5;
+    margin-left: 0;
+    margin-top: 0;
+}
+/*======================================================================================*/
+/*======================================================================================*/
+
+/***************************** Find Service **************************************/
+.find-servcie-container{
+    box-shadow: 0px -2px 10px 0px #888888;
+    margin-top: 100px;
+}
+.choose-service{
+    margin-left: 5%;
+}
+.choose-service .panel-default , .services-information .panel-default{
+    border: 1px solid #B8B8B9;
+    margin-top: 20px;
+    padding: 0px;
+    border-radius: 20px;
+    height: 310px;
+}
+.choose-service .panel-default > .panel-heading , .services-information .panel-default > .panel-heading{
+    height: 20px;  
+    border-radius: 20px 20px 0 0;
+}
+.choose-service .panel-title , .services-information .panel-title{
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 0;
+}
+.choose-service .service-options{
+    height: 322px;
+}
+#map {
+    height: 373px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+@media only screen and (max-width: 767px) {
+    #map {
+        width: 100%;
+    }
+}
+h3 , h4{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #9a9a9a;
+}
+.find-me{
+    width: 100%;
+    border-radius: 16px;
+}
+label{
+    display: inline-block;
+}
+.enter-address button{
+    font-size: 11px;
+}
+.enter-address h4{
+    line-height: .7;
+}
+.enter-address{
+    margin-bottom: -8px;
+}
+
+
+.controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #origin-input,
+      #destination-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 200px;
+      }
+
+      #origin-input:focus,
+      #destination-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #mode-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        margin-left: 12px;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #mode-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+.services-information-panels{
+    margin-left: 5%;
+    margin-right: 5%;
 }

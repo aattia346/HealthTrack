@@ -26,5 +26,5 @@ $(document).ready(function(){
 	    return confirm("Are you sure you want to unverify this booking?");
 	    
 	});
-	
+
 });	

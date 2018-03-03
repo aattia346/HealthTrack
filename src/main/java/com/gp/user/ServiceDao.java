@@ -25,19 +25,18 @@ public class ServiceDao {
 		
 		Service service = new Service();
 		
-		service.setServiceId(result.getInt(1));
+		service.setServiceId(result.getInt("service_id"));
 		service.setServiceName(result.getString(2));
-		service.setCenterId(result.getInt(3));
-		service.setDeptId(result.getInt(4));
-		service.setDeptName(result.getString(11));
-		service.setHospitalName(result.getString(13));
-		service.setBookedTill(result.getDate(5));
-		service.setLastUpdated(result.getDate(6));
-		service.setFees(result.getString(7));
-		service.setAdminId(result.getInt(14));
-		service.setGoogleMapsUrl(result.getString(22));
-		service.setAddress(result.getString(20));
-		service.setServiceReview(result.getFloat(8));
+		service.setCenterId(result.getInt("center_id"));
+		service.setDeptId(result.getInt("dept_id"));
+		service.setDeptName(result.getString("department.name"));
+		service.setHospitalName(result.getString("hospital.name"));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setAdminId(result.getInt("admin_id"));
+		service.setGoogleMapsUrl(result.getString("google_maps_url"));
+		service.setAddress(result.getString("address"));
+		service.setServiceReview(result.getFloat("service.review"));
 		return service;
 	}
 
@@ -55,19 +54,19 @@ public class ServiceDao {
 		
 		while(result.next()) {
 			Booking B = new Booking();
-			B.setBookingId(result.getInt(1));
-			B.setServiceId(result.getInt(2));
-			B.setUserId(result.getInt(3));
-			B.setFirstName(result.getString(4));
-			B.setLastName(result.getString(5));
-			B.setAge(result.getInt(6));
-			B.setDateFrom(result.getDate(7));
-			B.setDateTo(result.getDate(8));
-			B.setTimeFrom(result.getDate(9));
-			B.setTimeTo(result.getDate(10));
-			B.setStatus(result.getInt(11));
-			B.setTimeOfBooking(result.getDate(12));
-			B.setBookingPhone(result.getString(13));
+			B.setBookingId(result.getInt("id"));
+			B.setServiceId(result.getInt("service_id"));
+			B.setUserId(result.getInt("user_id"));
+			B.setFirstName(result.getString("firstname"));
+			B.setLastName(result.getString("lastname"));
+			B.setAge(result.getInt("age"));
+			B.setDateFrom(result.getDate("date_from"));
+			B.setDateTo(result.getDate("date_to"));
+			B.setTimeFrom(result.getDate("time_from"));
+			B.setTimeTo(result.getDate("time_to"));
+			B.setStatus(result.getInt("status"));
+			B.setTimeOfBooking(result.getDate("time_of_booking"));
+			B.setBookingPhone(result.getString("booking_phone"));
 			bookedDates.add(B);
 		}
 		
@@ -88,19 +87,19 @@ public class ServiceDao {
 				
 				while(result.next()) {
 					Booking B = new Booking();
-					B.setBookingId(result.getInt(1));
-					B.setServiceId(result.getInt(2));
-					B.setUserId(result.getInt(3));
-					B.setFirstName(result.getString(4));
-					B.setLastName(result.getString(5));
-					B.setAge(result.getInt(6));
-					B.setDateFrom(result.getDate(7));
-					B.setDateTo(result.getDate(8));
-					B.setTimeFrom(result.getDate(9));
-					B.setTimeTo(result.getDate(10));
-					B.setStatus(result.getInt(11));
-					B.setTimeOfBooking(result.getDate(12));
-					B.setBookingPhone(result.getString(13));
+					B.setBookingId(result.getInt("id"));
+					B.setServiceId(result.getInt("service_id"));
+					B.setUserId(result.getInt("user_id"));
+					B.setFirstName(result.getString("firstname"));
+					B.setLastName(result.getString("lastname"));
+					B.setAge(result.getInt("age"));
+					B.setDateFrom(result.getDate("date_from"));
+					B.setDateTo(result.getDate("date_to"));
+					B.setTimeFrom(result.getDate("time_from"));
+					B.setTimeTo(result.getDate("time_to"));
+					B.setStatus(result.getInt("status"));
+					B.setTimeOfBooking(result.getDate("time_of_booking"));
+					B.setBookingPhone(result.getString("booking_phone"));
 					bookedDates.add(B);
 				}
 				
@@ -146,20 +145,20 @@ public class ServiceDao {
 		result.next();
 		
 		Booking B = new Booking();
-		B.setBookingId(result.getInt(1));
-		B.setServiceId(result.getInt(2));
-		B.setUserId(result.getInt(3));
-		B.setFirstName(result.getString(4));
-		B.setLastName(result.getString(5));
-		B.setAge(result.getInt(6));
-		B.setDateFrom(result.getDate(7));
-		B.setDateTo(result.getDate(8));
-		B.setTimeFrom(result.getDate(9));
-		B.setTimeTo(result.getDate(10));
-		B.setStatus(result.getInt(11));
-		B.setAdminId(result.getInt("admin_id"));
+		B.setBookingId(result.getInt("id"));
+		B.setServiceId(result.getInt("service_id"));
+		B.setUserId(result.getInt("user_id"));
+		B.setFirstName(result.getString("firstname"));
+		B.setLastName(result.getString("lastname"));
+		B.setAge(result.getInt("age"));
+		B.setDateFrom(result.getDate("date_from"));
+		B.setDateTo(result.getDate("date_to"));
+		B.setTimeFrom(result.getDate("time_from"));
+		B.setTimeTo(result.getDate("time_to"));
+		B.setStatus(result.getInt("status"));
 		B.setTimeOfBooking(result.getDate("time_of_booking"));
 		B.setBookingPhone(result.getString("booking_phone"));
+		B.setAdminId(result.getInt("admin_id"));
 		return B;
 	}
 
@@ -207,18 +206,18 @@ public class ServiceDao {
 				
 				while(result.next()) {
 					Booking B = new Booking();
-					B.setBookingId(result.getInt(1));
-					B.setServiceId(result.getInt(2));
-					B.setUserId(result.getInt(3));
-					B.setFirstName(result.getString(4));
-					B.setLastName(result.getString(5));
-					B.setAge(result.getInt(6));
-					B.setDateFrom(result.getDate(7));
-					B.setDateTo(result.getDate(8));
-					B.setTimeFrom(result.getDate(9));
-					B.setTimeTo(result.getDate(10));
-					B.setStatus(result.getInt(11));
-					B.setTimeOfBooking(result.getDate(12));
+					B.setBookingId(result.getInt("id"));
+					B.setServiceId(result.getInt("service_id"));
+					B.setUserId(result.getInt("user_id"));
+					B.setFirstName(result.getString("firstname"));
+					B.setLastName(result.getString("lastname"));
+					B.setAge(result.getInt("age"));
+					B.setDateFrom(result.getDate("date_from"));
+					B.setDateTo(result.getDate("date_to"));
+					B.setTimeFrom(result.getDate("time_from"));
+					B.setTimeTo(result.getDate("time_to"));
+					B.setStatus(result.getInt("status"));
+					B.setTimeOfBooking(result.getDate("time_of_booking"));
 					bookedDates.add(B);
 				}
 				
@@ -238,17 +237,17 @@ public class ServiceDao {
 				
 				while(result.next()) {
 					Booking B = new Booking();
-					B.setBookingId(result.getInt(1));
-					B.setServiceId(result.getInt(2));
-					B.setUserId(result.getInt(3));
-					B.setFirstName(result.getString(4));
-					B.setLastName(result.getString(5));
-					B.setAge(result.getInt(6));
-					B.setDateFrom(result.getDate(7));
-					B.setDateTo(result.getDate(8));
-					B.setTimeFrom(result.getDate(9));
-					B.setTimeTo(result.getDate(10));
-					B.setStatus(result.getInt(11));
+					B.setBookingId(result.getInt("id"));
+					B.setServiceId(result.getInt("service_id"));
+					B.setUserId(result.getInt("user_id"));
+					B.setFirstName(result.getString("firstname"));
+					B.setLastName(result.getString("lastname"));
+					B.setAge(result.getInt("age"));
+					B.setDateFrom(result.getDate("date_from"));
+					B.setDateTo(result.getDate("date_to"));
+					B.setTimeFrom(result.getDate("time_from"));
+					B.setTimeTo(result.getDate("time_to"));
+					B.setStatus(result.getInt("status"));
 					B.setServiceName(result.getString("name"));
 					B.setTimeOfBooking(result.getDate("time_of_booking"));
 					B.setBookingPhone(result.getString("booking_phone"));
@@ -257,5 +256,70 @@ public class ServiceDao {
 				
 				return bookedDates;
 			}
+
+	public static List<Service> getAllServicesOfHospitals()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+				
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM service JOIN department ON dept_id=department_id"
+				+ " JOIN hospital ON hospital_id=department.hospital_id";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet result = ps.executeQuery();
+		
+		List<Service> services = new ArrayList<Service>();
+		
+		while(result.next()) {
+		Service service = new Service();
+		service.setServiceId(result.getInt("service_id"));
+		service.setServiceName(result.getString("service.name"));
+		service.setDeptId(result.getInt("dept_id"));
+		service.setDeptName(result.getString("department.name"));
+		service.setHospitalName(result.getString("hospital.name"));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setAdminId(result.getInt("admin_id"));
+		service.setGoogleMapsUrl(result.getString("google_maps_url"));
+		service.setAddress(result.getString("address"));
+		service.setServiceReview(result.getFloat("service.review"));
+		service.setLat(result.getFloat("lat"));
+		service.setLang(result.getFloat("lang"));
+		service.setWebsite(result.getString("website"));
+		services.add(service);
+		}
+		return services;
+			
+			}
+		
+	public static List<Service> getAllServicesOfCenters()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+				
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM service JOIN center ON service.center_id=center.center_id";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet result = ps.executeQuery();
+		
+		List<Service> services = new ArrayList<Service>();
+		
+		while(result.next()) {
+		Service service = new Service();
+		service.setServiceId(result.getInt("service_id"));
+		service.setServiceName(result.getString("service.name"));
+		service.setCenterId(result.getInt("center_id"));
+		service.setCenterName(result.getString("center.name"));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setAdminId(result.getInt("user_id"));
+		service.setGoogleMapsUrl(result.getString("google_maps_url"));
+		service.setAddress(result.getString("address"));
+		service.setServiceReview(result.getFloat("service.review"));
+		service.setLat(result.getFloat("lat"));
+		service.setLang(result.getFloat("lang"));
+		service.setWebsite(result.getString("website"));
+		services.add(service);
+		}
+		return services;
+			
+			}
 	
 }
+

@@ -8,21 +8,28 @@ public class Service extends Department {
 	String serviceName;
 	int centerId;
 	int deptId;
-	Date bookedTill;
 	Date lastUpdated;
 	String fees;
 	float serviceReview;
 	Date available_from;
 	Date available_to;
+	String centerName;
 
-	public Service(int serviceId, String serviceName, int centerId, int deptId, Date bookedTill, Date lastUpdated,
+	public String getCenterName() {
+		return centerName;
+	}
+
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
+	}
+
+	public Service(int serviceId, String serviceName, int centerId, int deptId, Date lastUpdated,
 			String fees, float serviceReview) {
 		super();
 		this.serviceId = serviceId;
 		this.serviceName = serviceName;
 		this.centerId = centerId;
 		this.deptId = deptId;
-		this.bookedTill = bookedTill;
 		this.lastUpdated = lastUpdated;
 		this.fees = fees;
 		this.serviceReview = serviceReview;
@@ -48,15 +55,7 @@ public class Service extends Department {
 	public void setFees(String fees) {
 		this.fees = fees;
 	}
-
-	public Date getBookedTill() {
-		return bookedTill;
-	}
-
-	public void setBookedTill(Date bookedTill) {
-		this.bookedTill = bookedTill;
-	}
-
+	
 	public Date getLastUpdated() {
 		return lastUpdated;
 	}

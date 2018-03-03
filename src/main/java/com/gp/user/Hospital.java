@@ -9,8 +9,6 @@ public class Hospital extends User{
 	public Hospital() {
 		super();
 	}
-	
-	
 
 	public Hospital(int hospitalId, int adminId, String hospitalName, String phone, String website, String address,
 			String intro, String googleMapsUrl, float lat, float lang, float review) {

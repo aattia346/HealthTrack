@@ -1,7 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="org.springframework.web.servlet.ModelAndView"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.io.PrintWriter"%>
 <%@page import="com.gp.user.Department"%>
 <%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.HospitalDao"%>
@@ -18,8 +16,6 @@ Hospital H = HospitalDao.getHospitalById(hospitalId);
 List<Department> depts = HospitalDao.getDeptsByHospitalID(H.getHospitalId());
 
 request.setAttribute("depts", depts);
-
-PrintWriter pw = new PrintWriter(System.out);
 
 Date today = Calendar.getInstance().getTime();
 %>
@@ -86,7 +82,10 @@ Date today = Calendar.getInstance().getTime();
 					                            <img src="/user/layout/images/dar_elfo2ad.jpg">
 					                            <p class="lead">${service.serviceName}</p> 
 					                            <%	Service service = (Service)pageContext.getAttribute("service");
-						                         	if(Validation.validateBookDate(service.getServiceId(), today)){ %>
+					                            	Calendar calendar = Calendar.getInstance();
+					                            	calendar.setTime(today);
+					                            	calendar.add(Calendar.DAY_OF_MONTH, 1);
+						                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
 						                         		<p class="lead">Available today</p> 
 						                        <% 	}
 					                            

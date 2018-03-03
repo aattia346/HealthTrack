@@ -54,10 +54,36 @@ public class HospitalDao {
 		List<Service> list = new ArrayList<Service>();
 		while(result.next()) {
 			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), 
-					result.getDate(5), result.getDate(6), result.getString(7), result.getFloat(8));
+					result.getDate(5), result.getString(7), result.getFloat(8));
 			list.add(s);
 		}
 		return list;
 	}
 
+	public static List<Hospital> getAllHospitals()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+				
+				Connection con = DBConnection.getConnection();
+				String sql="SELECT * FROM hospital";
+				PreparedStatement ps = con.prepareStatement(sql);
+				
+				ResultSet result = ps.executeQuery();
+				List<Hospital> hospitals = new ArrayList<Hospital>();
+				while(result.next()) {
+					Hospital hospital = new Hospital();
+					hospital.setHospitalId(result.getInt("id"));
+					hospital.setHospitalName(result.getString("name"));
+					hospital.setLat(result.getFloat("lat"));
+					hospital.setLang(result.getFloat("lang"));
+					hospital.setPhone(result.getString("phone"));
+					hospital.setWebsite(result.getString("website"));
+					hospital.setReview(result.getFloat("review"));
+					hospital.setAddress(result.getString("address"));
+					hospital.setIntro(result.getString("intro"));
+					hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+					hospitals.add(hospital);
+				}
+				return hospitals;
+			
+			}
 }
