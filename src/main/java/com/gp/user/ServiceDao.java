@@ -29,14 +29,14 @@ public class ServiceDao {
 		service.setServiceName(result.getString(2));
 		service.setCenterId(result.getInt("center_id"));
 		service.setDeptId(result.getInt("dept_id"));
-		service.setDeptName(result.getString("department.name"));
-		service.setHospitalName(result.getString("hospital.name"));
+		service.setDeptName(result.getString("name"));
+		service.setHospitalName(result.getString("name"));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setAdminId(result.getInt("admin_id"));
 		service.setGoogleMapsUrl(result.getString("google_maps_url"));
 		service.setAddress(result.getString("address"));
-		service.setServiceReview(result.getFloat("service.review"));
+		service.setServiceReview(result.getFloat("review"));
 		return service;
 	}
 
@@ -271,16 +271,16 @@ public class ServiceDao {
 		while(result.next()) {
 		Service service = new Service();
 		service.setServiceId(result.getInt("service_id"));
-		service.setServiceName(result.getString("service.name"));
+		service.setServiceName(result.getString("name"));
 		service.setDeptId(result.getInt("dept_id"));
-		service.setDeptName(result.getString("department.name"));
-		service.setHospitalName(result.getString("hospital.name"));
+		service.setDeptName(result.getString("name"));
+		service.setHospitalName(result.getString("name"));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setAdminId(result.getInt("admin_id"));
 		service.setGoogleMapsUrl(result.getString("google_maps_url"));
 		service.setAddress(result.getString("address"));
-		service.setServiceReview(result.getFloat("service.review"));
+		service.setServiceReview(result.getFloat("review"));
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));
@@ -303,15 +303,15 @@ public class ServiceDao {
 		while(result.next()) {
 		Service service = new Service();
 		service.setServiceId(result.getInt("service_id"));
-		service.setServiceName(result.getString("service.name"));
+		service.setServiceName(result.getString("name"));
 		service.setCenterId(result.getInt("center_id"));
-		service.setCenterName(result.getString("center.name"));
+		service.setCenterName(result.getString("name"));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setAdminId(result.getInt("user_id"));
 		service.setGoogleMapsUrl(result.getString("google_maps_url"));
 		service.setAddress(result.getString("address"));
-		service.setServiceReview(result.getFloat("service.review"));
+		service.setServiceReview(result.getFloat("review"));
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));

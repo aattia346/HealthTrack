@@ -3,7 +3,7 @@ package com.gp.user;
 public class Location {
 
 	float lat, lang;
-	String name, type, url;
+	String name, type, url, pinColor;
 	public float getLat() {
 		return lat;
 	}
@@ -34,13 +34,21 @@ public class Location {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Location(float lat, float lang, String name, String type, String url) {
+	
+	public Location(float lat, float lang, String name, String type, String url, String pinColor) {
 		super();
 		this.lat = lat;
 		this.lang = lang;
 		this.name = name;
 		this.type = type;
 		this.url = url;
+		this.pinColor = pinColor;
+	}
+	public String getPinColor() {
+		return pinColor;
+	}
+	public void setPinColor(String pinColor) {
+		this.pinColor = pinColor;
 	}
 	public Location() {
 		super();

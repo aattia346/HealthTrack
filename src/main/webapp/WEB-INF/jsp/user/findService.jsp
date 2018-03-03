@@ -24,41 +24,49 @@ List<Location> 	locations = new ArrayList<Location>();
 
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
-	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", center.getWebsite());
+	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", center.getWebsite(), "ff0");
+	locations.add(location);
+	//change the url to the page of the service
 }
 
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
-	Location location = new Location(hospital.getLat(), hospital.getLang(), hospital.getHospitalName(), "hospital", hospital.getWebsite());
+	Location location = new Location(hospital.getLat(), hospital.getLang(), hospital.getHospitalName(), "hospital", hospital.getWebsite(), "f00");
+	locations.add(location);
+	//change the url to the page of the service
 }
 
 List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), service.getWebsite());
+	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), service.getWebsite(), "fff");
+	locations.add(location);
+	//change the url to the page of the service
 }
 
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), service.getWebsite());
+	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), service.getWebsite(), "fff");
+	locations.add(location);
+	//change the url to the page of the service
 }
 
 %>
 
  <div class="container find-service-container">
         
-            <h3>Find A Service : </h3>
+            <h3 class="text-center">Find A Service : </h3>
             <div class="row">
                 
                 <div class="enter-address col-sm-11 col-sm-offset-1">
                     
-                    <h4 class="col-sm-2">Enter An Address</h4>
+                    <h4 class="col-sm-3">Enter An Address</h4>
                         <div class="col-sm-4">
                             <input id="pac-input" type="text" class="input-sm form-control" placeholder="Search By Place">
                     	</div>
             </div>
                 <div class="col-sm-offset-1 col-sm-3 choose-service">
                     
-                    <div class="panel panel-default ">
+                    <div class="panel panel-primary ">
                       <div class="panel-heading">
                         <h3 class="panel-title text-center">Services</h3>
                       </div>
@@ -68,6 +76,7 @@ for(Service service : servicesOfCenters){
                           <input type="radio" name="service" value="hospital"> Hospitals<br>
                           <input type="radio" name="service" value="center"> Centers<br>
                           <input type="radio" name="service" value="pharmacy"> Pharmacies<br>
+                          <input type="radio" name="service" value="icu"> ICU<br>
                       </div>
                     </div>
                     <button class="btn btn-primary find-me" id="findme">locate me</button>
@@ -75,30 +84,6 @@ for(Service service : servicesOfCenters){
                 </div>
                 
                 <div class="col-sm-8" id="map"></div>
-                
-                <div class="col-sm-offset-1 col-sm-5 services-information">
-                    
-                    <div class="panel panel-default ">
-                      <div class="panel-heading">
-                        <h3 class="panel-title text-center">Services Information Summary</h3>
-                      </div>
-                      <div class="panel-body">
-                          
-                      </div>
-                    </div>
-                </div>
-                
-                <div class="col-sm-5 services-information">
-                    
-                    <div class="panel panel-default ">
-                      <div class="panel-heading">
-                        <h3 class="panel-title text-center">Services Information Summary</h3>
-                      </div>
-                      <div class="panel-body">
-                          
-                      </div>
-                    </div>
-                </div>
             
             </div>
         
@@ -122,17 +107,18 @@ function initAutocomplete() {
       mapTypeId: 'roadmap'
     });
 var locations = [
-                [30.030759 , 31.229189 , "El-kasr El-3ene" , "f00" , "hospital" , ""],
-                [30.048872 , 31.242359 , "El-Helal Hospital" , "00f" , "clinic" , ""],
-                [30.030216 , 31.231368 , "Elkasr El-faransawy" , "f00" , "hospital" , ""],
-                [30.181248 , 31.106173 , "Mubarak Center" , "00f" , "clinic" , "https://www.google.com.eg"],
+	<% for(Location loc : locations){ %>
+	
+		[<%= loc.getLat() %>, <%= loc.getLang() %>, "<%= loc.getName() %>" ,"<%= loc.getPinColor() %>", "<%= loc.getType() %>", "<%= loc.getUrl() %>"],
+		
+	<% }%>
                          ];
 
           var infowindow = new google.maps.InfoWindow();
 
           for (i = 0; i < locations.length; i++) {  
               
-              if(locations[i][4]==selectedService || selectedService=="all"){
+              if(locations[i][4].toUpperCase()==selectedService.toUpperCase() || selectedService.toLowerCase()=="all"){
 
             var pinIcon = new google.maps.MarkerImage(
             "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|".concat(locations[i][3]), 
@@ -162,7 +148,6 @@ var locations = [
         }
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
-    console.log(input);
     var searchBox = new google.maps.places.SearchBox(input);
    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -252,5 +237,4 @@ var locations = [
 </script>
 <script
  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&libraries=places&callback=initAutocomplete"
-         async defer>
-        </script>
+         async defer></script>
