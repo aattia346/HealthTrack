@@ -72,6 +72,7 @@ public class HospitalDao {
 				while(result.next()) {
 					Hospital hospital = new Hospital();
 					hospital.setHospitalId(result.getInt("id"));
+					hospital.setAdminId(result.getInt("admin_id"));
 					hospital.setHospitalName(result.getString("name"));
 					hospital.setLat(result.getFloat("lat"));
 					hospital.setLang(result.getFloat("lang"));

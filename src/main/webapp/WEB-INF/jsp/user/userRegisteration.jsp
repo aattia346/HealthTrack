@@ -13,7 +13,7 @@
 
                         <form method="post" action="/HealthTrack/signup/submit">
                             
-                            <div class="form-group name">
+                            <div class="form-group register-name">
                                 <input type="text" class="form-control input-sm" name="firstName" placeholder="First Name" required maxlength="15"> 
                                 
                                 <input type="text" class="form-control input-sm" name="lastName" placeholder="Last Name" required maxlength="15"> 
@@ -44,7 +44,7 @@
                             	${emailAlreadyExists}
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="form-control btn btn-info" value="Submit">
+                                <input type="submit" class="form-control btn btn-primary" value="Submit">
                             </div>
                         
                         </form>

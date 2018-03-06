@@ -28,12 +28,15 @@ public class ProfilesController {
 		if(Validation.validateNumber(id) & 
 				Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {		
 			HttpSession session = request.getSession();
-			if(session.isNew()) {
+			String username = (String)session.getAttribute("username");
+			if(username == null) {
+				System.out.println("null");
 				mav.setViewName("/user/login");
 			}else {
-			User user = UserDao.getUserById(id);
-			m.addAttribute("id", user.getId());
-			mav.setViewName("/user/profiles/user");
+				System.out.println("not null");
+				User user = UserDao.getUserById(id);
+				m.addAttribute("id", user.getId());
+				mav.setViewName("/user/profiles/user");
 		}
 
     }else {
@@ -43,7 +46,7 @@ public class ProfilesController {
     }
 	
 	@RequestMapping(value="/HealthTrack/profile/hospital/{userId}", method = RequestMethod.GET)
-    public ModelAndView profile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    public ModelAndView hospitalProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
@@ -58,13 +61,29 @@ public class ProfilesController {
 	
 	}
 	
+	@RequestMapping(value="/HealthTrack/profile/center/{userId}", method = RequestMethod.GET)
+    public ModelAndView centerProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
+			m.addAttribute("centerId", id);
+			String url = "/user/profiles/center";
+			mav.setViewName(url);
+		}else {
+			mav.setViewName("/user/login");
+		}
+		
+        return mav;
+	
+	}
+	
 	@RequestMapping(value="/HealthTrack/profile/service/{id}", method = RequestMethod.GET)   
-	public ModelAndView servicePage(HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav) 
+	public ModelAndView servicePage(ModelMap m, HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("service_id", "service", Integer.toString(id))) {
-			HttpSession session = request.getSession();
-			session.setAttribute("serviceId", id);
+			
+			m.addAttribute("serviceId", id);
 			String url = "/user/profiles/service";
 			mav.setViewName(url);			
 		}else {

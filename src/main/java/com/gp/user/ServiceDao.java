@@ -30,7 +30,7 @@ public class ServiceDao {
 		service.setCenterId(result.getInt("center_id"));
 		service.setDeptId(result.getInt("dept_id"));
 		service.setDeptName(result.getString("name"));
-		service.setHospitalName(result.getString("name"));
+		service.setHospitalName(result.getString(13));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setAdminId(result.getInt("admin_id"));

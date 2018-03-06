@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.gp.user.Department"%>
+
 <%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.HospitalDao"%>
 <%@page import="com.gp.user.Hospital"%>
@@ -30,7 +31,7 @@ Date today = Calendar.getInstance().getTime();
 
                     <p class="hospital-desc lead"><%= H.getIntro() %></p>
                 </div>
-                <img src="/user/layout/images/dar_elfo2ad.jpg" class="hospital-img">
+                <img src="/user/layout/images/hospital.jpg" class="hospital-img">
                 </div>
         </div>
 
@@ -79,12 +80,12 @@ Date today = Calendar.getInstance().getTime();
 					       			<a href="/HealthTrack/profile/service/${service.getServiceId()}" class="dep${service.getDeptId()} hidden">
 					                    <div class="thumbnail hospital-service col-sm-4">             
 					                        <div class="caption">
-					                            <img src="/user/layout/images/dar_elfo2ad.jpg">
+					                            <img src="/user/layout/images/hospital.jpg">
 					                            <p class="lead">${service.serviceName}</p> 
 					                            <%	Service service = (Service)pageContext.getAttribute("service");
 					                            	Calendar calendar = Calendar.getInstance();
 					                            	calendar.setTime(today);
-					                            	calendar.add(Calendar.DAY_OF_MONTH, 1);
+					                            	//calendar.add(Calendar.DAY_OF_MONTH, 1);
 						                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
 						                         		<p class="lead">Available today</p> 
 						                        <% 	}

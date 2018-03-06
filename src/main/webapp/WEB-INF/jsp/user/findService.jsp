@@ -1,7 +1,9 @@
-<% String title="Find Service"; %>
+<% String title="Health Services Navigator"; %>
 <%@include  file="includes/header.jsp" %>
 
 <%@page import="java.util.List"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@page import="com.gp.user.Service"%>
@@ -12,6 +14,7 @@
 <%@page import="com.gp.user.CenterDao"%>
 <%@page import="com.gp.user.ServiceDao"%>
 <%@page import="com.gp.user.Location"%>
+<%@page import="com.gp.user.Validation"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 
@@ -22,39 +25,57 @@ List<String> 	types = new ArrayList<String>();
 List<String> 	urls  = new ArrayList<String>();
 List<Location> 	locations = new ArrayList<Location>();
 
+String servicePinColor = null;
+Date today = Calendar.getInstance().getTime();
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(today);
+String serviceUrl = null;
+
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
-	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", center.getWebsite(), "ff0");
+	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
+	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", serviceUrl, "71e486");
 	locations.add(location);
-	//change the url to the page of the service
 }
 
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
-	Location location = new Location(hospital.getLat(), hospital.getLang(), hospital.getHospitalName(), "hospital", hospital.getWebsite(), "f00");
+	serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
+	Location location = new Location(hospital.getLat(), hospital.getLang(), hospital.getHospitalName(), "hospital", serviceUrl, "ff6e6e");
 	locations.add(location);
-	//change the url to the page of the service
 }
 
 List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), service.getWebsite(), "fff");
+	serviceUrl = "/HealthTrack/profile/service/"+service.getServiceId();
+	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
+		servicePinColor = "52BC5F";
+	}
+	else{
+		servicePinColor = "ff0b0b";
+	}
+	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
-	//change the url to the page of the service
 }
 
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), service.getWebsite(), "fff");
+	serviceUrl = "/HealthTrack/profile/service/"+service.getServiceId();
+	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
+		servicePinColor = "52BC5F";
+	}
+	else{
+		servicePinColor = "ff0b0b";
+	}
+	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
-	//change the url to the page of the service
 }
 
 %>
 
  <div class="container find-service-container">
         
-            <h3 class="text-center">Find A Service : </h3>
+            <h3 class="text-center">Find a Location </h3>
             <div class="row">
                 
                 <div class="enter-address col-sm-11 col-sm-offset-1">
@@ -71,12 +92,27 @@ for(Service service : servicesOfCenters){
                         <h3 class="panel-title text-center">Services</h3>
                       </div>
                       <div class="panel-body">
+                      <ul class="list-unstyled">
                           <input type="radio" name="service" value="all" checked> All<br>
-                          <input type="radio" name="service" value="clinic"> Clinics<br>
-                          <input type="radio" name="service" value="hospital"> Hospitals<br>
-                          <input type="radio" name="service" value="center"> Centers<br>
-                          <input type="radio" name="service" value="pharmacy"> Pharmacies<br>
-                          <input type="radio" name="service" value="icu"> ICU<br>
+                          <input type="radio" name="service" value="clinic"> Clinics <i class="fa fa-map-marker custom-pin clinic-pin"></i><br>
+                          <input type="radio" name="service" value="hospital"> Hospitals <i class="fa fa-map-marker custom-pin hospital-pin"></i><br>
+                          <input type="radio" name="service" value="center"> Centers <i class="fa fa-map-marker custom-pin center-pin"></i><br>
+                          <input type="radio" name="service" value="pharmacy"> Pharmacies <i class="fa fa-map-marker custom-pin pharmacy-pin"></i><br>
+                          <input type="radio" name="service" value="lab"> Labs <i class="fa fa-map-marker custom-pin lab-pin"></i><br>
+                  	  </ul>
+                  	  <ul class="list-unstyled">
+                  	  	  <h4 class="text-center special-services">Special Services</h4>
+                          <input type="radio" name="service" value="icu"> ICU <br>
+                          <input type="radio" name="service" value="mri"> MRI<br>
+                      </ul>
+                      <div class="guide-label">
+                      	<div class="available-color">
+                      		<i class="fa fa-map-marker avialable-pin"></i> <span>Available today</span>
+                      	</div>
+                      	<div class="unavailable-color">
+                      		<i class="fa fa-map-marker unavialable-pin"></i> <span>Unavailable today</span>
+                      	</div>
+                      </div>
                       </div>
                     </div>
                     <button class="btn btn-primary find-me" id="findme">locate me</button>
@@ -93,7 +129,8 @@ for(Service service : servicesOfCenters){
 <script>
 var selectedService = "all";
 Center = {lat:30.181724, lng : 31.112288};
-
+var allSelected = ["hospital", "clinic", "pharmacy", "lab", "center"];
+var setPin = false;
 $("input[type='radio'][name='service']").change(function(){
         
     selectedService = $(this).val();
@@ -103,7 +140,7 @@ $("input[type='radio'][name='service']").change(function(){
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: Center,
-      zoom: 12,
+      zoom: 8,
       mapTypeId: 'roadmap'
     });
 var locations = [
@@ -116,9 +153,20 @@ var locations = [
 
           var infowindow = new google.maps.InfoWindow();
 
-          for (i = 0; i < locations.length; i++) {  
+          for (i = 0; i < locations.length; i++) {
+        	  
+        	  if(selectedService.toLowerCase() == "all" && allSelected.includes(locations[i][4].toLowerCase())){ 		  
+        			  console.log("all");
+        			  setPin = true;
+        		  }else{
+            		  setPin = false;
+            	  }
               
-              if(locations[i][4].toUpperCase()==selectedService.toUpperCase() || selectedService.toLowerCase()=="all"){
+              if(locations[i][4].toLowerCase() == selectedService.toLowerCase()){
+            	  console.log("selected service");
+            	  setPin = true;
+              }
+            if(setPin){
 
             var pinIcon = new google.maps.MarkerImage(
             "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|".concat(locations[i][3]), 

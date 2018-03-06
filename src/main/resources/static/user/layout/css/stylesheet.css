@@ -15,7 +15,7 @@
     box-shadow: 0 0 3px 1px #ddd;
     background-color: #fff;
     padding: 10px 0px;
-    color: #49bcf5;
+    color: #337ab7;
 }
 .login-container .login-form{
     margin-top: 40px;
@@ -44,8 +44,8 @@
 
 /***************************** registeration page **************************************/
 
-.name input{
-    width: 49%;
+.register-name input{
+    width: 48%;
     display: inline;
     margin-left: 2px;
 }
@@ -81,7 +81,7 @@
     background-color: #F3F4EF;
 }
 .hospital-depts{
-    border-top: 5px solid #49BCF5;
+    border-top: 5px solid #337ab7;
     margin: 4% 3% 3% 5%;
     min-height: 300px;
     border-radius:  0 0 20px 20px;
@@ -182,7 +182,7 @@
     margin-top: 18px;
 }
 .booking-date{
-    border: 1px solid #49bcf5;
+    border: 1px solid #337ab7;
     border-radius: 11px;
     padding: 3px;
 }
@@ -218,6 +218,11 @@ input[type="submit"]{
 .service-booking form .personal-info{
 	margin-top: 58px;
 }
+.name input{
+	width: 48%;
+    display: inline;
+    margin-left: 8px;
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
@@ -231,8 +236,8 @@ input[type="submit"]{
     font-size: 15px;
 }
 .navbar-inverse {
-    background-color: #49BCF5;
-    border-color: #49BCF5;
+    background-color: #337ab7;
+    border-color: #337ab7;
 }
 .navbar-inverse .navbar-nav > li > a, .login-register a, .login-register span {
     font-weight: 700;
@@ -245,14 +250,28 @@ input[type="submit"]{
     font-size: 14px;
 }
 .navbar-inverse .navbar-brand{
-    font-size: 20px;
+    font-size: 16px;
     color: #fff;
     font-weight: 900;
+    position: relative;
+}
+.navbar-brand img{
+	position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 3px;
+    right: -11px;
+}
+.navbar-nav{
+	margin-left: 20px;
 }
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: #49BCF5;
+    background-color: #337ab7;
     margin-left: 0;
     margin-top: 0;
+}
+.navbar{
+	margin-bottom: 0;
 }
 /*======================================================================================*/
 /*======================================================================================*/
@@ -275,15 +294,7 @@ input[type="submit"]{
     height: 346px;
     margin-right: 8%;
     margin-left: 3%;
-}
-.choose-service .panel-primary > .panel-heading , .services-information .panel-primary > .panel-heading{
-    height: 20px;  
-    border-radius: 20px 20px 0 0;
-}
-.choose-service .panel-title , .services-information .panel-title{
-    font-size: 13px;
-    font-weight: 800;
-    line-height: 0;
+    position: relative;
 }
 #map {
     height: 400px;
@@ -302,8 +313,10 @@ h3 , h4{
     color: #9a9a9a;
 }
 .find-me{
-    width: 100%;
+    width: 92%;
     border-radius: 11px;
+    font-weight: 800;
+    margin-left: 6px;
 }
 label{
     display: inline-block;
@@ -317,29 +330,57 @@ label{
 .enter-address{
     margin-bottom: -8px;
 }
-.panel-primary > .panel-heading{
-    padding: 15px;
+.choose-service .panel-primary > .panel-heading , .services-information .panel-primary > .panel-heading{
+    height: 30px;  
+    border-radius: 20px 20px 0 0;
+    padding: 13px 15px 21px 15px;
 }
-.choose-service .panel-title, .services-information .panel-title {
+.choose-service .panel-title , .services-information .panel-title{
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 0.5;
+}
+.custom-pin{
+	font-size: 23px;
+}
+.clinic-pin{
+	color: #4089c7;
+}
+.hospital-pin{
+	color: #f73c3c;
+}
+.center-pin{
+	color: #71e486;	
+}
+.pharmacy-pin{
+	color: #c35ed4;
+}
+.service-pin{
+	color: #0ff;
+}
+.special-services{
+	color: #fff;
+    background-color: #337ab7;
+    padding: 5px;
+    margin: 20px -15px 10px;
     font-size: 16px;
 }
-.panel-location li:nth-child(even){
-    background-color: #D9EDF7;
+.avialable-pin{
+	color: #4EB25A;
 }
-.panel-location li p{
-    font-weight: bold;
+.unavialable-pin{
+	color: #FF0B0B;
+}
+.guide-label{
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+.guide-label span{
+	font-size: 9px;
     color: #888;
-    display: inline-block;
-    width: 35%;
+    font-weight: bold;
 }
-.panel-location li{
-    margin-left: -15px;
-    margin-right: -15px;
-    padding: 8px;
-    padding-bottom: 0;
-}
-@media (min-width: 768px){
-.find-service-container .col-sm-5 {
-    width: 45%;
-	}
+.lab-pin{
+	color: #76c9d6;
 }

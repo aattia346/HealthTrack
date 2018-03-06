@@ -30,7 +30,8 @@ public class UserLoginController {
 	@RequestMapping(value = "/HealthTrack/login", method = RequestMethod.GET)
     public ModelAndView showForm(ModelAndView mav, HttpServletRequest request){
 		HttpSession session = request.getSession();
-		if(session.isNew()) {
+		String username = (String)session.getAttribute("username");
+		if(username == null) {
 			mav.setViewName("/user/login");
 		}else {
 			mav.setViewName("redirect:/HealthTrack");			

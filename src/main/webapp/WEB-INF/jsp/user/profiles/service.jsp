@@ -14,10 +14,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% 	
-	String title="Service"; 
-
 	HttpSession hospitalSession = request.getSession();
-	int serviceId = (Integer)hospitalSession.getAttribute("serviceId");
+	int serviceId = (Integer)request.getAttribute("serviceId");
 	boolean showForm = false;
 	User user = new User();
 	String usernameSession = (String)hospitalSession.getAttribute("username");
@@ -29,6 +27,7 @@
 	}
 	
 	Service S = ServiceDao.getServiceById(serviceId);
+	String title=S.getServiceName(); 
 	Calendar calendar = Calendar.getInstance();
 	Date today = Calendar.getInstance().getTime();
 	calendar.setTime(today);
@@ -85,7 +84,7 @@
                 <% if(showForm){ %>                
                 
                 <div class="col-sm-12 hospital-depts service-booking">
-                    <h3 class="text-center">Book ICU</h3>
+                    <h3 class="text-center">Book <%= S.getServiceName() %></h3>
                     <form method="post" action="/HealthTrack/Service/<%=S.getServiceId() %>/Booking/Submit">
                         
                         <input type="hidden" value="<%= user.getId() %>" name="userId">
@@ -145,10 +144,10 @@
                 			<p>${booking.timeTo}</p>
                 			<a href="/healthTrack/Service/DeleteBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-danger confirm-delete-booking">Delete</a>
                 			<c:if test="${booking.status==0}">
-                				<a href="/healthTrack/Service/VerifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Verify</a>
+                				<a href="/healthTrack/Service/VerifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Confirm</a>
 							</c:if>
 							<c:if test="${booking.status==1}">
-                				<a href="/healthTrack/Service/UnverifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">Unverify</a>
+                				<a href="/healthTrack/Service/UnverifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">Unconfirm</a>
 							</c:if>
                 			
                 		</div>
@@ -157,7 +156,7 @@
 
                <% }else{ %>
             	   
-            	   <div> if you want to book this service please login or signup</div>
+            	   <div> if you want to book this service please <a href="/HealthTrack/login">Login</a> or <a href="/HealthTrack/signup">Signup</a></div>
            <%    }
                 	%>
                 

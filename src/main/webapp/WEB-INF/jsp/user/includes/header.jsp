@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +13,19 @@
 
     </head>    
 <body>
-
+	
+	<%
+	boolean sessionExist = false;
+	HttpSession headerSession = request.getSession();
+	String headerUsername = (String)session.getAttribute("username");
+	if(headerUsername == null) {
+		sessionExist = false;
+	}else {
+		sessionExist = true;
+	}
+	
+	%>
+	
 	<nav class="navbar navbar-inverse">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,7 +37,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"title="Home Page">Health SoS Navigator</a>
+      <a class="navbar-brand" href="/HealthTrack/"title="Home Page">Health Services Navigator<img src="/user/layout/images/logo.png"></a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -35,9 +46,11 @@
         <li><a href="#">Clinics</a></li>
         <li><a href="#">Centers</a></li>
         <li><a href="#">Services</a></li>
+        <li><a href="#">Pharmacies</a></li>
         <li><a href="#">Labs</a></li>
       </ul>
         
+      <%  if(sessionExist){ %>
           <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
@@ -50,12 +63,14 @@
           </ul>
         </li>
       </ul>      
-
+<% }else{ %>
         <div class="pull-right login-register">
             
-            <a href="#">Login</a><span> or</span>
+            <a href="/HealthTrack/login">Login</a><span> or</span>
             
-            <a href="#">Register</a></div>
+            <a href="/HealthTrack/signup">Register</a></div>
+            
+            <% } %>
       
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

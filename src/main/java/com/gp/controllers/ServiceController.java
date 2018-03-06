@@ -26,12 +26,6 @@ import com.gp.user.Validation;
 @RestController
 public class ServiceController {
 		
-	@RequestMapping(value="/HealthTrack/addservice")
-	public ModelAndView addservice(ModelAndView mav) {
-		mav.setViewName("user/hospital_admin/addservice");
-		return mav;
-	}
-	
 	@RequestMapping(value="/HealthTrack/Service/{serviceId}/Booking/Submit", method = RequestMethod.POST)
     public ModelAndView submitBooking(@PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {

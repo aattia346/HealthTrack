@@ -35,7 +35,7 @@
           	        ${notAuthenticated}
                             
                     <div class="form-group">
-              	      <input type="submit" class="form-control btn btn-info" value="Submit">
+              	      <input type="submit" class="form-control btn btn-primary" value="Submit">
                     </div>
                     
              	</form>
