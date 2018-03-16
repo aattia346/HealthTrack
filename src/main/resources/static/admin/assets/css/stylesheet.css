@@ -1,0 +1,39 @@
+/*======================================================================================*/
+/*======================================================================================*/
+
+/***************************** Admin Dashboard **************************************/
+.brand-dashboard{
+	font-size: 13px !important;
+	font-weight: 700;
+}
+.navbar-brand-dashboard img{
+	position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 3px;
+    right: -11px;
+}
+.fa-hospital-symbol{
+    color: #939699;
+    display: inline-block;
+}
+.my-icon{
+    width: 19px;
+    height: 35px;
+    margin: -13px;
+    margin-left: -6px;
+    color: #939699;
+}
+.pharmacy-icon{
+    width: 15px;
+    height: 15px;
+}
+.open aside.left-panel .navbar .navbar-nav li a .menu-icon {
+   display: none;
+}
+.dashboard-btn {
+	color: #fff !important;
+    font-size: 13px;
+    font-weight: 700;	
+    margin: 2px;
+}

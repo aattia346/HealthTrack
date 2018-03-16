@@ -27,10 +27,8 @@ List<Location> 	locations = new ArrayList<Location>();
 
 String servicePinColor = null;
 Date today = Calendar.getInstance().getTime();
-Calendar calendar = Calendar.getInstance();
-calendar.setTime(today);
 String serviceUrl = null;
-
+Calendar calendar = Calendar.getInstance();
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
 	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
@@ -48,6 +46,8 @@ for(Hospital hospital : hospitals){
 List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
 	serviceUrl = "/HealthTrack/profile/service/"+service.getServiceId();
+	calendar.setTime(today);
+	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 		servicePinColor = "52BC5F";
 	}
@@ -61,6 +61,8 @@ for(Service service : servicesOfHospital){
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
 	serviceUrl = "/HealthTrack/profile/service/"+service.getServiceId();
+	calendar.setTime(today);
+	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 		servicePinColor = "52BC5F";
 	}

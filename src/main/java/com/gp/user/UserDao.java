@@ -126,6 +126,25 @@ public class UserDao {
 		result2.next();
 		return result2.getInt(1);
 	}
+
+	public static int adminLoginSubmit(String username, String password)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM user WHERE username=? AND password=? AND admin=1";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, username);	
+		ps.setString(2, password); 
+		ResultSet result = ps.executeQuery();
+		result.next();
+		
+		if(result.getRow()==1) {			
+			int userId = result.getInt(1);
+			return userId;
+		}else {
+			return 0;
+		}
+	}
 	
 	
 }

@@ -85,7 +85,7 @@ Date today = Calendar.getInstance().getTime();
 					                            <%	Service service = (Service)pageContext.getAttribute("service");
 					                            	Calendar calendar = Calendar.getInstance();
 					                            	calendar.setTime(today);
-					                            	//calendar.add(Calendar.DAY_OF_MONTH, 1);
+					                            	calendar.add(Calendar.DAY_OF_MONTH, -1);
 						                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
 						                         		<p class="lead">Available today</p> 
 						                        <% 	}

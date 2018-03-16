@@ -187,6 +187,24 @@ public class Validation {
 		
 		return valid;
 	}
+
+	public static boolean checkIfTheUserIsAdmin(String username) 
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT admin FROM user WHERE username=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, username);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		boolean admin=false;
+		
+		if(result.getInt(1)==1) {
+			admin = true;
+		}
+		
+		return admin;
+	}
 	
 }
 

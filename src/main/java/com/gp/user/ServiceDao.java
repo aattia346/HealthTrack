@@ -29,7 +29,7 @@ public class ServiceDao {
 		service.setServiceName(result.getString(2));
 		service.setCenterId(result.getInt("center_id"));
 		service.setDeptId(result.getInt("dept_id"));
-		service.setDeptName(result.getString("name"));
+		service.setDeptName(result.getString(11));
 		service.setHospitalName(result.getString(13));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
@@ -142,7 +142,7 @@ public class ServiceDao {
 		ps.setInt(1, bookingId);
 
 		ResultSet result = ps.executeQuery();
-		result.next();
+		//result.next();
 		
 		Booking B = new Booking();
 		B.setBookingId(result.getInt("id"));
