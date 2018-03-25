@@ -37,3 +37,18 @@
     font-weight: 700;	
     margin: 2px;
 }
+/*======================================================================================*/
+/*======================================================================================*/
+
+/***************************** Admin Dashboard/Hospitals **************************************/
+
+.dept-in-hospital-table , .dept-in-hospital-table:hover {
+	border: 1px solid #2196F3;
+    padding: 3px 10px;
+    font-size: 15px;
+    background-color: #2196F3;
+    border-radius: 10%;
+    margin: 5px 5px;
+    color: #fff;
+    font-weight: bold
+}

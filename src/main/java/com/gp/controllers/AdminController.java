@@ -37,8 +37,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/login", method = RequestMethod.GET)
-	public ModelAndView adminLogin(Model model, ModelAndView mav){
-		mav.setViewName("/admin/login");
+	public ModelAndView adminLogin(Model model, ModelAndView mav, HttpServletRequest request)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username)) {
+				mav.setViewName("/admin/dashboard");
+			}
+		}
 		return mav;
 	}
 
@@ -90,4 +99,6 @@ public class AdminController {
 		
 		return mav;
 	}
+
+
 }

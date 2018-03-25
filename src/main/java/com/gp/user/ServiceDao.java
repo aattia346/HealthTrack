@@ -261,8 +261,7 @@ public class ServiceDao {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 				
 		Connection con = DBConnection.getConnection();
-		String sql="SELECT * FROM service JOIN department ON dept_id=department_id"
-				+ " JOIN hospital ON hospital_id=department.hospital_id";
+		String sql="SELECT * FROM service JOIN department ON dept_id=department_id";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet result = ps.executeQuery();
 		
@@ -273,18 +272,29 @@ public class ServiceDao {
 		service.setServiceId(result.getInt("service_id"));
 		service.setServiceName(result.getString("name"));
 		service.setDeptId(result.getInt("dept_id"));
-		service.setDeptName(result.getString("name"));
-		service.setHospitalName(result.getString("name"));
+		service.setDeptName(result.getString(11));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
-		service.setAdminId(result.getInt("admin_id"));
-		service.setGoogleMapsUrl(result.getString("google_maps_url"));
-		service.setAddress(result.getString("address"));
 		service.setServiceReview(result.getFloat("review"));
-		service.setLat(result.getFloat("lat"));
-		service.setLang(result.getFloat("lang"));
-		service.setWebsite(result.getString("website"));
 		services.add(service);
+		}
+		
+		for(Service S: services) {
+			int deptId = S.getDeptId();
+			Connection con2 = DBConnection.getConnection();
+			String sql2="SELECT * FROM hospital JOIN department ON department.hospital_id=hospital.id"
+					+ " WHERE department_id=?";
+			PreparedStatement ps2 = con2.prepareStatement(sql2);
+			ps2.setInt(1, deptId);
+			ResultSet result2 = ps2.executeQuery();
+			result2.next();
+			S.setAdminId(result2.getInt("admin_id"));
+			S.setHospitalName(result2.getString("name"));
+			S.setGoogleMapsUrl(result2.getString("google_maps_url"));
+			S.setAddress(result2.getString("address"));
+			S.setLat(result2.getFloat("lat"));
+			S.setLang(result2.getFloat("lang"));
+			S.setWebsite(result2.getString("website"));
 		}
 		return services;
 			
@@ -305,13 +315,44 @@ public class ServiceDao {
 		service.setServiceId(result.getInt("service_id"));
 		service.setServiceName(result.getString("name"));
 		service.setCenterId(result.getInt("center_id"));
-		service.setCenterName(result.getString("name"));
+		service.setCenterName(result.getString(10));
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
-		service.setAdminId(result.getInt("user_id"));
+		service.setAdminId(result.getInt("admin_id"));
 		service.setGoogleMapsUrl(result.getString("google_maps_url"));
 		service.setAddress(result.getString("address"));
-		service.setServiceReview(result.getFloat("review"));
+		service.setServiceReview(result.getFloat(8));
+		service.setLat(result.getFloat("lat"));
+		service.setLang(result.getFloat("lang"));
+		service.setWebsite(result.getString("website"));
+		services.add(service);
+		}
+		return services;
+			
+			}
+	public static List<Service> getServicesOfCenter(int centerId)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+				
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM service JOIN center ON service.center_id=center.center_id WHERE center.center_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, centerId);
+		ResultSet result = ps.executeQuery();
+		
+		List<Service> services = new ArrayList<Service>();
+		
+		while(result.next()) {
+		Service service = new Service();
+		service.setServiceId(result.getInt("service_id"));
+		service.setServiceName(result.getString("name"));
+		service.setCenterId(result.getInt("center_id"));
+		service.setCenterName(result.getString(10));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setAdminId(result.getInt("admin_id"));
+		service.setGoogleMapsUrl(result.getString("google_maps_url"));
+		service.setAddress(result.getString("address"));
+		service.setServiceReview(result.getFloat(8));
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));

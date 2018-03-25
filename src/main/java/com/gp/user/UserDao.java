@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.gp.database.DBConnection;
 
@@ -146,5 +148,20 @@ public class UserDao {
 		}
 	}
 	
-	
+	public static List<User> getUsers(String type) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM user WHERE type=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, type);	
+		ResultSet result = ps.executeQuery();
+		
+		List<User> users = new ArrayList<User>();
+		while(result.next()) {
+			User user = new User(result.getInt("user_id"), result.getString("username"), type);
+			users.add(user);
+		}
+		return users;
+	}
 }

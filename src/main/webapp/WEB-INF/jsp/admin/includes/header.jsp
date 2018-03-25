@@ -52,25 +52,17 @@
                     <h3 class="menu-title">Services</h3><!-- /.menu-title -->
                     
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Places</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Locations</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-h-square menu-icon"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/hospitals">Hospitals</a></li>
+                            <li><i class="fa fa-h-square menu-icon"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments">Departments</a></li>
                             <li><i class="fa fa-stethoscope"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics">Clinics</a></li>
                             <li><img src="/admin/icons/if_medical_icon_3_1290986.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/centers">Centers</a></li>
                             <li><img src="/admin/icons/if_pill_36347.png" class="my-icon pharmacy-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies">Pharmacies</a></li>
+                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services">Services</a></li>
                         </ul>
                     </li>
-                    
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Single Services</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="tables-data.html">MRI</a></li>
-                            <li><img src="/admin/icons/icu-monitor.svg" class="my-icon"><a href="tables-data.html">ICU</a></li>
-                            <li><img src="/admin/icons/baby-incubators.svg" class="my-icon"><a href="tables-data.html">Incubators</a></li>
-                            <li><img src="/admin/icons/x-rays.svg" class="my-icon pharmacy-icon"><a href="tables-data.html">X-ray</a></li>
-                        </ul>
-                    </li>
-                    
+
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar menu-icon"></i>Bookings</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -95,4 +87,87 @@
         </nav>
     </aside>
     
-    
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+
+                        <div class="dropdown for-notification">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <span class="count bg-danger">5</span>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="notification">
+                            <p class="red">You have 3 Notification</p>
+                            <a class="dropdown-item media bg-flat-color-1" href="#">
+                                <i class="fa fa-check"></i>
+                                <p>Server #1 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-4" href="#">
+                                <i class="fa fa-info"></i>
+                                <p>Server #2 overloaded.</p>
+                            </a>
+                            <a class="dropdown-item media bg-flat-color-5" href="#">
+                                <i class="fa fa-warning"></i>
+                                <p>Server #3 overloaded.</p>
+                            </a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="/admin/images/admin.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+
+                                <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+
+                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+
+                                <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
+                    <div class="language-select dropdown" id="language-select">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
+                            <i class="flag-icon flag-icon-us"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="language" >
+                            <div class="dropdown-item">
+                                <span class="flag-icon flag-icon-fr"></span>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-es"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-us"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-it"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </header><!-- /header -->
+        <!-- Header-->

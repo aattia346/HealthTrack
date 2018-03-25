@@ -37,7 +37,7 @@ public class HospitalDao {
 		List<Department> list = new ArrayList<Department>();
 		//result.next();
 		while(result.next()) {
-			Department d = new Department(result.getInt(1), result.getInt(2), result.getString(3));
+			Department d = new Department(result.getInt("department_id"), result.getInt("hospital_id"), result.getString("name"));
 			list.add(d);
 		}
 		return list;
@@ -87,4 +87,21 @@ public class HospitalDao {
 				return hospitals;
 			
 			}
+
+	public static List<Department> getAllDepts() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM department JOIN hospital on Department.hospital_id = hospital.id";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet result = ps.executeQuery();
+		List<Department> list = new ArrayList<Department>();
+		while(result.next()) {
+			Department d = new Department(result.getInt("department_id"), result.getInt("hospital_id"), result.getString("name"));
+			d.setHospitalName(result.getString(5));
+			d.setAdminId(result.getInt("admin_id"));
+			list.add(d);
+		}
+		return list;
+	}
 }

@@ -4,15 +4,17 @@
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.gp.user.Pharmacy"%>
-<%@page import="com.gp.user.PharmacyDao"%>
+<%@page import="com.gp.user.Hospital"%>
+<%@page import="com.gp.user.HospitalDao"%>
+<%@page import="com.gp.user.Department"%>
+<%@page import="com.gp.user.Service"%>
 
-<% 	String title = "Pharmacies"; 
+<% 	String title = "Departments"; 
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
-	List<Pharmacy> pharmacies = new ArrayList<Pharmacy>();
-	pharmacies = PharmacyDao.getAllPharmacies();
-	request.setAttribute("pharmacies", pharmacies);
+	List<Department> depts = new ArrayList<Department>();
+	depts = HospitalDao.getAllDepts();
+	request.setAttribute("depts", depts);
 %>
 
 <%@include  file="includes/header.jsp" %>
@@ -30,7 +32,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Pharmacies</li>
+                            <li>Department</li>
                         </ol>
                     </div>
                 </div>
@@ -52,19 +54,30 @@
                       <tr>
                       	<th>ID</th>
                         <th>Name</th>
+                        <th>Hospital</th>
                         <th>Admin</th>
-                        <th>Review</th>
+                        <th>Services</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach var="pharmacy" items="${pharmacies}">
+                      <c:forEach var="dept" items="${depts}">
                       
-                      	<tr>
-                        <td>${pharmacy.pharmacyId}</td>
-                        <td><a href="/HealthTrack/profile/pharmacy/${pharmacy.adminId}" target="_blank">${pharmacy.pharmacyName}</a></td>
-                        <td>${pharmacy.adminId}</td>
-                        <td>${pharmacy.review}</td>
+                      <%
+                      	Department D = (Department)pageContext.getAttribute("dept");
+                      	List<Service> services = HospitalDao.getServicesByDeptID(D.getDeptId());
+                      	request.setAttribute("services", services);
+                      %>
+                      	<tr id="dept-${D.deptId}">
+                        <td>${dept.deptId}</td>
+                        <td>${dept.deptName}</td>
+                        <td>${dept.hospitalName}</td>
+                        <td>${dept.adminId}</td>
+                        <td>
+                        	<c:forEach var="service" items="${services}">
+                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
+                        	</c:forEach>
+                        </td>
                         <td>
                         <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
                         <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
