@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.user.Booking;
-import com.gp.user.ServiceDao;
+import com.gp.user.BookingDao;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -114,10 +114,10 @@ public class ProfilesController {
 		if(Validation.validateNumber(bookingId) & Validation.checkIfSomethingExists("id", "booking", Integer.toString(bookingId))
 				& Validation.validateNumber(userId) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(userId))) {
 			
-			Booking B = ServiceDao.getBookingById(bookingId);
+			Booking B = BookingDao.getBookingById(bookingId);
 			if(B.getUserId()==userId) {
 				
-				ServiceDao.deleteBooking(bookingId);
+				BookingDao.deleteBooking(bookingId);
 				mav.setViewName("/user/profiles/user");
 			}
 		}else {

@@ -8,6 +8,7 @@
 <%@page import="com.gp.user.HospitalDao"%>
 <%@page import="com.gp.user.Department"%>
 <%@page import="com.gp.user.Service"%>
+<%@page import="com.gp.user.ServiceDao"%>
 
 <% 	String title = "Departments"; 
 	String username = (String)session.getAttribute("username");
@@ -65,7 +66,7 @@
                       
                       <%
                       	Department D = (Department)pageContext.getAttribute("dept");
-                      	List<Service> services = HospitalDao.getServicesByDeptID(D.getDeptId());
+                      	List<Service> services = ServiceDao.getServicesByDeptID(D.getDeptId());
                       	request.setAttribute("services", services);
                       %>
                       	<tr id="dept-${D.deptId}">

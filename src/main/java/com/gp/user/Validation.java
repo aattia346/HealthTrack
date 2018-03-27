@@ -22,6 +22,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.validator.routines.EmailValidator;
+import org.apache.commons.validator.routines.UrlValidator;
 
 import com.gp.database.DBConnection;
 
@@ -71,16 +72,21 @@ public class Validation {
 	
 	public static boolean validateName(String name) {
 		
-		return Pattern.matches("\\S[a-zA-Z]*", name.trim());
+		return Pattern.matches("([-]*[\\s]*[a-zA-Z])*", name.trim());
+	}
+	
+public static boolean validateText(String name) {
+		
+		return Pattern.matches("([-,.]*[\\s]*[a-zA-Z])*", name.trim());
 	}
 	
 	public static boolean validatePhone(String phone) {
 	
 		int length = phone.length();
-		if(length!=11) {
-			return false;
-		}else {
+		if(length == 11 || length== 8) {
 			return true;
+		}else {
+			return false;
 			}
 		}
 	
@@ -165,6 +171,7 @@ public class Validation {
 		
 		return Pattern.matches("\\S[0-9]*", Integer.toString(num));
 	}
+	
 	public static boolean validateNumber(String num) {
 		
 		return Pattern.matches("\\S[0-9]*", num);
@@ -175,7 +182,7 @@ public class Validation {
 	
 		boolean valid = true;
 						
-		List<Booking> bookings = ServiceDao.getVerifiedBookingsByServiceId(serviceId);
+		List<Booking> bookings = BookingDao.getVerifiedBookingsByServiceId(serviceId);
 		
 		for(Booking B : bookings) {
 			
@@ -205,6 +212,29 @@ public class Validation {
 		
 		return admin;
 	}
+
 	
+	public static boolean validateURL(String url) {
+		
+		UrlValidator  urlValidator = UrlValidator.getInstance();
+		return urlValidator.isValid(url);
+	}
+
+	public static String[] getLatAndLangFromUrl(String url) {
+		
+		String[] location = new String[2];
+		
+		int latIndex = url.indexOf("@");
+		int endLatIndex = url.indexOf(",", latIndex);
+		String lat = url.substring(latIndex+1, endLatIndex);
+		location[0] = lat;
+		
+		int langIndex = endLatIndex+1;
+		int endLangIndex = url.indexOf(",", langIndex);
+		String lang = url.substring(langIndex, endLangIndex);
+		
+		location[1] = lang;
+		return location;
+	}
 }
 

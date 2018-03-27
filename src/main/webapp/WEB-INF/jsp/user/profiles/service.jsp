@@ -6,6 +6,7 @@
 <%@page import="com.gp.user.User"%>
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="com.gp.user.Booking"%>
+<%@page import="com.gp.user.BookingDao"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -126,7 +127,7 @@
                 
                 <% } else if(user.getId()== S.getAdminId()){
                 
-                	List<Booking> bookings = ServiceDao.getBookingsByServiceId(serviceId);
+                	List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
                 	
                 	request.setAttribute("bookings", bookings);
                 
@@ -167,7 +168,7 @@
 <%@include  file="../includes/footer.jsp" %>
 <%
 
-List<Booking> bookings = ServiceDao.getVerifiedBookingsByServiceId(serviceId);
+List<Booking> bookings = BookingDao.getVerifiedBookingsByServiceId(serviceId);
 
 %>
 <script>

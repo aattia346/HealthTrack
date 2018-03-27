@@ -4,6 +4,7 @@
 
 <%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.HospitalDao"%>
+<%@page import="com.gp.user.ServiceDao"%>
 <%@page import="com.gp.user.Hospital"%>
 <%@page import="com.gp.user.Validation"%>
 <%@page import="java.util.Calendar"%>
@@ -74,7 +75,7 @@ Date today = Calendar.getInstance().getTime();
                 <div class="col-sm-7 hospital-depts">
                     <h4 class="text-center services-available">Services Available</h4>          
                     <% for(Department d:depts){ 
-							List<Service> services = HospitalDao.getServicesByDeptID(d.getDeptId());                    
+							List<Service> services = ServiceDao.getServicesByDeptID(d.getDeptId());                    
                     		request.setAttribute("services", services); %>
 	                    		<c:forEach  var="service" items="${services}">
 					       			<a href="/HealthTrack/profile/service/${service.getServiceId()}" class="dep${service.getDeptId()} hidden">

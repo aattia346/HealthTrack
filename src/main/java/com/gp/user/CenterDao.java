@@ -23,13 +23,13 @@ public class CenterDao {
 		while(result.next()) {
 			Center center = new Center();
 			center.setCenterId(result.getInt("center_id"));
-			center.setCenterName(result.getString("name"));
+			center.setCenterName(result.getString("center_name"));
 			center.setAdminId(result.getInt("admin_id"));
 			center.setLat(result.getFloat("lat"));
 			center.setLang(result.getFloat("lang"));
 			center.setPhone(result.getString("phone"));
 			center.setWebsite(result.getString("website"));
-			center.setReview(result.getFloat("review"));
+			center.setReview(result.getFloat("center_review"));
 			center.setAddress(result.getString("address"));
 			center.setIntro(result.getString("intro"));
 			center.setGoogleMapsUrl(result.getString("google_maps_url"));

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,23 +17,7 @@ import com.gp.user.UserDao;
 import com.gp.user.Validation;
 
 @RestController
-public class AdminController {
-	
-	@RequestMapping(value="/HealthTrack/admin/dashboard", method = RequestMethod.GET)
-	public ModelAndView dashboard(Model model, ModelAndView mav, HttpServletRequest request)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		if(username == null) {
-			mav.setViewName("/admin/login");
-		}else {
-			if(Validation.checkIfTheUserIsAdmin(username)) {
-				mav.setViewName("/admin/dashboard");
-			}
-		}
-		
-		return mav;
-	}
+public class AdminLoginController {
 	
 	@RequestMapping(value="/HealthTrack/admin/login", method = RequestMethod.GET)
 	public ModelAndView adminLogin(Model model, ModelAndView mav, HttpServletRequest request)
@@ -79,26 +62,5 @@ public class AdminController {
    	}
 		return mav;
 	}
-
-	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{place}", method = RequestMethod.GET)
-	public ModelAndView adminPlaces(Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
-			String username = (String)session.getAttribute("username");
-			if(username != null) {
-				if(username.equalsIgnoreCase(adminUsername)) {
-					mav.setViewName("/admin/" + place);
-				}else {
-					mav.setViewName("redirect/:HealthTrack/admin/login");
-				}
-			}else {
-				mav.setViewName("/admin/login");
-			}
-			
-		}
-		
-		return mav;
-	}
-
 
 }

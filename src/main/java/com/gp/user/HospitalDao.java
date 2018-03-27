@@ -20,9 +20,9 @@ public class HospitalDao {
 		ps.setInt(1, id);
 		ResultSet result = ps.executeQuery();
 		result.next();
-		Hospital hospital = new Hospital(result.getInt(1), id, result.getString(2), result.getString(6),
-										result.getString(7), result.getString(9), result.getString(10),
-										result.getString(10),result.getFloat(4), result.getFloat(5), result.getFloat(8));
+		Hospital hospital = new Hospital(result.getInt("hospital_id"), id, result.getString("hospital_name"), result.getString("phone"),
+										result.getString("website"), result.getString("address"), result.getString("intro"),
+										result.getString("google_maps_url"),result.getFloat("lat"), result.getFloat("lang"), result.getFloat("hospital_review"));
 		return hospital;
 	}
 	
@@ -35,56 +35,38 @@ public class HospitalDao {
 		ps.setInt(1, hospitalId);
 		ResultSet result = ps.executeQuery();
 		List<Department> list = new ArrayList<Department>();
-		//result.next();
 		while(result.next()) {
-			Department d = new Department(result.getInt("department_id"), result.getInt("hospital_id"), result.getString("name"));
+			Department d = new Department(result.getInt("department_id"), result.getInt("hospital_id"), result.getString("dept_name"));
 			list.add(d);
-		}
-		return list;
-	}
-	
-	public static List<Service> getServicesByDeptID(int deptId) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		
-		Connection con = DBConnection.getConnection();
-		String sql="SELECT * FROM service WHERE dept_id=?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, deptId);
-		ResultSet result = ps.executeQuery();
-		List<Service> list = new ArrayList<Service>();
-		while(result.next()) {
-			Service s = new Service(result.getInt(1), result.getString(2), result.getInt(3), result.getInt(4), 
-					result.getDate(5), result.getString(7), result.getFloat(8));
-			list.add(s);
 		}
 		return list;
 	}
 
 	public static List<Hospital> getAllHospitals()
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 				
-				Connection con = DBConnection.getConnection();
-				String sql="SELECT * FROM hospital";
-				PreparedStatement ps = con.prepareStatement(sql);
-				
-				ResultSet result = ps.executeQuery();
-				List<Hospital> hospitals = new ArrayList<Hospital>();
-				while(result.next()) {
-					Hospital hospital = new Hospital();
-					hospital.setHospitalId(result.getInt("id"));
-					hospital.setAdminId(result.getInt("admin_id"));
-					hospital.setHospitalName(result.getString("name"));
-					hospital.setLat(result.getFloat("lat"));
-					hospital.setLang(result.getFloat("lang"));
-					hospital.setPhone(result.getString("phone"));
-					hospital.setWebsite(result.getString("website"));
-					hospital.setReview(result.getFloat("review"));
-					hospital.setAddress(result.getString("address"));
-					hospital.setIntro(result.getString("intro"));
-					hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
-					hospitals.add(hospital);
-				}
-				return hospitals;
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM hospital";
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet result = ps.executeQuery();
+		List<Hospital> hospitals = new ArrayList<Hospital>();
+		while(result.next()) {
+			Hospital hospital = new Hospital();
+			hospital.setHospitalId(result.getInt("hospital_id"));
+			hospital.setAdminId(result.getInt("admin_id"));
+			hospital.setHospitalName(result.getString("hospital_name"));
+			hospital.setLat(result.getFloat("lat"));
+			hospital.setLang(result.getFloat("lang"));
+			hospital.setPhone(result.getString("phone"));
+			hospital.setWebsite(result.getString("website"));
+			hospital.setReview(result.getFloat("hospital_review"));
+			hospital.setAddress(result.getString("address"));
+			hospital.setIntro(result.getString("intro"));
+			hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+			hospitals.add(hospital);
+			}
+		return hospitals;
 			
 			}
 
@@ -92,16 +74,42 @@ public class HospitalDao {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
 		Connection con = DBConnection.getConnection();
-		String sql="SELECT * FROM department JOIN hospital on Department.hospital_id = hospital.id";
+		String sql="SELECT * FROM department JOIN hospital on Department.hospital_id = hospital.hospital_id";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet result = ps.executeQuery();
 		List<Department> list = new ArrayList<Department>();
 		while(result.next()) {
-			Department d = new Department(result.getInt("department_id"), result.getInt("hospital_id"), result.getString("name"));
-			d.setHospitalName(result.getString(5));
+			Department d = new Department(result.getInt("department_id"), result.getInt("hospital_id"), result.getString("dept_name"));
+			d.setHospitalName(result.getString("hospital_name"));
 			d.setAdminId(result.getInt("admin_id"));
 			list.add(d);
 		}
 		return list;
+	}
+
+	
+	public static void insertHospital(Hospital hospital)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		
+		System.out.println("insert");
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO hospital "
+				+ "(hospital_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, hospital.getHospitalName());
+		ps.setInt(2, hospital.getAdminId());
+		ps.setFloat(3, hospital.getLat());
+		ps.setFloat(4, hospital.getLang());
+		ps.setString(5, hospital.getPhone());
+		ps.setString(6, hospital.getWebsite());
+		ps.setString(7, hospital.getAddress());
+		ps.setString(8, hospital.getIntro());
+		ps.setString(9, hospital.getGoogleMapsUrl());
+		
+		ps.executeUpdate();
+		
 	}
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.user.Booking;
-import com.gp.user.ServiceDao;
+import com.gp.user.BookingDao;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -64,7 +64,7 @@ public class ServiceController {
 		if(errors) {
 			mav.setViewName("/user/profiles/service");
 		}else {
-			ServiceDao.insertBookingDays(serviceId, userId, firstName, lastName, age, bookFromAsDate, bookToAsDate, phone);
+			BookingDao.insertBookingDays(serviceId, userId, firstName, lastName, age, bookFromAsDate, bookToAsDate, phone);
 			mav.setViewName("user/profiles/user");
 		}
 		
@@ -85,9 +85,9 @@ public class ServiceController {
 				mav.setViewName("user/login");
 			}else {
 				User user = UserDao.getUserByUsername(username);
-				Booking booking = ServiceDao.getBookingById(bookingId);
+				Booking booking = BookingDao.getBookingById(bookingId);
 				if(booking.getAdminId() == user.getId()) {	
-					ServiceDao.verifyBooking(bookingId);
+					BookingDao.verifyBooking(bookingId);
 					mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
 				}else {
 					mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
@@ -111,9 +111,9 @@ public class ServiceController {
 				mav.setViewName("user/login");
 			}else {
 				User user = UserDao.getUserByUsername(username);
-				Booking booking = ServiceDao.getBookingById(bookingId);
+				Booking booking = BookingDao.getBookingById(bookingId);
 				if(booking.getAdminId() == user.getId()) {	
-					ServiceDao.unverifyBooking(bookingId);
+					BookingDao.unverifyBooking(bookingId);
 					mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
 				}else {
 					mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
@@ -137,9 +137,9 @@ public class ServiceController {
 				mav.setViewName("user/login");
 			}else {
 				User user = UserDao.getUserByUsername(username);
-				Booking booking = ServiceDao.getBookingById(bookingId);
+				Booking booking = BookingDao.getBookingById(bookingId);
 				if(booking.getAdminId() == user.getId()) {	
-					ServiceDao.deleteBooking(bookingId);
+					BookingDao.deleteBooking(bookingId);
 					mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
 				}else {
 					mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);

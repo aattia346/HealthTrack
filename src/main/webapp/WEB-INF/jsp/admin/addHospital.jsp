@@ -40,18 +40,28 @@
                     <div class="card">
                       <div class="card-header"><strong>Hospital</strong><small> Form</small></div>
                       <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter hospital name" class="form-control" name="name" required="required"></div>
-                        <div class="form-group"><label class=" form-control-label">Intro</label><input type="text" placeholder="Say something about the hospital" class="form-control" name="intro" required="required"></div>
-                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required"></div>
+                        <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter hospital name" class="form-control" name="name" required="required" value="${oldName}"></div>
+                        ${invalideName}
+                        <div class="form-group"><label class=" form-control-label">Intro</label><textarea placeholder="Say something about the hospital" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
+                        ${invalidIntro}
+                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="${oldUrl}"></div>
+                        ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">phone</label><input type="text" placeholder="Phone Number" class="form-control" name="phone" required="required"></div>
+                            <div class="form-group"><label class=" form-control-label">phone</label><input type="text" placeholder="Phone Number" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
+                            ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="Website" class="form-control"  required="required"></div>
+                            <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="Website url" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
+                            ${invalidWebsite}
                           </div>
+                          <div class="col-12">
+                          <div class="form-group"><label class=" form-control-label">Address</label><input type="text" placeholder="Address" class="form-control" name="address" required="required" value="${oldAddress}"></div>
+                        	${invalidAddress}
+                        	</div>
                         </div>
-                        <div class="form-group"><label class=" form-control-label">Address</label><input type="text" placeholder="Address" class="form-control" name="address" required="required"></div>
+                        
+                        
                       	<div class="form-group">
                       		  <label class=" form-control-label">Choose the Admin</label>
                               <select name="hospitalAdmin" class="form-control">
@@ -61,7 +71,7 @@
                                 	request.setAttribute("users", hospitalUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value=="${user.username}">${user.username}</option>
+                                	<option value="${user.id}">${user.username}</option>
                                 </c:forEach>
                               </select>
                             </div>
