@@ -41,7 +41,8 @@
                       <div class="card-header"><strong>Hospital</strong><small> Form</small></div>
                       <div class="card-body card-block">
                         <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter hospital name" class="form-control" name="name" required="required" value="${oldName}"></div>
-                        ${invalideName}
+                        ${invalidName}
+                        ${nameExist}
                         <div class="form-group"><label class=" form-control-label">Intro</label><textarea placeholder="Say something about the hospital" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
                         ${invalidIntro}
                         <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="${oldUrl}"></div>
@@ -74,6 +75,7 @@
                                 	<option value="${user.id}">${user.username}</option>
                                 </c:forEach>
                               </select>
+                              ${invalidAdmin}
                             </div>
                             <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
                       </div>

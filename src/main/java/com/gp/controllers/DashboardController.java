@@ -84,13 +84,17 @@ public class DashboardController {
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
 					
-					String name	 	= request.getParameter("name");
-					String intro 	= request.getParameter("intro");
-					String url	 	= request.getParameter("url");
-					String phone	= request.getParameter("phone");
-					String website	= request.getParameter("website");
-					String address	= request.getParameter("address");
-					int admin		= Integer.parseInt(request.getParameter("hospitalAdmin"));
+					String name	 		= request.getParameter("name");
+					String intro 		= request.getParameter("intro");
+					String url			= request.getParameter("url");
+					String phone		= request.getParameter("phone");
+					String website		= request.getParameter("website");
+					String address		= request.getParameter("address");
+					int admin			= Integer.parseInt(request.getParameter("hospitalAdmin"));
+					String[] location 	= new String[2];
+					float lat			= 0
+						, lang			= 0;
+					
 					
 					model.addAttribute("oldName"	, name);
 					model.addAttribute("oldIntro"	, intro);
@@ -102,32 +106,45 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalideName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						errors = true;
+					}
+					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalideIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalideWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidePhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
 						errors = true;
 					}
 					
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalideUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
 						errors = true;
+					}else {
+						location 	= Validation.getLatAndLangFromUrl(url);
+						try {
+							lat		= Float.valueOf(location[0]);
+							lang	= Float.valueOf(location[1]);
+						} catch (Exception e) {
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							errors = true;
+						}
+						
+						if(admin == 0) {
+							model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the new hospital</p>");
+							errors = true;
+						}
 					}
-					
-					if(admin == 0) {
-						model.addAttribute("invalideAdmin", "<p class=\"wrong-input \">Please Select the admin of the new hospital</p>");
-						errors = true;
-					}
-					
+
 					if(errors == false) {
 						Hospital hospital = new Hospital();
 						hospital.setHospitalName(name);
@@ -137,12 +154,8 @@ public class DashboardController {
 						hospital.setAddress(address);
 						hospital.setIntro(intro);
 						hospital.setGoogleMapsUrl(url);
-						
-						String[] location = new String[2];
-						location = Validation.getLatAndLangFromUrl(url);
-						
-						hospital.setLat(Float.valueOf(location[0]));
-						hospital.setLang(Float.valueOf(location[1]));
+						hospital.setLat(lat);
+						hospital.setLang(lang);
 						
 						HospitalDao.insertHospital(hospital);
 						

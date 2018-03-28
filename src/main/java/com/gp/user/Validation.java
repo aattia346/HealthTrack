@@ -206,7 +206,7 @@ public static boolean validateText(String name) {
 		result.next();
 		boolean admin=false;
 		
-		if(result.getInt(1)==1) {
+		if(result.getInt(1) == 1) {
 			admin = true;
 		}
 		
@@ -225,14 +225,24 @@ public static boolean validateText(String name) {
 		String[] location = new String[2];
 		
 		int latIndex = url.indexOf("@");
+		if(latIndex == -1) {
+			latIndex = 0;
+		}
+		
 		int endLatIndex = url.indexOf(",", latIndex);
+		if(endLatIndex == -1) {
+			endLatIndex = 5;
+		}
+		
 		String lat = url.substring(latIndex+1, endLatIndex);
 		location[0] = lat;
 		
 		int langIndex = endLatIndex+1;
 		int endLangIndex = url.indexOf(",", langIndex);
+		if(endLangIndex == -1) {
+			endLangIndex = 9;
+		}
 		String lang = url.substring(langIndex, endLangIndex);
-		
 		location[1] = lang;
 		return location;
 	}
