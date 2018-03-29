@@ -72,12 +72,12 @@ public class Validation {
 	
 	public static boolean validateName(String name) {
 		
-		return Pattern.matches("([-]*[\\s]*[a-zA-Z])*", name.trim());
+		return Pattern.matches("[\\sa-zA-Z0-9-]*", name.trim());
 	}
 	
 public static boolean validateText(String name) {
 		
-		return Pattern.matches("([-,.]*[\\s]*[a-zA-Z])*", name.trim());
+		return Pattern.matches("[\\s\\a-zA-Z0-9\\-\\,\\.]*", name.trim());
 	}
 	
 	public static boolean validatePhone(String phone) {

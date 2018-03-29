@@ -1,3 +1,6 @@
+.hidden{
+	display: none;
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
@@ -41,14 +44,39 @@
 /*======================================================================================*/
 
 /***************************** Admin Dashboard/Hospitals **************************************/
-
-.dept-in-hospital-table , .dept-in-hospital-table:hover {
+.dept-in-hospital-table{
+	padding: 5px;
+	float: left;
+}
+.dept-in-hospital-table a:first-of-type , .dept-in-hospital-table a:first-of-type:hover {
 	border: 1px solid #2196F3;
-    padding: 3px 10px;
+    padding: 5px 10px 6px;
     font-size: 15px;
     background-color: #2196F3;
-    border-radius: 10%;
-    margin: 5px 5px;
+    border-radius: 3px 0 0 3px;
+    margin: 5px 1px;
     color: #fff;
-    font-weight: bold
+    font-weight: bold;
+}
+.dept-in-hospital-table a:nth-of-type(2){
+	background: #2196f3;
+    color: #fff;
+    font-size: 15px;
+    padding: 6px;
+    padding-bottom: 7px;
+    margin-left: -6px;
+    border-radius: 0 3px 0 0;
+    border-left: 1px solid #898f92;
+}
+.dept-in-hospital-table a:nth-of-type(2) i{
+	padding-right: 6px;
+}
+.select-new-dept{
+	width: 80%;
+    float: left;
+}
+.submit-dept{
+	float: left;
+    width: 17%;
+    margin-left: 3%;
 }

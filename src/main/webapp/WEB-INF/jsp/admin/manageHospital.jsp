@@ -6,14 +6,18 @@
 <%@page import="java.util.ArrayList"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<% 	String title = "Add New Hospital";
+	
+<% 	
+	String title = "Add New Hospital";
+	String action = (String)request.getAttribute("action");
 	String username = (String)session.getAttribute("username");
-	User admin = UserDao.getUserByUsername(username);
+	User admin = UserDao.getUserByUsername(username);	
 	
 %>
 
 <%@include  file="includes/header.jsp" %>
+
+<%if(action.equalsIgnoreCase("add")){ %>
 
 <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -61,8 +65,7 @@
                         	${invalidAddress}
                         	</div>
                         </div>
-                        
-                        
+                                             
                       	<div class="form-group">
                       		  <label class=" form-control-label">Choose the Admin</label>
                               <select name="hospitalAdmin" class="form-control">
@@ -77,9 +80,25 @@
                               </select>
                               ${invalidAdmin}
                             </div>
+                            
+                            <div class="form-group">
+                      		  <label class=" form-control-label">Please select the Departments of the new Hospital</label>
+                              <select name="depts" class="form-control" multiple="multiple">
+                                <%
+                                	List<String> depts = HospitalDao.getDepts();
+                                	request.setAttribute("depts", depts);
+                                %>
+                                <c:forEach var="dept" items="${depts}">
+                                	<option value="${dept}">${dept}</option>
+                                </c:forEach>
+                              </select>
+                            </div>
+                            
                             <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
                       </div>
                     </div>
                   </form>
+                  
+                  <% } %>
 
 <%@include  file="includes/footer.jsp" %>

@@ -54,6 +54,7 @@
 	    </script>
 	    <script src="/user/layout/js/jquery-3.2.1.min.js"></script>
 		<script src="/user/layout/js/bootstrap.min.js"></script>
+		<script src="/admin/assets/js/src.js"></script>
     </body>
 </html>
 

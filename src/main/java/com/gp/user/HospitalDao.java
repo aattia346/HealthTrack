@@ -91,8 +91,6 @@ public class HospitalDao {
 	public static void insertHospital(Hospital hospital)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
-		
-		System.out.println("insert");
 		Connection con = DBConnection.getConnection();
 		String sql="INSERT INTO hospital "
 				+ "(hospital_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url) "
@@ -112,4 +110,60 @@ public class HospitalDao {
 		ps.executeUpdate();
 		
 	}
+	
+	public static List<String> getDepts(){
+		
+		List<String> depts = new ArrayList<String>();
+		depts.add("Radiology");
+		depts.add("ICU");
+		depts.add("Neonatal intensive care");
+		
+		return depts;
+	}
+
+	public static void insertDepartment(String dept, int hospitalId)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO department "
+				+ "(hospital_id, dept_name) "
+				+ "VALUES(?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, hospitalId);
+		ps.setString(2, dept);
+		
+		ps.executeUpdate();
+	}
+	
+	public static boolean checkIfTheDepartmentExists(String deptName, int hospitalId)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		boolean exist=false;
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM department WHERE dept_name=? AND hospital_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, deptName);
+		ps.setInt(2, hospitalId);
+		
+		ResultSet result = ps.executeQuery();
+		result.next();
+		if(result.getRow()>0) {
+			exist = true;
+		}
+		
+		return exist;
+	}
+
+	public static void deleteSomthing(String table, String column, int value) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="DELETE FROM " + table + " WHERE " + column + " = " + value;
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.executeUpdate();
+	}
+	
 }

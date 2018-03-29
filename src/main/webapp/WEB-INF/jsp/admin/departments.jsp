@@ -80,7 +80,6 @@
                         	</c:forEach>
                         </td>
                         <td>
-                        <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
                         <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
                         </td>
                       </tr>

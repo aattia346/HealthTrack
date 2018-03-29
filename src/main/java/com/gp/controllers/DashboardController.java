@@ -64,7 +64,8 @@ public class DashboardController {
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(username.equalsIgnoreCase(adminUsername)) {
-					mav.setViewName("/admin/addHospital");
+					model.addAttribute("action","add");
+					mav.setViewName("/admin/manageHospital");
 				}else {
 					mav.setViewName("redirect/:HealthTrack/admin/login");
 				}
@@ -91,11 +92,11 @@ public class DashboardController {
 					String website		= request.getParameter("website");
 					String address		= request.getParameter("address");
 					int admin			= Integer.parseInt(request.getParameter("hospitalAdmin"));
+					String[] depts 		= request.getParameterValues("depts");
 					String[] location 	= new String[2];
 					float lat			= 0
 						, lang			= 0;
-					
-					
+				
 					model.addAttribute("oldName"	, name);
 					model.addAttribute("oldIntro"	, intro);
 					model.addAttribute("oldUrl"		, url);
@@ -159,9 +160,17 @@ public class DashboardController {
 						
 						HospitalDao.insertHospital(hospital);
 						
+						Hospital H = HospitalDao.getHospitalById(admin);
+						
+						for(String dept: depts) {
+								HospitalDao.insertDepartment(dept, H.getHospitalId());
+						}
+						
 						mav.setViewName("redirect:/HealthTrack/profile/hospital/"+admin);
 					}else {
-						mav.setViewName("/admin/addHospital");
+						model.addAttribute("action","add");
+						mav.addAllObjects(model);
+						mav.setViewName("/admin/manageHospital");
 					}
 				}else {
 					mav.setViewName("redirect/:HealthTrack/admin/login");
@@ -172,4 +181,44 @@ public class DashboardController {
 			mav.addAllObjects(model);
 		return mav;
 	}
-}
+
+	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/addNewDepartment", method = RequestMethod.POST)
+	public ModelAndView submitDept(Model model, ModelAndView mav, HttpServletRequest request)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username)) {
+				
+				int hospitalId 	= Integer.parseInt(request.getParameter("hospitalId"));
+				String deptName = request.getParameter("dept");
+				
+				if(!deptName.equals("0")) {
+					HospitalDao.insertDepartment(deptName, hospitalId);
+			}
+			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+		}
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/deleteDepartment/{deptId}", method = RequestMethod.GET)
+	public ModelAndView deleteDept(Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("deptId") int deptId )
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username)) {
+				
+				HospitalDao.deleteSomthing("department" , "department_id" , deptId);
+			}
+			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+		}
+
+		return mav;
+	}
+}	
