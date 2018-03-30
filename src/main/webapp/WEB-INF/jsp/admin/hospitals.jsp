@@ -71,15 +71,15 @@
                         <td>${hospital.hospitalId}</td>
                         <td><a href="/HealthTrack/profile/hospital/${hospital.adminId}" target="_blank">${hospital.hospitalName}</a></td>
                         <td>${hospital.adminId}</td>
-                        <td>
+                        <td class="depts-td">
                         <c:forEach var="dept" items="${depts}">
                         	<div class="dept-in-hospital-table">
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}">${dept.deptName}</a>
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}" class="confirm-delete-dept"><i class="fa fa-close" title="Delete this department"> </i> </a>
                         	</div>
                         </c:forEach>
-                        <a href="#" class="btn add-dept-in-hospital-table" id="add-dept-<%= hospital.getHospitalId() %>"><i class="fa fa-plus"></i> Add</a>
-                        <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/addNewDepartment" class="hidden add-dept-<%= hospital.getHospitalId() %>">
+                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%= hospital.getHospitalId() %>" title="Add new department"><i class="fa fa-plus"></i></a>
+                        <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/addNewDepartment" class="add-dept hidden add-dept-<%= hospital.getHospitalId() %>">
 	                        	<input type="hidden" value="<%= hospital.getHospitalId()%>" name="hospitalId">
 	                        	<select name="dept" class="form-control select-new-dept">
                                 <%
@@ -104,14 +104,16 @@
                                 	<%	
                                 %>
                                 </select>
-                                <button class="btn submit-dept btn-success" type="submit"><i class="fa fa-send"></i></button>
+                                <button class="btn submit-dept btn-success btn-sm" type="submit"><i class="fa fa-send"></i></button>
 	                      </form>
                         
                         </td>
                         <td>${hospital.review}</td>
                         <td>
-                        <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
-                        <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
+                        <div>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/<%= hospital.getAdminId() %>/edit" title="Edit this hospital"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/delete/<%= hospital.getHospitalId() %>" title="Delete this hospital"><i class="fa fa-close"></i></a>
+                        </div>
                         </td>
                       </tr>
                       

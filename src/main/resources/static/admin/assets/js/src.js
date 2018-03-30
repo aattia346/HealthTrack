@@ -30,5 +30,11 @@ $(".confirm-delete-dept").click(function(){
         
     });
 
+$(".confirm-delete-hospital").click(function(){
+    
+    return confirm("Are you sure you want to delete this hospital?");
+    
+});
+
 });	
 

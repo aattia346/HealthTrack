@@ -34,12 +34,6 @@
 .open aside.left-panel .navbar .navbar-nav li a .menu-icon {
    display: none;
 }
-.dashboard-btn {
-	color: #fff !important;
-    font-size: 13px;
-    font-weight: 700;	
-    margin: 2px;
-}
 /*======================================================================================*/
 /*======================================================================================*/
 
@@ -71,12 +65,36 @@
 .dept-in-hospital-table a:nth-of-type(2) i{
 	padding-right: 6px;
 }
+.depts-td{
+	position: relative;
+}
 .select-new-dept{
 	width: 80%;
     float: left;
+    height: 33px !important;
+    font-size: 13px;
 }
 .submit-dept{
 	float: left;
     width: 17%;
     margin-left: 3%;
+}
+.add-dept{
+	margin: 70px -10px 2px -10px !important;
+}
+.add-dept-in-hospital-table{
+	position: absolute;
+    top: 0;
+    right: 0;
+}
+.dashboard-btn {
+    font-size: 15px;
+    font-weight: 700;	
+    margin: 2px;
+}
+.dashboard-btn:first-of-type{
+	color: #42422d;
+}
+.dashboard-btn:nth-of-type(2){
+	color: #f55555;
 }

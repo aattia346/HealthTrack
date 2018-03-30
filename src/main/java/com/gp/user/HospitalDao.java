@@ -165,5 +165,29 @@ public class HospitalDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.executeUpdate();
 	}
+
+	public static void updateHospital(Hospital hospital)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE hospital "
+				+ "SET hospital_name=?, admin_id=?, lat=?, lang=?, phone=?, website=?, address=?, intro=?, google_maps_url=? "
+				+ "WHERE hospital_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, hospital.getHospitalName());
+		ps.setInt(2, hospital.getAdminId());
+		ps.setFloat(3, hospital.getLat());
+		ps.setFloat(4, hospital.getLang());
+		ps.setString(5, hospital.getPhone());
+		ps.setString(6, hospital.getWebsite());
+		ps.setString(7, hospital.getAddress());
+		ps.setString(8, hospital.getIntro());
+		ps.setString(9, hospital.getGoogleMapsUrl());
+		ps.setInt(10, hospital.getHospitalId());
+		
+		ps.executeUpdate();
+		
+	}
 	
 }

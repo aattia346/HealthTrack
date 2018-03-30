@@ -110,12 +110,20 @@ public class DashboardController {
 						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
 						errors = true;
 					}
+					if(name.length() < 4) {
+						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
 					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
 						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
 						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						errors = true;
+					}
+					if(intro.length() < 25) {
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
@@ -183,7 +191,7 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/addNewDepartment", method = RequestMethod.POST)
-	public ModelAndView submitDept(Model model, ModelAndView mav, HttpServletRequest request)
+	public ModelAndView submitDept(ModelMap model, ModelAndView mav, HttpServletRequest request)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -212,13 +220,167 @@ public class DashboardController {
 		if(username == null) {
 			mav.setViewName("/admin/login");
 		}else {
-			if(Validation.checkIfTheUserIsAdmin(username)) {
-				
+			if(Validation.checkIfTheUserIsAdmin(username)) {			
 				HospitalDao.deleteSomthing("department" , "department_id" , deptId);
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+			}else {
+				mav.setViewName("/user/login");
 			}
-			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+			
 		}
 
 		return mav;
 	}
+	
+	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/hospital/{hospitalAdminId}/edit", method = RequestMethod.GET)
+	public ModelAndView editHospital(ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
+			, HttpSession session, @PathVariable("hospitalAdminId") int hospitalAdminId)
+					throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			
+		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
+			String username = (String)session.getAttribute("username");
+			if(username != null) {
+				if(username.equalsIgnoreCase(adminUsername)) {
+					model.addAttribute("action", "edit");
+					model.addAttribute("hospitalAdminId", hospitalAdminId);
+					mav.addAllObjects(model);
+					mav.setViewName("/admin/manageHospital");
+				}else {
+					mav.setViewName("redirect/:HealthTrack/admin/login");
+				}
+			}else {
+				mav.setViewName("/admin/login");
+			}
+			
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/HealthTrack/admin/hospital/{hospitalAdminId}/update", method = RequestMethod.POST)
+	public ModelAndView updateHospital(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("hospitalAdminId") int hospitalAdminId) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+			String username = (String)session.getAttribute("username");
+			if(username != null) {
+				if(Validation.checkIfTheUserIsAdmin(username)) {
+					
+					int hospitalId		= Integer.parseInt((String)request.getParameter("hospitalId"));
+					String name	 		= request.getParameter("name");
+					String intro 		= request.getParameter("intro");
+					String url			= request.getParameter("url");
+					String phone		= request.getParameter("phone");
+					String website		= request.getParameter("website");
+					String address		= request.getParameter("address");
+					int admin			= Integer.parseInt(request.getParameter("hospitalAdmin"));
+					String[] location 	= new String[2];
+					float lat			= 0
+						, lang			= 0;
+				
+					model.addAttribute("oldName"	, name);
+					model.addAttribute("oldIntro"	, intro);
+					model.addAttribute("oldUrl"		, url);
+					model.addAttribute("oldPhone"	, phone);
+					model.addAttribute("oldWebsite"	, website);
+					model.addAttribute("oldAddress"	, address);
+					
+					boolean errors = false;
+					
+					if(!Validation.validateName(name)) {
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						errors = true;
+					}
+					if(name.length() < 4) {
+						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
+					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
+						errors = true;
+					}
+					if(!Validation.validateText(intro)) {
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						errors = true;
+					}
+					if(intro.length() < 25) {
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						errors = true;
+					}
+					if(!Validation.validateURL(website)) {
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						errors = true;
+					}
+					if(!Validation.validatePhone(phone)) {
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						errors = true;
+					}
+					if(admin == 0) {
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the hospital</p>");
+						errors = true;
+					}
+					if(!Validation.validateURL(url)) {
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						errors = true;
+					}else {
+						location 	= Validation.getLatAndLangFromUrl(url);
+						try {
+							lat		= Float.valueOf(location[0]);
+							lang	= Float.valueOf(location[1]);
+						} catch (Exception e) {
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							errors = true;
+						}
+					}
+
+					if(errors == false) {
+						Hospital hospital = new Hospital();
+						hospital.setHospitalId(hospitalId);
+						hospital.setHospitalName(name);
+						hospital.setAdminId(admin);
+						hospital.setPhone(phone);
+						hospital.setWebsite(website);
+						hospital.setAddress(address);
+						hospital.setIntro(intro);
+						hospital.setGoogleMapsUrl(url);
+						hospital.setLat(lat);
+						hospital.setLang(lang);
+						HospitalDao.updateHospital(hospital);
+						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+					}else {
+						System.out.println("true");
+						model.addAttribute("action","edit");
+						model.addAttribute("hospitalAdminId", hospitalAdminId);
+						mav.addAllObjects(model);
+						mav.setViewName("/admin/manageHospital");
+					}
+				}else {
+					mav.setViewName("redirect/:HealthTrack/admin/login");
+				}
+			}else {
+				mav.setViewName("/admin/login");
+			}
+			mav.addAllObjects(model);
+		return mav;
+	}
+	
+	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/delete/{hospitalId}", method = RequestMethod.GET)
+	public ModelAndView deleteHospital(Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("hospitalId") String hospitalId )
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("hospital_id", "hospital", hospitalId)) {			
+				HospitalDao.deleteSomthing("hospital" , "hospital_id" , Integer.parseInt(hospitalId));
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+			}else {
+				mav.setViewName("/user/login");
+			}
+			
+		}
+
+		return mav;
+	}
+	
 }	
