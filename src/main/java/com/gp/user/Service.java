@@ -35,6 +35,16 @@ public class Service extends Department {
 		this.serviceReview = serviceReview;
 		
 			}
+	
+	public Service(int serviceId, String serviceName, int centerId
+			) {
+		super();
+		this.serviceId = serviceId;
+		this.serviceName = serviceName;
+		this.centerId = centerId;
+		
+		
+			}
 
 	public Service() {
 		super();

@@ -15,6 +15,7 @@
 	List<Center> centers = new ArrayList<Center>();
 	centers = CenterDao.getAllCenters();
 	request.setAttribute("centers", centers);
+	
 %>
 
 <%@include  file="includes/header.jsp" %>
@@ -61,24 +62,31 @@
                       </tr>
                     </thead>
                     <tbody>
+                    
                       <c:forEach var="center" items="${centers}">
+                    
                       	
                       	<%
                       	Center C = (Center)pageContext.getAttribute("center");
                       	List<Service> services = ServiceDao.getServicesOfCenter(C.getCenterId());
                       	request.setAttribute("services", services);
                       %>
+                    
+                      
                       	<tr>
                         <td>${center.centerId}</td>
                         <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank">${center.centerName}</a></td>
                         <td>${center.adminId}</td>
                         <td><c:forEach var="service" items="${services}">
                         		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
+                        		
                         </c:forEach></td>
                         <td>${center.review}</td>
                         <td>
-                        <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
-                        <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
+                        <div>
+                      <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/<%= C.getAdminId() %>/edit" title="Edit this center"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title="Delete this center"><i class="fa fa-close"></i></a>
+                         </div>
                         </td>
                       </tr>
                       
@@ -88,6 +96,7 @@
                   </table>
                         </div>
                     </div>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/center/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Center</a>
                 </div>
 
 

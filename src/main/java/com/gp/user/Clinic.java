@@ -3,11 +3,27 @@ package com.gp.user;
 public class Clinic {
 	
 	int clinicId, adminId;
-	String clinicName, doctorName, specialty, phone, adress, google_maps_url;
+	String clinicName, doctorName, specialty, phone, address, google_maps_url,intro,website;
 	float lat, lang, review;
 	
 	public Clinic() {
 		super();
+	}
+	public Clinic(int clinicId,int adminId,String clinicName,String phone,String address,String google_maps_url ,float lat,float lang ,float review,String intro,String website,String doctorName,String specialty) {
+		super();
+		this.clinicId=clinicId;
+		this.adminId=adminId;
+		this.clinicName=clinicName;
+		this.phone=phone;
+		this.address=address;
+		this.google_maps_url=google_maps_url;
+		this.lat=lat;
+		this.lang=lang;
+		this.review=review;
+		this.intro=intro;
+		this.website=website;
+		this.doctorName=doctorName;
+		this.specialty=specialty;
 	}
 	
 	
@@ -74,14 +90,28 @@ public class Clinic {
 		this.phone = phone;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String adress) {
+		this.address = adress;
+	}
+	public String getIntro() {
+		return intro;
 	}
 
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	
 	public String getGoogle_maps_url() {
 		return google_maps_url;
 	}

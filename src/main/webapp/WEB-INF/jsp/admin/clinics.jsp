@@ -1,23 +1,24 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@page import="com.gp.user.User"%>
 <%@page import="com.gp.user.UserDao"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.gp.user.Clinic"%>
 <%@page import="com.gp.user.ClinicDao"%>
+<%@page import="com.gp.user.Department"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 
-<% 	String title = "Clinics"; 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<% 	String title = "Clinics";
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
 	List<Clinic> clinics = new ArrayList<Clinic>();
 	clinics = ClinicDao.getAllClinics();
 	request.setAttribute("clinics", clinics);
-%>
 
+%>
 <%@include  file="includes/header.jsp" %>
 
-<div class="breadcrumbs">
+        <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
@@ -37,7 +38,7 @@
             </div>
         </div>
 
- <div class="content mt-3">
+        <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
 
@@ -52,26 +53,30 @@
                       <tr>
                       	<th>ID</th>
                         <th>Name</th>
-                        <th>Doctor</th>
-                        <th>specialty</th>
                         <th>Admin</th>
+                        
                         <th>Review</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <c:forEach var="clinic" items="${clinics}">
-                      
+                      	
+                      	<% 
+                      	     Clinic clinic 		= (Clinic)pageContext.getAttribute("clinic");
+                      		
+                      	%>
                       	<tr>
                         <td>${clinic.clinicId}</td>
-                        <td><a href="/HealthTrack/profile/clinic/${clinic.clinicId}" target="_blank">${clinic.clinicName}</a></td>
-                        <td>${clinic.doctorName}</td>
-                        <td>${clinic.specialty}</td>
+                        <td><a href="/HealthTrack/profile/hospital/${clinic.adminId}" target="_blank">${clinic.clinicName}</a></td>
                         <td>${clinic.adminId}</td>
+                       
                         <td>${clinic.review}</td>
                         <td>
-                        <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
-                        <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
+                        <div>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/<%= clinic.getAdminId() %>/edit" title="Edit this clinic"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/delete/<%= clinic.getClinicId() %>" title="Delete this hospital"><i class="fa fa-close"></i></a>
+                        </div>
                         </td>
                       </tr>
                       
@@ -81,11 +86,15 @@
                   </table>
                         </div>
                     </div>
+                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Clinic</a>
                 </div>
-
 
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
+
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
 
 <%@include  file="includes/footer.jsp" %>

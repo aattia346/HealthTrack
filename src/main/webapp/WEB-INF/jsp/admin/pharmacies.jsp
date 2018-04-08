@@ -53,21 +53,29 @@
                       	<th>ID</th>
                         <th>Name</th>
                         <th>Admin</th>
+                        
                         <th>Review</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <c:forEach var="pharmacy" items="${pharmacies}">
-                      
+                      	
+                      	<% 
+                      		Pharmacy pharmacy 		= (Pharmacy)pageContext.getAttribute("pharmacy");
+                      		
+                      	%>
                       	<tr>
                         <td>${pharmacy.pharmacyId}</td>
                         <td><a href="/HealthTrack/profile/pharmacy/${pharmacy.adminId}" target="_blank">${pharmacy.pharmacyName}</a></td>
                         <td>${pharmacy.adminId}</td>
+                       
                         <td>${pharmacy.review}</td>
                         <td>
-                        <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
-                        <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
+                        <div>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/<%= pharmacy.getAdminId() %>/edit" title="Edit this pharmacy"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/delete/<%= pharmacy.getPharmacyId()%>" title="Delete this pharmacy"><i class="fa fa-close"></i></a>
+                        </div>
                         </td>
                       </tr>
                       
@@ -77,11 +85,15 @@
                   </table>
                         </div>
                     </div>
+                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Pharmacy</a>
                 </div>
-
 
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
+
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
 
 <%@include  file="includes/footer.jsp" %>

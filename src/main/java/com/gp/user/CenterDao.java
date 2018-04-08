@@ -10,6 +10,21 @@ import java.util.List;
 import com.gp.database.DBConnection;
 
 public class CenterDao {
+	public static Center getCenterById(int id) throws InstantiationException,
+	IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM center WHERE admin_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		Center center= new Center(result.getInt("center_id"), id, result.getString("center_name"), result.getString("phone"),
+										result.getString("website"), result.getString("address"), result.getString("intro"),
+										result.getString("google_maps_url"),result.getFloat("lat"), result.getFloat("lang"), result.getFloat("center_review"));
+		return center;
+	}
+	
 
 	public static List<Center> getAllCenters()
 	throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
@@ -38,5 +53,74 @@ public class CenterDao {
 		return centers;
 	
 	}
+	public static void updateCenter(Center center)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE center "
+				+ "SET center_name=?, admin_id=?, lat=?, lang=?, phone=?, website=?, address=?, intro=?, google_maps_url=? "
+				+ "WHERE center_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1,center.getCenterName());
+		ps.setInt(2, center.getAdminId());
+		ps.setFloat(3, center.getLat());
+		ps.setFloat(4, center.getLang());
+		ps.setString(5, center.getPhone());
+		ps.setString(6, center.getWebsite());
+		ps.setString(7, center.getAddress());
+		ps.setString(8, center.getIntro());
+		ps.setString(9,center.getGoogleMapsUrl());
+		ps.setInt(10,center.getCenterId());
+		
+		ps.executeUpdate();
+		
+	}
+	public static void insertCenter(Center center)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO center "
+				+ "(center_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, center.getCenterName());
+		ps.setInt(2, center.getAdminId());
+		ps.setFloat(3, center.getLat());
+		ps.setFloat(4, center.getLang());
+		ps.setString(5, center.getPhone());
+		ps.setString(6, center.getWebsite());
+		ps.setString(7,center.getAddress());
+		ps.setString(8, center.getIntro());
+		ps.setString(9, center.getGoogleMapsUrl());
+		
+		ps.executeUpdate();
+		
+	}
+public static List<String> getServices(){
+		
+		List<String> services = new ArrayList<String>();
+		services.add("MRI");
+		services.add("ICU");
+		services.add("CT");
+		
+		return services;
+	}
+
+public static void insertService(String service, int centerId)
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
+	Connection con = DBConnection.getConnection();
+	String sql="INSERT INTO `service`( `name`,`dept_id`) VALUES(?,?)";
+	PreparedStatement ps = con.prepareStatement(sql);
+	
+	ps.setInt(1, centerId);
+	ps.setString(2, service);
+	
+	ps.executeUpdate();
 }
+}
+
+	
+

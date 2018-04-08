@@ -3,11 +3,26 @@ package com.gp.user;
 public class Pharmacy {
 	
 	int pharmacyId, adminId;
-	String pharmacyName, phone, adress, google_maps_url;
+	String pharmacyName, phone, address, google_maps_url,website,intro;
 	float lat, lang, review;
 	
 	public Pharmacy() {
 		super();
+	}
+	public Pharmacy(int pharmacyId,int adminId,String pharmacyName,String phone,String address,String google_maps_url,String website,
+			String intro,float lat ,float lang ,float review) {
+		super();
+		this.pharmacyId=pharmacyId;
+		this.adminId=adminId;
+		this.pharmacyName=pharmacyName;
+		this.phone=phone;
+		this.address=address;
+		this.google_maps_url=google_maps_url;
+		this.website=website;
+		this.lat=lat;
+		this.lang=lang;
+		this.review=review;
+		this.intro=intro;
 	}
 
 	public int getPharmacyId() {
@@ -42,12 +57,12 @@ public class Pharmacy {
 		this.phone = phone;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getGoogle_maps_url() {
@@ -81,5 +96,21 @@ public class Pharmacy {
 	public void setReview(float review) {
 		this.review = review;
 	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	
+
+	
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
 	
 }

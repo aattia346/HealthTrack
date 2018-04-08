@@ -71,7 +71,7 @@
                                              
                       	<div class="form-group">
                       		  <label class=" form-control-label">Choose the Admin</label>
-                              <select name="hospitalAdmin" class="form-control">
+                              <select name="Admin" class="form-control">
                                 <option value="0">Please select</option>
                                 <%
                                 	List<User> hospitalUsers = UserDao.getUsers("hospital");
@@ -106,7 +106,7 @@
                 	  		String title = "Edit New Hospital";
 	                		String username = (String)session.getAttribute("username");
 	                		User admin = UserDao.getUserByUsername(username);
-		                	int hospitalAdminId = (int)request.getAttribute("hospitalAdminId");
+		                	int hospitalAdminId = (int)request.getAttribute("AdminId");
 		                	Hospital hospital = HospitalDao.getHospitalById(hospitalAdminId);
                 	  %>
 <%@include  file="includes/header.jsp" %>
@@ -162,7 +162,7 @@
                                              
                       	<div class="form-group">
                       		  <label class=" form-control-label">Choose the Admin</label>
-                              <select name="hospitalAdmin" class="form-control">
+                              <select name="Admin" class="form-control">
                                 <option value="0">Please select</option>
                                 <%
                                 	List<User> hospitalUsers = UserDao.getUsers("hospital");

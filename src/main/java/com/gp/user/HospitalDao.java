@@ -87,7 +87,15 @@ public class HospitalDao {
 		return list;
 	}
 
-	
+	public static void deleteSomthing(String table, String column, int value) 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="DELETE FROM " + table + " WHERE " + column + " = " + value;
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.executeUpdate();
+	}
+
 	public static void insertHospital(Hospital hospital)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -157,15 +165,7 @@ public class HospitalDao {
 		return exist;
 	}
 
-	public static void deleteSomthing(String table, String column, int value) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
-		Connection con = DBConnection.getConnection();
-		String sql="DELETE FROM " + table + " WHERE " + column + " = " + value;
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.executeUpdate();
-	}
-
+	
 	public static void updateHospital(Hospital hospital)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		

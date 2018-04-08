@@ -246,5 +246,7 @@ public static boolean validateText(String name) {
 		location[1] = lang;
 		return location;
 	}
+	
+	
 }
 
