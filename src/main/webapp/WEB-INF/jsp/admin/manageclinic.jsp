@@ -36,7 +36,7 @@
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
                             <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/hospitals">Clinics</a></li>
-                            <li>Add New Center</li>
+                            <li>Add New Clinic</li>
                         </ol>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/clinic/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong>Center</strong><small> Form</small></div>
+                      <div class="card-header"><strong>Clinic</strong><small> Form</small></div>
                       <div class="card-body card-block">
                         <div class="form-group"><label class=" form-control-label">Clinic name</label><input type="text" placeholder="Enter Clinic name" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
                         ${invalidName}
@@ -138,14 +138,13 @@
                         ${invalidName}
                         ${nameExist}
                         ${shortName}
-                     <div class="form-group"><label class=" form-control-label">doctor_clinic_name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" ><%= clinic.getDoctorName() %></div>
+                     <div class="form-group"><label class=" form-control-label">doctor_clinic_name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" value=<%= clinic.getDoctorName() %>></div>
                         ${invalidName}
                         ${nameExist}
-                        ${shortName}
-                    
-                         <div class="form-group"><label class=" form-control-label">intro</label><textarea placeholder="say something about Clinic" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getDoctorName() %></textarea></div>
-                        ${invalidIntro} ${shortIntro}
-                      
+                        ${shortName}     
+                         <div class="form-group"><label class=" form-control-label">intro</label><textarea placeholder="say something about Clinic" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
+                        ${invalidIntro}
+                         ${shortIntro}       
                         <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="<%=clinic.getGoogle_maps_url()%>"></div>
                         ${invalidUrl}
                         <div class="row form-group">

@@ -126,8 +126,8 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
+					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">This place already exists</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
@@ -521,7 +521,7 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+					if(Validation.checkIfSomethingExists("center_name", "center", name)) {
 						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}
@@ -650,7 +650,7 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+					if(Validation.checkIfSomethingExists("clinic_name", "clinic", name)) {
 						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}
@@ -757,7 +757,7 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+					if(Validation.checkIfSomethingExists("pharmacy_name", "pharmacy", name)) {
 						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}

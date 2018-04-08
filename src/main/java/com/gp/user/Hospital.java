@@ -10,24 +10,6 @@ public class Hospital extends User{
 		super();
 	}
 
-	public Hospital(int hospitalId, int adminId, String hospitalName, String phone, String website, String address,
-			String intro, String googleMapsUrl, float lat, float lang, float review) {
-		super();
-		this.hospitalId = hospitalId;
-		this.adminId = adminId;
-		this.hospitalName = hospitalName;
-		this.phone = phone;
-		this.website = website;
-		this.address = address;
-		this.intro = intro;
-		this.googleMapsUrl = googleMapsUrl;
-		this.lat = lat;
-		this.lang = lang;
-		this.review = review;
-	}
-
-
-
 	public String getIntro() {
 		return intro;
 	}

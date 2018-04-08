@@ -9,21 +9,7 @@ public class Pharmacy {
 	public Pharmacy() {
 		super();
 	}
-	public Pharmacy(int pharmacyId,int adminId,String pharmacyName,String phone,String address,String google_maps_url,String website,
-			String intro,float lat ,float lang ,float review) {
-		super();
-		this.pharmacyId=pharmacyId;
-		this.adminId=adminId;
-		this.pharmacyName=pharmacyName;
-		this.phone=phone;
-		this.address=address;
-		this.google_maps_url=google_maps_url;
-		this.website=website;
-		this.lat=lat;
-		this.lang=lang;
-		this.review=review;
-		this.intro=intro;
-	}
+	
 
 	public int getPharmacyId() {
 		return pharmacyId;

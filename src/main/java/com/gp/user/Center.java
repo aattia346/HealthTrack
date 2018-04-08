@@ -71,21 +71,7 @@ public class Center extends User{
 	public void setReview(float review) {
 		this.review = review;
 	}
-	public Center(int centerId, int adminId, String centerName, String phone, String website, String address,
-			String intro, String googleMapsUrl, float lat, float lang, float review) {
-		super();
-		this.centerId = centerId;
-		this.adminId = adminId;
-		CenterName = centerName;
-		this.phone = phone;
-		this.website = website;
-		this.address = address;
-		this.intro = intro;
-		this.googleMapsUrl = googleMapsUrl;
-		this.lat = lat;
-		this.lang = lang;
-		this.review = review;
-	}
+	
 	public Center() {
 		super();
 	}

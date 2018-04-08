@@ -9,22 +9,7 @@ public class Clinic {
 	public Clinic() {
 		super();
 	}
-	public Clinic(int clinicId,int adminId,String clinicName,String phone,String address,String google_maps_url ,float lat,float lang ,float review,String intro,String website,String doctorName,String specialty) {
-		super();
-		this.clinicId=clinicId;
-		this.adminId=adminId;
-		this.clinicName=clinicName;
-		this.phone=phone;
-		this.address=address;
-		this.google_maps_url=google_maps_url;
-		this.lat=lat;
-		this.lang=lang;
-		this.review=review;
-		this.intro=intro;
-		this.website=website;
-		this.doctorName=doctorName;
-		this.specialty=specialty;
-	}
+	
 	
 	
 	public int getAdminId() {
