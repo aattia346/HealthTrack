@@ -1665,8 +1665,11 @@ textarea {
     margin-bottom: 17px;
 }
 .section-padding-100-20{
-    margin-bottom: -100px;
+    margin-bottom: 0px;
 }
 .breadcumb-title{
 	color: #006cff;
+}
+.single-blog-area .blog-post-thumbnail .post-date a{
+	font-size: 13px;
 }

@@ -71,93 +71,15 @@
 /*======================================================================================*/
 
 /***************************** Hospital page **************************************/
-.hospital-img{
-    height: 400px;
-    width: 100%;
+
+.hospital-map{
+	width: 100% !important;
+    margin-top: 140px !important;
+    border-bottom: 5px solid #006cff;
+    margin-bottom: 40px;
 }
-.hospital-body{
-    background-color: #F3F4EF;
-}
-.hospital-body .container{
-    background-color: #F3F4EF;
-}
-.hospital-depts{
-    border-top: 5px solid #337ab7;
-    margin: 4% 3% 3% 5%;
-    min-height: 300px;
-    border-radius:  0 0 20px 20px;
-    background-color: #fff;
-}
-.hospital{
-    position: relative;
-}
-.hospital-head{
-    position: absolute;
-    left: 183px;
-    top: 58px;
-}
-.hospital-title{
-    color: #fff;
-}
-.hospital-desc{
-    max-width: 587px;
-    max-height: 59px;
-    overflow: hidden;
-    color: #fff;
-}
-.overlay{
-    background: #000;
-    opacity: .8;
-}
-.about-title{
-    display: inline-block;
-    width: 40%;
-    color: #777;
-}
-.about-detail{
-    display: inline-block;
-}
-.hospital-depts h4{
-    color: #777;
-    margin-top: 20px;
-}
-.hospital-depts ul{
-    margin-top: 30px;
-}
-.hospital-depts ul li{
-   	line-height: 1.8;
-    font-size: 17px;
-    font-weight: bold;
-    margin: 0px -14px;
-    background-color: #49BCF5;
-    width: 112%;
-    color: #fff;
-    border-bottom: 1px solid #fff;
-}
-.hospital-service{
-    max-height: 400px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-.hospital-service .caption img{
-    width: 100%;
-}
-.hospital-service .caption p{
-    margin-top: 13px;
-    color: #777;
-    font-size: 16px;
-}
-.hospital-service .caption{
-    padding-bottom: 0;
-}
-.services-available{
-    margin-bottom: 37px;
-}
-.hospital-depts .col-sm-4{
-    width: 201px;
-}
-.hospital-depts ul li:hover{
-    cursor: pointer;
+.medilife-services-area:nth-of-type(even){
+	background-color: #e7f1ff;
 }
 /*======================================================================================*/
 /*======================================================================================*/
