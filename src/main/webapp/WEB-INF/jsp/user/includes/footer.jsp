@@ -6,6 +6,11 @@
         <script src="/user/layout/js/jquery.selectBoxIt.min.js"></script>
         <script src='/user/layout/js/moment.min.js'></script>
         <script src='/user/layout/js/fullcalendar.js'></script>
+        
+        <script src="/user/layout/js/profiles/popper.js"></script>
+        <script src="/user/layout/js/profiles/plugins.js"></script>
+        <script src="/user/layout/js/profiles/active.js"></script>
+         
         <script src="/user/layout/js/src.js"></script>
         
     </body>

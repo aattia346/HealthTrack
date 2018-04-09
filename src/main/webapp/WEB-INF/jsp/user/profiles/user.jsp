@@ -8,6 +8,7 @@
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="com.gp.user.Booking"%>
 <%@page import="com.gp.user.ServiceDao"%>
+<%@page import="com.gp.user.BookingDao"%>
 
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
@@ -29,7 +30,7 @@
 	
 	if(!username.equalsIgnoreCase(null)){
 		User user = UserDao.getUserByUsername(username);
-		List<Booking> userBookings = ServiceDao.getBookingsByUserId(user.getId());
+		List<Booking> userBookings = BookingDao.getBookingsByUserId(user.getId());
 		request.setAttribute("bookings", userBookings);
 		
 	}

@@ -20,9 +20,18 @@ public class HospitalDao {
 		ps.setInt(1, id);
 		ResultSet result = ps.executeQuery();
 		result.next();
-		Hospital hospital = new Hospital(result.getInt("hospital_id"), id, result.getString("hospital_name"), result.getString("phone"),
-										result.getString("website"), result.getString("address"), result.getString("intro"),
-										result.getString("google_maps_url"),result.getFloat("lat"), result.getFloat("lang"), result.getFloat("hospital_review"));
+		Hospital hospital = new Hospital();
+		hospital.setHospitalId(result.getInt("hospital_id"));
+		hospital.setAdminId(result.getInt("admin_id"));
+		hospital.setHospitalName(result.getString("hospital_name"));
+		hospital.setLat(result.getFloat("lat"));
+		hospital.setLang(result.getFloat("lang"));
+		hospital.setPhone(result.getString("phone"));
+		hospital.setWebsite(result.getString("website"));
+		hospital.setReview(result.getFloat("hospital_review"));
+		hospital.setAddress(result.getString("address"));
+		hospital.setIntro(result.getString("intro"));
+		hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
 		return hospital;
 	}
 	

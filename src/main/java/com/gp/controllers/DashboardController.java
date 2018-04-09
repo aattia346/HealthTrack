@@ -126,9 +126,9 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
-						errors = true;
+					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
+					model.addAttribute("nameExist", "<p class=\"wrong-input \">This place already exists</p>");
+					errors = true;
 					}
 					if(!Validation.validateText(intro)) {
 						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
@@ -392,10 +392,7 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
-						errors = true;
-					}
+
 					if(!Validation.validateText(intro)) {
 						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
 						errors = true;
@@ -482,7 +479,7 @@ public class DashboardController {
 		return mav;
 	}
 	
-	//******************************************************Centers
+	//******************************************************Centers*******************************************//
 	
 	@RequestMapping(value="/HealthTrack/admin/center/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateCenter(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
@@ -521,7 +518,7 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+					if(Validation.checkIfSomethingExists("center_name", "center", name)) {
 						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}
@@ -630,7 +627,7 @@ public class DashboardController {
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
 						errors = true;
 					}
 					if(!Validation.validateName(doctorName)) {
@@ -639,7 +636,7 @@ public class DashboardController {
 					}
 					
 					if(doctorName.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
 						errors = true;
 					}
 					if(!Validation.validateName(specialty)) {
@@ -647,13 +644,10 @@ public class DashboardController {
 						errors = true;
 					}
 					if(specialty.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
-						errors = true;
-					}
+
 					if(!Validation.validateText(intro)) {
 						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
 						errors = true;
@@ -705,11 +699,10 @@ public class DashboardController {
 						ClinicDao.updateClinic(clinic);
 						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/clinics");
 					}else {
-						System.out.println("true");
 						model.addAttribute("action","edit");
 						model.addAttribute("AdminId", AdminId);
 						mav.addAllObjects(model);
-						mav.setViewName("/admin/clinic");
+						mav.setViewName("/admin/manageclinic");
 					}
 				}else {
 					mav.setViewName("redirect/:HealthTrack/admin/login");

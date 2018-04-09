@@ -33,13 +33,15 @@ public class ClinicDao {
 			clinic.setLang(result.getFloat("lang"));
 			clinic.setAdminId(result.getInt("admin_id"));
 			clinic.setReview(result.getFloat("review"));
-			clinic.setDoctorName(result.getString("doctor_clinic_name"));
+			clinic.setIntro(result.getString("intro"));
 			clinic.setSpecialty(result.getString("specialty"));
+			clinic.setWebsite(result.getString("website"));
 			
 			clinics.add(clinic);
 		}
 		return clinics;
 	}
+
 	public static Clinic getClinicById(int id) throws InstantiationException,
 	IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -49,10 +51,21 @@ public class ClinicDao {
 		ps.setInt(1, id);
 		ResultSet result = ps.executeQuery();
 		result.next();
-		Clinic clinic= new Clinic(result.getInt("clinic_id"), id, result.getString("clinic_name"), result.getString("phone"),
-										 result.getString("address"),
-										result.getString("google_maps_url"),result.getFloat("lat"), result.getFloat("lang"), result.getFloat("review")
-										,result.getString("intro"),result.getString("website"),result.getString("doctor_clinic_name"),result.getString("specialty"));
+		Clinic clinic= new Clinic();
+		clinic.setClinicId(result.getInt("clinic_id"));
+		clinic.setClinicName(result.getString("clinic_name"));
+		clinic.setDoctorName(result.getString("doctor_clinic_name"));
+		clinic.setSpecialty(result.getString("specialty"));
+		clinic.setPhone(result.getString("phone"));
+		clinic.setAddress(result.getString("address"));
+		clinic.setGoogle_maps_url(result.getString("google_maps_url"));
+		clinic.setLat(result.getFloat("lat"));
+		clinic.setLang(result.getFloat("lang"));
+		clinic.setAdminId(result.getInt("admin_id"));
+		clinic.setReview(result.getFloat("review"));
+		clinic.setIntro(result.getString("intro"));
+		clinic.setSpecialty(result.getString("specialty"));
+		clinic.setWebsite(result.getString("website"));
 		return clinic;
 	}
 	public static void insertClinic(Clinic clinic)

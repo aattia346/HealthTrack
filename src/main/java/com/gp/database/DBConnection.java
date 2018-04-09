@@ -11,7 +11,9 @@ public class DBConnection {
 			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
-			Connection con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/healthtrack","root","");
+			String unicode= "?useUnicode=yes&characterEncoding=UTF-8";
+			
+			Connection con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/healthtrack" + unicode ,"root","");
 	
 			return con;
 		}

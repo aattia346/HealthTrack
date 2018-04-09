@@ -9,6 +9,15 @@
         <link rel="stylesheet" href="/user/layout/css/jquery-ui.min.css">
         <link rel="stylesheet" href="/user/layout/css/jquery.selectBoxIt.css">
         <link rel="stylesheet" href="/user/layout/css/fullcalendar.css">
+        
+        <link rel="stylesheet" href="/user/layout/css/profiles/style.css">
+        <link rel="stylesheet" href="/user/layout/css/profiles/owl.carousel.css">
+        <link rel="stylesheet" href="/user/layout/css/profiles/animate.css">
+        <link rel="stylesheet" href="/user/layout/css/profiles/magnific-popup.css">
+        <link rel="stylesheet" href="/user/layout/css/profiles/themify-icons.css">
+        <link rel="stylesheet" href="/user/layout/css/profiles/medilife-icons.css">
+        <link rel="stylesheet" href="/user/layout/css/profiles/nice-select.css">
+        
         <link rel="stylesheet" href="/user/layout/css/stylesheet.css">
 
     </head>    

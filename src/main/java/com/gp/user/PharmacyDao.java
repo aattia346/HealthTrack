@@ -31,7 +31,8 @@ public static List<Pharmacy> getAllPharmacies() throws InstantiationException, I
 			pharmacy.setLang(result.getFloat("lang"));
 			pharmacy.setAdminId(result.getInt("admin_id"));
 			pharmacy.setReview(result.getFloat("review"));
-			
+			pharmacy.setWebsite(result.getString("website"));
+			pharmacy.setIntro(result.getString("intro"));
 			pharmacies.add(pharmacy);
 		}
 		return pharmacies;
@@ -45,9 +46,20 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	ps.setInt(1, id);
 	ResultSet result = ps.executeQuery();
 	result.next();
-	Pharmacy pharmacy= new Pharmacy(result.getInt("pharmacy_id"), id, result.getString("pharmacy_name"), result.getString("phone"),
-									 result.getString("address"), 
-									result.getString("google_maps_url"),result.getString("website"),result.getString("intro"),result.getFloat("lat"), result.getFloat("lang"), result.getFloat("review"));
+	Pharmacy pharmacy= new Pharmacy();
+	
+	pharmacy.setPharmacyId(result.getInt("pharmacy_id"));
+	pharmacy.setPharmacyName(result.getString("pharmacy_name"));
+	pharmacy.setPhone(result.getString("phone"));
+	pharmacy.setAddress(result.getString("address"));
+	pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
+	pharmacy.setLat(result.getFloat("lat"));
+	pharmacy.setLang(result.getFloat("lang"));
+	pharmacy.setAdminId(result.getInt("admin_id"));
+	pharmacy.setReview(result.getFloat("review"));
+	pharmacy.setWebsite(result.getString("website"));
+	pharmacy.setIntro(result.getString("intro"));
+	
 	return pharmacy;
 }
 

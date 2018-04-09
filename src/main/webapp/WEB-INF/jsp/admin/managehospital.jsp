@@ -138,10 +138,10 @@
                       <div class="card-body card-block">
                         <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter hospital name" class="form-control" name="name" required="required" value="<%= hospital.getHospitalName() %>" maxlength="50"></div>
                         ${invalidName}
-                        ${nameExist}
                         ${shortName}
                         <div class="form-group"><label class=" form-control-label">Intro</label><textarea placeholder="Say something about the hospital" class="form-control" name="intro" required="required" maxlength="254"><%= hospital.getIntro() %></textarea></div>
-                        ${invalidIntro} ${shortIntro}
+                        ${invalidIntro}
+                        ${shortIntro}
                       
                         <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="<%= hospital.getGoogleMapsUrl() %>"></div>
                         ${invalidUrl}

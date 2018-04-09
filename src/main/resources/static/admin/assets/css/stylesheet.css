@@ -41,6 +41,7 @@
 .dept-in-hospital-table{
 	padding: 5px;
 	float: left;
+	margin: 3px -5px;
 }
 .dept-in-hospital-table a:first-of-type , .dept-in-hospital-table a:first-of-type:hover {
 	border: 1px solid #2196F3;
@@ -80,7 +81,7 @@
     margin-left: 3%;
 }
 .add-dept{
-	margin: 70px -10px 2px -10px !important;
+	margin: 77px -10px 2px 3px !important
 }
 .add-dept-in-hospital-table{
 	position: absolute;
