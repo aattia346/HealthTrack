@@ -33,6 +33,7 @@ public static List<Pharmacy> getAllPharmacies() throws InstantiationException, I
 			pharmacy.setReview(result.getFloat("review"));
 			pharmacy.setWebsite(result.getString("website"));
 			pharmacy.setIntro(result.getString("intro"));
+
 			pharmacies.add(pharmacy);
 		}
 		return pharmacies;
@@ -47,7 +48,7 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	ResultSet result = ps.executeQuery();
 	result.next();
 	Pharmacy pharmacy= new Pharmacy();
-	
+
 	pharmacy.setPharmacyId(result.getInt("pharmacy_id"));
 	pharmacy.setPharmacyName(result.getString("pharmacy_name"));
 	pharmacy.setPhone(result.getString("phone"));
@@ -59,7 +60,7 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	pharmacy.setReview(result.getFloat("review"));
 	pharmacy.setWebsite(result.getString("website"));
 	pharmacy.setIntro(result.getString("intro"));
-	
+
 	return pharmacy;
 }
 

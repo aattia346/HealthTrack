@@ -129,6 +129,8 @@ public class DashboardController {
 					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
 					model.addAttribute("nameExist", "<p class=\"wrong-input \">This place already exists</p>");
 					errors = true;
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">This place already exists</p>");
+						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
 						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
@@ -645,6 +647,11 @@ public class DashboardController {
 					}
 					if(specialty.length() < 4) {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
+					if(Validation.checkIfSomethingExists("clinic_name", "clinic", name)) {
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}
 
@@ -750,7 +757,7 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+					if(Validation.checkIfSomethingExists("pharmacy_name", "pharmacy", name)) {
 						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
 						errors = true;
 					}

@@ -66,6 +66,10 @@ public class ClinicDao {
 		clinic.setIntro(result.getString("intro"));
 		clinic.setSpecialty(result.getString("specialty"));
 		clinic.setWebsite(result.getString("website"));
+		clinic.setDoctorName(result.getString("doctor_clinic_name"));
+		clinic.setSpecialty(result.getString("specialty"));
+		clinic.setWebsite(result.getString("website"));
+		
 		return clinic;
 	}
 	public static void insertClinic(Clinic clinic)

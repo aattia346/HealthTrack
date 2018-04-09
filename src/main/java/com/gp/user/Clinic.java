@@ -9,7 +9,7 @@ public class Clinic {
 	public Clinic() {
 		super();
 	}
-	
+
 	public int getAdminId() {
 		return adminId;
 	}

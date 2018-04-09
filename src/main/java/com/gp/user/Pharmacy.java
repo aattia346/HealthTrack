@@ -9,6 +9,7 @@ public class Pharmacy {
 	public Pharmacy() {
 		super();
 	}
+
 	public int getPharmacyId() {
 		return pharmacyId;
 	}
