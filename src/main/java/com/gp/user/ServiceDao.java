@@ -11,12 +11,22 @@ import com.gp.database.DBConnection;
 
 public class ServiceDao {
 
-	public static Service getServiceById(int id) throws
+	public static Service getServiceById(int id, String table) throws
 	InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		Connection con = DBConnection.getConnection();
-		String sql="SELECT * FROM service JOIN department ON dept_id=department_id JOIN hospital ON department.hospital_id=hospital.hospital_id"
-				+ " WHERE service_id=?";
+		String sql = null;
+		boolean executeLine = false;
+		if(table.equalsIgnoreCase("hospital")) {
+			sql="SELECT * FROM service JOIN department ON dept_id=department_id JOIN hospital ON department.hospital_id=hospital.hospital_id"
+					+ " WHERE service_id=?";
+			executeLine = true;
+		}else if(table.equalsIgnoreCase("center")){
+			sql="SELECT * FROM service JOIN center ON service.center_id=center.center_id"
+					+ " WHERE service_id=?";
+		}
+		
+		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
 		ResultSet result = ps.executeQuery();
@@ -27,9 +37,11 @@ public class ServiceDao {
 		service.setServiceId(result.getInt("service_id"));
 		service.setServiceName(result.getString("service_name"));
 		service.setCenterId(result.getInt("center_id"));
-		service.setDeptId(result.getInt("dept_id"));
-		service.setDeptName(result.getString("dept_name"));
-		service.setHospitalName(result.getString("hospital_name"));
+		if(executeLine) {
+			service.setDeptId(result.getInt("dept_id"));
+			service.setDeptName(result.getString("dept_name"));
+			service.setHospitalName(result.getString("hospital_name"));
+		}	
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setAdminId(result.getInt("admin_id"));

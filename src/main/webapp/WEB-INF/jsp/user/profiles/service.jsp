@@ -26,8 +26,8 @@
 			showForm = true;
 		}
 	}
-	
-	Service S = ServiceDao.getServiceById(serviceId);
+	String place = (String)request.getAttribute("place");
+	Service S = ServiceDao.getServiceById(serviceId, place);
 	String title=S.getServiceName(); 
 	Calendar calendar = Calendar.getInstance();
 	Date today = Calendar.getInstance().getTime();

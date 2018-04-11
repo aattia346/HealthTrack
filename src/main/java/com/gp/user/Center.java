@@ -71,9 +71,5 @@ public class Center extends User{
 	public void setReview(float review) {
 		this.review = review;
 	}
-	
-	public Center() {
-		super();
-	}
-	
+
 }

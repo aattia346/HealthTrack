@@ -4,13 +4,13 @@
         <meta charset="UTF-8">
         <title><%= title %></title>
 
+		<link rel="stylesheet" href="/user/layout/css/profiles/style.css">
         <link rel="stylesheet" href="/user/layout/css/bootstrap.min.css">
         <link rel="stylesheet" href="/user/layout/css/font-awesome.min.css">
         <link rel="stylesheet" href="/user/layout/css/jquery-ui.min.css">
         <link rel="stylesheet" href="/user/layout/css/jquery.selectBoxIt.css">
         <link rel="stylesheet" href="/user/layout/css/fullcalendar.css">
         
-        <link rel="stylesheet" href="/user/layout/css/profiles/style.css">
         <link rel="stylesheet" href="/user/layout/css/profiles/owl.carousel.css">
         <link rel="stylesheet" href="/user/layout/css/profiles/animate.css">
         <link rel="stylesheet" href="/user/layout/css/profiles/magnific-popup.css">
