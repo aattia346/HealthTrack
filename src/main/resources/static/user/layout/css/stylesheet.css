@@ -154,6 +154,8 @@ input[type="submit"]{
 /***************************** Navbar **************************************/
 .navbar-brand{
 	line-height: 46px;
+	color: #f7f7f7;
+	font-size: 21px;
 }
 header{
 	position: fixed !important;
@@ -162,15 +164,7 @@ header{
 /*======================================================================================*/
 
 /***************************** Find Service **************************************/
-.find-service-container{
-    box-shadow: 0px -2px 10px 0px #888888;
-    margin-top: 100px;
-    margin-bottom: 60px;
-    padding-bottom: 50px;
-}
-.find-service-container h3{
-	margin-bottom: 40px;
-}
+
 .choose-service .panel-primary , .services-information .panel-primary{
     border: 1px solid #B8B8B9;
     margin-top: 20px;
@@ -192,10 +186,14 @@ header{
         width: 100%;
     }
 }
-h3 , h4{
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    color: #9a9a9a;
+.main-page-container h3{
+	margin-top: 0;
+    font-weight: 800;
+    color: #888;
+    margin-bottom: 40px;
+}
+.main-page-container{
+	padding-top: 160px;
 }
 .find-me{
     width: 92%;
@@ -211,6 +209,8 @@ label{
 }
 .enter-address h4{
     line-height: .7;
+    color: #888;
+    font-weight: 600;
 }
 .enter-address{
     margin-bottom: -8px;
@@ -278,4 +278,28 @@ label{
 }
 .breadcumb-intro{
 	color: #081F3E;
+}
+.my-table{
+    width: 100%;
+    margin-bottom: 0px;
+    padding: 30px 50px;  
+}
+.my-table table{
+    background-color: #fff;
+    border: #536174;
+}
+.my-table table td:hover , .booked{
+    background-color: #081F3E;
+}
+.my-table th, .my-table tr{
+    text-align: center;
+    color: #ecf0f1;
+}
+.my-table tr{
+	background-color: #4383a9;
+}
+.table-head{
+    background-color: #006CFF !important;
+    color: #fff !important;
+    font-size: 15px;
 }

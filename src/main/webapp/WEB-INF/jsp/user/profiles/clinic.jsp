@@ -51,7 +51,52 @@ String title = clinic.getClinicName();
                 <div class="col-12">
                     <div class="appointment-form-content">
                         <div class="row no-gutters align-items-center">
-                            <div class="col-12 col-lg-9">
+                            <div class="col-12 col-lg-9 col-md-6">
+                             <div class="my-table text-center">
+                            <table class="table table-bordered">
+                    
+                        <thead>
+                            <tr class="table-head">
+                                <th>thu 12/4</th>
+                                <th>Fri 13/4</th>
+                                <th>Sat 14/4</th>
+                                <th>Sun 15/4</th>
+                                <th>mon 16/4</th>
+                                <th>tue 17/4</th>
+                                <th>wed 18/4</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            <tr>
+                              <td>12:00</td>
+                              <td>01:00</td>
+                              <td class="booked">02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>02:00</td>
+                              <td>02:00</td>
+                              <td>03:30</td>
+                          </tr>
+                          <tr>
+                              <td>12:00</td>
+                              <td class="booked">01:00</td>
+                              <td>02:00</td>
+                              <td>02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>02:00</td>
+                              <td class="booked">03:30</td>
+                          </tr>
+                            <tr>
+                              <td class="booked">12:00</td>
+                              <td class="booked">01:00</td>
+                              <td>02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>03:30</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    </div>
                                 <div class="medilife-appointment-form">
                                     <form action="#" method="post">
                                         <div class="row align-items-end">

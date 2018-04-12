@@ -1,5 +1,4 @@
 <% String title="Health Services Navigator"; %>
-<%@include  file="includes/header.jsp" %>
 
 <%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
@@ -84,9 +83,8 @@ for(Service service : servicesOfCenters){
 }
 
 %>
-
- <div class="container find-service-container">
-        
+<%@include  file="includes/header.jsp" %>    
+	<div class="main-page-container">   
             <h3 class="text-center">Find a Location </h3>
             <div class="row">
                 
@@ -132,11 +130,9 @@ for(Service service : servicesOfCenters){
                 </div>
                 
                 <div class="col-sm-8" id="map"></div>
-            
             </div>
         
-        </div>
-
+</div>
 <%@include  file="includes/footer.jsp" %>
 <script>
 var selectedService = "all";
