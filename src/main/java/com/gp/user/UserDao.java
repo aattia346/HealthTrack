@@ -16,7 +16,7 @@ public class UserDao {
 	, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
 		
 		Connection con = DBConnection.getConnection();
-		String sql="SELECT * FROM user WHERE username=? AND password=?";
+		String sql="SELECT * FROM user WHERE username=? AND password=? AND ban=0";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, username);	
 		ps.setString(2, password); 

@@ -15,6 +15,9 @@
 <%@page import="com.gp.user.ServiceDao"%>
 <%@page import="com.gp.user.Location"%>
 <%@page import="com.gp.user.Validation"%>
+<%@page import="com.gp.user.Clinic"%>
+<%@page import="com.gp.user.ClinicDao"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 
@@ -33,6 +36,13 @@ List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
 	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
 	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", serviceUrl, "71e486");
+	locations.add(location);
+}
+
+List<Clinic> clinics = ClinicDao.getAllClinics();
+for(Clinic clinic : clinics){
+	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
+	Location location = new Location(clinic.getLat(), clinic.getLang(), clinic.getClinicName(), "clinic", serviceUrl, "4089C7");
 	locations.add(location);
 }
 

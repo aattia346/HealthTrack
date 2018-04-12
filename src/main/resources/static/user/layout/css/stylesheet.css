@@ -152,51 +152,11 @@ input[type="submit"]{
 /*======================================================================================*/
 
 /***************************** Navbar **************************************/
-.login-register{
-    padding-top: 18px;
-    padding-bottom: 15px;
+.navbar-brand{
+	line-height: 46px;
 }
-.login-register a{
-    font-weight: 700;
-    font-size: 15px;
-}
-.navbar-inverse {
-    background-color: #337ab7;
-    border-color: #337ab7;
-}
-.navbar-inverse .navbar-nav > li > a, .login-register a, .login-register span {
-    font-weight: 700;
-    color: #fff;
-    padding-top: 18px;
-}
-.login-register span{
-    margin-left: 3px;
-    margin-right: 3px;
-    font-size: 14px;
-}
-.navbar-inverse .navbar-brand{
-    font-size: 16px;
-    color: #fff;
-    font-weight: 900;
-    position: relative;
-}
-.navbar-brand img{
-	position: absolute;
-    height: 30px;
-    width: 30px;
-    top: 3px;
-    right: -11px;
-}
-.navbar-nav{
-	margin-left: 20px;
-}
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: #337ab7;
-    margin-left: 0;
-    margin-top: 0;
-}
-.navbar{
-	margin-bottom: 0;
+header{
+	position: fixed !important;
 }
 /*======================================================================================*/
 /*======================================================================================*/
@@ -309,4 +269,13 @@ label{
 .lab-pin{
 	color: #76c9d6;
 }
+/*======================================================================================*/
+/*======================================================================================*/
 
+/***************************** Clinic **************************************/
+.medilife-btn-appointment{
+	padding: 6px 55px 6px 12px !important;
+}
+.breadcumb-intro{
+	color: #081F3E;
+}

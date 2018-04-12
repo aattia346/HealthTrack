@@ -74,10 +74,7 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-h-square"></i><a href="tables-data.html">Hospitals</a></li>
-                            <li><i class="fa fa-stethoscope"></i><a href="tables-data.html">Clinics</a></li>
-                            <li><img src="/admin/icons/if_medical_icon_3_1290986.svg" class="my-icon"><a href="tables-data.html">Centers</a></li>
-                            <li><img src="/admin/icons/if_pill_36347.png" class="my-icon pharmacy-icon"><a href="tables-data.html">Pharmacies</a></li>
+                            <li><i class="fa fa-h-square"></i><a href="tables-data.html">All Users</a></li>
                             <li><i class="fa fa-ban"></i><a href="tables-data.html">Banned Users</a></li>
                         </ul>
                     </li>
