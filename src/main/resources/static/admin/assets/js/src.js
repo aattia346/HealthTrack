@@ -4,7 +4,7 @@ $(document).ready(function(){
 		
 		var id = $(this).attr("id");
 		
-		$("."+id).toggle();
+		$("."+id).slideToggle();
 		
 	});
 

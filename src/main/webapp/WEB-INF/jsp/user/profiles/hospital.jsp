@@ -85,7 +85,7 @@ Date today = Calendar.getInstance().getTime();
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a href="/HealthTrack/profile/service/${service.getServiceId()}" class="headline">${service.serviceName}</a>
+                            <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}" class="headline">${service.serviceName}</a>
                             <a href="#" class="comments">3 Comments</a>
                         </div>
                     </div>
