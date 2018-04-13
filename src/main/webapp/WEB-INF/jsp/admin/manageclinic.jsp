@@ -138,7 +138,7 @@
                         ${invalidName}
                         ${nameExist}
                         ${shortName}
-<<<<<<< HEAD
+
                      <div class="form-group"><label class=" form-control-label">Doctor Clinic Name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" value="<%= clinic.getDoctorName()%>"></div>
                         ${invalidName}
                         ${nameExist}
@@ -147,7 +147,7 @@
                          <div class="form-group"><label class=" form-control-label">Intro</label><textarea placeholder="say something about Clinic" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
                         ${invalidIntro} ${shortIntro}
                       
-=======
+
                      <div class="form-group"><label class=" form-control-label">doctor_clinic_name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" value=<%= clinic.getDoctorName() %>></div>
                         ${invalidName}
                         ${nameExist}
@@ -155,7 +155,7 @@
                          <div class="form-group"><label class=" form-control-label">intro</label><textarea placeholder="say something about Clinic" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
                         ${invalidIntro}
                          ${shortIntro}       
->>>>>>> 2c1aaa48bf3e1a56333d47c55eec01b62b694f2c
+
                         <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="<%=clinic.getGoogle_maps_url()%>"></div>
                         ${invalidUrl}
                         <div class="row form-group">

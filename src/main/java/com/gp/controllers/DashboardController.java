@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gp.user.BookingDao;
 import com.gp.user.Center;
 import com.gp.user.CenterDao;
 import com.gp.user.Clinic;
@@ -826,6 +827,28 @@ public class DashboardController {
 		return mav;
 	}
 
+//**********************************Booking ***********************************
+	@RequestMapping(value="/HealthTrack/admin/{username}/booking/delete/{bookingId}", method = RequestMethod.GET)
+	public ModelAndView deleteBooking(Model model, ModelAndView mav, HttpServletRequest request
+			, @PathVariable("bookingId") String bookingId)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("booking_id", "booking" , bookingId)) {	
+				//BookingDao.deleteBooking(bookingId);
+				HospitalDao.deleteSomthing("booking" , "booking_id" , Integer.parseInt(bookingId));
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/daySlotBooking");
+			}else {
+				mav.setViewName("/user/login");
+			}
+			
+		}
 
+		return mav;
+	}
+	
 	
 }	

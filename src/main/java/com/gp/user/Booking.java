@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Booking extends Service{
 
-	int bookingId, serviceId, userId;
+	int bookingId, serviceId, userId,clinicId;
 	String firstName, lastName, bookingPhone;
 	int age;
 	Date dateFrom, dateTo, timeFrom, timeTo, timeOfBooking;
@@ -130,6 +130,12 @@ public class Booking extends Service{
 	}
 	public void setTimeTo(Date timeTo) {
 		this.timeTo = timeTo;
+	}
+	public int getClinicId() {
+		return clinicId;
+	}
+	public void setClinicId(int clinicId) {
+		this.clinicId = clinicId;
 	}
 	
 }

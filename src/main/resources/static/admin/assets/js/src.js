@@ -7,6 +7,7 @@ $(document).ready(function(){
 		$("."+id).slideToggle();
 		
 	});
+	
 
 	$(".confirm-delete-booking").click(function(){
         
