@@ -35,52 +35,72 @@
 	
 	%>
 	
-	<nav class="navbar navbar-inverse">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
-              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/HealthTrack/"title="Home Page">Health Services Navigator<img src="/user/layout/images/logo.png"></a>
-    </div>
+	    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p>Welcome to <span>Medifile</span> template</p>
+                            <p class="pull-right">Opening Hours : Monday to Saturday - 8am to 10pm Contact : <span>+12-823-611-8721</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="#">Hospitals</a></li>
-        <li><a href="#">Clinics</a></li>
-        <li><a href="#">Centers</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Pharmacies</a></li>
-        <li><a href="#">Labs</a></li>
-      </ul>
-        
-      <%  if(sessionExist){ %>
-          <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
-             aria-expanded="false"><img class="img-circle navbar-img" src='#'><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">edit</a></li>
-            <li><a href="#">add article</a></li>
-            <li><a href="#">logout</a></li>
-          </ul>
-        </li>
-      </ul>      
-<% }else{ %>
-        <div class="pull-right login-register">
-            
-            <a href="/HealthTrack/login">Login</a><span> or</span>
-            
-            <a href="/HealthTrack/signup">Register</a></div>
-            
-            <% } %>
-      
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+        <!-- Main Header Area -->
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <!-- Logo Area  -->
+                                <a class="navbar-brand" href="index.html">Health Service Navigator</a>
+
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <!-- Menu Area -->
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="index.html">Home</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="index.html">Home</a>
+                                                <a class="dropdown-item" href="about-us.html">About Us</a>
+                                                <a class="dropdown-item" href="services.html">Services</a>
+                                                <a class="dropdown-item" href="blog.html">News</a>
+                                                <a class="dropdown-item" href="single-blog.html">News Details</a>
+                                                <a class="dropdown-item" href="contact.html">Contact</a>
+                                                <a class="dropdown-item" href="elements.html">Elements</a>
+                                                <a class="dropdown-item" href="index-icons.html">All Icons</a>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="about-us.html">About Us</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="services.html">Services</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="blog.html">News</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="contact.html">Contact</a>
+                                        </li>
+                                    </ul>
+                                    <!-- Appointment Button -->
+                                    <a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->

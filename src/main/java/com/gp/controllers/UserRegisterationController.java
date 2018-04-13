@@ -118,6 +118,11 @@ public class UserRegisterationController {
 			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">Sorry this email alreay exists</p>");
 			errors = false;
 		}
+		
+		if(Validation.checkEmailBan("email")) {
+			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">Sorry this email is banned</p>");
+			errors = false;
+		}
 	
 		if(errors) {
 			//create the info of login

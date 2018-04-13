@@ -42,6 +42,7 @@
                                 <input type="email" class="form-control" name="email" placeholder="Your Email" required>
                             	${invalidEmail}
                             	${emailAlreadyExists}
+                            	${bannedEmail}
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="form-control btn btn-primary" value="Submit">

@@ -6,6 +6,7 @@
 <%@page import="com.gp.user.CenterDao"%>
 <%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.ServiceDao"%>
+<%@page import="com.gp.user.Validation"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
@@ -80,7 +81,11 @@
                                 	request.setAttribute("users", CenterUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value="${user.id}">${user.username}</option>
+                                <%
+                                User u = (User)pageContext.getAttribute("user");
+                                if(!Validation.checkIfTheUserAlreadyAdmin(u.getId() , "center")){ %>
+		                             <option value="${user.id}">${user.username}</option>
+		                             <%	} %>
                                 </c:forEach>
                               </select>
                               ${invalidAdmin}
@@ -159,7 +164,11 @@
                                 	request.setAttribute("users", centerUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value="${user.id}">${user.username}</option>
+                                	<%
+                                User u = (User)pageContext.getAttribute("user");
+                                if(!Validation.checkIfTheUserAlreadyAdmin(u.getId() , "center")){ %>
+		                             <option value="${user.id}">${user.username}</option>
+		                             <%	} %>
                                 </c:forEach>
                               </select>
                               ${invalidAdmin}

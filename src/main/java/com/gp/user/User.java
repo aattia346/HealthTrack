@@ -2,11 +2,19 @@ package com.gp.user;
 
 public class User {
 	
-	int id, verificationCode;
+	int id, verificationCode, ban;
 	String username, password, type;
 	
 	public User() {
 		super();
+	}
+	
+	public int getBan() {
+		return ban;
+	}
+
+	public void setBan(int ban) {
+		this.ban = ban;
 	}
 
 	public User(int id, String username, String type) {

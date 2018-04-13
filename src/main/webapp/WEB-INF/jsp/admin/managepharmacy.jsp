@@ -2,6 +2,8 @@
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="com.gp.user.Pharmacy"%>
 <%@page import="com.gp.user.PharmacyDao"%>
+<%@page import="com.gp.user.Validation"%>
+
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -74,11 +76,15 @@
                               <select name="Admin" class="form-control">
                                 <option value="0">Please select</option>
                                 <%
-                                	List<User> clinicUsers = UserDao.getUsers("hospital");
+                                	List<User> clinicUsers = UserDao.getUsers("pharmacy");
                                 	request.setAttribute("users", clinicUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value="${user.id}">${user.username}</option>
+                                	 <%      
+                           User u = (User)pageContext.getAttribute("user");
+                           if(!Validation.checkIfTheUserAlreadyAdmin(u.getId(), "pharmacy")){%>
+                             <option value="${user.id}">${user.username}</option>
+                             <%	} %>
                                 </c:forEach>
                               </select>
                               ${invalidAdmin}
@@ -154,11 +160,15 @@
                               <select name="Admin" class="form-control">
                                 <option value="0">Please select</option>
                                 <%
-                                	List<User> hospitalUsers = UserDao.getUsers("hospital");
+                                	List<User> hospitalUsers = UserDao.getUsers("pharmacy");
                                 	request.setAttribute("users", hospitalUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value="${user.id}">${user.username}</option>
+                                	<%      
+                           User u = (User)pageContext.getAttribute("user");
+                           if(!Validation.checkIfTheUserAlreadyAdmin(u.getId(), "pharmacy")){%>
+                             <option value="${user.id}">${user.username}</option>
+                             <%	} %>
                                 </c:forEach>
                               </select>
                               ${invalidAdmin}

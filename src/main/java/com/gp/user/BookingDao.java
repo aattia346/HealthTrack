@@ -114,7 +114,7 @@ public class BookingDao {
 				booking.setTimeFrom(result.getTime("time_from"));
 				booking.setTimeTo(result.getTime("time_to"));
 				booking.setStatus(result.getInt("status"));
-				booking.setClinicId(result.getInt("clinic_id"));
+			
 				
 				bookings.add(booking);
 				}

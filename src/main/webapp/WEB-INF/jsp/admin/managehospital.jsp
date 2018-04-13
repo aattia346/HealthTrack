@@ -2,6 +2,7 @@
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="com.gp.user.Hospital"%>
 <%@page import="com.gp.user.HospitalDao"%>
+<%@page import="com.gp.user.Validation"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -74,11 +75,16 @@
                               <select name="Admin" class="form-control">
                                 <option value="0">Please select</option>
                                 <%
-                                	List<User> hospitalUsers = UserDao.getUsers("hospital");
+                                	List<User> hospitalUsers = new ArrayList<User>();
+                                	hospitalUsers = UserDao.getUsers("hospital");
                                 	request.setAttribute("users", hospitalUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value="${user.id}">${user.username}</option>
+                           <%      
+                           User u = (User)pageContext.getAttribute("user");
+                           if(!Validation.checkIfTheUserAlreadyAdmin(u.getId(), "hospital")){%>
+                             <option value="${user.id}">${user.username}</option>
+                             <%	} %>
                                 </c:forEach>
                               </select>
                               ${invalidAdmin}
@@ -159,17 +165,21 @@
                         	${invalidAddress}
                         	</div>
                         </div>
-                                             
                       	<div class="form-group">
                       		  <label class=" form-control-label">Choose the Admin</label>
                               <select name="Admin" class="form-control">
                                 <option value="0">Please select</option>
                                 <%
-                                	List<User> hospitalUsers = UserDao.getUsers("hospital");
+                                	List<User> hospitalUsers = new ArrayList<User>();
+                                	hospitalUsers = UserDao.getUsers("hospital");
                                 	request.setAttribute("users", hospitalUsers);
                                 %>
                                 <c:forEach var="user" items="${users}">
-                                	<option value="${user.id}">${user.username}</option>
+                           <%      
+                           User u = (User)pageContext.getAttribute("user");
+                           if(!Validation.checkIfTheUserAlreadyAdmin(u.getId(), "hospital")){%>
+                             <option value="${user.id}">${user.username}</option>
+                             <%	} %>
                                 </c:forEach>
                               </select>
                               ${invalidAdmin}

@@ -320,7 +320,7 @@ img {
     transition-duration: 500ms; }
   .medilife-btn:hover, .medilife-btn:focus {
     background-color: #081f3e;
-    color: #ffffff; }
+    color: #ffffff !important; }
   .medilife-btn:hover span, .medilife-btn:focus span {
     color: #ffffff;
     background-color: #006cff; }
@@ -360,7 +360,7 @@ img {
   background-color: #ff0000;
   height: 50px;
   padding: 0 15px;
-  line-height: 50px;
+  line-height: 37px !important;
   font-size: 14px;
   min-width: 140px;
   border-radius: 0;
@@ -453,6 +453,8 @@ img {
   height: 45px;
   background-color: #081f3e; }
   .top-header-area p {
+  	float: left;
+  	line-height: 3;
     margin-bottom: 0;
     color: #b5b5b5; }
     .top-header-area p span {
@@ -470,7 +472,8 @@ img {
 
 .main-header-area {
   width: 100%;
-  height: 110px;
+  height: 75px;
+  line-height: 5;
   position: relative;
   z-index: 1;
   background-color: rgba(0, 108, 255, 0.5);
@@ -691,7 +694,6 @@ img {
   padding: 0 15px;
   border: 2px solid #536174; }
   .form-control:hover, .form-control:focus {
-    background-color: transparent;
     box-shadow: none; }
 
 textarea {
@@ -714,7 +716,7 @@ textarea {
     background-color: #081f3e; }
   .medilife-book-an-appoinment-area .medilife-appointment-form {
     background-color: #081f3e;
-    padding: 60px 50px; }
+    padding: 0px 50px; }
     .medilife-book-an-appoinment-area .medilife-appointment-form select {
       border: 2px solid #536174;
       background-color: transparent; }
@@ -728,7 +730,7 @@ textarea {
       .medilife-book-an-appoinment-area .medilife-appointment-form button[type=submit] {
         margin-top: 15px; } }
   .medilife-book-an-appoinment-area .medilife-contact-info {
-    padding: 30px;
+    padding: 30px 30px 120px 30px;
     background-color: #006cff; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .medilife-book-an-appoinment-area .medilife-contact-info {
@@ -998,11 +1000,12 @@ textarea {
 /* :: 13.0 Breadcumb Area CSS */
 .breadcumb-area {
   width: 100%;
-  height: 400px;
+  height: 500px;
   position: relative;
   z-index: 1;
   padding-top: 150px; }
   .breadcumb-area .breadcumb-title {
+  	color: #081F3E;
     font-size: 60px;
     margin-bottom: 0; }
     @media only screen and (max-width: 767px) {

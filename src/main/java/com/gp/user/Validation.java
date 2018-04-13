@@ -247,6 +247,33 @@ public static boolean validateText(String name) {
 		return location;
 	}
 	
-	
+	public static boolean checkIfTheUserAlreadyAdmin(int userId , String table)
+			 throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		 
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM " + table + "  WHERE admin_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1,userId);
+		ResultSet result = ps.executeQuery();
+
+		return result.next();
+	 }
+
+	public static boolean checkEmailBan(String email)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		boolean ban = false;
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT ban FROM user WHERE email =?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, email);
+		ResultSet result = ps.executeQuery();
+		
+		if(result.getRow()==1) {
+			ban = true;
+		}	
+		return ban;
+	}
 }
 
