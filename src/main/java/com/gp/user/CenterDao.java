@@ -9,7 +9,8 @@ import java.util.List;
 
 import com.gp.database.DBConnection;
 
-public class CenterDao {
+abstract public class CenterDao {
+	
 	public static Center getCenterById(int id) throws InstantiationException,
 	IllegalAccessException, ClassNotFoundException, SQLException {
 		

@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.gp.database.DBConnection;
 
-public class ServiceDao {
+abstract public class ServiceDao {
 
 	public static Service getServiceById(int id, String table) throws
 	InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -48,6 +48,8 @@ public class ServiceDao {
 		service.setGoogleMapsUrl(result.getString("google_maps_url"));
 		service.setAddress(result.getString("address"));
 		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setPhone(result.getString("phone"));
 		return service;
 	}
 	
@@ -61,8 +63,14 @@ public class ServiceDao {
 		ResultSet result = ps.executeQuery();
 		List<Service> list = new ArrayList<Service>();
 		while(result.next()) {
-			Service s = new Service(result.getInt("service_id"), result.getString("service_name"), result.getInt("center_id"), result.getInt("dept_id"), 
-					result.getDate("booked_till"), result.getString("fees"), result.getFloat("service_review"));
+			Service s = new Service();
+			s.setServiceId(result.getInt("service_id"));
+			s.setServiceName(result.getString("service_name"));
+			s.setCenterId(result.getInt("center_id"));
+			s.setDeptId(result.getInt("dept_id"));
+			s.setFees(result.getString("fees"));
+			s.setServiceReview(result.getFloat("service_review"));
+			s.setSlotType(result.getInt("day_or_time"));
 			list.add(s);
 		}
 		return list;
@@ -87,6 +95,7 @@ public class ServiceDao {
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
 		services.add(service);
 		}
 		
@@ -136,6 +145,7 @@ public class ServiceDao {
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));
+		service.setSlotType(result.getInt("day_or_time"));
 		services.add(service);
 		}
 		return services;
@@ -168,12 +178,11 @@ public class ServiceDao {
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));
+		service.setSlotType(result.getInt("day_or_time"));
 		services.add(service);
 		}
 		return services;
 			
-			}
-	
-	
+			}	
 }
 

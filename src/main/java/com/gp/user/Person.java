@@ -2,41 +2,25 @@ package com.gp.user;
 
 public class Person extends User{
 	
-	public int userId;
-	public String username;
-	public String password;
-	public String type;
-	public int verificationCode;
-	public String firstName;
-	public String lastName;
-	public String email;
-	public String phone;
-	public int verified;
+	private int userId;
+	private String username;
+	private String password;
+	private String type;
+	private int verificationCode;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String phone;
+	private int verified;
+	private int bookingsPerDay;
 	
 	
-	public Person(int userId, String firstName, String lastName, String email, String phone, int verified) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phone = phone;
-		this.verified = verified;
+	public int getBookingsPerDay() {
+		return bookingsPerDay;
 	}
 
-	public Person(int userId, String username, String password, String type, int verificationCode, String firstName,
-			String lastName, String email, String phone, int verified) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.password = password;
-		this.type = type;
-		this.verificationCode = verificationCode;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phone = phone;
-		this.verified = verified;
+	public void setBookingsPerDay(int bookingsPerDay) {
+		this.bookingsPerDay = bookingsPerDay;
 	}
 
 	public Person() {

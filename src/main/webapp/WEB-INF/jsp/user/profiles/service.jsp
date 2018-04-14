@@ -7,6 +7,9 @@
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="com.gp.user.Booking"%>
 <%@page import="com.gp.user.BookingDao"%>
+<%@page import="com.gp.user.PersonDao"%>
+<%@page import="com.gp.user.Person"%>
+
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -41,11 +44,178 @@
 	Date bookTo = calendar.getTime();
 	String bookToInMyFormat = todayFormat.format(bookTo);
 	
+	if(S.getSlotType() == 1){
+		request.setAttribute("hideTable", "hidden");
+	}else if(S.getSlotType() == 2){
+		request.setAttribute("hideCalendar", "hidden");
+	}
+	
 %>
 <%@include  file="../includes/header.jsp" %>
 
+<!-- Preloader -->
+    <div id="preloader">
+        <div class="medilife-load"></div>
+    </div>
+    
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(/user/layout/images/profiles/bg-img/breadcumb2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title"><%= S.getServiceName() %></h3>
+                        <p class="breadcumb-intro"><%= S.getIntro() %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- ***** Book An Appoinment Area Start ***** -->
+    <div class="medilife-book-an-appoinment-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="appointment-form-content">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12 col-lg-9 col-md-6">
+                             <div class="my-table text-center">
+                            <table class="table table-bordered ${hideTable}">
+                            <thead>
+                            <tr class="table-head">
+                                <th>thu 12/4</th>
+                                <th>Fri 13/4</th>
+                                <th>Sat 14/4</th>
+                                <th>Sun 15/4</th>
+                                <th>mon 16/4</th>
+                                <th>tue 17/4</th>
+                                <th>wed 18/4</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            <tr>
+                              <td>12:00</td>
+                              <td>01:00</td>
+                              <td class="booked">02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>02:00</td>
+                              <td>02:00</td>
+                              <td>03:30</td>
+                          </tr>
+                          <tr>
+                              <td>12:00</td>
+                              <td class="booked">01:00</td>
+                              <td>02:00</td>
+                              <td>02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>02:00</td>
+                              <td class="booked">03:30</td>
+                          </tr>
+                            <tr>
+                              <td class="booked">12:00</td>
+                              <td class="booked">01:00</td>
+                              <td>02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>02:00</td>
+                              <td class="booked">02:00</td>
+                              <td>03:30</td>
+                          </tr>
+                        </tbody>
+                    </table> 
+                                                           
+                    </div>
+                    <div class=" ${hideCalendar}"><div class="calendar " id='calendar'></div></div>
+                                <div class="medilife-appointment-form">
+                                    <form action="#" method="post">
+                                        <div class="row align-items-end">
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="firstName" id="name" placeholder="First Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="lastName" id="name" placeholder="Last Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control" name="date" id="date" placeholder="Date" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="time" class="form-control" name="time" id="time" placeholder="Time">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="number" id="number" placeholder="Phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="E-mail">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12">
+                                                <div class="form-group mb-0">
+                                                    <textarea name="message" class="form-control mb-0 border-top-0 border-right-0 border-left-0" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4 mb-0">
+                                                <div class="form-group mb-0">
+                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment">Make an Appointment <span>+</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="medilife-contact-info">
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info-icon"><i class="fa fa-h-square fa-3x"></i></div>
+                                    <div class="single-contact-info mb-30">
+                                        <p><%= S.getHospitalName() %></p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info mb-30">
+                                    	<div class="single-contact-info-icon"><i class="fa fa-phone fa-3x"></i></div>
+                                        <p><%= S.getPhone() %></p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
+                                        <p><%= S.getAddress() %></p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
+                                        <p><%= S.getFees() %></p>
+                                    </div><br><br>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon"><i class="fas fa-map-marker-alt fa-3x"></i></div>
+                                        <p>Find the location google maps</p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
+                                        <p><%= S.getServiceReview() %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Book An Appoinment Area End ***** -->
+
 <div class="hospital-body">
-        	<input type="hidden" class="booking-date" required  value="<%= todayInMyFormat %>">
             <div class="container">
 
                 <div class="row service-img">
@@ -82,14 +252,25 @@
 
                 </div>
                 
-                <% if(showForm){ %>                
+                <% if(showForm){ 
+                
+                	Person person = PersonDao.getPersonByUserID(user.getId());
+                	if(person.getBookingsPerDay() >= 3){
+                		request.setAttribute("disabled", "disabled");
+                		request.setAttribute("exceedBookingsLimit", "<p class=\"wrong-input\">Sorry, you reached the maximum number of bookings per day (3)</p>");
+                	}else{
+                		request.setAttribute("disabled", "");
+                		request.setAttribute("exceedBookingsLimit", "");
+                	}
+                
+                %>                
                 
                 <div class="col-sm-12 hospital-depts service-booking">
                     <h3 class="text-center">Book <%= S.getServiceName() %></h3>
                     <form method="post" action="/HealthTrack/Service/<%=S.getServiceId() %>/Booking/Submit">
                         
                         <input type="hidden" value="<%= user.getId() %>" name="userId">
-                        
+                        ${exceedBookingsLimit}
                         <div class="col-sm-6 personal-info">
                     
                             <div class="form-group name">
@@ -116,10 +297,10 @@
                             </div>
                             ${invalidDate}
                         </div>
-                        <div class="col-sm-6 calendar" id='calendar'></div>
+                        
 
                         <div class="form-group">
-                            <input type="submit" class="form-control input-sm  btn btn-primary"> 
+                            <input type="submit" class="form-control input-sm  btn btn-primary" ${disabled} > 
                         </div>
                     </form>
                     
@@ -168,7 +349,7 @@
 <%@include  file="../includes/footer.jsp" %>
 <%
 
-List<Booking> bookings = BookingDao.getVerifiedBookingsByServiceId(serviceId);
+List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
 
 %>
 <script>

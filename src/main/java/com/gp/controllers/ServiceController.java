@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.user.Booking;
 import com.gp.user.BookingDao;
+import com.gp.user.PersonDao;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -64,7 +65,17 @@ public class ServiceController {
 		if(errors) {
 			mav.setViewName("/user/profiles/service");
 		}else {
-			BookingDao.insertBookingDays(serviceId, userId, firstName, lastName, age, bookFromAsDate, bookToAsDate, phone);
+			Booking booking = new Booking();
+			booking.setServiceId(serviceId);
+			booking.setUserId(userId);
+			booking.setFirstName(firstName);
+			booking.setLastName(lastName);
+			booking.setAge(age);
+			booking.setDateFrom(bookFromAsDate);
+			booking.setDateTo(bookToAsDate);
+			booking.setPhone(phone);
+			BookingDao.insertBookingDays(booking);
+			PersonDao.increaseBookings(userId);
 			mav.setViewName("user/profiles/user");
 		}
 		

@@ -81,10 +81,24 @@
 .medilife-services-area:nth-of-type(even){
 	background-color: #e7f1ff;
 }
+.breadcumb-title{
+	font-weight: 700;
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
 /***************************** Service page **************************************/
+.fc-view-container{
+	background: #4383A9;
+    color: #fff;
+    font-weight: 800;
+    margin: 10px 51px 23px 52px;
+}
+.fc-toolbar.fc-header-toolbar{
+	margin-right: 51px;
+    margin-left: 52px;
+    color: #fff;
+}
 .service-img{
     margin-top: 80px;
     background: #fff;
@@ -129,7 +143,42 @@ input[type="submit"]{
     }
 }
 .calendar{
-    margin-top: 16px;
+    margin-top: -37px;
+}
+.fc-unthemed td.fc-today {
+    background: #006cff;
+}
+.fc-event, .fc-event-dot {
+    background-color: #006cff;
+}
+.fc-week{
+	height: 57px !important;
+}
+.fc-day-grid-container{
+	height: 343px !important;
+}
+.single-contact-info i{
+	color: #fff;
+}
+.single-contact-info p , .single-contact-info a{
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 48px;
+}
+.calendar th{
+	background-color: #006CFF;
+}
+.medilife-appoint-btn:hover, .medilife-appoint-btn:focus{
+	color: #006CFF;
+}
+.single-contact-info-icon{
+	float: left;
+    line-height: 5;
+    margin-right: 10px;
+    color: #fff;
+    width: 23%;
 }
 .fc-toolbar h2{
     font-size: 20px;
@@ -152,7 +201,7 @@ input[type="submit"]{
 /*======================================================================================*/
 
 /***************************** Navbar **************************************/
-.navbar-brand{
+.navbar-brand , .navbar-brand:hover{
 	line-height: 46px;
 	color: #f7f7f7;
 	font-size: 21px;
@@ -189,7 +238,7 @@ header{
 .main-page-container h3{
 	margin-top: 0;
     font-weight: 800;
-    color: #888;
+    color: #fff;
     margin-bottom: 40px;
 }
 .main-page-container{
@@ -283,6 +332,7 @@ label{
     width: 100%;
     margin-bottom: 0px;
     padding: 30px 50px;  
+    height: 438px;
 }
 .my-table table{
     background-color: #fff;

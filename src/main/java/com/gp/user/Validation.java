@@ -27,7 +27,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import com.gp.database.DBConnection;
 
 
-public class Validation {
+abstract public class Validation {
 	
 	public static boolean validateUsername(String username) {
 		
@@ -182,7 +182,7 @@ public static boolean validateText(String name) {
 	
 		boolean valid = true;
 						
-		List<Booking> bookings = BookingDao.getVerifiedBookingsByServiceId(serviceId);
+		List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
 		
 		for(Booking B : bookings) {
 			

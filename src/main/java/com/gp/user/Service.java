@@ -14,6 +14,7 @@ public class Service extends Department {
 	Date available_from;
 	Date available_to;
 	String centerName;
+	int slotType;         // 1 means day && 2 means time
 
 	public String getCenterName() {
 		return centerName;
@@ -23,28 +24,14 @@ public class Service extends Department {
 		this.centerName = centerName;
 	}
 
-	public Service(int serviceId, String serviceName, int centerId, int deptId, Date lastUpdated,
-			String fees, float serviceReview) {
-		super();
-		this.serviceId = serviceId;
-		this.serviceName = serviceName;
-		this.centerId = centerId;
-		this.deptId = deptId;
-		this.lastUpdated = lastUpdated;
-		this.fees = fees;
-		this.serviceReview = serviceReview;
-		
-			}
-	
-	public Service(int serviceId, String serviceName, int centerId
-			) {
-		super();
-		this.serviceId = serviceId;
-		this.serviceName = serviceName;
-		this.centerId = centerId;
-		
-		
-			}
+
+	public int getSlotType() {
+		return slotType;
+	}
+
+	public void setSlotType(int slotType) {
+		this.slotType = slotType;
+	}
 
 	public Service() {
 		super();

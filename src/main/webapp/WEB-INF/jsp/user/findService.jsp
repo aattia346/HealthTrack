@@ -54,7 +54,7 @@ for(Hospital hospital : hospitals){
 
 List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
-	serviceUrl = "/HealthTrack/profile/service/"+service.getServiceId();
+	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();
 	calendar.setTime(today);
 	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){

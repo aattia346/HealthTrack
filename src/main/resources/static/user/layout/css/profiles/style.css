@@ -36,14 +36,14 @@
 /* :: 1.0 Import Fonts */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
 /* :: 2.0 Import All CSS */
-@import url(css/bootstrap.min.css);
-@import url(css/animate.css);
-@import url(css/owl.carousel.css);
-@import url(css/magnific-popup.css);
-@import url(css/font-awesome.min.css);
-@import url(css/themify-icons.css);
-@import url(css/medilife-icons.css);
-@import url(css/nice-select.css);
+@import url(/user/layout/css/bootstrap.min.css);
+@import url(/user/layout/css/profiles/animate.css);
+@import url(/user/layout/css/profiles/owl.carousel.css);
+@import url(/user/layout/css/profiles/magnific-popup.css);
+@import url(/user/layout/css/font-awesome.min.css);
+@import url(/user/layout/css/profiles/themify-icons.css);
+@import url(/user/layout/css/profiles/medilife-icons.css);
+@import url(/user/layout/css/profiles/nice-select.css);
 /* :: 3.0 Base CSS */
 * {
   margin: 0;
@@ -472,7 +472,7 @@ img {
 
 .main-header-area {
   width: 100%;
-  height: 75px;
+  height: 92px;
   line-height: 5;
   position: relative;
   z-index: 1;
@@ -730,7 +730,7 @@ textarea {
       .medilife-book-an-appoinment-area .medilife-appointment-form button[type=submit] {
         margin-top: 15px; } }
   .medilife-book-an-appoinment-area .medilife-contact-info {
-    padding: 30px 30px 120px 30px;
+    padding: 30px 30px 259px 30px;
     background-color: #006cff; }
     @media only screen and (min-width: 768px) and (max-width: 991px) {
       .medilife-book-an-appoinment-area .medilife-contact-info {

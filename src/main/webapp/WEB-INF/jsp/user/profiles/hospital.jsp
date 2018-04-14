@@ -67,6 +67,7 @@ Date today = Calendar.getInstance().getTime();
                     
                     <c:forEach var="service" items="${services}">
                     
+                    <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">
                    <div class="col-12 col-md-6 col-lg-3">
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
@@ -85,11 +86,12 @@ Date today = Calendar.getInstance().getTime();
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}" class="headline">${service.serviceName}</a>
+                            <a class="headline">${service.serviceName}</a>
                             <a href="#" class="comments">3 Comments</a>
                         </div>
                     </div>
                 </div>
+                </a>
                     
                     </c:forEach>
                 

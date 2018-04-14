@@ -132,7 +132,13 @@ public class UserRegisterationController {
 			user.setId(UserDao.insertUser(user));
 			//start the storage to the database		
 			
-			Person person = new Person(user.getId(), firstName, lastName, email, phone, 0);
+			Person person = new Person();
+			person.setUserId(user.getId());
+			person.setFirstName(firstName);
+			person.setLastName(lastName);
+			person.setEmail(email);
+			person.setPhone(phone);
+			person.setVerified(0);
 			PersonDao.insertPerson(person);
 			
 			HttpSession session = request.getSession();		

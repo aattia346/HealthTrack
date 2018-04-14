@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.gp.database.DBConnection;
 
-public class HospitalDao {
+abstract public class HospitalDao {
 	
 	public static Hospital getHospitalById(int id) throws InstantiationException,
 	IllegalAccessException, ClassNotFoundException, SQLException {

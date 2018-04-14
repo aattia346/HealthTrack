@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.gp.database.DBConnection;
 
-public class UserDao {
+abstract public class UserDao {
 	
 	public static int loginSubmit(String username , String password) throws InstantiationException
 	, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
