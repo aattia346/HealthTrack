@@ -15,6 +15,17 @@ public class Service extends Department {
 	Date available_to;
 	String centerName;
 	int slotType;         // 1 means day && 2 means time
+	String days;
+	
+	
+
+	public String getDays() {
+		return days;
+	}
+
+	public void setDays(String days) {
+		this.days = days;
+	}
 
 	public String getCenterName() {
 		return centerName;

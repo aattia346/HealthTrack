@@ -79,8 +79,8 @@
                     <div class="appointment-form-content">
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9 col-md-6">
-                             <div class="my-table text-center">
-                            <table class="table table-bordered ${hideTable}">
+                             <div class="my-table text-center ${hideTable}">
+                            <table class="table table-bordered">
                             <thead>
                             <tr class="table-head">
                                 <th>thu 12/4</th>
@@ -176,8 +176,7 @@
                             <div class="col-12 col-lg-3">
                                 <div class="medilife-contact-info">
                                     <!-- Single Contact Info -->
-                                    <div class="single-contact-info-icon"><i class="fa fa-h-square fa-3x"></i></div>
-                                    <div class="single-contact-info mb-30">
+                                     <div class="single-contact-info mb-30">
                                         <p><%= S.getHospitalName() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
@@ -188,7 +187,7 @@
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
-                                        <p><%= S.getAddress() %></p>
+                                        <p> <%= S.getAddress() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
@@ -214,99 +213,10 @@
         </div>
     </div>
     <!-- ***** Book An Appoinment Area End ***** -->
+    
+    <div id="map" class="hospital-map"></div>
 
-<div class="hospital-body">
-            <div class="container">
-
-                <div class="row service-img">
-
-                    <div class="thumbnail col-sm-4">
-
-                        <img class="img-responsive" src="/user/layout/images/icu.jpg">
-
-                    </div>
-
-                    <div class="col-sm-8  col-xs-12">
-                         <div class="hospital-info">
-                            <h4 class="about-title">Service: </h4><p class="about-detail"><%= S.getServiceName() %></p>
-                        </div>
-                         <div class="hospital-info">
-                            <h4 class="about-title">Department: </h4><p class="about-detail"><%= S.getDeptName() %></p>
-                        </div>
-                         <div class="hospital-info">
-                            <h4 class="about-title">Hospital: </h4><p class="about-detail"><%= S.getHospitalName() %></p>
-                        </div>
-                         <div class="hospital-info">
-                            <h4 class="about-title">Fees: </h4><p class="about-detail"><%= S.getFees() %></p>
-                        </div>
-                        <div class="hospital-info">
-                            <h4 class="about-title">Address: </h4><p class="about-detail"><%= S.getAddress()%></p>
-                        </div>
-                        <div class="hospital-info">
-                        	<h4 class="about-title">Location: </h4><p class="about-detail"><a href="<%= S.getGoogleMapsUrl() %>">find <%= S.getServiceName() %> in google maps</a></p>
-                    	</div>
-                        <div class="hospital-info">
-                            <h4 class="about-title">Review: </h4><p class="about-detail"><%= S.getServiceReview() %></p>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <% if(showForm){ 
-                
-                	Person person = PersonDao.getPersonByUserID(user.getId());
-                	if(person.getBookingsPerDay() >= 3){
-                		request.setAttribute("disabled", "disabled");
-                		request.setAttribute("exceedBookingsLimit", "<p class=\"wrong-input\">Sorry, you reached the maximum number of bookings per day (3)</p>");
-                	}else{
-                		request.setAttribute("disabled", "");
-                		request.setAttribute("exceedBookingsLimit", "");
-                	}
-                
-                %>                
-                
-                <div class="col-sm-12 hospital-depts service-booking">
-                    <h3 class="text-center">Book <%= S.getServiceName() %></h3>
-                    <form method="post" action="/HealthTrack/Service/<%=S.getServiceId() %>/Booking/Submit">
-                        
-                        <input type="hidden" value="<%= user.getId() %>" name="userId">
-                        ${exceedBookingsLimit}
-                        <div class="col-sm-6 personal-info">
-                    
-                            <div class="form-group name">
-                                    <input type="text" required maxlength="15" class="form-control input-sm" name="firstName" placeholder="Patient First Name" > 
-
-                                    <input type="text" required maxlength="15" class="form-control input-sm" name="lastName" placeholder="Patient Last Name" > 
-                            </div>
-                            ${invalidName}
-                            <div class="form-group">
-                                    <input type="number" required min="0" max = "120" class="form-control input-sm" name="age" placeholder="Patient Age" > 
-                            </div>
-                          
-                            <div class="form-group">
-                                    <input type="text" required maxlength="11" class="form-control input-sm" name="phone" placeholder="Phone Number" required> 
-                            </div>
-                        	${invalidPhone}                          
-                            <div>
-                                <h4 class="about-title">Book From: </h4>
-                                <input type="date" required class="booking-date" name="bookFrom"  min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
-                            </div>  
-                            <div>
-                                <h4 class="about-title">To: </h4>
-                                <input type="date" required class="booking-date" name="bookTo" min="<%= todayInMyFormat %>" value="<%= bookToInMyFormat %>">
-                            </div>
-                            ${invalidDate}
-                        </div>
-                        
-
-                        <div class="form-group">
-                            <input type="submit" class="form-control input-sm  btn btn-primary" ${disabled} > 
-                        </div>
-                    </form>
-                    
-                </div>
-                
-                <% } else if(user.getId()== S.getAdminId()){
+                <% if(user.getId()== S.getAdminId()){
                 
                 	List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
                 	
@@ -336,16 +246,8 @@
                 		<hr>
                 	</c:forEach>
 
-               <% }else{ %>
-            	   
-            	   <div> if you want to book this service please <a href="/HealthTrack/login">Login</a> or <a href="/HealthTrack/signup">Signup</a></div>
-           <%    }
-                	%>
-                
+               <% } %>
 
-            </div>
-        </div>
-        	 
 <%@include  file="../includes/footer.jsp" %>
 <%
 
@@ -386,3 +288,20 @@ $('#calendar').fullCalendar({
     
 });
 </script>
+
+	<script>
+      function hospitalMarker() {
+        var uluru = {lat: <%= S.getLat() %>, lng: <%= S.getLang() %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&callback=hospitalMarker">
+    </script>

@@ -1,5 +1,4 @@
 /*************************** login page *****************************/
-
 .login-body{
     background-color: #F2F2F2;
 }
@@ -143,7 +142,7 @@ input[type="submit"]{
     }
 }
 .calendar{
-    margin-top: -37px;
+    margin-top: 25px;
 }
 .fc-unthemed td.fc-today {
     background: #006cff;

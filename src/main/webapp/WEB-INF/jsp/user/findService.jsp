@@ -16,6 +16,8 @@
 <%@page import="com.gp.user.Validation"%>
 <%@page import="com.gp.user.Clinic"%>
 <%@page import="com.gp.user.ClinicDao"%>
+<%@page import="com.gp.user.Pharmacy"%>
+<%@page import="com.gp.user.PharmacyDao"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -37,7 +39,12 @@ for(Center center : centers){
 	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", serviceUrl, "71e486");
 	locations.add(location);
 }
-
+List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
+for(Pharmacy pharmacy : pharmacies){
+	serviceUrl = "/HealthTrack/profile/pharmacy/"+pharmacy.getAdminId();
+	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), pharmacy.getPharmacyName(), "pharmacy", serviceUrl, "C35ED4");
+	locations.add(location);
+}
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
@@ -104,11 +111,11 @@ for(Service service : servicesOfCenters){
                       <div class="panel-body">
                       <ul class="list-unstyled">
                           <input type="radio" name="service" value="all" checked> All<br>
-                          <input type="radio" name="service" value="clinic"> Clinics <i class="fa fa-map-marker custom-pin clinic-pin"></i><br>
-                          <input type="radio" name="service" value="hospital"> Hospitals <i class="fa fa-map-marker custom-pin hospital-pin"></i><br>
-                          <input type="radio" name="service" value="center"> Centers <i class="fa fa-map-marker custom-pin center-pin"></i><br>
-                          <input type="radio" name="service" value="pharmacy"> Pharmacies <i class="fa fa-map-marker custom-pin pharmacy-pin"></i><br>
-                          <input type="radio" name="service" value="lab"> Labs <i class="fa fa-map-marker custom-pin lab-pin"></i><br>
+                          <input type="radio" name="service" value="clinic"> Clinics <i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
+                          <input type="radio" name="service" value="hospital"> Hospitals <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
+                          <input type="radio" name="service" value="center"> Centers <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
+                          <input type="radio" name="service" value="pharmacy"> Pharmacies <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
+                          <input type="radio" name="service" value="lab"> Labs <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
                   	  </ul>
                   	  <ul class="list-unstyled">
                   	  	  <h4 class="text-center special-services">Special Services</h4>
