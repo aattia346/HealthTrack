@@ -5,7 +5,7 @@ import java.util.Date;
 public class Booking extends Service{
 
 	int bookingId, serviceId, userId;
-	String firstName, lastName, bookingPhone, msg;
+	String firstName, lastName, bookingPhone, msg, sex;
 	int age;
 	Date dateFrom, dateTo, timeFrom, timeTo, timeOfBooking;
 	int status;
@@ -15,6 +15,13 @@ public class Booking extends Service{
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	public String getBookingPhone() {
 		return bookingPhone;

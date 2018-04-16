@@ -77,13 +77,13 @@ abstract public class Validation {
 	
 public static boolean validateText(String name) {
 		
-		return Pattern.matches("[\\s\\a-zA-Z0-9\\-\\,\\.]*", name.trim());
+		return Pattern.matches("[\\sa-zA-Z0-9-<>]*", name.trim());
 	}
 	
 	public static boolean validatePhone(String phone) {
 	
 		int length = phone.length();
-		if(length == 11 || length== 8) {
+		if((length == 11 || length== 8) && Pattern.matches("[0-9]*", phone.trim())) {
 			return true;
 		}else {
 			return false;

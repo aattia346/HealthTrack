@@ -59,9 +59,12 @@
     margin-right: 16px;
 }
 .wrong-input-register-page-1{
-	margin-top: 5px;
-	width: 41%;
-	display: inline-block;
+    width: auto;
+    display: inline-block;
+   	margin: 0;
+    padding: 0 20px;
+    border-right: 1px solid #f00;
+    margin-bottom: 5px;
 }
 .wrong-input-register-input-2{
 	display: inline-block;
@@ -158,6 +161,32 @@ input[type="submit"]{
 }
 .single-contact-info i{
 	color: #fff;
+}
+.unbooked-slots{
+	height: 20px;
+	width: 40px;
+	background-color: #4383A9;
+	margin-bottom: 20px;
+}
+.unbooked-slots + span{
+	color: #fff;
+    float: left;
+    margin-left: 10px;
+}
+.booking-form-label label{
+	color: #fff;
+	line-height: 35px;
+}
+.booking-form-label{
+	margin-top: -20px;
+	margin-bottom: -20px;
+}
+.booking-alert{
+	border-radius: 0;
+	margin:0;
+}
+.medilife-book-an-appoinment-area .medilife-appointment-form select{
+	background-color: #fff;
 }
 .single-contact-info p , .single-contact-info a{
     color: #ffffff;
@@ -329,7 +358,7 @@ label{
 }
 .my-table{
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     padding: 30px 50px;  
     height: 438px;
 }

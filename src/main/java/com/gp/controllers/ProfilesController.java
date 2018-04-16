@@ -30,10 +30,8 @@ public class ProfilesController {
 			HttpSession session = request.getSession();
 			String username = (String)session.getAttribute("username");
 			if(username == null) {
-				System.out.println("null");
 				mav.setViewName("/user/login");
 			}else {
-				System.out.println("not null");
 				User user = UserDao.getUserById(id);
 				m.addAttribute("id", user.getId());
 				mav.setViewName("/user/profiles/user");

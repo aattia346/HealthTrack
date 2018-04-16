@@ -80,7 +80,7 @@ abstract public class BookingDao {
 		java.sql.Date sqlDateTo = new java.sql.Date(b.getDateTo().getTime());
 		
 		Connection con = DBConnection.getConnection();
-		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, date_from, date_to, status, time_of_booking, booking_phone, day_or_time)"
+		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, date_from, date_to, status, time_of_booking, booking_phone, sex)"
 				+ " VALUES(?,?,?,?,?,?,?,?,now(),?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, b.getServiceId());
@@ -92,7 +92,7 @@ abstract public class BookingDao {
 		ps.setDate(7, sqlDateTo);
 		ps.setInt(8, 0);
 		ps.setString(9, b.getPhone());
-		ps.setInt(10, 1);
+		ps.setString(10, b.getSex());
 		ps.executeUpdate();
 		}
 	

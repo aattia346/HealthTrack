@@ -11,20 +11,16 @@ public class Service extends Department {
 	Date lastUpdated;
 	String fees;
 	float serviceReview;
-	Date available_from;
-	Date available_to;
 	String centerName;
 	int slotType;         // 1 means day && 2 means time
-	String days;
+	int slot;
 	
-	
-
-	public String getDays() {
-		return days;
+	public int getSlot() {
+		return slot;
 	}
 
-	public void setDays(String days) {
-		this.days = days;
+	public void setSlot(int slot) {
+		this.slot = slot;
 	}
 
 	public String getCenterName() {
@@ -34,7 +30,6 @@ public class Service extends Department {
 	public void setCenterName(String centerName) {
 		this.centerName = centerName;
 	}
-
 
 	public int getSlotType() {
 		return slotType;
@@ -104,21 +99,5 @@ public class Service extends Department {
 	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
-	public Date getAvailable_from() {
-		return available_from;
-	}
-
-	public void setAvailable_from(Date available_from) {
-		this.available_from = available_from;
-	}
 	
-	public Date getAvailable_to() {
-		return available_from;
-	}
-
-	public void setAvailable_to(Date available_to) {
-		this.available_to = available_to;
-	}
-
-
 }

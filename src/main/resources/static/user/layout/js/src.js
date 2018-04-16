@@ -40,7 +40,7 @@ $(document).ready(function(){
 	
 	// :: Nicescroll Active Code
     if ($.fn.niceScroll) {
-        $("body, textarea").niceScroll({
+        $("body, textarea, .my-table").niceScroll({
             cursorcolor: "#151515",
             cursorwidth: "6px",
             background: "#f0f0f0"
