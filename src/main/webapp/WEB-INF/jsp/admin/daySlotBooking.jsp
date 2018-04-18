@@ -53,7 +53,7 @@
                       <tr>
                       	<th>Booking Id</th>
                         <th>User Id</th>
-                        <th>Location</th>
+                        <th>Service Id</th>
                         <th>Date</th>
                         <th>Action</th>
                       </tr>
@@ -68,14 +68,21 @@
                       	<tr>
                         <td>${booking.bookingId}</td>
                         <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank">${booking.userId}</a></td>
-                        <td>${booking.serviceId}</td>
+                        <td><a href="/HealthTrack/profile/service/${booking.serviceId}" target="_blank">${booking.serviceId}</a></td>
                      
                         <td>From:${booking.dateFrom} ${booking.timeFrom}>>>
                           To:${booking.dateTo}, ${booking.timeTo}</td>                  
                         <td>
                         <div>
-                       
+                      <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 
                         <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title="Delete this booking"><i class="fa fa-close"></i></a>
+                         <%if(booking.getStatus()==0){ %>
+                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Confirm</a>
+                       
+                        <%}else{ %>
+                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">UnConfirm</a>
+                       
+                        <%} %>
                         </div>
                         </td>
                       </tr>

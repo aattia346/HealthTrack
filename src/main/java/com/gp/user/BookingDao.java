@@ -249,4 +249,13 @@ public class BookingDao {
 						
 		return bookedDates;
 		}
+	public static void updateStatus(int status, int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE booking set status=? WHERE booking_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, status);
+		ps.setInt(2, bookingId);
+		ps.executeUpdate();
+	}
+	
 }

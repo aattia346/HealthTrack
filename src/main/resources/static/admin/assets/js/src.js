@@ -24,6 +24,16 @@ $(document).ready(function(){
 	    return confirm("Are you sure you want to unverify this booking?");
 	    
 	});
+   $(".confirm-Ban-user").click(function(){
+	    
+	    return confirm("Are you sure you want to ban this user?");
+	    
+	});
+   $(".confirm-unBan-user").click(function(){
+	    
+	    return confirm("Are you sure you want to unban this user?");
+	    
+	});
 	
 $(".confirm-delete-dept").click(function(){
         

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gp.user.Booking;
 import com.gp.user.BookingDao;
 import com.gp.user.Center;
 import com.gp.user.CenterDao;
@@ -22,7 +23,8 @@ import com.gp.user.Hospital;
 import com.gp.user.HospitalDao;
 import com.gp.user.Pharmacy;
 import com.gp.user.PharmacyDao;
-
+import com.gp.user.User;
+import com.gp.user.UserDao;
 import com.gp.user.Validation;
 
 @RestController
@@ -828,6 +830,7 @@ public class DashboardController {
 	}
 
 //**********************************Booking ***********************************
+	///HealthTrack/profile/booking/delete/{userId}/{bookingId}
 	@RequestMapping(value="/HealthTrack/admin/{username}/booking/delete/{bookingId}", method = RequestMethod.GET)
 	public ModelAndView deleteBooking(Model model, ModelAndView mav, HttpServletRequest request
 			, @PathVariable("bookingId") String bookingId)
@@ -849,6 +852,137 @@ public class DashboardController {
 
 		return mav;
 	}
+	@RequestMapping(value="/HealthTrack/admin/{username}/user/delete/{userId}", method = RequestMethod.GET)
+	public ModelAndView deleteUser(Model model, ModelAndView mav, HttpServletRequest request
+			, @PathVariable("userId") String userId)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("user_id", "user" , userId)) {	
+				//BookingDao.deleteBooking(bookingId);
+				HospitalDao.deleteSomthing("user" , "user_id" , Integer.parseInt(userId));
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/users");
+			}else {
+				mav.setViewName("/user/login");
+			}
+			
+		}
+
+		return mav;
+	}
+	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/user/{userId}/edit", method = RequestMethod.GET)
+	public ModelAndView editUser(ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
+			
+			, HttpSession session, @PathVariable("userId") int AdminId)
+					throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			
+		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
+			String username = (String)session.getAttribute("username");
+				if(username != null) {
+					if(username.equalsIgnoreCase(adminUsername)) {
+						model.addAttribute("action", "edit");
+						model.addAttribute("AdminId", AdminId);
+						mav.addAllObjects(model);
+						mav.setViewName("/admin/manageUser"  );
+						
+					}else {
+						mav.setViewName("redirect/:HealthTrack/admin/login");
+					}
+			
+	   		}else {
+					mav.setViewName("/admin/login");
+				}
+	   		
+		}
+		
+		return mav;
+	}
 	
+	@RequestMapping(value="/HealthTrack/user/ban/{adminId}/{userId}", method = RequestMethod.GET)
+    public ModelAndView Ban(@PathVariable("adminId") String adminId, @PathVariable("userId") int userId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("user_id", "user" , adminId)) {	
+				
+					UserDao.upadateBan(1,userId);
+				
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/users");
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}
+		
+		return mav;
+	}
+	@RequestMapping(value="/HealthTrack/user/unban/{adminId}/{userId}", method = RequestMethod.GET)
+    public ModelAndView UnBan(@PathVariable("adminId") String adminId, @PathVariable("userId") int userId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("user_id", "user" , adminId)) {					
+				UserDao.upadateBan(0,userId);
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/users");
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}
+		
+		return mav;
+	}
+	@RequestMapping(value="/HealthTrack/booking/confirm/{adminId}/{bookingId}", method = RequestMethod.GET)
+    public ModelAndView Confirm(@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("user_id", "user" , adminId)) {	
+				
+					BookingDao.updateStatus(1, bookingId);
+					
+				
+				
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/daySlotBooking");
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}
+		
+		return mav;
+	}
+	@RequestMapping(value="/HealthTrack/booking/unconfirm/{adminId}/{bookingId}", method = RequestMethod.GET)
+    public ModelAndView unConfirm(@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("user_id", "user" , adminId)) {					
+					BookingDao.updateStatus(0, bookingId);					
+				
+				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/daySlotBooking");
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}
+		
+		return mav;
+	}
 	
 }	

@@ -164,4 +164,35 @@ public class UserDao {
 		}
 		return users;
 	}
+	public static List<User> getAllUsers()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+					
+			Connection con = DBConnection.getConnection();
+			String sql="SELECT * FROM user";
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet result = ps.executeQuery();
+			List<User> users = new ArrayList<User>();
+			while(result.next()) {
+				User user = new User();
+				user.setId(result.getInt("user_id"));			
+				user.setUsername(result.getString("username"));
+				user.setType(result.getString("type"));
+				user.setBan(result.getInt("ban"));
+				
+				users.add(user);
+				}
+			return users;
+				
+				}
+	public static void upadateBan(int ban, int userId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE user set ban=? WHERE user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, ban);
+		ps.setInt(2, userId);
+		ps.executeUpdate();
+	}
+	
+
 }
