@@ -67,6 +67,7 @@ Date today = Calendar.getInstance().getTime();
                     
                     <c:forEach var="service" items="${services}">
                     
+                    <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">
                    <div class="col-12 col-md-6 col-lg-3">
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
@@ -79,7 +80,7 @@ Date today = Calendar.getInstance().getTime();
 			                	calendar.setTime(today);
 			                	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
-                                <a href="#">Available today</a>
+                                <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">Available today</a>
                                 <% } %>
                             </div>
                         </div>
@@ -90,6 +91,7 @@ Date today = Calendar.getInstance().getTime();
                         </div>
                     </div>
                 </div>
+                </a>
                     
                     </c:forEach>
                 

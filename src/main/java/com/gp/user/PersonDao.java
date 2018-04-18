@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.gp.database.DBConnection;
 
-public class PersonDao {
+abstract public class PersonDao {
 
 	public static void insertPerson(Person person) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		Connection con = DBConnection.getConnection();
@@ -41,11 +41,13 @@ public class PersonDao {
 		ResultSet result = ps.executeQuery();
 		result.next();
 		Person person = new Person();
-		person.setFirstName(result.getString(3));
-		person.setLastName((result.getString(4)));
-		person.setEmail(result.getString(5));
-		person.setPhone(result.getString(6));
-		person.setVerified(result.getInt(7));
+		person.setUserId(result.getInt("user_id"));
+		person.setFirstName(result.getString("firstname"));
+		person.setLastName((result.getString("lastname")));
+		person.setEmail(result.getString("email"));
+		person.setPhone(result.getString("phone"));
+		person.setVerified(result.getInt("verified"));
+		person.setBookingsPerDay(result.getInt("bookings_per_day"));
 		
 		return person;
 	}
@@ -58,9 +60,15 @@ public class PersonDao {
 		ps.setString(1, email);
 		ResultSet result = ps.executeQuery();
 		result.next();
-		Person person = new Person(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
-				result.getInt(5), result.getString(8), result.getString(9), result.getString(10), result.getString(11),
-				result.getInt(12));
+
+		Person person = new Person();
+		person.setUserId(result.getInt("user_id"));
+		person.setFirstName(result.getString("firstname"));
+		person.setFirstName(result.getString("lastname"));
+		person.setEmail(result.getString("email"));
+		person.setPhone(result.getString("phone"));
+		person.setVerified(result.getInt("verified"));
+		person.setBookingsPerDay(result.getInt("bookings_per_day"));
 		
 		return person;
 	}
@@ -73,11 +81,26 @@ public class PersonDao {
 		ps.setString(1, username);
 		ResultSet result = ps.executeQuery();
 		result.next();
-		Person person = new Person(result.getInt(1), result.getString(2), result.getString(3), result.getString(4),
-				result.getInt(5), result.getString(8), result.getString(9), result.getString(10), result.getString(11),
-				result.getInt(12));
+		
+		Person person = new Person();
+		person.setUserId(result.getInt("user_id"));
+		person.setFirstName(result.getString("firstname"));
+		person.setFirstName(result.getString("lastname"));
+		person.setEmail(result.getString("email"));
+		person.setPhone(result.getString("phone"));
+		person.setVerified(result.getInt("verified"));
+		person.setBookingsPerDay(result.getInt("bookings_per_day"));
 		
 		return person;
+	}
+
+	public static void increaseBookings(int userId) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "UPDATE person SET bookings_per_day = bookings_per_day +1 where user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.executeUpdate();
 	}
 
 

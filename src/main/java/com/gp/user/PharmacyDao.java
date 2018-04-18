@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.gp.database.DBConnection;
 
-public class PharmacyDao {
+abstract public class PharmacyDao {
 	
 public static List<Pharmacy> getAllPharmacies() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		

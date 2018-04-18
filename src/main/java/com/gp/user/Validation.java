@@ -27,7 +27,7 @@ import org.apache.commons.validator.routines.UrlValidator;
 import com.gp.database.DBConnection;
 
 
-public class Validation {
+abstract public class Validation {
 	
 	public static boolean validateUsername(String username) {
 		
@@ -77,13 +77,13 @@ public class Validation {
 	
 public static boolean validateText(String name) {
 		
-		return Pattern.matches("[\\s\\a-zA-Z0-9\\-\\,\\.]*", name.trim());
+		return Pattern.matches("[\\sa-zA-Z0-9-<>]*", name.trim());
 	}
 	
 	public static boolean validatePhone(String phone) {
 	
 		int length = phone.length();
-		if(length == 11 || length== 8) {
+		if((length == 11 || length== 8) && Pattern.matches("[0-9]*", phone.trim())) {
 			return true;
 		}else {
 			return false;
@@ -182,7 +182,7 @@ public static boolean validateText(String name) {
 	
 		boolean valid = true;
 						
-		List<Booking> bookings = BookingDao.getVerifiedBookingsByServiceId(serviceId);
+		List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
 		
 		for(Booking B : bookings) {
 			

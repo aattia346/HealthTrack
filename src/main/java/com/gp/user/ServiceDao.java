@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.gp.database.DBConnection;
 
-public class ServiceDao {
+abstract public class ServiceDao {
 
 	public static Service getServiceById(int id, String table) throws
 	InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -48,6 +48,11 @@ public class ServiceDao {
 		service.setGoogleMapsUrl(result.getString("google_maps_url"));
 		service.setAddress(result.getString("address"));
 		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setPhone(result.getString("phone"));
+		service.setSlot(result.getInt("slot"));
+		
+		con.close();
 		return service;
 	}
 	
@@ -61,10 +66,18 @@ public class ServiceDao {
 		ResultSet result = ps.executeQuery();
 		List<Service> list = new ArrayList<Service>();
 		while(result.next()) {
-			Service s = new Service(result.getInt("service_id"), result.getString("service_name"), result.getInt("center_id"), result.getInt("dept_id"), 
-					result.getDate("booked_till"), result.getString("fees"), result.getFloat("service_review"));
+			Service s = new Service();
+			s.setServiceId(result.getInt("service_id"));
+			s.setServiceName(result.getString("service_name"));
+			s.setCenterId(result.getInt("center_id"));
+			s.setDeptId(result.getInt("dept_id"));
+			s.setFees(result.getString("fees"));
+			s.setServiceReview(result.getFloat("service_review"));
+			s.setSlotType(result.getInt("day_or_time"));
+			s.setSlot(result.getInt("slot"));
 			list.add(s);
 		}
+		con.close();
 		return list;
 	}
 
@@ -87,6 +100,8 @@ public class ServiceDao {
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setSlot(result.getInt("slot"));
 		services.add(service);
 		}
 		
@@ -107,6 +122,7 @@ public class ServiceDao {
 			S.setLang(result2.getFloat("lang"));
 			S.setWebsite(result2.getString("website"));
 		}
+		con.close();
 		return services;
 			
 	}
@@ -136,8 +152,11 @@ public class ServiceDao {
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setSlot(result.getInt("slot"));
 		services.add(service);
 		}
+		con.close();
 		return services;
 			
 	}
@@ -168,12 +187,66 @@ public class ServiceDao {
 		service.setLat(result.getFloat("lat"));
 		service.setLang(result.getFloat("lang"));
 		service.setWebsite(result.getString("website"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setSlot(result.getInt("slot"));
 		services.add(service);
 		}
+		con.close();
 		return services;
 			
-			}
+			}	
 	
+	public static List<Appointment> getAppointmentsOfService(int serviceId) throws 
+	SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM appointment JOIN service ON appointment.service_id = service.service_id WHERE appointment.service_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ResultSet result = ps.executeQuery();
+		
+		List<Appointment> apps = new ArrayList<Appointment>();
+		
+		while(result.next()) {
+			Appointment app = new Appointment();
+			app.setAppointmenId(result.getInt("appointment_id"));
+			app.setDay(result.getString("app_day"));
+			app.setAppFrom(result.getTime("app_from"));
+			app.setAppTo(result.getTime("app_to"));
+			app.setServiceId(result.getInt("service_id"));
+			app.setClinicId(result.getInt("clinic_id"));
+			app.setAvailable(result.getInt("available"));
+			app.setBookedSessions(result.getInt("booked_sessions"));
+			
+			apps.add(app);
+		}
+		con.close();
+		return apps;
+	}
 	
+	public static Appointment getAppointmentOfService(int serviceId, String day) throws 
+	SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM appointment JOIN service ON appointment.service_id = service.service_id WHERE appointment.service_id=? AND appointment.app_day=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setString(2, day);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		
+		Appointment app = new Appointment();
+		app.setAppointmenId(result.getInt("appointment_id"));
+		app.setDay(result.getString("app_day"));
+		app.setAppFrom(result.getTime("app_from"));
+		app.setAppTo(result.getTime("app_to"));
+		app.setServiceId(result.getInt("service_id"));
+		app.setClinicId(result.getInt("clinic_id"));
+		app.setAvailable(result.getInt("available"));
+		app.setBookedSessions(result.getInt("booked_sessions"));
+					
+		con.close();
+		return app;
+	}
 }
 

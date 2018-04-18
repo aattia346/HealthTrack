@@ -1,5 +1,4 @@
 /*************************** login page *****************************/
-
 .login-body{
     background-color: #F2F2F2;
 }
@@ -60,9 +59,12 @@
     margin-right: 16px;
 }
 .wrong-input-register-page-1{
-	margin-top: 5px;
-	width: 41%;
-	display: inline-block;
+    width: auto;
+    display: inline-block;
+   	margin: 0;
+    padding: 0 20px;
+    border-right: 1px solid #f00;
+    margin-bottom: 5px;
 }
 .wrong-input-register-input-2{
 	display: inline-block;
@@ -81,10 +83,24 @@
 .medilife-services-area:nth-of-type(even){
 	background-color: #e7f1ff;
 }
+.breadcumb-title{
+	font-weight: 700;
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
 /***************************** Service page **************************************/
+.fc-view-container{
+	background: #4383A9;
+    color: #fff;
+    font-weight: 800;
+    margin: 10px 51px 23px 52px;
+}
+.fc-toolbar.fc-header-toolbar{
+	margin-right: 51px;
+    margin-left: 52px;
+    color: #fff;
+}
 .service-img{
     margin-top: 80px;
     background: #fff;
@@ -129,7 +145,68 @@ input[type="submit"]{
     }
 }
 .calendar{
-    margin-top: 16px;
+    margin-top: 25px;
+}
+.fc-unthemed td.fc-today {
+    background: #006cff;
+}
+.fc-event, .fc-event-dot {
+    background-color: #006cff;
+}
+.fc-week{
+	height: 57px !important;
+}
+.fc-day-grid-container{
+	height: 343px !important;
+}
+.single-contact-info i{
+	color: #fff;
+}
+.unbooked-slots{
+	height: 20px;
+	width: 40px;
+	background-color: #4383A9;
+	margin-bottom: 20px;
+}
+.unbooked-slots + span{
+	color: #fff;
+    float: left;
+    margin-left: 10px;
+}
+.booking-form-label label{
+	color: #fff;
+	line-height: 35px;
+}
+.booking-form-label{
+	margin-top: -20px;
+	margin-bottom: -20px;
+}
+.booking-alert{
+	border-radius: 0;
+	margin:0;
+}
+.medilife-book-an-appoinment-area .medilife-appointment-form select{
+	background-color: #fff;
+}
+.single-contact-info p , .single-contact-info a{
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 48px;
+}
+.calendar th{
+	background-color: #006CFF;
+}
+.medilife-appoint-btn:hover, .medilife-appoint-btn:focus{
+	color: #006CFF;
+}
+.single-contact-info-icon{
+	float: left;
+    line-height: 5;
+    margin-right: 10px;
+    color: #fff;
+    width: 23%;
 }
 .fc-toolbar h2{
     font-size: 20px;
@@ -152,7 +229,7 @@ input[type="submit"]{
 /*======================================================================================*/
 
 /***************************** Navbar **************************************/
-.navbar-brand{
+.navbar-brand , .navbar-brand:hover{
 	line-height: 46px;
 	color: #f7f7f7;
 	font-size: 21px;
@@ -189,7 +266,7 @@ header{
 .main-page-container h3{
 	margin-top: 0;
     font-weight: 800;
-    color: #888;
+    color: #fff;
     margin-bottom: 40px;
 }
 .main-page-container{
@@ -281,8 +358,9 @@ label{
 }
 .my-table{
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     padding: 30px 50px;  
+    height: 438px;
 }
 .my-table table{
     background-color: #fff;
