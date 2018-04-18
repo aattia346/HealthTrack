@@ -34,38 +34,41 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/hospitals">Hospitals</a></li>
-                            <li>Add New Hospital</li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/users">Users</a></li>
+                            <li>Add New User</li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
         
-        <form class="col-lg-12" action="/HealthTrack/admin/hospital/insert" method="post">
+        <form class="col-lg-12" action="/HealthTrack/admin/user/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong>Hospital</strong><small> Form</small></div>
+                      <div class="card-header"><strong>User</strong><small> Form</small></div>
                       <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter hospital name" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
+                        <div class="form-group"><label class=" form-control-label">First Name</label><input type="text" placeholder="Enter first name" class="form-control" name="firstName" required="required" value="${oldFirstName}" maxlength="50"></div>
                         ${invalidName}
                         ${nameExist}
                          ${shortName}
-                        <div class="form-group"><label class=" form-control-label">Intro</label><textarea maxlength="254" placeholder="Say something about the hospital" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
-                        ${invalidIntro}
-                         ${shortIntro}
-                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="${oldUrl}"></div>
-                        ${invalidUrl}
+                          <div class="form-group"><label class=" form-control-label">Last Name</label><input type="text" placeholder="Enter Last name" class="form-control" name="lastName" required="required" value="${oldLastName}" maxlength="50"></div>
+                        ${invalidName}
+                        ${nameExist}
+                         ${shortName}
+                          <div class="form-group"><label class=" form-control-label"> UserName</label><input type="text" placeholder="Enter user name" class="form-control" name="userName" required="required" value="${oldUserName}" maxlength="50"></div>
+                        ${invalidName}
+                        ${nameExist}
+                         ${shortName}
                         <div class="row form-group">
                           <div class="col-12">
                             <div class="form-group"><label class=" form-control-label">phone</label><input maxlength="11" type="text" placeholder="Phone Number" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="Website url" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
+                            <div class="form-group"><label class=" form-control-label">Email</label><input type="text" placeholder="Enter email" class="form-control"  required="required" name="email" value="${oldEmail}"></div>
                             ${invalidWebsite}
                           </div>
                           <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label">Address</label><input maxlength="50" type="text" placeholder="Address" class="form-control" name="address" required="required" value="${oldAddress}"></div>
+                          <div class="form-group"><label class=" form-control-label">Type</label><input maxlength="50" type="text" placeholder="Enter user Type" class="form-control" name="type" required="required" value="${oldType}"></div>
                         	${invalidAddress}
                         	</div>
                         </div>
