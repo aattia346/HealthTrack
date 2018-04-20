@@ -113,9 +113,4 @@ public class Booking extends Service{
 	public void setTimeFrom(Time timeFrom) {
 		this.timeFrom = timeFrom;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> 548e440288779fb055393b4faf9aea26ac428bfc
-	
 }
