@@ -46,7 +46,21 @@ $(document).ready(function(){
             background: "#f0f0f0"
         });
     }
-
+    
+    var today 	= $("#day-select").val();
+    var todayId = $("#day-select option[value='" + today +"']").attr("id");
+    $("."+todayId).removeClass("hidden");
+    
+    $("#day-select").on("change" , function(){
+    	var day 	= $(this).val();
+    	var dayId 	= $("#day-select option[value='" + day +"']").attr("id");
+    	console.log(day);
+    	$("#time-select option").siblings("option").addClass("hidden");
+    	$("."+dayId).removeClass("hidden");
+    	$("."+dayId).siblings("option[value='0']").removeClass("hidden");
+    });
+    
+    
 });	
 
 //:: ScrollUp Active Code

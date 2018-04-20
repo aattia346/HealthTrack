@@ -15,6 +15,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Calendar"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.time.LocalTime"%>
@@ -32,6 +33,11 @@
 		user = UserDao.getUserByUsername(usernameSession);
 		if(user.getType().equalsIgnoreCase("person")){
 			showForm = true;
+		}
+		if(PersonDao.canPersonBook(user.getId())){
+			request.setAttribute("limitExceed", " ");
+		}else{
+			request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">Sorry you have reached the maximum number of bookings per day(3)</p>");
 		}
 	}
 	String place = (String)request.getAttribute("place");
@@ -58,8 +64,10 @@
 	
 	if(S.getSlotType() == 1){
 		request.setAttribute("hideTable", "hidden");
+		request.setAttribute("hideCalendar", "");
 	}else if(S.getSlotType() == 2){
 		request.setAttribute("hideCalendar", "hidden");
+		request.setAttribute("hideTable", "");
 	}
 	
 	List<Appointment> apps = ServiceDao.getAppointmentsOfService(serviceId);
@@ -73,9 +81,23 @@
 		}
 	}
 	float numberOfTableRows = diff/S.getSlot();
+	HashMap<String, String> daysAsHashMap = new HashMap<String, String>();
 	String[] days = new String[7];
+	HashMap<String , List<String>> times = new HashMap<String , List<String>>();
+	times.put("Sat",  new ArrayList<String>());
+	times.put("Sun",  new ArrayList<String>());
+	times.put("Mon",  new ArrayList<String>());
+	times.put("Tue",  new ArrayList<String>());
+	times.put("Wed",  new ArrayList<String>());
+	times.put("Thu",  new ArrayList<String>());
+	times.put("Fri",  new ArrayList<String>());
 	DateFormat dayFormat = new SimpleDateFormat("E");
+	DateFormat weekDateFormat = new SimpleDateFormat("d/M");
 	days[0] = dayFormat.format(today);
+	daysAsHashMap.put(days[0], weekDateFormat.format(today));
+	DateFormat midNightFormat = new SimpleDateFormat("HH:mm");
+	Time midNight = new Time(midNightFormat.parse("00:00").getTime());
+	LocalTime localMidNight = midNight.toLocalTime();
 %>
 <%@include  file="../includes/header.jsp" %>
 
@@ -103,7 +125,7 @@
         <div class="container">
             <div class="row">
             <% if(!showForm){ %>
-                    <div class="col-sm-12 alert alert-info text-center booking-alert">To book Please <a href="/HealthTrack/login">Login</a> First or <a href="/HealthTrack/signup">Register</a></div>
+                    <div class="col-sm-12 alert alert-info text-center booking-alert">To book Please <a href="/HealthTrack/login" target="_blank">Login</a> First or <a href="/HealthTrack/signup">Register</a></div>
                      <% } %>
                      <div class="col-12">
                     <div class="appointment-form-content">
@@ -120,9 +142,10 @@
                                 		Date d = tableCalendar.getTime();
                                 		String nextDay = tableFormat.format(d);
                                 		days[i] = dayFormat.format(d);
+                                		daysAsHashMap.put(days[i], weekDateFormat.format(d));
                                  %>
                                 	<th><%= nextDay %></th>
-                               <% } %>
+                               <% }  %>
                                                     
                             </tr>
                           </thead>
@@ -131,26 +154,52 @@
                         <% 
                            String finalFormat = null;
                            for(int i=0; i<numberOfTableRows; i++){%>
-                        		<tr>
+                        		<tr>                        		
                         <% for(int j=0; j<7; j++){
                         	Appointment ap = ServiceDao.getAppointmentOfService(serviceId, days[j]);
-                        	LocalTime localTimeFrom = ap.getAppFrom().toLocalTime();
-                        	localTimeFrom = localTimeFrom.plusMinutes( i * S.getSlot());
+                        	
+                        	LocalTime localTimeFrom = ap.getAppFrom().toLocalTime();     
+                        	localTimeFrom = localTimeFrom.plusMinutes( i * S.getSlot()); 
+                        	
+                        	Time newTimeFrom = Time.valueOf(localTimeFrom);
                         	
                         	LocalTime localTimeTo = ap.getAppTo().toLocalTime();
                         	
-                        	if(localTimeFrom.isAfter(localTimeTo) || localTimeFrom.equals(localTimeTo) || ap.getAvailable() == 0){
-                        		finalFormat = " ";
-                        		request.setAttribute("booked", "booked");
-                        	}else{
-                        		finalFormat = localTimeFrom.toString();
-                        		request.setAttribute("booked", "");
-                        	}
+                        	int thisYear		= Calendar.getInstance().get(Calendar.YEAR);
+                    		String day		 	= daysAsHashMap.get(days[j])+"/"+thisYear;
+                    		day 				= day.replace("/", "-");
+                    		
+                    		String[] explodedDay = day.split("-");
+                    		if(explodedDay[0].length()<2){
+                    			explodedDay[0] = 0 + explodedDay[0];
+                    		}
+                    		if(explodedDay[1].length()<2){
+                    			explodedDay[1] = 0 + explodedDay[1];
+                    		}
+                    		day = explodedDay[2]+"-"+explodedDay[1]+"-"+explodedDay[0];  
+                           	if(localTimeFrom.isAfter(localTimeTo) || localTimeFrom.equals(localTimeTo) || localTimeFrom.equals(localMidNight) ||  ap.getAvailable() == 0 ){
+                           		finalFormat = " ";           
+                           		request.setAttribute("booked", "booked");
+                           	}else if(ServiceDao.checkTimeBooking(serviceId, day, newTimeFrom)){
+                           		request.setAttribute("booked", "booked");
+                           		finalFormat = localTimeFrom.toString();                        		
+                           	}else{
+                           		finalFormat = localTimeFrom.toString();
+                        		List<String> tempTimes = new ArrayList<String>();
+                        		tempTimes = times.get(days[j]);
+                        		tempTimes.add(finalFormat);
+                        		times.replace(days[j], tempTimes);
+                           		request.setAttribute("booked", " ");
+                           	}                         	                           	                 	                           	
                         	%>              		 
                         	<td class="${booked}"><%= finalFormat %></td>                       		
-                        <% } %>
+                        <% 
+                        }                                               
+                        %>
                         		</tr>
-                        <% } %>
+                        <% }
+                           request.setAttribute("times", times);
+                           %>
                                                  
                         </tbody>
                     </table> 
@@ -158,8 +207,8 @@
                     </div>
                     <div class=" ${hideCalendar}"><div class="calendar " id='calendar'></div></div>
                                 <div class="medilife-appointment-form">
-                                ${invalidName} ${invalidPhone} ${invalidDate} ${invalidmsg} ${invalidEmail}
-                                    <form method="post" action="/HealthTrack/<%= place %>/Service/<%=S.getServiceId() %>/Booking/Submit">
+                                ${invalidName} ${invalidPhone} ${invalidDate} ${invalidmsg} ${invalidEmail} ${invalidTime} ${limitExceed}
+                                    <form class="${hideCalendar}" method="post" action="/HealthTrack/<%= place %>/Service/<%=S.getServiceId() %>/BookingDay/Submit">
                                     <input type="hidden" value="<%= user.getId() %>" name="userId">
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-3">
@@ -218,6 +267,93 @@
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                     <input type="date" class="form-control" required name="bookTo" id="date" placeholder="Date" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12">
+                                                <div class="form-group mb-0">
+                                                    <textarea name="msg" class="form-control mb-0 border-top-0 border-right-0 border-left-0" id="message" cols="30" rows="10" placeholder="Message" maxlength="500">${oldmsg}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4 mb-0">
+                                                <div class="form-group mb-0">
+                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment">Make an Appointment <span>+</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form class="${hideTable}" method="post" action="/HealthTrack/<%= place %>/Service/<%=S.getServiceId() %>/BookingTime/Submit">
+                                    <input type="hidden" value="<%= user.getId() %>" name="userId">
+                                        <div class="row align-items-end">
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="firstName" id="name" placeholder="First Name" value="${oldFirstName}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="lastName" id="name" placeholder="Last Name" value="${oldLastName}">
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control border-top-0 border-right-0 border-left-0" required name="age" placeholder="Age"  required min="0" max = "120" value="${oldAge}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <select class="form-control border-top-0 border-right-0 border-left-0" required name="sex">
+                                                    	
+                                                    	<option value="male">Male</option>
+                                                    	<option value="female">Female</option>
+                                                    
+                                                    </select>
+                                                </div>
+                                            </div>
+                                                                                        
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" required maxlength="11" id="number" placeholder="Phone" value="${oldPhone}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="E-mail" value="${oldEmail}">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6 booking-form-label">
+                                                <div class="form-group">
+                                                	<label>Day:</label> 
+                                                </div>
+                                             </div>
+                                             <div class="col-12 col-md-6 booking-form-label">
+                                                <div class="form-group">
+                                                	<label>Time:</label> 
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                	<select required id="day-select" name="day" class="form-control">
+                                                			<option id="Sat" value="<%=  daysAsHashMap.get("Sat") %>" <% if(days[0].equalsIgnoreCase("Sat")){%> selected <% } %>>Sat &ensp; <%=  daysAsHashMap.get("Sat") %></option>
+                                                			<option id="Sun" value="<%=  daysAsHashMap.get("Sun") %>" <% if(days[0].equalsIgnoreCase("Sun")){%> selected <% } %>>Sun &ensp; <%=  daysAsHashMap.get("Sun") %></option>
+                                                			<option id="Mon" value="<%=  daysAsHashMap.get("Mon") %>" <% if(days[0].equalsIgnoreCase("Mon")){%> selected <% } %>>Mon &ensp; <%=  daysAsHashMap.get("Mon") %></option>
+                                                			<option id="Tue" value="<%=  daysAsHashMap.get("Tue") %>" <% if(days[0].equalsIgnoreCase("Tue")){%> selected <% } %>>Tue &ensp; <%=  daysAsHashMap.get("Tue") %></option>
+                                                			<option id="Wed" value="<%=  daysAsHashMap.get("Wed") %>" <% if(days[0].equalsIgnoreCase("Wed")){%> selected <% } %>>Wed &ensp; <%=  daysAsHashMap.get("Wed") %></option>
+                                                			<option id="Thu" value="<%=  daysAsHashMap.get("Thu") %>" <% if(days[0].equalsIgnoreCase("Thu")){%> selected <% } %>>Thu &ensp; <%=  daysAsHashMap.get("Thu") %></option>
+                                                			<option id="Fri" value="<%=  daysAsHashMap.get("Fri") %>" <% if(days[0].equalsIgnoreCase("Fri")){%> selected <% } %>>Fri &ensp; <%=  daysAsHashMap.get("Fri") %></option>
+                                                	</select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                	<select required id="time-select" name="time" class="form-control">
+                                                		<option value="0">Choose time</option>
+                                                	<c:forEach var="time" items="${times}">
+                                                    	<c:forEach var="list" items="${time.value}">                                                    	
+                                                    		<option class="${time.key} hidden" value="${list}">${list}</option>
+                                                		</c:forEach>
+                                                	</c:forEach>
+                                                	</select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12">

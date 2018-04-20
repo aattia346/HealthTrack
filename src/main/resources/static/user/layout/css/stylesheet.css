@@ -381,3 +381,20 @@ label{
     color: #fff !important;
     font-size: 15px;
 }
+.another-table-head{
+	background-color: #006CFF;
+	font-weight: 700;
+	font-family: Helvetica;
+	font-siz: 15px;
+	line-height: 21px;
+	color: #ecf0f1;
+}
+.my-table-clinic{
+	height: 250px;
+}
+.medilife-appointment-form-clinic{
+	margin-top: -40px;
+}
+.medilife-contact-info-clinic{
+    padding: 30px 30px 110px 30px !important;
+}

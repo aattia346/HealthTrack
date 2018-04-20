@@ -32,14 +32,14 @@ abstract public class BookingDao {
 			B.setAge(result.getInt("age"));
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
-			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			B.setTimeFrom(result.getTime("time_from"));
+			B.setDayOfBooking(result.getDate("day_of_time"));
 			B.setStatus(result.getInt("status"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
 			B.setBookingPhone(result.getString("booking_phone"));
 			bookedDates.add(B);
 		}
-				
+		con.close();
 		return bookedDates;
 		}
 	
@@ -64,13 +64,14 @@ abstract public class BookingDao {
 			B.setAge(result.getInt("age"));
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
-			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			B.setTimeFrom(result.getTime("time_from"));
+			B.setDayOfBooking(result.getDate("day_of_time"));
 			B.setStatus(result.getInt("status"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
 			B.setBookingPhone(result.getString("booking_phone"));
 			bookedDates.add(B);
 		}
+		con.close();
 		return bookedDates;
 	}
 	
@@ -93,7 +94,10 @@ abstract public class BookingDao {
 		ps.setInt(8, 0);
 		ps.setString(9, b.getPhone());
 		ps.setString(10, b.getSex());
+		
 		ps.executeUpdate();
+		
+		con.close();
 		}
 	
 	public static Booking getBookingById(int bookingId)
@@ -121,12 +125,14 @@ abstract public class BookingDao {
 				B.setAge(result.getInt("age"));
 				B.setDateFrom(result.getDate("date_from"));
 				B.setDateTo(result.getDate("date_to"));
-				B.setTimeFrom(result.getDate("time_from"));
-				B.setTimeTo(result.getDate("time_to"));
+				B.setTimeFrom(result.getTime("time_from"));
+				B.setDayOfBooking(result.getDate("day_of_time"));
 				B.setStatus(result.getInt("status"));
 				B.setTimeOfBooking(result.getDate("time_of_booking"));
 				B.setBookingPhone(result.getString("booking_phone"));
 				B.setAdminId(result.getInt("admin_id"));
+				
+				con.close();
 				return B;
 			}
 	
@@ -138,6 +144,7 @@ abstract public class BookingDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, bookingId);
 		ps.executeUpdate();
+		con.close();
 	}
 
 	public static void unverifyBooking(int bookingId)
@@ -148,6 +155,7 @@ abstract public class BookingDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, bookingId);
 		ps.executeUpdate();
+		con.close();
 	}
 
 	public static void deleteBooking(int bookingId)
@@ -158,6 +166,7 @@ abstract public class BookingDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, bookingId);
 		ps.executeUpdate();
+		con.close();
 	}
 			
 	public static List<Booking> getUnverifiedBookingsByServiceId(int serviceId) 
@@ -181,13 +190,13 @@ abstract public class BookingDao {
 			B.setAge(result.getInt("age"));
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
-			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			B.setTimeFrom(result.getTime("time_from"));
+			B.setDayOfBooking(result.getDate("day_of_time"));
 			B.setStatus(result.getInt("status"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));	
 			bookedDates.add(B);
 			}
-						
+		con.close();	
 		return bookedDates;
 	}
 			
@@ -212,15 +221,72 @@ abstract public class BookingDao {
 			B.setAge(result.getInt("age"));
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
-			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			B.setTimeFrom(result.getTime("time_from"));
+			B.setDayOfBooking(result.getDate("day_of_time"));
 			B.setStatus(result.getInt("status"));
 			B.setServiceName(result.getString("service_name"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
 			B.setBookingPhone(result.getString("booking_phone"));
 			bookedDates.add(B);
 		}
-						
+		con.close();
+		con.close();
 		return bookedDates;
 		}
+
+	public static void insertBookingTimes(Booking b) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		java.sql.Date sqlDate = new java.sql.Date(b.getDayOfBooking().getTime());
+		String sql="INSERT INTO booking(service_id, user_id, firstname, lastname, age, time_from, status, time_of_booking, booking_phone, sex, day_of_time, msg)"
+				+ " VALUES(?,?,?,?,?,?,?,now(),?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, b.getServiceId());
+		ps.setInt(2, b.getUserId());
+		ps.setString(3, b.getFirstName());
+		ps.setString(4, b.getLastName());
+		ps.setInt(5, b.getAge());
+		ps.setTime(6, b.getTimeFrom());
+		ps.setInt(7, 0);
+		ps.setString(8, b.getPhone());
+		ps.setString(9, b.getSex());
+		ps.setDate(10, sqlDate);
+		ps.setString(11, b.getMsg());
+		ps.executeUpdate();	
+		con.close();
+	}
+
+	public static int getBookingsOfTheDay(int serviceId, String today) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM booking WHERE service_id=? AND day_of_time=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setString(2, today);
+		ResultSet result = ps.executeQuery();
+		result.last();
+		con.close();
+		return result.getRow();
+	}
+
+	public static void insertBookingClinic(Booking b) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		java.sql.Date sqlDate = new java.sql.Date(b.getDayOfBooking().getTime());
+		String sql="INSERT INTO booking(user_id, firstname, lastname, age, status, time_of_booking, booking_phone, sex, day_of_time, msg)"
+				+ " VALUES(?,?,?,?,?,now(),?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, b.getUserId());
+		ps.setString(2, b.getFirstName());
+		ps.setString(3, b.getLastName());
+		ps.setInt(4, b.getAge());
+		ps.setInt(5, 0);
+		ps.setString(6, b.getPhone());
+		ps.setString(7, b.getSex());
+		ps.setDate(8, sqlDate);
+		ps.setString(9, b.getMsg());
+		ps.executeUpdate();		
+		con.close();
+	}
+	
 }

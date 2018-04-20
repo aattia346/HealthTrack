@@ -2,7 +2,7 @@ package com.gp.user;
 
 public class Clinic {
 	
-	int clinicId, adminId;
+	int clinicId, adminId, numOfSessions;
 	String clinicName, doctorName, specialty, phone, address, google_maps_url,intro,website;
 	float lat, lang, review;
 	
@@ -10,6 +10,12 @@ public class Clinic {
 		super();
 	}
 
+	public int getNumOfSessions() {
+		return numOfSessions;
+	}
+	public void setNumOfSessions(int numOfSessions) {
+		this.numOfSessions = numOfSessions;
+	}
 	public int getAdminId() {
 		return adminId;
 	}

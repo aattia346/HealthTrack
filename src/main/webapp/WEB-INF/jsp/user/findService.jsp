@@ -64,12 +64,17 @@ for(Service service : servicesOfHospital){
 	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();
 	calendar.setTime(today);
 	calendar.add(Calendar.DAY_OF_MONTH, -1);
-	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
-		servicePinColor = "52BC5F";
+	if(service.getSlotType()==1){
+		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
+			servicePinColor = "52BC5F";
+		}
+		else{
+			servicePinColor = "ff0b0b";
+		}
+	}else if(service.getSlotType()==2){
+		
 	}
-	else{
-		servicePinColor = "ff0b0b";
-	}
+	
 	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }

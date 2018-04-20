@@ -9,6 +9,9 @@
 <%@page import="com.gp.user.Validation"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% 
 int hospitalId = (Integer)request.getAttribute("hospitalId");
@@ -19,6 +22,8 @@ List<Department> depts = HospitalDao.getDeptsByHospitalID(H.getHospitalId());
 request.setAttribute("depts", depts);
 
 Date today = Calendar.getInstance().getTime();
+DateFormat dayFormat = new SimpleDateFormat("E");
+String dayName = dayFormat.format(today);
 
 %>
 <%@include  file="../includes/header.jsp" %>
@@ -78,10 +83,14 @@ Date today = Calendar.getInstance().getTime();
                             <%	Service service = (Service)pageContext.getAttribute("service");
 					            Calendar calendar = Calendar.getInstance();
 			                	calendar.setTime(today);
-			                	calendar.add(Calendar.DAY_OF_MONTH, -1);
+			                	//calendar.add(Calendar.DAY_OF_MONTH, -1);
+			                	if(service.getSlotType()== 1){
 	                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
                                 <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">Available today</a>
-                                <% } %>
+                                <% } 
+                                }else if(Validation.validateBookTime(service.getServiceId(), dayName , "hospital")){ %>
+                                	<a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">Available today</a>
+                                <% }%>
                             </div>
                         </div>
                         <!-- Post Content -->

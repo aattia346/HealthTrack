@@ -20,6 +20,7 @@ abstract public class PersonDao {
 		ps.setString(5, person.getPhone());
 		ps.setInt(6, person.getVerified());
 		ps.executeUpdate();
+		con.close();
 	}
 	
 	public static void verifyAccount(int id) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -29,6 +30,7 @@ abstract public class PersonDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
 		ps.executeUpdate();
+		con.close();
 	}
 	
 	public static Person getPersonByUserID(int id) throws InstantiationException,
@@ -49,6 +51,7 @@ abstract public class PersonDao {
 		person.setVerified(result.getInt("verified"));
 		person.setBookingsPerDay(result.getInt("bookings_per_day"));
 		
+		con.close();
 		return person;
 	}
 	
@@ -69,7 +72,8 @@ abstract public class PersonDao {
 		person.setPhone(result.getString("phone"));
 		person.setVerified(result.getInt("verified"));
 		person.setBookingsPerDay(result.getInt("bookings_per_day"));
-		
+
+		con.close();
 		return person;
 	}
 	
@@ -91,6 +95,7 @@ abstract public class PersonDao {
 		person.setVerified(result.getInt("verified"));
 		person.setBookingsPerDay(result.getInt("bookings_per_day"));
 		
+		con.close();
 		return person;
 	}
 
@@ -101,6 +106,20 @@ abstract public class PersonDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, userId);
 		ps.executeUpdate();
+		con.close();
+	}
+	
+	public static boolean canPersonBook(int userId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT bookings_per_day FROM person WHERE user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);		
+		ResultSet result = ps.executeQuery();
+		result.next();
+		int numOfBookings = result.getInt("bookings_per_day");
+		con.close();
+		
+		return numOfBookings<3;
 	}
 
 

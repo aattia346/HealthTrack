@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -186,6 +190,8 @@ public static boolean validateText(String name) {
 		
 		for(Booking B : bookings) {
 			
+			
+			
 			if((bookDate.after(B.getDateFrom()) || bookDate.equals(B.getDateFrom())) && (bookDate.before(B.getDateTo()) ||bookDate.equals(B.getDateTo())) ){
 				valid = false;
 			}
@@ -275,5 +281,42 @@ public static boolean validateText(String name) {
 		}	
 		return ban;
 	}
+	
+	public static boolean validateBookTime(int serviceId, String day, String table) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		boolean valid = true;
+		
+		Service service = ServiceDao.getServiceById(serviceId, table);
+		
+		Appointment app = ServiceDao.getAppointmentOfService(serviceId, day);
+		
+		if(app.getAvailable()==0) {
+			valid = false;
+		}else {
+			Time appFrom = app.getAppFrom();
+			Time appTo = app.getAppTo();
+			
+			int minutesDiff = (int)(appTo.getTime() - appFrom.getTime())/(1000*60);
+
+			int numberOfTableRows = (int) Math.floor(minutesDiff/service.getSlot());
+			Date today = Calendar.getInstance().getTime();
+			
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String todayAsString = format.format(today);
+			
+			int numOfBookings = BookingDao.getBookingsOfTheDay(serviceId, todayAsString);
+			
+			if(numOfBookings < numberOfTableRows) {
+				valid = true;
+			}else {
+				valid = false;
+			}
+			
+		}
+		
+		
+		return valid;
+	}
+
 }
 

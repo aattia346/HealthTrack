@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -233,9 +234,8 @@ abstract public class ServiceDao {
 		ps.setInt(1, serviceId);
 		ps.setString(2, day);
 		ResultSet result = ps.executeQuery();
-		result.next();
-		
 		Appointment app = new Appointment();
+		if(result.next()) {			
 		app.setAppointmenId(result.getInt("appointment_id"));
 		app.setDay(result.getString("app_day"));
 		app.setAppFrom(result.getTime("app_from"));
@@ -244,9 +244,40 @@ abstract public class ServiceDao {
 		app.setClinicId(result.getInt("clinic_id"));
 		app.setAvailable(result.getInt("available"));
 		app.setBookedSessions(result.getInt("booked_sessions"));
-					
+		}
 		con.close();
 		return app;
 	}
+	
+	public static boolean checkTimeBooking(int serviceId, String day, Time time) throws 
+	SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		
+		String timeAsString = time.toString();
+		timeAsString = timeAsString+":00";
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM booking WHERE service_id=? AND day_of_time=? AND time_from=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setString(2, day);
+		ps.setTime(3, time);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		boolean exists = (result.getRow()==1);
+		
+		con.close();
+		return exists;
+	}
+	
+	public static List<String> getServices(){
+		
+		List<String> services = new ArrayList<String>();
+		services.add("MRI");
+		services.add("ICU");
+		services.add("CT");
+		
+		return services;
+	}
+
 }
 
