@@ -217,19 +217,25 @@ if(username != null){
                                 <div class="medilife-contact-info medilife-contact-info-clinic">
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
-                                        <img src="img/icons/alarm-clock.png" alt="">
-                                        <p>Mon - Sat 08:00 - 21:00 <br>Sunday CLOSED</p>
+                                        <div class="single-contact-info-icon"><i class="fas fa-user-md fa-3x"></i></div>
+                                        <p><%= clinic.getClinicName() %></p>                                        
                                     </div>
-                                    <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
-                                        <img src="img/icons/envelope.png" alt="">
-                                        <p>0080 673 729 766 <br>contact@business.com</p>
+                                    	<div class="single-contact-info-icon"><i class="fa fa-phone fa-3x"></i></div>
+                                        <p><%= clinic.getPhone() %></p>
                                     </div>
-                                    <!-- Single Contact Info -->
                                     <div class="single-contact-info">
-                                        <img src="img/icons/map-pin.png" alt="">
-                                        <p>Lamas Str, no 14-18 <br>41770 Miami</p>
-                                    </div>
+                                        <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
+                                        <p> <%= clinic.getAddress() %></p>
+                                    </div><br><br>
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
+                                        <p><%= clinic.getFees() %></p>
+                                    </div><br><br>
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
+                                        <p><%= clinic.getReview() %></p>
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>

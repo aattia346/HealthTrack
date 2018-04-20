@@ -290,7 +290,6 @@ abstract public class BookingDao {
 		ps.setString(2, today);
 		ResultSet result = ps.executeQuery();
 		result.last();
-		con.close();
 		return result.getRow();
 	}
 

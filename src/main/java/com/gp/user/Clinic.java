@@ -4,10 +4,18 @@ public class Clinic {
 	
 	int clinicId, adminId, numOfSessions;
 	String clinicName, doctorName, specialty, phone, address, google_maps_url,intro,website;
-	float lat, lang, review;
+	float lat, lang, review, fees;
 	
 	public Clinic() {
 		super();
+	}
+
+	public float getFees() {
+		return fees;
+	}
+
+	public void setFees(float fees) {
+		this.fees = fees;
 	}
 
 	public int getNumOfSessions() {

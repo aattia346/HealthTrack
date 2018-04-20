@@ -38,6 +38,7 @@ abstract public class ClinicDao {
 			clinic.setSpecialty(result.getString("specialty"));
 			clinic.setWebsite(result.getString("website"));
 			clinic.setNumOfSessions(result.getInt("number_of_sessions"));
+			clinic.setFees(result.getFloat("fees"));
 			
 			clinics.add(clinic);
 		}
@@ -73,6 +74,7 @@ abstract public class ClinicDao {
 		clinic.setSpecialty(result.getString("specialty"));
 		clinic.setWebsite(result.getString("website"));
 		clinic.setNumOfSessions(result.getInt("number_of_sessions"));
+		clinic.setFees(result.getFloat("fees"));
 		con.close();
 		return clinic;
 	}
@@ -82,8 +84,8 @@ abstract public class ClinicDao {
 		
 		Connection con = DBConnection.getConnection();
 		String sql="INSERT INTO clinic "
-				+ "(clinic_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url,doctor_clinic_name,specialty) "
-				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+				+ "(clinic_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url,doctor_clinic_name,specialty,fees) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setString(1, clinic.getClinicName());
@@ -97,7 +99,8 @@ abstract public class ClinicDao {
 		ps.setString(9, clinic.getGoogle_maps_url());
 		ps.setString(10, clinic.getDoctorName());
 		ps.setString(11, clinic.getSpecialty());
-				
+		ps.setFloat(11, clinic.getFees());		
+		
 		ps.executeUpdate();
 		con.close();
 	}
@@ -117,7 +120,7 @@ abstract public class ClinicDao {
 		
 		Connection con = DBConnection.getConnection();
 		String sql="UPDATE clinic "
-				+ "SET clinic_name=?, admin_id=?, lat=?, lang=?, phone=?, website=?, address=?, intro=?, google_maps_url=?,doctor_clinic_name=?,specialty=? "
+				+ "SET clinic_name=?, admin_id=?, lat=?, lang=?, phone=?, website=?, address=?, intro=?, google_maps_url=?,doctor_clinic_name=?,specialty=?, fees=? "
 				+ "WHERE clinic_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
@@ -133,6 +136,7 @@ abstract public class ClinicDao {
 		ps.setString(10, clinic.getDoctorName());
 		ps.setString(11, clinic.getSpecialty());
 		ps.setInt(12, clinic.getClinicId());
+		ps.setFloat(13, clinic.getFees());
 		
 		ps.executeUpdate();
 		con.close();

@@ -129,10 +129,10 @@ for(Service service : servicesOfCenters){
                       </ul>
                       <div class="guide-label">
                       	<div class="available-color">
-                      		<i class="fa fa-map-marker avialable-pin"></i> <span>Available today</span>
+                      		<i class="fa fa-map-marker-alt avialable-pin"></i> <span>Available today</span>
                       	</div>
                       	<div class="unavailable-color">
-                      		<i class="fa fa-map-marker unavialable-pin"></i> <span>Unavailable today</span>
+                      		<i class="fa fa-map-marker-alt unavialable-pin"></i> <span>Unavailable today</span>
                       	</div>
                       </div>
                       </div>
