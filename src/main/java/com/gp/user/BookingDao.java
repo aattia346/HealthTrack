@@ -99,6 +99,32 @@ abstract public class BookingDao {
 		
 		con.close();
 		}
+	public static List<Booking> getAllBookings()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+					
+			Connection con = DBConnection.getConnection();
+			String sql="SELECT * FROM booking";
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ResultSet result = ps.executeQuery();
+			List<Booking> bookings = new ArrayList<Booking>();
+			while(result.next()) {
+				Booking booking = new Booking();
+				booking.setBookingId(result.getInt("booking_id"));
+				booking.setUserId(result.getInt("user_id"));
+				booking.setServiceId(result.getInt("service_id"));
+				booking.setDateFrom(result.getDate("date_from"));
+				booking.setDateTo(result.getDate("date_to"));
+				booking.setTimeFrom(result.getTime("time_from"));
+				booking.setTimeTo(result.getTime("time_to"));
+				booking.setStatus(result.getInt("status"));
+			
+				
+				bookings.add(booking);
+				}
+			return bookings;
+				
+				}
 	
 	public static Booking getBookingById(int bookingId)
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -233,6 +259,7 @@ abstract public class BookingDao {
 		con.close();
 		return bookedDates;
 		}
+<<<<<<< HEAD
 
 	public static void insertBookingTimes(Booking b) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
@@ -287,6 +314,15 @@ abstract public class BookingDao {
 		ps.setString(9, b.getMsg());
 		ps.executeUpdate();		
 		con.close();
+=======
+	public static void updateStatus(int status, int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE booking set status=? WHERE booking_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, status);
+		ps.setInt(2, bookingId);
+		ps.executeUpdate();
+>>>>>>> 548e440288779fb055393b4faf9aea26ac428bfc
 	}
 	
 }

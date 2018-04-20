@@ -72,7 +72,7 @@
                       	<tr id="dept-${D.deptId}">
                         <td>${dept.deptId}</td>
                         <td>${dept.deptName}</td>
-                        <td>${dept.hospitalName}</td>
+                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank">${dept.hospitalName}</a></td>
                         <td>${dept.adminId}</td>
                         <td>
                         	<c:forEach var="service" items="${services}">
