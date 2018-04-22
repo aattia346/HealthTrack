@@ -16,7 +16,7 @@
     
         <meta charset="UTF-8">
         
-	    <link rel="stylesheet" href="/user/layout/css/stylesheet.css">
+	    
         <link rel="stylesheet" href="/admin/assets/css/normalize.css">
 	    <link rel="stylesheet" href="/admin/assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="/admin/assets/css/font-awesome.min.css">

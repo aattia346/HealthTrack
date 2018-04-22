@@ -12,6 +12,7 @@ public class Booking extends Service{
 	Time timeFrom;
 	int status;
 	
+	
 	public int getClinicId() {
 		return clinicId;
 	}

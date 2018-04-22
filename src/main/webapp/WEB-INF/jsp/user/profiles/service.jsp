@@ -421,28 +421,7 @@
                 	request.setAttribute("bookings", bookings);
                 
                 %>
-                	<h2> Bookings </h2>
-                	<c:forEach var="booking" items="${bookings}">
-                		<div>
-                			<p>${booking.bookingId}</p>
-                			<p>${booking.firstName}</p>
-                			<p>${booking.lastName}</p>
-                			<p>${booking.age}</p>
-                			<p>${booking.dateFrom}</p>
-                			<p>${booking.dateTo}</p>
-                			<p>${booking.timeFrom}</p>
-                			<p>${booking.timeTo}</p>
-                			<a href="/healthTrack/Service/DeleteBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-danger confirm-delete-booking">Delete</a>
-                			<c:if test="${booking.status==0}">
-                				<a href="/healthTrack/Service/VerifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Confirm</a>
-							</c:if>
-							<c:if test="${booking.status==1}">
-                				<a href="/healthTrack/Service/UnverifyBooking/<%= S.getServiceId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">Unconfirm</a>
-							</c:if>
-                			
-                		</div>
-                		<hr>
-                	</c:forEach>
+                	
 
                <% } %>
 
