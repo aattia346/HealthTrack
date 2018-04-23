@@ -271,7 +271,7 @@ public static boolean validateText(String name) {
 		boolean ban = false;
 		
 		Connection con = DBConnection.getConnection();
-		String sql="SELECT ban FROM user WHERE email =?";
+		String sql="SELECT ban FROM user JOIN person ON user.user_id = person.user_id WHERE email =?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, email);
 		ResultSet result = ps.executeQuery();

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gp.user.Booking;
 import com.gp.user.BookingDao;
 import com.gp.user.PersonDao;
+import com.gp.user.ServiceDao;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -379,4 +380,42 @@ public class ServiceController {
 		return mav;
 	}
 
+	@RequestMapping(value="/healthTrack/Service/review/{serviceId}/{userId}/{review}", method = RequestMethod.POST)
+    public void review(@PathVariable("review") int review, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			
+			if(ServiceDao.checkUserReviewOfService(userId, serviceId)) {
+				ServiceDao.updateUserServiceReview(userId, serviceId, review);
+				ServiceDao.updateServiceReview(serviceId);
+			}else {
+				ServiceDao.setServiceReview(userId, serviceId, review);
+				ServiceDao.updateServiceReview(serviceId);
+			}
+	}
+	
+	@RequestMapping(value="/healthTrack/Service/{place}/review/{serviceId}/{userId}/comment", method = RequestMethod.POST)
+    public ModelAndView reviewComment(@PathVariable("place") String place, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		if(userId == 0) {
+			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">Please login first</p>");
+		}else if(UserDao.canUserComment(userId, serviceId)) {
+			
+				String comment = request.getParameter("comment");
+							
+				if(!Validation.validateText(comment)) {
+					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid vharacters in your comment</p>");	
+				}else {
+					ServiceDao.insertComment(userId, serviceId, comment);
+				}				
+			}else {
+				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">sorry you reached the maximum number of comments for this service</p>");
+			}
+		
+		model.addAttribute("serviceId", serviceId);
+		model.addAttribute("place", place);
+		mav.setViewName("user/profiles/service");
+		return mav;
+	}
 }
+	

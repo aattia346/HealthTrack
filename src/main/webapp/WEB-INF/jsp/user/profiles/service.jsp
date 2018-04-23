@@ -98,9 +98,10 @@
 	DateFormat midNightFormat = new SimpleDateFormat("HH:mm");
 	Time midNight = new Time(midNightFormat.parse("00:00").getTime());
 	LocalTime localMidNight = midNight.toLocalTime();
+
 %>
 <%@include  file="../includes/header.jsp" %>
-
+<input type="hidden" id="serviceId" value="<%= S.getServiceId() %>">
 <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>
@@ -209,7 +210,7 @@
                                 <div class="medilife-appointment-form">
                                 ${invalidName} ${invalidPhone} ${invalidDate} ${invalidmsg} ${invalidEmail} ${invalidTime} ${limitExceed}
                                     <form class="${hideCalendar}" method="post" action="/HealthTrack/<%= place %>/Service/<%=S.getServiceId() %>/BookingDay/Submit">
-                                    <input type="hidden" value="<%= user.getId() %>" name="userId">
+                                    <input type="hidden" value="<%= user.getId() %>" name="userId" id="userId">
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
@@ -400,13 +401,40 @@
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
-                                        <p><%= S.getServiceReview() %></p>
+                                        <p><%= Math.round(S.getServiceReview()*10.0)/10.0 %></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+                        
+            <div class="review">            
+	            <div class="overlay">
+	           		<h2 class="text-center">Rate The Service </h2>
+	           		<div class="row">
+	           			<div class="col-sm-offset-2 col-sm-4 rateYo">
+	           				<div id="rateYo"></div>	
+	           				<div id="reviewSucceeded" class="reviewSucceeded ">Thanks for your opinion <i class="fas fa-smile"></i></div>           				
+	           				<div id="reviewFailed" class="reviewFailed">Please login first <i class="fas fa-frown"></i></div>           				
+	           				
+	           			</div>
+	           			<form class="review-form" method="post" action="/healthTrack/Service/<%= place %>/review/<%= S.getServiceId() %>/<%= user.getId() %>/comment">
+	           						<div class="col-sm-offset-2 col-sm-8 col-xs-12">
+	           							<div class="form-group">
+	           								<textarea class="form-control mb-0 border-top-0 border-right-0 border-left-0" rows="10" name="comment" placeholder="write any comment...." maxlength="500"></textarea>
+	           								${invalidComment} ${commentsLimitExceeded} ${commentLoginFirst}
+	           						<div class="">
+	           							<div class="form-group">
+	           								<button type="submit" class="btn btn-success form-group col-xs-12"> <i class="fas fa-location-arrow"></i> Submit your comment</button>
+	           							</div>
+	           						</div>
+	           							</div>
+	           						</div>
+	           				</form>
+	           		</div>
+	            </div>    
             </div>
         </div>
     </div>
@@ -466,7 +494,11 @@ $('#calendar').fullCalendar({
 });
 </script>
 
-	<script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&callback=hospitalMarker">
+    </script>
+    
+    <script>
       function hospitalMarker() {
         var uluru = {lat: <%= S.getLat() %>, lng: <%= S.getLang() %>};
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -478,7 +510,4 @@ $('#calendar').fullCalendar({
           map: map
         });
       }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&callback=hospitalMarker">
     </script>

@@ -279,5 +279,82 @@ abstract public class ServiceDao {
 		return services;
 	}
 
-}
+	public static boolean checkUserReviewOfService(int userId, int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM review WHERE service_id=? AND user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setInt(2, userId);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		boolean exists = result.getRow()>0;		
+		con.close();
+		
+		return exists;
+	}
 
+	public static void setServiceReview(int userId, int serviceId, int review) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO review (user_id, service_id, review) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.setInt(2, serviceId);
+		ps.setInt(3, review);
+		ps.executeUpdate();
+		con.close();
+	}
+
+	public static void updateServiceReview(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT review FROM review WHERE service_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ResultSet result = ps.executeQuery();
+		float totalReview = 0;
+		int numOfRows = 0;
+		while(result.next()) {
+			totalReview += result.getFloat("review"); 
+			numOfRows++;
+		}
+		
+		float average = totalReview/numOfRows;
+		
+		String sql2 ="UPDATE service SET service_review=? WHERE service_id=?";
+		PreparedStatement ps2 = con.prepareStatement(sql2);
+		ps2.setFloat(1, average);
+		ps2.setInt(2, serviceId);
+		ps2.executeUpdate();
+		
+		con.close();
+	}
+
+	public static void updateUserServiceReview(int userId, int serviceId, int review) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql2 ="UPDATE review SET review=? WHERE service_id=? AND user_id=?";
+		PreparedStatement ps2 = con.prepareStatement(sql2);
+		ps2.setInt(1, review);
+		ps2.setFloat(2, serviceId);
+		ps2.setInt(3, userId);
+		ps2.executeUpdate();
+		
+		con.close();		
+	}
+
+	
+	public static void insertComment(int userId, int serviceId, String comment) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO review (user_id, service_id, comment) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.setInt(2, serviceId);
+		ps.setString(3, comment);
+		ps.executeUpdate();
+		con.close();	
+	}
+
+}

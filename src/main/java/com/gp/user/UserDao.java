@@ -193,6 +193,19 @@ abstract public class UserDao {
 		ps.setInt(2, userId);
 		ps.executeUpdate();
 	}
+
+	public static boolean canUserComment(int userId, int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT comment FROM review WHERE user_id=? AND comment!=null";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		
+		ResultSet result = ps.executeQuery();
+		result.next();
+		
+		return result.getRow() < 10;
+	}
 	
 
 }
