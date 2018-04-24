@@ -40,6 +40,9 @@ String dayName = dayFormat.format(today);
                         <h3 class="breadcumb-title"><%= H.getHospitalName() %></h3>
                         <p><%= H.getIntro() %></p>
                     </div>
+                    <div class="hospital-review">
+                    	<i class="far fa-star fa-3x"></i> <span><%= Math.round(H.getReview()*10.0)/10.0 %></span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ $(document).ready(function(){
 	
 	$(function () {
 		
-		$("#rateYo").rateYo({
+		$(".service-review #rateYo").rateYo({
 	    fullStar: true,
 	    ratedFill: "#f1c40f",
 	    normalFill: "#fff",
@@ -14,12 +14,50 @@ $(document).ready(function(){
 	    onSet: function (rating, rateYoInstance) {
 	  	        var userId = $("#userId").val();
 	  	        var serviceId = $("#serviceId").val();
+	  	        var place = $("#place").val();
+	  	        var placeId = $("#placeId").val();
 	  	        if(userId ==0 ){
 	  	        	$("#rateYo").hide();
 	  	        	$("#reviewFailed").fadeIn(500);
 	  	        }else{
 		  	      $.ajax({
-		              url: '/healthTrack/Service/review/' + serviceId + '/' + userId + '/' + rating,
+		              url: '/healthTrack/Service/review/' + place + '/' + placeId + '/' + serviceId + '/' + userId + '/' + rating,
+		              type: 'POST',
+		              data: {
+		                  review: rating
+		              },
+		              success: function(data) {
+		            	  $("#rateYo").hide();
+		            	  $("#reviewSucceeded").fadeIn(500);
+		              },
+		              failure: function(data) {
+		                  alert('Update Failed');
+		              }
+		          });
+	  	      
+	  	        }
+	    }
+	    
+	});
+	});
+	
+	$(function () {
+		
+		$(".clinic-review #rateYo").rateYo({
+	    fullStar: true,
+	    ratedFill: "#f1c40f",
+	    normalFill: "#fff",
+	    starWidth: "40px",
+	    spacing: "5px",
+	    onSet: function (rating, rateYoInstance) {
+	  	        var userId = $("#userId").val();
+	  	        var clinicId = $("#clinicId").val();
+	  	        if(userId ==0 ){
+	  	        	$("#rateYo").hide();
+	  	        	$("#reviewFailed").fadeIn(500);
+	  	        }else{
+		  	      $.ajax({
+		              url: '/healthTrack/clinic/review/' + clinicId + '/' + userId + '/' + rating,
 		              type: 'POST',
 		              data: {
 		                  review: rating

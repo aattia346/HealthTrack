@@ -42,6 +42,8 @@
 	}
 	String place = (String)request.getAttribute("place");
 	Service S = ServiceDao.getServiceById(serviceId, place);
+	System.out.print(S.getHospitalId());
+
 	String title=S.getServiceName(); 
 	Calendar calendar = Calendar.getInstance();
 	Date today = Calendar.getInstance().getTime();
@@ -102,6 +104,15 @@
 %>
 <%@include  file="../includes/header.jsp" %>
 <input type="hidden" id="serviceId" value="<%= S.getServiceId() %>">
+<%
+	if(place.equalsIgnoreCase("hospital")){ %>
+		<input type="hidden" id="placeId" value="<%= S.getHospitalId() %>">
+		<input type="hidden" id="place" value="hospital">
+	 <% }else{ %>
+	 		<input type="hidden" id="placeId" value="<%= S.getCenterId() %>">
+	 		<input type="hidden" id="place" value="center">
+	 <% } %>
+
 <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>
@@ -410,7 +421,7 @@
                 </div>
             </div>
                         
-            <div class="review">            
+            <div class="review service-review">            
 	            <div class="overlay">
 	           		<h2 class="text-center">Rate The Service </h2>
 	           		<div class="row">

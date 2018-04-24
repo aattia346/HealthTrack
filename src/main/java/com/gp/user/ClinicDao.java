@@ -168,6 +168,72 @@ abstract public class ClinicDao {
 		con.close();
 		return apps;
 	}
+	
+	public static boolean checkUserReviewOfClinic(int userId, int clinicId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM review WHERE clinic_id=? AND user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clinicId);
+		ps.setInt(2, userId);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		boolean exists = result.getRow()>0;		
+		con.close();
+		
+		return exists;		
+	}
 
+	public static void updateUserClinicReview(int userId, int clinicId, int review) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql2 ="UPDATE review SET review=? WHERE clinic_id=? AND user_id=?";
+		PreparedStatement ps2 = con.prepareStatement(sql2);
+		ps2.setInt(1, review);
+		ps2.setFloat(2, clinicId);
+		ps2.setInt(3, userId);
+		ps2.executeUpdate();
+		
+		con.close();	
+		
+	}
+
+	public static void setClinicReview(int userId, int clinicId, int review) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO review (user_id, clinic_id, review) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.setInt(2, clinicId);
+		ps.setInt(3, review);
+		ps.executeUpdate();
+		con.close();
+		
+	}
+
+	public static void updateClinicReview(int clinicId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE clinic SET review = (SELECT AVG(review) FROM review WHERE clinic_id=?) WHERE clinic_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clinicId);
+		ps.setInt(2, clinicId);
+		ps.executeUpdate();
+		con.close();
+		
+	}
+
+	public static void insertComment(int userId, int clinicId, String comment) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO review (user_id, clinic_id, comment) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.setInt(2, clinicId);
+		ps.setString(3, comment);
+		ps.executeUpdate();
+		con.close();
+		
+	}
 	
 }

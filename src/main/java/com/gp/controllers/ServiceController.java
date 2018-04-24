@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.user.Booking;
 import com.gp.user.BookingDao;
+import com.gp.user.ClinicDao;
 import com.gp.user.PersonDao;
 import com.gp.user.ServiceDao;
 import com.gp.user.User;
@@ -380,16 +381,19 @@ public class ServiceController {
 		return mav;
 	}
 
-	@RequestMapping(value="/healthTrack/Service/review/{serviceId}/{userId}/{review}", method = RequestMethod.POST)
-    public void review(@PathVariable("review") int review, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+	@RequestMapping(value="/healthTrack/Service/review/{place}/{placeId}/{serviceId}/{userId}/{review}", method = RequestMethod.POST)
+    public void review(@PathVariable("place") String place, @PathVariable("placeId") int placeId, @PathVariable("review") int review, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-			
 			if(ServiceDao.checkUserReviewOfService(userId, serviceId)) {
-				ServiceDao.updateUserServiceReview(userId, serviceId, review);
-				ServiceDao.updateServiceReview(serviceId);
+				ServiceDao.updateUserServiceReview(userId, serviceId, review);	
 			}else {
 				ServiceDao.setServiceReview(userId, serviceId, review);
-				ServiceDao.updateServiceReview(serviceId);
+			}
+			ServiceDao.updateServiceReview(serviceId);
+			if(place.equalsIgnoreCase("hospital")) {
+				ServiceDao.updateHospitalReview(placeId);
+			}else if(place.equalsIgnoreCase("center")) {
+				ServiceDao.updateCenterReview(placeId);
 			}
 	}
 	
@@ -415,6 +419,43 @@ public class ServiceController {
 		model.addAttribute("serviceId", serviceId);
 		model.addAttribute("place", place);
 		mav.setViewName("user/profiles/service");
+		return mav;
+	}
+	
+	@RequestMapping(value="/healthTrack/clinic/review/{clinicId}/{userId}/{review}", method = RequestMethod.POST)
+    public void clinicReview(@PathVariable("clinicId") int clinicId, @PathVariable("review") int review, @PathVariable("userId") int userId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+			if(ClinicDao.checkUserReviewOfClinic(userId, clinicId)) {
+				ClinicDao.updateUserClinicReview(userId, clinicId, review);	
+			}else {
+				ClinicDao.setClinicReview(userId, clinicId, review);
+			}
+			ClinicDao.updateClinicReview(clinicId);
+			
+	}
+	
+	@RequestMapping(value="/healthTrack/clinic/review/{clinicId}/{userId}/comment", method = RequestMethod.POST)
+    public ModelAndView clinicComment(@PathVariable("userId") int userId, @PathVariable("clinicId") int clinicId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		if(userId == 0) {
+			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">Please login first</p>");
+		}else if(UserDao.canUserComment(userId, clinicId)) {
+			
+				String comment = request.getParameter("comment");
+							
+				if(!Validation.validateText(comment)) {
+					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid vharacters in your comment</p>");	
+				}else {
+					ClinicDao.insertComment(userId, clinicId, comment);
+				}				
+			}else {
+				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">sorry you reached the maximum number of comments for this service</p>");
+			}
+		
+		model.addAttribute("clinicId", clinicId);
+		mav.setViewName("user/profiles/clinic");
 		return mav;
 	}
 }

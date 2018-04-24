@@ -89,6 +89,11 @@ textarea{
 .breadcumb-title{
 	font-weight: 700;
 }
+.hospital-review span{
+	font-size: 33px;
+    font-weight: 600;
+    margin-left: 20px;
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
@@ -443,5 +448,5 @@ label{
 	margin-top: -40px;
 }
 .medilife-contact-info-clinic{
-    padding: 30px 30px 138px 30px !important;
+    padding: 30px 30px 168px 30px !important;
 }

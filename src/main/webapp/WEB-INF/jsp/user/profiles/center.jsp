@@ -35,6 +35,9 @@ String title = center.getCenterName();
                         <h3 class="breadcumb-title"><%= center.getCenterName() %></h3>
                         <p><%= center.getIntro() %></p>
                     </div>
+                    <div class="hospital-review">
+                    	<i class="far fa-star fa-3x"></i> <span><%= Math.round(center.getReview()*10.0)/10.0 %></span>
+                    </div>
                 </div>
             </div>
         </div>

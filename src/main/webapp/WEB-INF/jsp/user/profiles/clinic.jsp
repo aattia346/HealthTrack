@@ -59,6 +59,8 @@ if(username != null){
         <div class="medilife-load"></div>
     </div>
     
+    <input type="hidden" id="clinicId" value="<%= clinic.getClinicId() %>">
+    <input type="hidden" id="userId" value="<%= user.getId() %>">
     <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(/user/layout/images/profiles/bg-img/breadcumb2.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -241,6 +243,32 @@ if(username != null){
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="review clinic-review">            
+	            <div class="overlay">
+	           		<h2 class="text-center">Rate The Service </h2>
+	           		<div class="row">
+	           			<div class="col-sm-offset-2 col-sm-4 rateYo">
+	           				<div id="rateYo"></div>	
+	           				<div id="reviewSucceeded" class="reviewSucceeded ">Thanks for your opinion <i class="fas fa-smile"></i></div>           				
+	           				<div id="reviewFailed" class="reviewFailed">Please login first <i class="fas fa-frown"></i></div>           				
+	           				
+	           			</div>
+	           			<form class="review-form" method="post" action="/healthTrack/clinic/review/<%= clinic.getClinicId() %>/<%= user.getId() %>/comment">
+	           						<div class="col-sm-offset-2 col-sm-8 col-xs-12">
+	           							<div class="form-group">
+	           								<textarea class="form-control mb-0 border-top-0 border-right-0 border-left-0" rows="10" name="comment" placeholder="write any comment...." maxlength="500"></textarea>
+	           								${invalidComment} ${commentsLimitExceeded} ${commentLoginFirst}
+	           						<div class="">
+	           							<div class="form-group">
+	           								<button type="submit" class="btn btn-success form-group col-xs-12"> <i class="fas fa-location-arrow"></i> Submit your comment</button>
+	           							</div>
+	           						</div>
+	           							</div>
+	           						</div>
+	           				</form>
+	           		</div>
+	            </div>    
             </div>
         </div>
     </div>
