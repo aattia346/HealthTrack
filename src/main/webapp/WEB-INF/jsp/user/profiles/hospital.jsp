@@ -80,7 +80,7 @@ String dayName = dayFormat.format(today);
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="/user/layout/images/profiles/blog-img/1.jpg" alt="">
+                            <img src="/user/layout/images/profiles/blog-img/${service.getServiceName()}.png" alt="">
                             <!-- Post Date -->
                             <div class="post-date">
                             <%	Service service = (Service)pageContext.getAttribute("service");

@@ -236,7 +236,7 @@ if(username != null){
                                     </div><br><br>
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
-                                        <p><%= clinic.getReview() %></p>
+                                        <p><%= Math.round(clinic.getReview()*10.0)/10.0 %></p>
                                     </div>                                   
                                 </div>
                             </div>

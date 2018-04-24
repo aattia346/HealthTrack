@@ -84,7 +84,7 @@ textarea{
     margin-bottom: 40px;
 }
 .medilife-services-area:nth-of-type(even){
-	background-color: #e7f1ff;
+	background-color: #006cff;
 }
 .breadcumb-title{
 	font-weight: 700;
@@ -93,6 +93,13 @@ textarea{
 	font-size: 33px;
     font-weight: 600;
     margin-left: 20px;
+}
+.medilife-services-area:nth-of-type(even), .medilife-services-area:nth-of-type(even) p,
+ .medilife-services-area:nth-of-type(even) a{
+	color: #fff;
+}
+.medilife-services-area:nth-of-type(even) .service-content h5{
+	color: #fff;
 }
 /*======================================================================================*/
 /*======================================================================================*/

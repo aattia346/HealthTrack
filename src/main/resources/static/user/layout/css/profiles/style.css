@@ -792,15 +792,15 @@ textarea {
     margin-top: 15px; }
     .single-service-area .service-content h5 {
       font-size: 22px;
+      font-weight: 700;
       margin-bottom: 15px;
+      color: #006cff;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms; }
     .single-service-area .service-content p {
       margin-bottom: 0; }
   .single-service-area:hover .service-icon {
     background-color: #006cff; }
-  .single-service-area:hover .service-content h5 {
-    color: #006cff; }
 
 /* :: 9.0 Gallery Area CSS */
 .single-gallery-item {
