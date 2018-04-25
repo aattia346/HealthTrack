@@ -1,3 +1,6 @@
+textarea{
+	resize: none;
+}
 /*************************** login page *****************************/
 .login-body{
     background-color: #F2F2F2;
@@ -81,15 +84,30 @@
     margin-bottom: 40px;
 }
 .medilife-services-area:nth-of-type(even){
-	background-color: #e7f1ff;
+	background-color: #006cff;
 }
 .breadcumb-title{
 	font-weight: 700;
+}
+.hospital-review span{
+	font-size: 33px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.medilife-services-area:nth-of-type(even), .medilife-services-area:nth-of-type(even) p,
+ .medilife-services-area:nth-of-type(even) a{
+	color: #fff;
+}
+.medilife-services-area:nth-of-type(even) .service-content h5{
+	color: #fff;
 }
 /*======================================================================================*/
 /*======================================================================================*/
 
 /***************************** Service page **************************************/
+#reviewLogin{
+	margin-top: 17px;
+}
 .fc-view-container{
 	background: #4383A9;
     color: #fff;
@@ -225,6 +243,47 @@ input[type="submit"]{
 .name input:nth-of-type(2){
 	margin-left: 17px;
 }
+.review{
+	height: 450px;
+	background-image: url("/user/layout/images/rating.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 80px -20px;
+	position: relative;
+}
+.overlay{
+	background-color: #081F3E;
+	opacity: .9;
+	height: 100%;
+}
+.review h2{
+	color: #fff;
+	font-weight: 900;
+	margin-bottom: 40px;
+}
+.review i{
+	padding-top: 46px;
+}
+.review .overlay{
+	padding-top: 35px;
+}
+.review-form{
+	margin-top: 65px;
+}
+.review-form button{
+	font-weight: bold;
+}
+.reviewSucceeded{
+	color: #37ff12;
+    font-size: 17px;
+    font-weight: 800;
+}
+.reviewFailed{
+	font-size: 17px;
+    color: #f00;
+    font-weight: 800;
+}
+
 /*======================================================================================*/
 /*======================================================================================*/
 
@@ -380,4 +439,21 @@ label{
     background-color: #006CFF !important;
     color: #fff !important;
     font-size: 15px;
+}
+.another-table-head{
+	background-color: #006CFF;
+	font-weight: 700;
+	font-family: Helvetica;
+	font-siz: 15px;
+	line-height: 21px;
+	color: #ecf0f1;
+}
+.my-table-clinic{
+	height: 250px;
+}
+.medilife-appointment-form-clinic{
+	margin-top: -40px;
+}
+.medilife-contact-info-clinic{
+    padding: 30px 30px 168px 30px !important;
 }

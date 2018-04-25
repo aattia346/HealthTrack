@@ -64,12 +64,17 @@ for(Service service : servicesOfHospital){
 	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();
 	calendar.setTime(today);
 	calendar.add(Calendar.DAY_OF_MONTH, -1);
-	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
-		servicePinColor = "52BC5F";
+	if(service.getSlotType()==1){
+		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
+			servicePinColor = "52BC5F";
+		}
+		else{
+			servicePinColor = "ff0b0b";
+		}
+	}else if(service.getSlotType()==2){
+		
 	}
-	else{
-		servicePinColor = "ff0b0b";
-	}
+	
 	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }
@@ -124,10 +129,10 @@ for(Service service : servicesOfCenters){
                       </ul>
                       <div class="guide-label">
                       	<div class="available-color">
-                      		<i class="fa fa-map-marker avialable-pin"></i> <span>Available today</span>
+                      		<i class="fa fa-map-marker-alt avialable-pin"></i> <span>Available today</span>
                       	</div>
                       	<div class="unavailable-color">
-                      		<i class="fa fa-map-marker unavialable-pin"></i> <span>Unavailable today</span>
+                      		<i class="fa fa-map-marker-alt unavialable-pin"></i> <span>Unavailable today</span>
                       	</div>
                       </div>
                       </div>

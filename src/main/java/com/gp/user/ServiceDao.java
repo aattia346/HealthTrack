@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,7 @@ abstract public class ServiceDao {
 			service.setDeptId(result.getInt("dept_id"));
 			service.setDeptName(result.getString("dept_name"));
 			service.setHospitalName(result.getString("hospital_name"));
+			service.setHospitalId(result.getInt("hospital_id"));
 		}	
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
@@ -233,9 +235,8 @@ abstract public class ServiceDao {
 		ps.setInt(1, serviceId);
 		ps.setString(2, day);
 		ResultSet result = ps.executeQuery();
-		result.next();
-		
 		Appointment app = new Appointment();
+		if(result.next()) {			
 		app.setAppointmenId(result.getInt("appointment_id"));
 		app.setDay(result.getString("app_day"));
 		app.setAppFrom(result.getTime("app_from"));
@@ -244,9 +245,130 @@ abstract public class ServiceDao {
 		app.setClinicId(result.getInt("clinic_id"));
 		app.setAvailable(result.getInt("available"));
 		app.setBookedSessions(result.getInt("booked_sessions"));
-					
+		}
 		con.close();
 		return app;
 	}
-}
+	
+	public static boolean checkTimeBooking(int serviceId, String day, Time time) throws 
+	SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		
+		String timeAsString = time.toString();
+		timeAsString = timeAsString+":00";
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM booking WHERE service_id=? AND day_of_time=? AND time_from=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setString(2, day);
+		ps.setTime(3, time);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		boolean exists = (result.getRow()==1);
+		
+		con.close();
+		return exists;
+	}
+	
+	public static List<String> getServices(){
+		
+		List<String> services = new ArrayList<String>();
+		services.add("MRI");
+		services.add("ICU");
+		services.add("CT");
+		
+		return services;
+	}
 
+	public static boolean checkUserReviewOfService(int userId, int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM review WHERE service_id=? AND user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setInt(2, userId);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		boolean exists = result.getRow()>0;		
+		con.close();
+		
+		return exists;
+	}
+
+	public static void setServiceReview(int userId, int serviceId, int review) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO review (user_id, service_id, review) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.setInt(2, serviceId);
+		ps.setInt(3, review);
+		ps.executeUpdate();
+		con.close();
+	}
+
+	public static void updateServiceReview(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE service SET service_review = (SELECT AVG(review) FROM review WHERE service_id=?) WHERE service_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.setInt(2, serviceId);
+		ps.executeUpdate();
+		con.close();
+	}
+
+	public static void updateUserServiceReview(int userId, int serviceId, int review) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql2 ="UPDATE review SET review=? WHERE service_id=? AND user_id=?";
+		PreparedStatement ps2 = con.prepareStatement(sql2);
+		ps2.setInt(1, review);
+		ps2.setFloat(2, serviceId);
+		ps2.setInt(3, userId);
+		ps2.executeUpdate();
+		
+		con.close();		
+	}
+
+	public static void insertComment(int userId, int serviceId, String comment) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO review (user_id, service_id, comment) VALUES(?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ps.setInt(2, serviceId);
+		ps.setString(3, comment);
+		ps.executeUpdate();
+		con.close();	
+	}
+
+	public static void updateHospitalReview(int hospitalId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE hospital SET hospital_review = "
+				+ "(SELECT AVG(service_review)"
+				+ " FROM department JOIN service ON department.department_id = service.dept_id WHERE department.hospital_id=?) WHERE hospital_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, hospitalId);
+		ps.setInt(2, hospitalId);
+		ps.executeUpdate();
+		con.close();
+	}
+
+	public static void updateCenterReview(int centerId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE center SET center_review = "
+				+ "(SELECT AVG(service_review)"
+				+ " FROM service WHERE center_id=?) WHERE center_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, centerId);
+		ps.setInt(2, centerId);
+		ps.executeUpdate();
+		con.close();
+	}
+
+	
+
+}

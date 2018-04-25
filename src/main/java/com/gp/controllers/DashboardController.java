@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gp.user.Booking;
 import com.gp.user.BookingDao;
 import com.gp.user.Center;
 import com.gp.user.CenterDao;

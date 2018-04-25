@@ -1,15 +1,24 @@
 package com.gp.user;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Booking extends Service{
 
 	int bookingId, serviceId, userId;
 	String firstName, lastName, bookingPhone, msg, sex;
-	int age;
-	Date dateFrom, dateTo, timeFrom, timeTo, timeOfBooking;
+	int age, clinicId;
+	Date dateFrom, dateTo, dayOfBooking, timeOfBooking;
+	Time timeFrom;
 	int status;
 	
+	
+	public int getClinicId() {
+		return clinicId;
+	}
+	public void setClinicId(int clinicId) {
+		this.clinicId = clinicId;
+	}
 	public String getMsg() {
 		return msg;
 	}
@@ -92,18 +101,17 @@ public class Booking extends Service{
 	public void setDateTo(Date dateTo) {
 		this.dateTo = dateTo;
 	}
-	public Date getTimeFrom() {
+
+	public Date getDayOfBooking() {
+		return dayOfBooking;
+	}
+	public void setDayOfBooking(Date dayOfBooking) {
+		this.dayOfBooking = dayOfBooking;
+	}
+	public Time getTimeFrom() {
 		return timeFrom;
 	}
-	public void setTimeFrom(Date timeFrom) {
+	public void setTimeFrom(Time timeFrom) {
 		this.timeFrom = timeFrom;
 	}
-	public Date getTimeTo() {
-		return timeTo;
-	}
-	public void setTimeTo(Date timeTo) {
-		this.timeTo = timeTo;
-	}
-
-	
 }

@@ -1,13 +1,22 @@
 package com.gp.user;
 
 import java.sql.Time;
+import java.util.Date;
 
 public class Appointment extends Service{
 	
 	int appointmenId, available, bookedSessions, clinicId;
 	String day;
 	Time appFrom, appTo;
+	Date dayDate;
 	
+	
+	public Date getDayDate() {
+		return dayDate;
+	}
+	public void setDayDate(Date dayDate) {
+		this.dayDate = dayDate;
+	}
 	public int getAppointmenId() {
 		return appointmenId;
 	}
