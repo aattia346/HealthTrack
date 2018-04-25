@@ -71,7 +71,7 @@
                         <td><a href="/HealthTrack/profile/service/${booking.serviceId}" target="_blank">${booking.serviceId}</a></td>
                      
                         <td>From:${booking.dateFrom} ${booking.timeFrom}>>>
-                          To:${booking.dateTo}, ${booking.timeTo}</td>                  
+                          To:${booking.dateTo}</td>                  
                         <td>
                         <div>
                       <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 

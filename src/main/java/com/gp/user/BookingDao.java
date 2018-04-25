@@ -65,7 +65,7 @@ abstract public class BookingDao {
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
 			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			
 			B.setStatus(result.getInt("status"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
 			B.setBookingPhone(result.getString("booking_phone"));
@@ -112,7 +112,7 @@ abstract public class BookingDao {
 				booking.setDateFrom(result.getDate("date_from"));
 				booking.setDateTo(result.getDate("date_to"));
 				booking.setTimeFrom(result.getTime("time_from"));
-				booking.setTimeTo(result.getTime("time_to"));
+				
 				booking.setStatus(result.getInt("status"));
 			
 				
@@ -148,7 +148,7 @@ abstract public class BookingDao {
 				B.setDateFrom(result.getDate("date_from"));
 				B.setDateTo(result.getDate("date_to"));
 				B.setTimeFrom(result.getDate("time_from"));
-				B.setTimeTo(result.getDate("time_to"));
+				
 				B.setStatus(result.getInt("status"));
 				B.setTimeOfBooking(result.getDate("time_of_booking"));
 				B.setBookingPhone(result.getString("booking_phone"));
@@ -208,7 +208,7 @@ abstract public class BookingDao {
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
 			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			
 			B.setStatus(result.getInt("status"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));	
 			bookedDates.add(B);
@@ -239,7 +239,7 @@ abstract public class BookingDao {
 			B.setDateFrom(result.getDate("date_from"));
 			B.setDateTo(result.getDate("date_to"));
 			B.setTimeFrom(result.getDate("time_from"));
-			B.setTimeTo(result.getDate("time_to"));
+			
 			B.setStatus(result.getInt("status"));
 			B.setServiceName(result.getString("service_name"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
