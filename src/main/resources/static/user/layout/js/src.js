@@ -130,7 +130,6 @@ $(document).ready(function(){
     $("#day-select").on("change" , function(){
     	var day 	= $(this).val();
     	var dayId 	= $("#day-select option[value='" + day +"']").attr("id");
-    	console.log(day);
     	$("#time-select option").siblings("option").addClass("hidden");
     	$("."+dayId).removeClass("hidden");
     	$("."+dayId).siblings("option[value='0']").removeClass("hidden");

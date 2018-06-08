@@ -53,6 +53,8 @@ abstract public class ServiceDao {
 		service.setSlotType(result.getInt("day_or_time"));
 		service.setPhone(result.getString("phone"));
 		service.setSlot(result.getInt("slot"));
+		service.setLang(result.getFloat("lang"));
+		service.setLat(result.getFloat("lat"));
 		
 		con.close();
 		return service;
