@@ -1,5 +1,6 @@
 package com.gp.controllers;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,11 @@ import com.gp.user.Clinic;
 import com.gp.user.ClinicDao;
 import com.gp.user.Hospital;
 import com.gp.user.HospitalDao;
+import com.gp.user.Person;
+import com.gp.user.PersonDao;
 import com.gp.user.Pharmacy;
 import com.gp.user.PharmacyDao;
+import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
 
@@ -983,6 +987,133 @@ public class DashboardController {
 		return mav;
 	}
 
-	
+	@RequestMapping(value="/HealthTrack/admin/user/insert", method = RequestMethod.POST)
+	public ModelAndView insertUser(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
+			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+		
+			String username = (String)session.getAttribute("username");
+			if(username != null) {
+				if(Validation.checkIfTheUserIsAdmin(username)) {
+					
+					String firstName	 		= request.getParameter("firstName");
+					String lastName		        = request.getParameter("lastName");
+					String username1			= request.getParameter("userName");
+					String phone		        = request.getParameter("phone");
+					String Email		        = request.getParameter("email");
+					String Type		            = request.getParameter("type");
+					String password             =(request.getParameter("password"));
+					String ConfirmPassword      =request.getParameter("confirmPassword");
+					//int admin			= Integer.parseInt(request.getParameter("Admin"));
+					
+					
+				
+					model.addAttribute("oldFirstName"	, firstName);
+					model.addAttribute("oldLastName"	, lastName);
+					model.addAttribute("oldUserName"	, username1);
+					model.addAttribute("oldPhone"	, phone);
+					model.addAttribute("oldEmail"	, Email);
+					model.addAttribute("oldType"	, Type);
+					model.addAttribute("oldPassword"	, password);
+					
+					boolean errors = false;
+					
+					if(!Validation.validateName(firstName)) {
+						model.addAttribute("invalidFirstName", "<p class=\"wrong-input \">Invalid FirstName</p>");
+						errors = true;
+					}
+					if(firstName.length() < 4) {
+						model.addAttribute("shortFirstName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
+					if(!Validation.validateName(lastName)) {
+						model.addAttribute("invalidlastName", "<p class=\"wrong-input \">Invalid lastName</p>");
+						errors = true;
+					}
+					if(lastName.length() < 4) {
+						model.addAttribute("shortlastName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
+					if(!Validation.validateName(username1)) {
+						model.addAttribute("invalidUserName", "<p class=\"wrong-input \">Invalid username</p>");
+						errors = true;
+					}
+					if(username1.length() < 4) {
+						model.addAttribute("shortUserName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
+					if(Validation.checkIfSomethingExists("username", "user", username1)) {
+					model.addAttribute("UsernameExist", "<p class=\"wrong-input \">This username already exists</p>");
+					errors = true;
+						
+					}
+					
+					if(!Validation.validateEmail(Email)) {
+						model.addAttribute("invalidEmail", "<p class=\"wrong-input \">Invalid Email</p>");
+						errors = true;
+					}
+					if(!Validation.validatePhone(phone)) {
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						errors = true;
+					}
+					
+					if(!Validation.validateName(Type)) {
+						model.addAttribute("invalidType", "<p class=\"wrong-input \">Invalid Type</p>");
+						errors = true;
+					}
+					if(firstName.length() < 4) {
+						model.addAttribute("shortType", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						errors = true;
+					}
+					if(password.length()<6) {
+						model.addAttribute("invalidPassword", "<p class=\"wrong-input\">Password shouldn't be less than 6 characters</p>");
+						errors = false;
+					}
+					if(!password.equals(ConfirmPassword)) {
+						model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">Password doesn't match</p>");
+						errors = false;
+					}
+					
+							if(errors == false) {
+								String encryptedPassword = Validation.encryptePssword(password);
+								//int verificationCode = Validation.generateCode();
+								//User user = new User(username1, encryptedPassword, "person",verificationCode);
+								//user.setId(UserDao.insertUser(user));
+								
+								User user= new User();
+								user.setType(Type);
+								user.setUsername(username1);
+								user.setPassword(encryptedPassword);
+								user.setId(UserDao.insertUser(user));	
+								System.out.println("Hellllllllllooooooooo  :"+user.getId());
+								if(Type.equals("person")) {
+									Person person =new Person();
+									person.setId(user.getId());
+									person.setFirstName(firstName);
+									person.setLastName(lastName);
+									person.setEmail(Email);
+									person.setPhone(phone);
+									person.setVerified(0);
+									PersonDao.insertPerson(person);
+								}
+								//UserDao.insertNewUser(user, person);
+								mav.setViewName("redirect:/HealthTrack/admin/" + username + "/users");
+							}
+							else {
+								model.addAttribute("action","add");
+								mav.addAllObjects(model);
+								mav.setViewName("/admin/manageUser");
+							}
+							
+							}else {
+								mav.setViewName("redirect/:HealthTrack/admin/login");
+							}		
+				
+			}else {
+				mav.setViewName("/admin/login");
+			}
+			
+			mav.addAllObjects(model);
+		return mav;
+	}
 	
 }	

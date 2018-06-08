@@ -194,6 +194,31 @@ abstract public class UserDao {
 		ps.executeUpdate();
 	}
 
+	public static String getUsersType() 
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT type FROM user ";
+		PreparedStatement ps = con.prepareStatement(sql);		
+		ResultSet result = ps.executeQuery();	
+		result.next();
+		String type= result.getString("type");
+		return type;
+	}
+	public static void insertNewUser(User user,Person person) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO user (username,type) VALUES (?,?); INSERT INTO person (user_id,firstname,lastname,email,phone) VALUES ((SELECT user_id WHERE username=?),?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1,user.getUsername());
+		ps.setString(2, user.getType());
+		ps.setString(3,user.getUsername());
+		ps.setString(4, person.getFirstName());
+		ps.setString(5, person.getLastName());
+		ps.setString(6, person.getEmail());
+		ps.setString(7, person.getPhone());
+		ps.executeUpdate();
+	}
+
 	public static boolean canUserComment(int userId, int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		Connection con = DBConnection.getConnection();
@@ -205,6 +230,7 @@ abstract public class UserDao {
 		result.next();
 		
 		return result.getRow() < 10;
+
 	}
 	
 

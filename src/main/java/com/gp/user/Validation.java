@@ -271,17 +271,22 @@ public static boolean validateText(String name) {
 		boolean ban = false;
 		
 		Connection con = DBConnection.getConnection();
+
+		//String sql="SELECT ban FROM user JOIN person ON user.user_id = person.user_id WHERE person.email =?";
+
 		String sql="SELECT ban FROM user JOIN person ON user.user_id = person.user_id WHERE email =?";
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, email);
 		ResultSet result = ps.executeQuery();
-		
+		result.next();
 		if(result.getRow()==1) {
 			ban = true;
 		}	
 		return ban;
 	}
 	
+
 	public static boolean validateBookTime(int serviceId, String day, String table) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		boolean valid = true;
@@ -317,6 +322,7 @@ public static boolean validateText(String name) {
 		
 		return valid;
 	}
+
 
 }
 

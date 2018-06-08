@@ -31,6 +31,13 @@ public class User {
 		this.type = type;
 		this.verificationCode = verificationCode;
 	}
+	public User(String username, String password, String type) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.type = type;
+		
+	}
 
 	public User(int id, String username, String password, String type, int verificationCode) {
 		super();

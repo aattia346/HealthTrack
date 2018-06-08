@@ -66,6 +66,7 @@ abstract public class BookingDao {
 			B.setDateTo(result.getDate("date_to"));
 			B.setTimeFrom(result.getTime("time_from"));
 			B.setDayOfBooking(result.getDate("day_of_time"));
+
 			B.setStatus(result.getInt("status"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
 			B.setBookingPhone(result.getString("booking_phone"));
