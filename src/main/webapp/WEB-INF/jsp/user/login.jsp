@@ -15,7 +15,7 @@
                             
                 	<div class="form-group">
                     	<label>Username:</label>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>                          
+                        <input type="text" class="form-control" name="username" placeholder="Username" required value="${oldUsername}">                          
                     </div>
                             
                     ${invalidUsername}

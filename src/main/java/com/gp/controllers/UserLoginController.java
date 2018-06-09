@@ -75,7 +75,8 @@ public class UserLoginController {
 	   
 	   	String username = request.getParameter("username");
 	   	String password = request.getParameter("password");
-
+	   	
+	   	model.addAttribute("oldUsername", username);
 	   	if(Validation.validateUsername(username)) {
 	   		
 	   		String encryptedPassword = Validation.encryptePssword(password);
@@ -124,6 +125,7 @@ public class UserLoginController {
 			int insertedCode = Integer.parseInt(request.getParameter("code"));
 				HttpSession session = request.getSession();
 				User user = UserDao.getUserByUsername((String) session.getAttribute("username"));
+				System.out.println((String) session.getAttribute("username"));
 				int id = user.getId();
 				int code = user.getVerificationCode();
 				if(code==insertedCode) {
@@ -168,6 +170,54 @@ public class UserLoginController {
         return mav;
     }
 	
+	@RequestMapping(value="/HealthTrack/changePassword/submit", method = RequestMethod.POST)
+    public ModelAndView changePasswordSubmit(ModelAndView mav, HttpSession session, HttpServletRequest request, ModelMap model)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, AddressException, NoSuchAlgorithmException {
+		
+		String username = (String)session.getAttribute("username");
+		
+		if(username == null) {
+			mav.setViewName("/user/login");
+		}else {
+			String password			= request.getParameter("password");
+			String confirmPassword	= request.getParameter("confirmPassword");
+			
+			boolean errors = false;
+			
+			if(password.length()<6) {
+				model.addAttribute("invalidPassword", "<p class=\"wrong-input\">Password shouldn't be less than 6 characters</p>");
+				errors = true;
+			}
+			if(!password.equals(confirmPassword)) {
+				model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">Password doesn't match</p>");
+				errors = true;
+			}
+			
+			if(errors) {
+				mav.setViewName("/user/changePassword");
+			}else {
+				String hashedPassword = Validation.encryptePssword(password);
+				User user = UserDao.getUserByUsername(username);
+				PersonDao.changePassword(user.getId(), hashedPassword);
+				mav.setViewName("/user/profiles/user");
+			}
+			
+		}		
+		return mav;	
+	}
+	
+	@RequestMapping(value="/HealthTrack/{username}/changePassword", method = RequestMethod.GET)
+    public ModelAndView changePassword(ModelAndView mav, HttpSession session) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, AddressException {
+		
+		String username = (String)session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/user/login");
+		}else {
+			mav.setViewName("/user/changePassword");
+		}		
+		return mav;	
+	}
+	
 	@RequestMapping(value="/HealthTrack/login/verifymyaccount/submit", method = RequestMethod.POST) 
 	public ModelAndView submitCode(ModelMap model, HttpServletRequest request, HttpSession session, ModelAndView mav) 
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException,
@@ -179,13 +229,12 @@ public class UserLoginController {
 			User user = UserDao.getUserByUsername(username);       
 			Person person = PersonDao.getPersonByUserID(user.getId());
 			Validation.sendEmail(person.getEmail(), person.getFirstName(), user.getVerificationCode());
-			//UserDao.changeCode(user.getId());
 
 	        if(user.getVerificationCode()==insertedCode) {
 	        	
 	        	PersonDao.verifyAccount(user.getId());
 	        	UserDao.changeCode(user.getId());
-	        	String url = "redirect:/HealthTrack/profile/" + user.getId();
+	        	String url = "/user/profiles/user";
 	        	mav.setViewName(url);
 	        	
 	        }else {

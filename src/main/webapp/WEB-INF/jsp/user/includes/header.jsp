@@ -38,8 +38,26 @@
                     <div class="col-12 h-100">
                         <div class="h-100 d-md-flex justify-content-between align-items-center">
                             <p>Welcome to <span>Medifile</span> template</p>
-                            <p class="pull-right">Opening Hours : Monday to Saturday - 8am to 10pm Contact : <span>+12-823-611-8721</span></p>
+                            <p class="pull-right" style="margin-right: 30px;">Opening Hours : Monday to Saturday - 8am to 10pm Contact : <span>+12-823-611-8721</span></p>
                         </div>
+                        <% if(sessionExist){ %>
+                        <div class="navbar-user">
+                            <img class="img-circle upper-img img-thumbnail" src="/user/layout/images/default.jpg">
+	                         <div class="btn-group pull-right">
+	                            <span class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+	                                <%= headerUsername %>
+	                                <span class="caret"></span>
+	                             </span>
+	                                <ul class="dropdown-menu">
+	                                    <li><a href="profile.php">My Profile</a></li>
+	                                    <li><a href="profile.php#myads">My Ads</a></li>
+	                                    <li><a href="newad.php">New Item</a></li>
+	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword">Change Password</a></li>
+	                                    <li><a href="logout.php">Logout</a></li>
+	                                </ul>
+	                        </div>
+	                        </div>
+	                        <% } %>
                     </div>
                 </div>
             </div>
@@ -68,11 +86,8 @@
                                                 <a class="dropdown-item" href="index.html">Home</a>
                                                 <a class="dropdown-item" href="about-us.html">About Us</a>
                                                 <a class="dropdown-item" href="services.html">Services</a>
-                                                <a class="dropdown-item" href="blog.html">News</a>
-                                                <a class="dropdown-item" href="single-blog.html">News Details</a>
                                                 <a class="dropdown-item" href="contact.html">Contact</a>
-                                                <a class="dropdown-item" href="elements.html">Elements</a>
-                                                <a class="dropdown-item" href="index-icons.html">All Icons</a>
+                                                
                                             </div>
                                         </li>
                                         <li class="nav-item">

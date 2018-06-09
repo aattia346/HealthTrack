@@ -80,6 +80,12 @@ public class UserRegisterationController {
 		String phone 			= request.getParameter("phone");
 		String email			= request.getParameter("email");
 		
+		model.addAttribute("oldFirstName", firstName);
+		model.addAttribute("oldLastName", lastName);
+		model.addAttribute("oldUsername", username);
+		model.addAttribute("oldPhone", phone);
+		model.addAttribute("oldEmail", email);
+		
 		boolean errors = true;
 		
 		if(!Validation.validateName(firstName)) {
@@ -106,7 +112,7 @@ public class UserRegisterationController {
 			model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">Password doesn't match</p>");
 			errors = false;
 		}
-		if(Validation.validatePhone(phone)) {
+		if(!Validation.validatePhone(phone)) {
 			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">Invalid Phone Number</p>");
 			errors = false;
 		}
@@ -145,7 +151,6 @@ public class UserRegisterationController {
 			session.setAttribute("username", username); //create new session with username
 			
 			Validation.sendEmail(email, firstName,verificationCode);
-			UserDao.changeCode(user.getId());
 			//and after storing the data redirect to the profile
 			model.addAttribute("id"			, user.getId());
 			model.addAttribute("username"	, user.getUsername());

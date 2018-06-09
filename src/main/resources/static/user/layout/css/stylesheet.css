@@ -296,6 +296,16 @@ input[type="submit"]{
 header{
 	position: fixed !important;
 }
+.navbar-user{
+	position: absolute;
+	right: 12px;
+	top: 5px;
+}
+.navbar-user img{
+	width: 34px;
+    margin-right: 3px;
+    margin-top: -3px;	
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
