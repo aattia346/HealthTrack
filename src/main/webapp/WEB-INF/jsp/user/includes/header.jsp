@@ -44,20 +44,24 @@
                         <div class="navbar-user">
                             <img class="img-circle upper-img img-thumbnail" src="/user/layout/images/default.jpg">
 	                         <div class="btn-group pull-right">
-	                            <span class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+	                            <span class="btn btn-default dropdown-toggle btn-sm user-dropdown" data-toggle="dropdown">
 	                                <%= headerUsername %>
 	                                <span class="caret"></span>
 	                             </span>
 	                                <ul class="dropdown-menu">
-	                                    <li><a href="profile.php">My Profile</a></li>
-	                                    <li><a href="profile.php#myads">My Ads</a></li>
-	                                    <li><a href="newad.php">New Item</a></li>
+	                                    <li><a href="#">My Profile</a></li>
+	                                    <li><a href="#">My Ads</a></li>
+	                                    <li><a href="#">New Item</a></li>
 	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword">Change Password</a></li>
-	                                    <li><a href="logout.php">Logout</a></li>
+	                                    <li><a href="/HealthTrack/logout">Logout</a></li>
 	                                </ul>
 	                        </div>
 	                        </div>
-	                        <% } %>
+	                        <% }else{ %>
+	                        	<a href='/HealthTrack/login' class="login-signup">
+                        			<span class='pull-right'>Login/Signup</span>
+                    			</a>
+	                        <% }%>
                     </div>
                 </div>
             </div>

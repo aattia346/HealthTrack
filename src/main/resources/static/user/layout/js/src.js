@@ -135,6 +135,10 @@ $(document).ready(function(){
     	$("."+dayId).siblings("option[value='0']").removeClass("hidden");
     });
     
+    $(".user-dropdown").click(function(){
+    	$("#stickyHeader-sticky-wrapper").slideToggle(500);
+    });
+    
     
 });	
 

@@ -73,7 +73,7 @@ abstract public class PersonDao {
 		person.setPhone(result.getString("phone"));
 		person.setVerified(result.getInt("verified"));
 		person.setBookingsPerDay(result.getInt("bookings_per_day"));
-
+		person.setVerificationCode(result.getInt("verificationcode"));
 		con.close();
 		return person;
 	}

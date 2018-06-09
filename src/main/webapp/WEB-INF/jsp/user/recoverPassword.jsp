@@ -21,13 +21,9 @@
 	                    
 	            <div class="col-sm-4 col-sm-offset-4 col-xs-12 login-form">
 	
-	            	<form method="post" action="/HealthTrack/changePassword/submit">
+	            	<form method="post" action="/HealthTrack/recoverPassword/submit">
 	                            
 	                	<div class="form-group">
-	                    	<label class="write-email">
-	                    	Please insert new password</label>
-	                    	<input type="text" class="form-control" name="oldPassword" placeholder="old password" required>
-	                        ${wrongPassword}
 	                        <input type="password" class="form-control" name="password" placeholder="new password" required>
 	                        ${invalidPassword}
 	                        <input type="password" class="form-control" name="confirmPassword" placeholder="Re-enter password" required>                          
