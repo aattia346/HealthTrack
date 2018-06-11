@@ -110,6 +110,11 @@
                                     <!-- Appointment Button -->
                                     <a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>
                                 </div>
+                                <a href="${pageContext.request.contextPath}/HealthTrack/login?lang=en">Login (English)</a>
+						       &nbsp;|&nbsp;
+						       <a href="${pageContext.request.contextPath}/HealthTrack/login?lang=fr">Login (French)</a>
+						       &nbsp;|&nbsp;
+						       <a href="${pageContext.request.contextPath}/HealthTrack/login?lang=ar">Login (Arabic)</a>
                             </nav>
                         </div>
                     </div>
@@ -119,3 +124,4 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
+     	 

@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "label.password",
+    "type": "java.lang.String",
+    "description": "A description for 'label.password'"
+  },
+  {
+    "name": "label.title",
+    "type": "java.lang.String",
+    "description": "A description for 'label.title'"
+  },
+  {
+    "name": "label.submit",
+    "type": "java.lang.String",
+    "description": "A description for 'label.submit'"
+  },
+  {
+    "name": "label.userName",
+    "type": "java.lang.String",
+    "description": "A description for 'label.userName'"
+  },
+  {
+    "name": "label.userName",
+    "type": "java.lang.String",
+    "description": "A description for 'label.userName'"
+  }
+]}

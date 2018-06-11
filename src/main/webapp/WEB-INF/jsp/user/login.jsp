@@ -1,5 +1,7 @@
 <% String title="Login"; %>
 <%@include  file="includes/header.jsp" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <div class="login-body">
 
 	<div class="container login-container">

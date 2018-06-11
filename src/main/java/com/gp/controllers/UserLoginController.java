@@ -264,10 +264,9 @@ public class UserLoginController {
     public ModelAndView logout(ModelAndView mav, HttpSession session) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, AddressException {
 		
 		String username = (String)session.getAttribute("username");
-		if(username == null) {		
-		}else {
+		if(username != null) {		
 			session.invalidate();
-		}		
+		}
 		mav.setViewName("/user/login");
 		return mav;	
 	}
