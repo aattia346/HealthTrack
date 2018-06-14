@@ -1,3 +1,6 @@
+.hidden{
+	display: none;
+}
 .jq-ry-container {
   position: relative;
   padding: 0 5px;

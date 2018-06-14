@@ -327,8 +327,8 @@ abstract public class BookingDao {
 		
 		Connection con = DBConnection.getConnection();
 		java.sql.Date sqlDate = new java.sql.Date(b.getDayOfBooking().getTime());
-		String sql="INSERT INTO booking(user_id, firstname, lastname, age, status, time_of_booking, booking_phone, sex, day_of_time, msg)"
-				+ " VALUES(?,?,?,?,?,now(),?,?,?,?)";
+		String sql="INSERT INTO booking(user_id, firstname, lastname, age, status, time_of_booking, booking_phone, sex, day_of_time, msg, clinic_id)"
+				+ " VALUES(?,?,?,?,?,now(),?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, b.getUserId());
 		ps.setString(2, b.getFirstName());
@@ -339,6 +339,7 @@ abstract public class BookingDao {
 		ps.setString(7, b.getSex());
 		ps.setDate(8, sqlDate);
 		ps.setString(9, b.getMsg());
+		ps.setInt(10, b.getClinicId());
 		ps.executeUpdate();		
 		con.close();
 

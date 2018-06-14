@@ -1,8 +1,37 @@
 $(document).ready(function(){
- 	
+	
+	var cookie = document.cookie;
+	
+	switch(cookie){
+	
+		case "lang=en": 
+			break;
+		case "lang=ar":
+			break;
+		default:
+			document.cookie = "lang=en";
+			location.reload();
+			break;
+	}
+	
+	$(".translate").click(function(){
+    	
+    	"use strict";
+    	
+    	var id = $(this).attr("id");
+    	    	
+    	document.cookie = "lang=" + id;
+    	
+    	var cookie = document.cookie;
+    	
+    	location.reload();
+    	
+    });
+	
+	
 	$("#reviewFailed").hide();
 	$("#reviewSucceeded").hide();
-	
+		
 	$(function () {
 		
 		$(".service-review #rateYo").rateYo({
@@ -130,12 +159,14 @@ $(document).ready(function(){
     $("#day-select").on("change" , function(){
     	var day 	= $(this).val();
     	var dayId 	= $("#day-select option[value='" + day +"']").attr("id");
-    	console.log(day);
     	$("#time-select option").siblings("option").addClass("hidden");
     	$("."+dayId).removeClass("hidden");
     	$("."+dayId).siblings("option[value='0']").removeClass("hidden");
     });
     
+    $(".user-dropdown").click(function(){
+    	$("#stickyHeader-sticky-wrapper").slideToggle(500);
+    });
     
 });	
 

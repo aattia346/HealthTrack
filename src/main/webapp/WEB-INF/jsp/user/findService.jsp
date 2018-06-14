@@ -18,6 +18,7 @@
 <%@page import="com.gp.user.ClinicDao"%>
 <%@page import="com.gp.user.Pharmacy"%>
 <%@page import="com.gp.user.PharmacyDao"%>
+<%@page import="com.gp.user.Translation"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -97,12 +98,12 @@ for(Service service : servicesOfCenters){
 %>
 <%@include  file="includes/header.jsp" %>    
 	<div class="main-page-container">   
-            <h3 class="text-center">Find a Location </h3>
+            <h3 class="text-center"><%= t.write("Find a Location") %></h3>
             <div class="row">
                 
                 <div class="enter-address col-sm-11 col-sm-offset-1">
                     
-                    <h4 class="col-sm-3">Enter An Address</h4>
+                    <h4 class="col-sm-3"><%= t.write("Enter An Address") %></h4>
                         <div class="col-sm-4">
                             <input id="pac-input" type="text" class="input-sm form-control" placeholder="Search By Place">
                     	</div>

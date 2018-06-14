@@ -14,15 +14,15 @@
                         <form method="post" action="/HealthTrack/signup/submit">
                             
                             <div class="form-group register-name">
-                                <input type="text" class="form-control input-sm" name="firstName" placeholder="First Name" required maxlength="15"> 
+                                <input type="text" class="form-control input-sm" name="firstName" placeholder="First Name" required maxlength="15" value="${oldFirstName}"> 
                                 
-                                <input type="text" class="form-control input-sm" name="lastName" placeholder="Last Name" required maxlength="15"> 
+                                <input type="text" class="form-control input-sm" name="lastName" placeholder="Last Name" required maxlength="15" value="${oldLastName}"> 
                             	${invalidFirstName}
                             	${invalidLastName}
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" class="form-control" name="username" placeholder="Username" required maxlength="15">                          
+                                <input type="text" class="form-control" name="username" placeholder="Username" required maxlength="15" value="${oldUsername}">                          
                             	${invalidUsername}
                             	${usernameAlreadyExists}
                             </div>
@@ -35,11 +35,11 @@
                             	${passwordNotMatch}
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="phone" placeholder="Your Phone Number(optional)">
+                                <input type="text" class="form-control" name="phone" placeholder="Your Phone Number(optional)" value="${oldPhone}">
                             	${invalidPhone}
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required value="${oldEmail}">
                             	${invalidEmail}
                             	${emailAlreadyExists}
                             	${bannedEmail}

@@ -1,6 +1,9 @@
 textarea{
 	resize: none;
 }
+a{
+	cursor: pointer;
+}
 /*************************** login page *****************************/
 .login-body{
     background-color: #F2F2F2;
@@ -295,6 +298,26 @@ input[type="submit"]{
 }
 header{
 	position: fixed !important;
+}
+.navbar-user{
+	position: absolute;
+	right: 12px;
+	top: 5px;
+}
+.navbar-user img{
+	width: 34px;
+    margin-right: 3px;
+    margin-top: -3px;	
+}
+.pull-right>.dropdown-menu{
+	top: 37px;
+}
+.login-signup{
+	position: absolute;
+    right: 21px;
+    top: 12px;
+    color: #b5b5b5;
+    font-size: 14px;
 }
 /*======================================================================================*/
 /*======================================================================================*/

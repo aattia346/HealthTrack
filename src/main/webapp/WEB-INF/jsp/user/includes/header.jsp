@@ -1,3 +1,5 @@
+<%@page import="com.gp.user.Translation"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,8 +40,30 @@
                     <div class="col-12 h-100">
                         <div class="h-100 d-md-flex justify-content-between align-items-center">
                             <p>Welcome to <span>Medifile</span> template</p>
-                            <p class="pull-right">Opening Hours : Monday to Saturday - 8am to 10pm Contact : <span>+12-823-611-8721</span></p>
+                            <p class="pull-right" style="margin-right: 30px;">Opening Hours : Monday to Saturday - 8am to 10pm Contact : <span>+12-823-611-8721</span></p>
                         </div>
+                        <% if(sessionExist){ %>
+                        <div class="navbar-user">
+                            <img class="img-circle upper-img img-thumbnail" src="/user/layout/images/default.jpg">
+	                         <div class="btn-group pull-right">
+	                            <span class="btn btn-default dropdown-toggle btn-sm user-dropdown" data-toggle="dropdown">
+	                                <%= headerUsername %>
+	                                <span class="caret"></span>
+	                             </span>
+	                                <ul class="dropdown-menu">
+	                                    <li><a href="#">My Profile</a></li>
+	                                    <li><a href="#">My Ads</a></li>
+	                                    <li><a href="#">New Item</a></li>
+	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword">Change Password</a></li>
+	                                    <li><a href="/HealthTrack/logout">Logout</a></li>
+	                                </ul>
+	                        </div>
+	                        </div>
+	                        <% }else{ %>
+	                        	<a href='/HealthTrack/login' class="login-signup">
+                        			<span class='pull-right'>Login/Signup</span>
+                    			</a>
+	                        <% }%>
                     </div>
                 </div>
             </div>
@@ -68,11 +92,8 @@
                                                 <a class="dropdown-item" href="index.html">Home</a>
                                                 <a class="dropdown-item" href="about-us.html">About Us</a>
                                                 <a class="dropdown-item" href="services.html">Services</a>
-                                                <a class="dropdown-item" href="blog.html">News</a>
-                                                <a class="dropdown-item" href="single-blog.html">News Details</a>
                                                 <a class="dropdown-item" href="contact.html">Contact</a>
-                                                <a class="dropdown-item" href="elements.html">Elements</a>
-                                                <a class="dropdown-item" href="index-icons.html">All Icons</a>
+                                                
                                             </div>
                                         </li>
                                         <li class="nav-item">
@@ -91,6 +112,9 @@
                                     <!-- Appointment Button -->
                                     <a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>
                                 </div>
+                                <a id="en" class="translate">Login (English)</a>
+						       &nbsp;|&nbsp;
+						        <a id="ar" class="translate">Login (Arabic)</a>
                             </nav>
                         </div>
                     </div>
@@ -100,3 +124,11 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
+    <%
+    
+    	String lang = (String)request.getAttribute("lang");
+
+    	Translation t = new Translation(lang);
+    
+    %>
+     	 

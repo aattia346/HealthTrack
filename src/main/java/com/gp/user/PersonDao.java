@@ -68,11 +68,12 @@ abstract public class PersonDao {
 		person.setUserId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
 		person.setFirstName(result.getString("lastname"));
+		person.setUsername(result.getString("username"));
 		person.setEmail(result.getString("email"));
 		person.setPhone(result.getString("phone"));
 		person.setVerified(result.getInt("verified"));
 		person.setBookingsPerDay(result.getInt("bookings_per_day"));
-
+		person.setVerificationCode(result.getInt("verificationcode"));
 		con.close();
 		return person;
 	}
@@ -90,6 +91,7 @@ abstract public class PersonDao {
 		person.setUserId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
 		person.setFirstName(result.getString("lastname"));
+		person.setUsername(result.getString("username"));
 		person.setEmail(result.getString("email"));
 		person.setPhone(result.getString("phone"));
 		person.setVerified(result.getInt("verified"));
@@ -120,6 +122,17 @@ abstract public class PersonDao {
 		con.close();
 		
 		return numOfBookings<3;
+	}
+
+	public static void changePassword(int id, String password) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "UPDATE user set password = ? WHERE user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, password);
+		ps.setInt(2, id);
+		ps.executeUpdate();
+		con.close();	
 	}
 
 

@@ -17,6 +17,7 @@
 <% 
 
 	String username = (String) session.getAttribute("username");
+
 	Calendar calendar = Calendar.getInstance();
 	Date today = Calendar.getInstance().getTime();
 	calendar.setTime(today);
