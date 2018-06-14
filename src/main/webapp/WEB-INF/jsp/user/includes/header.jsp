@@ -1,3 +1,5 @@
+<%@page import="com.gp.user.Translation"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -110,11 +112,9 @@
                                     <!-- Appointment Button -->
                                     <a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>
                                 </div>
-                                <a href="${pageContext.request.contextPath}/HealthTrack/login?lang=en">Login (English)</a>
+                                <a id="en" class="translate">Login (English)</a>
 						       &nbsp;|&nbsp;
-						       <a href="${pageContext.request.contextPath}/HealthTrack/login?lang=fr">Login (French)</a>
-						       &nbsp;|&nbsp;
-						       <a href="${pageContext.request.contextPath}/HealthTrack/login?lang=ar">Login (Arabic)</a>
+						        <a id="ar" class="translate">Login (Arabic)</a>
                             </nav>
                         </div>
                     </div>
@@ -124,4 +124,11 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
+    <%
+    
+    	String lang = (String)request.getAttribute("lang");
+
+    	Translation t = new Translation(lang);
+    
+    %>
      	 

@@ -1,6 +1,9 @@
 textarea{
 	resize: none;
 }
+a{
+	cursor: pointer;
+}
 /*************************** login page *****************************/
 .login-body{
     background-color: #F2F2F2;

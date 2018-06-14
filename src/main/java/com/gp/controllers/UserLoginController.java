@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,14 +24,16 @@ import com.gp.user.Validation;
 public class UserLoginController {	
 	
 	@RequestMapping(value="/HealthTrack", method = RequestMethod.GET)
-    public ModelAndView home() {
+    public ModelAndView home(@CookieValue(value = "lang") String cookie, ModelMap model) {
+		model.addAttribute("lang", cookie);
         return new ModelAndView("/user/findService");
     }
 	
 	@RequestMapping(value = "/HealthTrack/login", method = RequestMethod.GET)
-    public ModelAndView showForm(ModelAndView mav, HttpServletRequest request){
+    public ModelAndView showForm(ModelMap model, ModelAndView mav, HttpServletRequest request,@CookieValue(value = "lang") String cookie){
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username");
+		model.addAttribute("lang", cookie);
 		if(username == null) {
 			mav.setViewName("/user/login");
 		}else {

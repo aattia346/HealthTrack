@@ -1,7 +1,7 @@
-<% String title="Login"; %>
+<%@page import="javax.servlet.http.Cookie" %> 
+<% String title="Login";%>
+
 <%@include  file="includes/header.jsp" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page contentType="text/html; charset=UTF-8" %>
 <div class="login-body">
 
 	<div class="container login-container">
@@ -16,14 +16,14 @@
             	<form method="post" action="/HealthTrack/login/submit" >
                             
                 	<div class="form-group">
-                    	<label>Username:</label>
+                    	<label><%= t.write("username:") %></label>
                         <input type="text" class="form-control" name="username" placeholder="Username" required value="${oldUsername}">                          
                     </div>
                             
                     ${invalidUsername}
                             
                     <div class="form-group">
-                    	<label>Password:</label>
+                    	<label><%= t.write("password:") %></label>
                         <input type="password" class="form-control" name="password" placeholder="Password" required>
                     </div>
                             

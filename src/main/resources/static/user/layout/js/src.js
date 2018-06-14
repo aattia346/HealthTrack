@@ -1,8 +1,37 @@
 $(document).ready(function(){
- 	
+	
+	var cookie = document.cookie;
+	
+	switch(cookie){
+	
+		case "lang=en": 
+			break;
+		case "lang=ar":
+			break;
+		default:
+			document.cookie = "lang=en";
+			location.reload();
+			break;
+	}
+	
+	$(".translate").click(function(){
+    	
+    	"use strict";
+    	
+    	var id = $(this).attr("id");
+    	    	
+    	document.cookie = "lang=" + id;
+    	
+    	var cookie = document.cookie;
+    	
+    	location.reload();
+    	
+    });
+	
+	
 	$("#reviewFailed").hide();
 	$("#reviewSucceeded").hide();
-	
+		
 	$(function () {
 		
 		$(".service-review #rateYo").rateYo({
@@ -138,7 +167,6 @@ $(document).ready(function(){
     $(".user-dropdown").click(function(){
     	$("#stickyHeader-sticky-wrapper").slideToggle(500);
     });
-    
     
 });	
 

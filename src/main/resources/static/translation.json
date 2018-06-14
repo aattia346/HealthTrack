@@ -1,0 +1,16 @@
+{
+	"en" : {
+		"username:" : "username:",
+		"password:" : "password:",
+		"submit" : "submit",
+		"Find a Location" : "Find a Location",
+		"Enter An Address" : "Enter An Address"
+	},
+	"ar" : {
+		"username:" : ":أسم المستخدم",
+		"password:" : ":كلمة السر",
+		"submit" : "أدخال",
+		"Find a Location" : "أبحث عن موقع",
+		"Enter An Address" : "أدخل  عنوان"
+	}
+}
