@@ -368,7 +368,31 @@ abstract public class ServiceDao {
 		ps.executeUpdate();
 		con.close();
 	}
-
+public static void insertServiceForHospital(Service service) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO service (service_name,dept_id,fees,day_or_time) VALUES(?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, service.getServiceName());
+		ps.setInt(2, service.getDeptId() );
+		ps.setString(3, service.getFees());
+		ps.setInt(4, service.getSlotType());
+		ps.executeUpdate();
+		con.close();	
+	}
+public static void insertServiceForCenter(Service service) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
+	Connection con = DBConnection.getConnection();
+	String sql="INSERT  INTO service (service_name,center_id,fees,day_or_time) VALUES(?,?,?,?)";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setString(1, service.getServiceName());
+	ps.setInt(2, service.getCenterId() );
+	ps.setString(3, service.getFees());
+	ps.setInt(4, service.getSlotType());
+	ps.executeUpdate();
+	con.close();	
+}
+
+
 
 }

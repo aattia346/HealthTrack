@@ -162,6 +162,35 @@ abstract public class BookingDao {
 				return B;
 			}
 	
+	
+	public static List<Booking> getBookingTimeOrDaySlot(int day_or_time)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+					
+			Connection con = DBConnection.getConnection();
+			String sql="SELECT * FROM booking"
+					+ " JOIN service ON booking.service_id=service.service_id"
+					+ " WHERE service.day_or_time=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, day_or_time);
+
+			ResultSet result = ps.executeQuery();
+			List<Booking> bookings = new ArrayList<Booking>();
+			while(result.next()) {
+				Booking booking = new Booking();
+				booking.setBookingId(result.getInt("booking_id"));
+				booking.setUserId(result.getInt("user_id"));
+				booking.setServiceId(result.getInt("service_id"));
+				booking.setDateFrom(result.getDate("date_from"));
+				booking.setDateTo(result.getDate("date_to"));
+				booking.setTimeFrom(result.getTime("time_from"));
+				booking.setStatus(result.getInt("status"));				
+				bookings.add(booking);
+				}
+			return bookings;
+				
+				}
+		
+	
 	public static void verifyBooking(int bookingId)
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 				

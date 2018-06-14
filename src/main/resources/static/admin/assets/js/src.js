@@ -46,6 +46,11 @@ $(".confirm-delete-hospital").click(function(){
     return confirm("Are you sure you want to delete this hospital?");
     
 });
+$(".confirm-delete-service").click(function(){
+    
+    return confirm("Are you sure you want to delete this service?");
+    
+});
 
 });	
 

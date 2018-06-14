@@ -5,11 +5,11 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% 	String title = "Users";
+<% 	String title = "BannedUsers";
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
 	List<User> users = new ArrayList<User>();
-	users = UserDao.getAllUsers();
+	users = UserDao.getBannedUsers();
 	request.setAttribute("users", users);
 
 %>
@@ -28,7 +28,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>All Users</li>
+                            <li>Banned Users</li>
                         </ol>
                     </div>
                 </div>
@@ -67,15 +67,9 @@
                         <td>${user.type}</td>
                         <td>
                         <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/<%= user.getId() %>/edit" title="Edit this User"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/delete/<%=user.getId() %>" title="Delete this User"><i class="fa fa-close"></i></a>
-                        <%if(user.getBan()==1){ %>
-                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user">unBan</a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/bannedUser/delete/<%=user.getId() %>" title="Delete this User"><i class="fa fa-close"></i></a>
                        
-                        <%}else{ %>
-                        <a href="/HealthTrack/user/ban/<%= admin.getId() %>/${user.id}" class="btn btn-warning confirm-Ban-user">Ban</a>
-                       
-                        <%} %>
+                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user">unBan</a>                    
                        
                         </div>
                         </td>
@@ -87,7 +81,7 @@
                   </table>
                         </div>
                     </div>
-                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/User/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New User</a>
+                    
                 </div>
 
                 </div>

@@ -164,6 +164,28 @@ abstract public class UserDao {
 		}
 		return users;
 	}
+	public static List<User> getBannedUsers()
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+					
+			Connection con = DBConnection.getConnection();
+			String sql="SELECT * FROM user WHERE ban =?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, 1);
+			ResultSet result = ps.executeQuery();
+			List<User> users = new ArrayList<User>();
+			while(result.next()) {
+				User user = new User();
+				user.setId(result.getInt("user_id"));			
+				user.setUsername(result.getString("username"));
+				user.setType(result.getString("type"));
+				user.setBan(result.getInt("ban"));
+				
+				users.add(user);
+				}
+			return users;
+				
+				}
 	public static List<User> getAllUsers()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 					

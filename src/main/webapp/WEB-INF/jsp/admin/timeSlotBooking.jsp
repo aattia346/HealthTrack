@@ -1,16 +1,19 @@
 <%@page import="com.gp.user.User"%>
 <%@page import="com.gp.user.UserDao"%>
+<%@page import="com.gp.user.Booking"%>
+<%@page import="com.gp.user.BookingDao"%>
+
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% 	String title = "Users";
+<% 	String title = "TimeSlotBooking";
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
-	List<User> users = new ArrayList<User>();
-	users = UserDao.getAllUsers();
-	request.setAttribute("users", users);
+	List<Booking> bookings = new ArrayList<Booking>();
+	bookings=BookingDao.getBookingTimeOrDaySlot(2);	
+	request.setAttribute("bookings", bookings);
 
 %>
 <%@include  file="includes/header.jsp" %>
@@ -28,7 +31,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>All Users</li>
+                            <li>Time slot Booking</li>
                         </ol>
                     </div>
                 </div>
@@ -48,35 +51,37 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>User ID</th>
-                        <th>User Name</th>
-                        <th>Type</th>                        
+                      	<th>Booking Id</th>
+                        <th>User Id</th>
+                        <th>Service Id</th>
+                        <th>Time From</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach var="user" items="${users}">
+                      <c:forEach var="booking" items="${bookings}">
                       	
                       	<% 
-                      		User user 		= (User)pageContext.getAttribute("user");                     		
+                      	    Booking booking = (Booking)pageContext.getAttribute("booking");
+            
                       	%>
                       	<tr>
-                        
-                        <td><a href="/HealthTrack/profile/user/${user.id}" target="_blank">${user.id}</a></td>
-                        <td>${user.username}</td>
-                        <td>${user.type}</td>
+                        <td>${booking.bookingId}</td>
+                        <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank">${booking.userId}</a></td>
+                        <td><a href="/HealthTrack/profile/service/${booking.serviceId}" target="_blank">${booking.serviceId}</a></td>
+                     
+                        <td> From:  ${booking.timeFrom}</td>                  
                         <td>
                         <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/<%= user.getId() %>/edit" title="Edit this User"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/delete/<%=user.getId() %>" title="Delete this User"><i class="fa fa-close"></i></a>
-                        <%if(user.getBan()==1){ %>
-                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user">unBan</a>
+                      <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title="Delete this booking"><i class="fa fa-close"></i></a>
+                         <%if(booking.getStatus()==0){ %>
+                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Confirm</a>
                        
                         <%}else{ %>
-                        <a href="/HealthTrack/user/ban/<%= admin.getId() %>/${user.id}" class="btn btn-warning confirm-Ban-user">Ban</a>
+                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">UnConfirm</a>
                        
                         <%} %>
-                       
                         </div>
                         </td>
                       </tr>
@@ -87,7 +92,7 @@
                   </table>
                         </div>
                     </div>
-                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/User/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New User</a>
+                   
                 </div>
 
                 </div>

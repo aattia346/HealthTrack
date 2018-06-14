@@ -67,7 +67,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar menu-icon"></i>Bookings</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-calendar"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/daySlotBooking">Day Slots</a></li>
-                            <li><i class="fa fa-calendar"></i><a href="tables-data.html">Time Slots</a></li>
+                            <li><i class="fa fa-calendar"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/timeSlotBooking">Time Slots</a></li>
                         </ul>
                     </li>
                     
@@ -75,7 +75,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-h-square"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/users">All Users</a></li>
-                            <li><i class="fa fa-ban"></i><a href="tables-data.html">Banned Users</a></li>
+                            <li><i class="fa fa-ban"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/bannedUsers">Banned Users</a></li>
                         </ul>
                     </li>
                     

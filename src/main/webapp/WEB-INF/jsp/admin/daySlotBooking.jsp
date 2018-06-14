@@ -12,7 +12,7 @@
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
 	List<Booking> bookings = new ArrayList<Booking>();
-	bookings=BookingDao.getAllBookings();	
+	bookings=BookingDao.getBookingTimeOrDaySlot(1);	
 	request.setAttribute("bookings", bookings);
 
 %>

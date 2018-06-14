@@ -86,8 +86,8 @@
                         <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank">${service.hospitalName}${service.centerName}</a></td>
                         <td>${service.serviceReview}</td>
                         <td>
-                        <a class="btn btn-warning dashboard-btn" href="#"><i class="fa fa-edit"></i> Edit</a>
-                        <a class="btn btn-danger dashboard-btn" href="#"><i class="fa fa-close"></i> Delete</a>
+                       <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/${service.serviceId}/edit" title="Edit this Service"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-service" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" title="Delete this Service"><i class="fa fa-close"></i></a>
                         </td>
                       </tr>
                       
@@ -97,6 +97,7 @@
                   </table>
                         </div>
                     </div>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Services/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Service</a>
                 </div>
 
 

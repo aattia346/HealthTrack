@@ -94,6 +94,26 @@ public static boolean validateText(String name) {
 			}
 		}
 	
+	public static boolean validateAge(int Age) {		 
+			
+		if((Age>=0 ||Age <120) && Pattern.matches("[0-9]*", Integer.toString(Age))) {
+			return true;
+		}else {
+			return false;
+			}
+		
+		}
+		
+	public static boolean validateFees(String fees) {
+		
+		
+		if( Pattern.matches("[0-9]*", fees.trim())) {
+			return true;
+		}else {
+			return false;
+			}
+		}
+	
 	public static int generateCode() {
 		
 		Random rand = new Random();

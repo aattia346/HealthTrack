@@ -80,11 +80,7 @@
                         	${invalidType}
                         	${shortType}
                         	</div>
-                        </div>
-                                             
-                      	
-                            
-                           
+                        </div>  
                             
                             <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
                       </div>
@@ -92,8 +88,7 @@
                   </form>
                   
                  
-	
 	<%} %>
- 
+
 	
 <%@include  file="includes/footer.jsp" %>
