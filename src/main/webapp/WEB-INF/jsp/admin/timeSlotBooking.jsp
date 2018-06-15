@@ -98,9 +98,6 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-
-    </div><!-- /#right-panel -->
-
     <!-- Right Panel -->
 
 <%@include  file="includes/footer.jsp" %>

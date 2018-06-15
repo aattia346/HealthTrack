@@ -1,5 +1,12 @@
 <%@page import="com.gp.user.Translation"%>
+<%
+    
+    	String lang = (String)request.getAttribute("lang");
 
+    	Translation t = new Translation(lang);
+    
+    %>
+     	 
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,8 +46,8 @@
                 <div class="row h-100">
                     <div class="col-12 h-100">
                         <div class="h-100 d-md-flex justify-content-between align-items-center">
-                            <p>Welcome to <span>Medifile</span> template</p>
-                            <p class="pull-right" style="margin-right: 30px;">Opening Hours : Monday to Saturday - 8am to 10pm Contact : <span>+12-823-611-8721</span></p>
+                            <p><%= t.write("Welcome to") %><span><%= t.write("HealthTrack") %></span></p>
+                            <p class="pull-right" style="margin-right: 30px;"><%= t.write("introduction to healthtrack") %><span>+12-823-611-8721</span></p>
                         </div>
                         <% if(sessionExist){ %>
                         <div class="navbar-user">
@@ -51,17 +58,17 @@
 	                                <span class="caret"></span>
 	                             </span>
 	                                <ul class="dropdown-menu">
-	                                    <li><a href="#">My Profile</a></li>
+	                                    <li><a href="#"><%= t.write("My Profile") %></a></li>
 	                                    <li><a href="#">My Ads</a></li>
 	                                    <li><a href="#">New Item</a></li>
-	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword">Change Password</a></li>
-	                                    <li><a href="/HealthTrack/logout">Logout</a></li>
+	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword"><%= t.write("change password") %></a></li>
+	                                    <li><a href="/HealthTrack/logout"><%= t.write("logout") %></a></li>
 	                                </ul>
 	                        </div>
 	                        </div>
 	                        <% }else{ %>
 	                        	<a href='/HealthTrack/login' class="login-signup">
-                        			<span class='pull-right'>Login/Signup</span>
+                        			<span class='pull-right'><%= t.write("login") %>&nbsp; | &nbsp; <%= t.write("signup") %></span>
                     			</a>
 	                        <% }%>
                     </div>
@@ -84,37 +91,28 @@
                                     <!-- Menu Area -->
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="index.html"><%= t.write("Home") %></a>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="index.html">Home</a>
-                                                <a class="dropdown-item" href="about-us.html">About Us</a>
-                                                <a class="dropdown-item" href="services.html">Services</a>
-                                                <a class="dropdown-item" href="contact.html">Contact</a>
-                                                
-                                            </div>
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="about-us.html"><%= t.write("About Us") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="about-us.html">About Us</a>
+                                            <a class="nav-link" href="services.html"><%= t.write("Services") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="services.html">Services</a>
+                                            <a class="nav-link" href="blog.html"><%= t.write("News") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="blog.html">News</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="contact.html">Contact</a>
+                                            <a class="nav-link" href="contact.html"><%= t.write("Contact") %></a>
                                         </li>
                                     </ul>
                                     <!-- Appointment Button -->
-                                    <a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>
+                                    <a href="#" class="btn medilife-appoint-btn ml-30"><%= t.write("for") %> <span><%= t.write("emergencies") %></span> <%= t.write("click here") %></a>
                                 </div>
-                                <a id="en" class="translate">Login (English)</a>
+                                <a id="en" class="translate"><%= t.write("English") %></a>
 						       &nbsp;|&nbsp;
-						        <a id="ar" class="translate">Login (Arabic)</a>
+						        <a id="ar" class="translate"><%= t.write("Arabic") %></a>
                             </nav>
                         </div>
                     </div>
@@ -124,11 +122,3 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-    <%
-    
-    	String lang = (String)request.getAttribute("lang");
-
-    	Translation t = new Translation(lang);
-    
-    %>
-     	 

@@ -24,13 +24,13 @@ import com.gp.user.Validation;
 public class UserLoginController {	
 	
 	@RequestMapping(value="/HealthTrack", method = RequestMethod.GET)
-    public ModelAndView home(@CookieValue(value = "lang") String cookie, ModelMap model) {
+    public ModelAndView home(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) {
 		model.addAttribute("lang", cookie);
         return new ModelAndView("/user/findService");
     }
 	
 	@RequestMapping(value = "/HealthTrack/login", method = RequestMethod.GET)
-    public ModelAndView showForm(ModelMap model, ModelAndView mav, HttpServletRequest request,@CookieValue(value = "lang") String cookie){
+    public ModelAndView showForm(ModelMap model, ModelAndView mav, HttpServletRequest request,@CookieValue(value = "lang", defaultValue="en") String cookie){
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username");
 		model.addAttribute("lang", cookie);

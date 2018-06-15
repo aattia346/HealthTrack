@@ -18,7 +18,6 @@
 <%@page import="com.gp.user.ClinicDao"%>
 <%@page import="com.gp.user.Pharmacy"%>
 <%@page import="com.gp.user.PharmacyDao"%>
-<%@page import="com.gp.user.Translation"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -105,40 +104,40 @@ for(Service service : servicesOfCenters){
                     
                     <h4 class="col-sm-3"><%= t.write("Enter An Address") %></h4>
                         <div class="col-sm-4">
-                            <input id="pac-input" type="text" class="input-sm form-control" placeholder="Search By Place">
+                            <input id="pac-input" type="text" class="input-sm form-control" placeholder="<%= t.write("Search By Place") %>">
                     	</div>
             </div>
                 <div class="col-sm-offset-1 col-sm-3 choose-service">
                     
                     <div class="panel panel-primary ">
                       <div class="panel-heading">
-                        <h3 class="panel-title text-center">Services</h3>
+                        <h3 class="panel-title text-center"><%= t.write("Services") %></h3>
                       </div>
                       <div class="panel-body">
                       <ul class="list-unstyled">
-                          <input type="radio" name="service" value="all" checked> All<br>
-                          <input type="radio" name="service" value="clinic"> Clinics <i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
-                          <input type="radio" name="service" value="hospital"> Hospitals <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
-                          <input type="radio" name="service" value="center"> Centers <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
-                          <input type="radio" name="service" value="pharmacy"> Pharmacies <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
-                          <input type="radio" name="service" value="lab"> Labs <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
+                          <input type="radio" name="service" value="all" checked> <%= t.write("All") %><br>
+                          <input type="radio" name="service" value="clinic"><%= t.write("Clinics") %><i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
+                          <input type="radio" name="service" value="hospital"> <%= t.write("Hospitals") %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
+                          <input type="radio" name="service" value="center"> <%= t.write("Centers") %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
+                          <input type="radio" name="service" value="pharmacy"> <%= t.write("Pharmacies") %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
+                          <input type="radio" name="service" value="lab"> <%= t.write("Labs") %> <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
                   	  </ul>
                   	  <ul class="list-unstyled">
                   	  	  <h4 class="text-center special-services">Special Services</h4>
-                          <input type="radio" name="service" value="icu"> ICU <br>
-                          <input type="radio" name="service" value="mri"> MRI<br>
+                          <input type="radio" name="service" value="icu"> <%= t.write("ICU") %> <br>
+                          <input type="radio" name="service" value="mri"> <%= t.write("MRI") %><br>
                       </ul>
                       <div class="guide-label">
                       	<div class="available-color">
-                      		<i class="fa fa-map-marker-alt avialable-pin"></i> <span>Available today</span>
+                      		<i class="fa fa-map-marker-alt avialable-pin"></i> <span><%= t.write("Available Today") %></span>
                       	</div>
                       	<div class="unavailable-color">
-                      		<i class="fa fa-map-marker-alt unavialable-pin"></i> <span>Unavailable today</span>
+                      		<i class="fa fa-map-marker-alt unavialable-pin"></i> <span><%= t.write("Unavailable today") %></span>
                       	</div>
                       </div>
                       </div>
                     </div>
-                    <button class="btn btn-primary find-me" id="findme">locate me</button>
+                    <button class="btn btn-primary find-me" id="findme"><%= t.write("locate me") %></button>
                     
                 </div>
                 
@@ -167,7 +166,7 @@ function initAutocomplete() {
 var locations = [
 	<% for(Location loc : locations){ %>
 	
-		[<%= loc.getLat() %>, <%= loc.getLang() %>, "<%= loc.getName() %>" ,"<%= loc.getPinColor() %>", "<%= loc.getType() %>", "<%= loc.getUrl() %>"],
+		[<%= loc.getLat() %>, <%= loc.getLang() %>, "<%= t.write(loc.getName()) %>" ,"<%= loc.getPinColor() %>", "<%= loc.getType() %>", "<%= loc.getUrl() %>"],
 		
 	<% }%>
                          ];
