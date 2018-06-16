@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	var cookie = document.cookie;
-	
+	console.log(cookie);
 	switch(cookie){
 	
 		case "lang=en": 
@@ -9,7 +9,7 @@ $(document).ready(function(){
 		case "lang=ar":
 			break;
 		default:
-			document.cookie = "lang=en";
+			document.cookie = "lang=en;path=/";
 			location.reload();
 			break;
 	}
@@ -20,10 +20,8 @@ $(document).ready(function(){
     	
     	var id = $(this).attr("id");
     	    	
-    	document.cookie = "lang=" + id;
-    	
-    	var cookie = document.cookie;
-    	
+    	document.cookie = "lang=" + id + ";path=/"; 
+    	    	    	
     	location.reload();
     	
     });

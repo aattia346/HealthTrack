@@ -343,6 +343,5 @@ public static boolean validateText(String name) {
 		return valid;
 	}
 
-
 }
 

@@ -1,5 +1,6 @@
 package com.gp.controllers;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
@@ -7,7 +8,10 @@ import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
+import org.json.simple.parser.ParseException;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.user.Person;
 import com.gp.user.PersonDao;
+import com.gp.user.Translator;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -23,15 +28,18 @@ import com.gp.user.Validation;
 public class UserRegisterationController {
 	
 	@RequestMapping(value = "/HealthTrack/signup", method = RequestMethod.GET)
-    public ModelAndView showForm() {	
+    public ModelAndView showForm(ModelMap model, @CookieValue(value = "lang", defaultValue="en") String cookie) {	
+		
+		model.addAttribute("lang", cookie);
 		ModelAndView mav = new ModelAndView("/user/userRegisteration");
         return mav;
     }
 	
 	@RequestMapping(value = "/HealthTrack/forgetpassword/resendCode", method = RequestMethod.GET)
-    public ModelAndView resendCodeToRecoverPassword(HttpSession session, ModelAndView mav)
+    public ModelAndView resendCodeToRecoverPassword(ModelMap model, @CookieValue(value = "lang", defaultValue="en") String cookie,HttpSession session, ModelAndView mav)
     throws InstantiationException, IllegalAccessException, ClassNotFoundException,SQLException,AddressException {	
 		
+		model.addAttribute("lang", cookie);
 		if(session.isNew()) {
 			mav.setViewName("redirect:/HealthTrack/login");
 		}else {
@@ -44,9 +52,10 @@ public class UserRegisterationController {
     }
 	
 	@RequestMapping(value = "/HealthTrack/verifymyaccount/resendCode", method = RequestMethod.GET)
-    public ModelAndView resendCodeToVerifyAccount(HttpSession session, ModelAndView mav)
+    public ModelAndView resendCodeToVerifyAccount(ModelMap model, @CookieValue(value = "lang", defaultValue="en") String cookie,HttpSession session, ModelAndView mav)
     throws InstantiationException, IllegalAccessException, ClassNotFoundException,SQLException,AddressException {	
 		
+		model.addAttribute("lang", cookie);
 		if(session.isNew()) {
 			mav.setViewName("redirect:/HealthTrack/login");
 		}else {
@@ -57,18 +66,14 @@ public class UserRegisterationController {
 		}
         return mav;
     }
-	
-	@RequestMapping(value = "/HealthTrack/signup/submit", method = RequestMethod.GET)
-    public ModelAndView registerSubmitWithGetMethod() {	
-		ModelAndView mav = new ModelAndView("/user/userRegisteration");
-        return mav;
-    }
-	
+
 	@RequestMapping(value = "/HealthTrack/signup/submit", method = RequestMethod.POST)
-    public ModelAndView registerSubmit(HttpServletRequest request, ModelMap model)
+    public ModelAndView registerSubmit(@CookieValue(value = "lang", defaultValue="en") String cookie,HttpServletRequest request, ModelMap model)
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException,
-    NoSuchAlgorithmException, AddressException {
+    NoSuchAlgorithmException, AddressException, ParseException, JSONException, IOException {
 		
+		Translator t = new Translator(cookie);
+		model.addAttribute("lang", cookie);
 		ModelAndView verifyMav  = new ModelAndView("/user/verificationPage");
 		ModelAndView registerMav = new ModelAndView("/user/userRegisteration");
 		
@@ -89,44 +94,44 @@ public class UserRegisterationController {
 		boolean errors = true;
 		
 		if(!Validation.validateName(firstName)) {
-			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid First Name</p>");
+			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid First Name") + "</p>");
 			errors = false;
 		}
 		if(!Validation.validateName(lastName)) {
-			model.addAttribute("invalidLastName", "<p class=\"wrong-input wrong-input-register-input-2\">Invalid Last Name</p>");
+			model.addAttribute("invalidLastName", "<p class=\"wrong-input wrong-input-register-input-2\">" + t.write("Invalid Last Name") + "</p>");
 			errors = false;
 		}
 		if(!Validation.validateUsername(username)) {
-			model.addAttribute("invalidUsername", "<p class=\"wrong-input\">Invalid username</p>");
+			model.addAttribute("invalidUsername", "<p class=\"wrong-input\">" + t.write("Invalid username") + "</p>");
 			errors = false;
 		}
 		if(Validation.checkIfSomethingExists("username", "user", username)) {
-			model.addAttribute("usernameAlreadyExists", "<p class=\"wrong-input\">Sorry this username has been taken</p>");
+			model.addAttribute("usernameAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this username has been taken") + "</p>");
 			errors = false;
 		}
 		if(password.length()<6) {
-			model.addAttribute("invalidPassword", "<p class=\"wrong-input\">Password shouldn't be less than 6 characters</p>");
+			model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters") + "</p>");
 			errors = false;
 		}
 		if(!password.equals(confirmPassword)) {
-			model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">Password doesn't match</p>");
+			model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match") + "</p>");
 			errors = false;
 		}
 		if(!Validation.validatePhone(phone)) {
-			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">Invalid Phone Number</p>");
+			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">" + t.write("Invalid Phone Number") + "</p>");
 			errors = false;
 		}
 		if(!Validation.validateEmail(email)) {
-			model.addAttribute("invalidEmail", "<p class=\"wrong-input\">Invalid Email</p>");
+			model.addAttribute("invalidEmail", "<p class=\"wrong-input\">" + t.write("Invalid Email") + "</p>");
 			errors = false;
 		}
 		if(Validation.checkIfSomethingExists("email", "person", email)) {
-			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">Sorry this email alreay exists</p>");
+			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this email alreay exists") + "</p>");
 			errors = false;
 		}
 		
 		if(Validation.checkEmailBan("email")) {
-			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">Sorry this email is banned</p>");
+			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">" + t.write("Sorry this email is banned") + "</p>");
 			errors = false;
 		}
 	

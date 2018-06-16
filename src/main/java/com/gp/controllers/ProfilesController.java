@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +23,10 @@ import com.gp.user.Validation;
 public class ProfilesController {
 	
 	@RequestMapping(value="/HealthTrack/changePassword/{userId}", method = RequestMethod.GET)
-    public ModelAndView changePassword(@PathVariable("userId") int id, ModelAndView mav, ModelMap m, HttpServletRequest request) 
+    public ModelAndView changePassword(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("userId") int id, ModelAndView mav, ModelMap m, HttpServletRequest request) 
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(id) & 
 				Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {		
 			HttpSession session = request.getSession();
@@ -44,9 +46,10 @@ public class ProfilesController {
     }
 	
 	@RequestMapping(value="/HealthTrack/profile/hospital/{userId}", method = RequestMethod.GET)
-    public ModelAndView hospitalProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    public ModelAndView hospitalProfile(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-
+		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			m.addAttribute("hospitalId", id);
 			String url = "/user/profiles/hospital";
@@ -60,9 +63,10 @@ public class ProfilesController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/profile/center/{userId}", method = RequestMethod.GET)
-    public ModelAndView centerProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    public ModelAndView centerProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-
+		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			m.addAttribute("centerId", id);
 			String url = "/user/profiles/center";
@@ -76,9 +80,10 @@ public class ProfilesController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/profile/service/{place}/{id}", method = RequestMethod.GET)   
-	public ModelAndView servicePage(ModelMap m, HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav, @PathVariable("place") String place) 
+	public ModelAndView servicePage(ModelMap m, HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav, @PathVariable("place") String place, @CookieValue(value = "lang", defaultValue="en") String cookie) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-
+		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("service_id", "service", Integer.toString(id))) {
 			
 			m.addAttribute("serviceId", id);
@@ -94,8 +99,10 @@ public class ProfilesController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/profile/user/{id}", method = RequestMethod.GET)   
-	public ModelAndView personPage(HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav) 
+	public ModelAndView personPage(ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		m.addAttribute("lang", "coookie");
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			String url = "/user/profiles/user";
 			mav.setViewName(url);			
@@ -108,8 +115,10 @@ public class ProfilesController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/profile/booking/delete/{userId}/{bookingId}", method = RequestMethod.GET)   
-	public ModelAndView deleteBooking(HttpServletRequest request, @PathVariable("userId") int userId, @PathVariable("bookingId") int bookingId, ModelAndView mav) 
+	public ModelAndView deleteBooking(ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request, @PathVariable("userId") int userId, @PathVariable("bookingId") int bookingId, ModelAndView mav) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(bookingId) & Validation.checkIfSomethingExists("id", "booking", Integer.toString(bookingId))
 				& Validation.validateNumber(userId) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(userId))) {
 			
@@ -126,9 +135,10 @@ public class ProfilesController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/profile/clinic/{userId}", method = RequestMethod.GET)
-    public ModelAndView clinicProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    public ModelAndView clinicProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-
+		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			m.addAttribute("clinicId", id);
 			String url = "/user/profiles/clinic";
@@ -142,9 +152,10 @@ public class ProfilesController {
 	}
 
 	@RequestMapping(value="/HealthTrack/profile/pharmacy/{userId}", method = RequestMethod.GET)
-    public ModelAndView pharmacyProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m) 
+    public ModelAndView pharmacyProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-
+		
+		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
 			m.addAttribute("parmacyId", id);
 			String url = "/user/profiles/pharmacy";
@@ -156,4 +167,5 @@ public class ProfilesController {
         return mav;
 	
 	}
+
 }

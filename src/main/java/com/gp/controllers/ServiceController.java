@@ -1,5 +1,6 @@
 package com.gp.controllers;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
@@ -11,7 +12,9 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +26,7 @@ import com.gp.user.BookingDao;
 import com.gp.user.ClinicDao;
 import com.gp.user.PersonDao;
 import com.gp.user.ServiceDao;
+import com.gp.user.Translator;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -32,9 +36,11 @@ import com.gp.user.Validation;
 public class ServiceController {
 	
 	@RequestMapping(value="/HealthTrack/clinic/{clinicId}/BookingClinic/Submit", method = RequestMethod.POST)
-    public ModelAndView submitBookingClinic(@PathVariable("clinicId") int clinicId,ModelAndView mav, ModelMap model, HttpServletRequest request)
-    throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public ModelAndView submitBookingClinic(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("clinicId") int clinicId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
+		Translator t = new Translator(cookie);
+		model.addAttribute("lang", cookie);
 		int userId 			= Integer.parseInt(request.getParameter("userId"));
 		String firstName 	= request.getParameter("firstName");
 		String lastName 	= request.getParameter("lastName");
@@ -60,33 +66,33 @@ public class ServiceController {
 			boolean errors = false;
 			
 			if(!Validation.validateName(firstName) || !Validation.validateName(lastName)) {
-				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Name</p>");
+				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name") + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateEmail(email)) {
-				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Email</p>");
+				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email") + "</p>");
 				errors = true;
 			}
 			if(!Validation.validatePhone(phone)) {
-				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Phone Number</p>");
+				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number") + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateText(msg)) {
-				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">Your message has invalid characters</p>");
+				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters") + "</p>");
 				errors = true;
 			}
 			if(PersonDao.canPersonBook(userId)){
 				request.setAttribute("limitExceed", " ");				
 			}else{
-				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">Sorry you have reached the maximum number of bookings per day(3)</p>");
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
 				errors = true;
 			}
 			mav.addAllObjects(model);
 			if(errors) {
 				model.addAttribute("clinicId", clinicId);
-				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">Your information have some errors, Please check the booking and resend it</div>");
+				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it") + "</div>");
 				mav.setViewName("user/profiles/clinic");
 			}else {
 				Booking booking = new Booking();
@@ -105,7 +111,7 @@ public class ServiceController {
 			}
 		}else {
 			model.addAttribute("clinicId", clinicId);
-			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">To book Please <a target=\"_blank\" href=\"/HealthTrack/login\">Login</a> First or <a target=\"_blank\" href=\"/HealthTrack/signup\">Register</a></div>");
+			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("to book please") + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("login") + "</a>" + t.write("first or") + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("register") + "</a></div>");
 			mav.setViewName("user/profiles/clinic");
 		}
 		
@@ -114,9 +120,11 @@ public class ServiceController {
 	}
 		
 	@RequestMapping(value="/HealthTrack/{place}/Service/{serviceId}/BookingDay/Submit", method = RequestMethod.POST)
-    public ModelAndView submitBookingDay(@PathVariable("serviceId") int serviceId, @PathVariable("place") String place,ModelAndView mav, ModelMap model, HttpServletRequest request)
-    throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public ModelAndView submitBookingDay(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
+		Translator t = new Translator(cookie);
+		model.addAttribute("lang", cookie);
 		int userId 			= Integer.parseInt(request.getParameter("userId"));
 		String firstName 	= request.getParameter("firstName");
 		String lastName 	= request.getParameter("lastName");
@@ -144,40 +152,40 @@ public class ServiceController {
 			boolean errors = false;
 			
 			if(!Validation.validateName(firstName) || !Validation.validateName(lastName)) {
-				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Name</p>");
+				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name") + "</p>");
 				errors = true;
 			}
 			if(!Validation.validateEmail(email)) {
-				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Email</p>");
+				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email") + "</p>");
 				errors = true;
 			}
 			if(!Validation.validatePhone(phone)) {
-				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Phone Number</p>");
+				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number") + "</p>");
 				errors = true;
 			}
 			if(!Validation.validateBookDate(serviceId, bookFromAsDate) || !Validation.validateBookDate(serviceId, bookToAsDate)) {
-				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">Sorry this date has been already booked</p>");
+				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry this date has been already booked") + "</p>");
 				errors = true;
 			}
 			if(bookFromAsDate.after(bookToAsDate)) {
-				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Date</p>");
+				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Date") + "</p>");
 				errors = true;
 			}
 			if(!Validation.validateText(msg)) {
-				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">Your message has invalid characters</p>");
+				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters") + "</p>");
 				errors = true;
 			}
 			if(PersonDao.canPersonBook(userId)){
 				request.setAttribute("limitExceed", " ");				
 			}else{
-				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">Sorry you have reached the maximum number of bookings per day(3)</p>");
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
 				errors = true;
 			}
 			mav.addAllObjects(model);
 			if(errors) {
 				model.addAttribute("serviceId", serviceId);
 				model.addAttribute("place", place);
-				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">Your information have some errors, Please check the booking and resend it</div>");
+				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it") + "</div>");
 				mav.setViewName("user/profiles/service");
 			}else {
 				Booking booking = new Booking();
@@ -198,7 +206,7 @@ public class ServiceController {
 		}else {
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("place", place);
-			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">To book Please <a target=\"_blank\" href=\"/HealthTrack/login\">Login</a> First or <a target=\"_blank\" href=\"/HealthTrack/signup\">Register</a></div>");
+			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("To book Please") + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("Login") + "</a>" + t.write("First or") + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("Register") + "</a></div>");
 			mav.setViewName("user/profiles/service");
 		}
 		
@@ -207,9 +215,11 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/{place}/Service/{serviceId}/BookingTime/Submit", method = RequestMethod.POST)
-    public ModelAndView submitBookingTime(@PathVariable("serviceId") int serviceId, @PathVariable("place") String place,ModelAndView mav, ModelMap model, HttpServletRequest request)
-    throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public ModelAndView submitBookingTime(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
+		Translator t = new Translator(cookie);
+		model.addAttribute("lang", cookie);
 		int userId 			= Integer.parseInt(request.getParameter("userId"));
 		String firstName 	= request.getParameter("firstName");
 		String lastName 	= request.getParameter("lastName");
@@ -242,39 +252,39 @@ public class ServiceController {
 			try {
 				time = new java.sql.Time(formatter.parse(request.getParameter("time")).getTime());
 			} catch (Exception e) {
-				model.addAttribute("invalidTime", "<p class=\"wrong-input wrong-input-register-page-1\">Please choose time</p>");
+				model.addAttribute("invalidTime", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please choose time") + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateName(firstName) || !Validation.validateName(lastName)) {
-				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Name</p>");
+				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name") + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateEmail(email)) {
-				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Email</p>");
+				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email") + "</p>");
 				errors = true;
 			}
 			if(!Validation.validatePhone(phone)) {
-				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid Phone Number</p>");
+				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number") + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateText(msg)) {
-				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">Your message has invalid characters</p>");
+				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters") + "</p>");
 				errors = true;
 			}
 			if(PersonDao.canPersonBook(userId)){
 				request.setAttribute("limitExceed", " ");				
 			}else{
-				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">Sorry you have reached the maximum number of bookings per day(3)</p>");
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
 				errors = true;
 			}
 			mav.addAllObjects(model);
 			if(errors) {
 				model.addAttribute("serviceId", serviceId);
 				model.addAttribute("place", place);
-				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">Your information have some errors, Please check the booking and resend it</div>");
+				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it") + "</div>");
 				mav.setViewName("user/profiles/service");
 			}else {
 				Booking booking = new Booking();
@@ -295,8 +305,7 @@ public class ServiceController {
 		}else {
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("place", place);
-			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">To book Please <a target=\"_blank\" href=\"/HealthTrack/login\">Login</a> First or <a target=\"_blank\" href=\"/HealthTrack/signup\">Register</a></div>");
-			mav.setViewName("user/profiles/service");
+			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("To book Please") + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("Login") + "</a>" + t.write("First or") + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("Register") + "</a></div>");			mav.setViewName("user/profiles/service");
 		}
 		
 		return mav;
@@ -304,9 +313,10 @@ public class ServiceController {
 	}
 
 	@RequestMapping(value="/healthTrack/Service/VerifyBooking/{serviceId}/{bookingId}", method = RequestMethod.GET)
-    public ModelAndView verifyBooking(@PathVariable("bookingId") int bookingId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView verifyBooking(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("bookingId") int bookingId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
+		model.addAttribute("lang", cookie);
 		if(!Validation.checkIfSomethingExists("id", "booking", Integer.toString(bookingId)) || !Validation.checkIfSomethingExists("service_id", "service", Integer.toString(serviceId))){
 			mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
 		}else {
@@ -330,9 +340,10 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/healthTrack/Service/UnverifyBooking/{serviceId}/{bookingId}", method = RequestMethod.GET)
-    public ModelAndView unverifyBooking(@PathVariable("bookingId") int bookingId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView unverifyBooking(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("bookingId") int bookingId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
+		model.addAttribute("lang", cookie);
 		if(!Validation.checkIfSomethingExists("id", "booking", Integer.toString(bookingId))){
 			mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
 		}else {
@@ -356,9 +367,10 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/healthTrack/Service/DeleteBooking/{serviceId}/{bookingId}", method = RequestMethod.GET)
-    public ModelAndView deleteBooking(@PathVariable("bookingId") int bookingId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView deleteBooking(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("bookingId") int bookingId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
+		model.addAttribute("lang", cookie);
 		if(!Validation.checkIfSomethingExists("id", "booking", Integer.toString(bookingId))){
 			mav.setViewName("redirect:/HealthTrack/profile/service/"+serviceId);
 		}else {
@@ -382,9 +394,11 @@ public class ServiceController {
 	}
 
 	@RequestMapping(value="/healthTrack/Service/review/{place}/{placeId}/{serviceId}/{userId}/{review}", method = RequestMethod.POST)
-    public void review(@PathVariable("place") String place, @PathVariable("placeId") int placeId, @PathVariable("review") int review, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public void review(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("place") String place, @PathVariable("placeId") int placeId, @PathVariable("review") int review, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-			if(ServiceDao.checkUserReviewOfService(userId, serviceId)) {
+		
+		model.addAttribute("lang", cookie);
+		if(ServiceDao.checkUserReviewOfService(userId, serviceId)) {
 				ServiceDao.updateUserServiceReview(userId, serviceId, review);	
 			}else {
 				ServiceDao.setServiceReview(userId, serviceId, review);
@@ -398,22 +412,24 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/healthTrack/Service/{place}/review/{serviceId}/{userId}/comment", method = RequestMethod.POST)
-    public ModelAndView reviewComment(@PathVariable("place") String place, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
-    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public ModelAndView reviewComment(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("place") String place, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
+		Translator t = new Translator(cookie);
+		model.addAttribute("lang", cookie);
 		if(userId == 0) {
-			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">Please login first</p>");
+			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please login first") + "</p>");
 		}else if(UserDao.canUserComment(userId, serviceId)) {
 			
 				String comment = request.getParameter("comment");
 							
 				if(!Validation.validateText(comment)) {
-					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid vharacters in your comment</p>");	
+					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment") + "</p>");	
 				}else {
 					ServiceDao.insertComment(userId, serviceId, comment);
 				}				
 			}else {
-				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">sorry you reached the maximum number of comments for this service</p>");
+				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service") + "</p>");
 			}
 		
 		model.addAttribute("serviceId", serviceId);
@@ -423,9 +439,10 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/healthTrack/clinic/review/{clinicId}/{userId}/{review}", method = RequestMethod.POST)
-    public void clinicReview(@PathVariable("clinicId") int clinicId, @PathVariable("review") int review, @PathVariable("userId") int userId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public void clinicReview(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("clinicId") int clinicId, @PathVariable("review") int review, @PathVariable("userId") int userId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+			
+			model.addAttribute("lang", cookie);
 			if(ClinicDao.checkUserReviewOfClinic(userId, clinicId)) {
 				ClinicDao.updateUserClinicReview(userId, clinicId, review);	
 			}else {
@@ -436,22 +453,24 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/healthTrack/clinic/review/{clinicId}/{userId}/comment", method = RequestMethod.POST)
-    public ModelAndView clinicComment(@PathVariable("userId") int userId, @PathVariable("clinicId") int clinicId, ModelAndView mav, ModelMap model, HttpServletRequest request)
-    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public ModelAndView clinicComment(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("userId") int userId, @PathVariable("clinicId") int clinicId, ModelAndView mav, ModelMap model, HttpServletRequest request)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
+		Translator t = new Translator(cookie);
+		model.addAttribute("lang", cookie);
 		if(userId == 0) {
-			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">Please login first</p>");
+			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please login first") + "</p>");
 		}else if(UserDao.canUserComment(userId, clinicId)) {
 			
 				String comment = request.getParameter("comment");
 							
 				if(!Validation.validateText(comment)) {
-					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">Invalid vharacters in your comment</p>");	
+					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment") + "</p>");	
 				}else {
 					ClinicDao.insertComment(userId, clinicId, comment);
 				}				
 			}else {
-				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">sorry you reached the maximum number of comments for this service</p>");
+				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service") + "</p>");
 			}
 		
 		model.addAttribute("clinicId", clinicId);

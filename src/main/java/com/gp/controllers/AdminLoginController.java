@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,10 @@ import com.gp.user.Validation;
 public class AdminLoginController {
 	
 	@RequestMapping(value="/HealthTrack/admin/login", method = RequestMethod.GET)
-	public ModelAndView adminLogin(Model model, ModelAndView mav, HttpServletRequest request)
+	public ModelAndView adminLogin(@CookieValue(value="lang", defaultValue="en") String cookie, Model model, ModelAndView mav, HttpServletRequest request)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {

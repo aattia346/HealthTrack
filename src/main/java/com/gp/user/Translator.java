@@ -11,11 +11,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class Translation {
+public class Translator {
 	
 	private Map<String , String> translate = new HashMap<String , String>();
 	
-	public Translation(String language) throws ParseException, JSONException, IOException {
+	public Translator(String language) throws ParseException, JSONException, IOException {
 				
 		JSONParser parser = new JSONParser();
 				

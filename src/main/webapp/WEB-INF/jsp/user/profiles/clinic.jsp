@@ -15,10 +15,15 @@
 <%@page import="com.gp.user.PersonDao"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<% 
+<%
 int clinicId = (Integer)request.getAttribute("clinicId");
 
 Clinic clinic = ClinicDao.getClinicById(clinicId);
+
+String title = clinic.getClinicName(); 
+%>
+<%@include  file="../includes/header.jsp" %>
+<% 
 
 Calendar calendar = Calendar.getInstance();
 Date today = Calendar.getInstance().getTime();
@@ -28,8 +33,6 @@ String todayInTableFormat = tableFormat.format(today);
 
 SimpleDateFormat todayFormat = new SimpleDateFormat ("yyyy-MM-dd");
 String todayInMyFormat = todayFormat.format(today);
-
-String title = clinic.getClinicName(); 
 
 HashMap<String,Appointment> apps = ClinicDao.getAppointmentOfClinic(clinicId);
 
@@ -46,14 +49,13 @@ if(username != null){
 	if(PersonDao.canPersonBook(user.getId())){
 		request.setAttribute("limitExceed", " ");
 	}else{
-		request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">Sorry you have reached the maximum number of bookings per day(3)</p>");
+		request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
 	}
 	if(user.getType().equalsIgnoreCase("person")){
 		showForm = true;
 	}
 }
 %>
-<%@include  file="../includes/header.jsp" %>
     <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>
@@ -66,8 +68,8 @@ if(username != null){
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title"><%= clinic.getClinicName() %></h3>
-                        <p class="breadcumb-intro"><%= clinic.getIntro() %></p>
+                        <h3 class="breadcumb-title"><%= t.write(clinic.getClinicName()) %></h3>
+                        <p class="breadcumb-intro"><%= t.write(clinic.getIntro()) %></p>
                     </div>
                 </div>
                 ${checkYourBooking} ${loginFirst}
@@ -80,19 +82,19 @@ if(username != null){
         <div class="container">
             <div class="row">
             <% if(!showForm){ %>
-                    <div class="col-sm-12 alert alert-info text-center booking-alert">To book Please <a href="/HealthTrack/login" target="_blank">Login</a> First or <a href="/HealthTrack/signup">Register</a></div>
+                    <div class="col-sm-12 alert alert-info text-center booking-alert"><%= t.write("to book please") %> <a href="/HealthTrack/login" target="_blank">Login</a> First or <a href="/HealthTrack/signup">Register</a></div>
                      <% } %>
                 <div class="col-12">
                     <div class="appointment-form-content">
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9 col-md-6">
                              <div class="my-table text-center my-table-clinic">
-                             <div class="unbooked-slots pull-left"></div><span>Available session</span>
+                             <div class="unbooked-slots pull-left"></div><span><%= t.write("available session") %></span>
                             <table class="table table-bordered">
                     
                         <thead>
                             <tr class="table-head">
-                            	<th>Date</th>
+                            	<th><%= t.write("date") %></th>
                                 <th><%= todayInTableFormat %></th>
                                 <% for(int i=1; i<7; i++){
                                 		calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -108,7 +110,7 @@ if(username != null){
                           </thead>
                         <tbody>
                             <tr>
-                              <td class="another-table-head">From</td>
+                              <td class="another-table-head"><%= t.write("from") %></td>
                               <c:forEach var="day" items="${days}">
                               <% String singleDay = (String)pageContext.getAttribute("day");
                               	 Appointment A = apps.get(singleDay.toLowerCase());
@@ -126,7 +128,7 @@ if(username != null){
                               </c:forEach>
                           </tr>
                           <tr>
-                             <td class="another-table-head">To</td>
+                             <td class="another-table-head"><%= t.write("to") %>To</td>
                               <c:forEach var="day" items="${days}">
                               <% String singleDay = (String)pageContext.getAttribute("day");
                               	 Appointment A = apps.get(singleDay.toLowerCase());
@@ -153,24 +155,24 @@ if(username != null){
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="firstName" id="name" placeholder="First Name" value="${oldFirstName}" required="required">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="firstName" id="name" placeholder="<%= t.write("first name") %>" value="${oldFirstName}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="lastName" id="name" placeholder="Last Name"value="${oldLastName}" required="required">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="lastName" id="name" placeholder="<%= t.write("last name") %>"value="${oldLastName}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="number" max = "120" class="form-control" name="age" placeholder="Age" min="0" maxlength="2" value="${oldAge}" required="required">
+                                                    <input type="number" max = "120" class="form-control" name="age" placeholder="<%= t.write("age") %>" min="0" maxlength="2" value="${oldAge}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
                                                 	<select class="form-control" name="sex">
-                                                		<option value="male">Male</option>
-                                                		<option value="female">Female</option>
+                                                		<option value="male"><%= t.write("male") %></option>
+                                                		<option value="female"><%= t.write("female") %></option>
                                                 	</select>
                                                 </div>
                                             </div>
@@ -193,22 +195,22 @@ if(username != null){
                                             
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" placeholder="Phone" value="${oldPhone}" required="required">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" placeholder="<%= t.write("phone") %>" value="${oldPhone}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="E-mail" value="${oldEmail}" required="required">
+                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="<%= t.write("email") %>" value="${oldEmail}" required="required">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12">
                                                 <div class="form-group mb-0">
-                                                    <textarea name="msg" class="form-control mb-0 border-top-0 border-right-0 border-left-0" cols="30" rows="10" placeholder="Message">${oldmsg}</textarea>
+                                                    <textarea name="msg" class="form-control mb-0 border-top-0 border-right-0 border-left-0" cols="30" rows="10" placeholder="<%= t.write("message") %>">${oldmsg}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-4 mb-0">
                                                 <div class="form-group mb-0">
-                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment">Make an Appointment <span>+</span></button>
+                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment"><%= t.write("make an appointment") %><span>+</span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -220,7 +222,7 @@ if(username != null){
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
                                         <div class="single-contact-info-icon"><i class="fas fa-user-md fa-3x"></i></div>
-                                        <p><%= clinic.getClinicName() %></p>                                        
+                                        <p><%= t.write(clinic.getClinicName()) %></p>                                        
                                     </div>
                                     <div class="single-contact-info mb-30">
                                     	<div class="single-contact-info-icon"><i class="fa fa-phone fa-3x"></i></div>
@@ -228,7 +230,7 @@ if(username != null){
                                     </div>
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
-                                        <p> <%= clinic.getAddress() %></p>
+                                        <p> <%= t.write(clinic.getAddress()) %></p>
                                     </div><br><br>
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
@@ -246,22 +248,22 @@ if(username != null){
             </div>
             <div class="review clinic-review">            
 	            <div class="overlay">
-	           		<h2 class="text-center">Rate The Service </h2>
+	           		<h2 class="text-center"><%= t.write("rate this service") %></h2>
 	           		<div class="row">
 	           			<div class="col-sm-offset-2 col-sm-4 rateYo">
 	           				<div id="rateYo"></div>	
-	           				<div id="reviewSucceeded" class="reviewSucceeded ">Thanks for your opinion <i class="fas fa-smile"></i></div>           				
-	           				<div id="reviewFailed" class="reviewFailed">Please login first <i class="fas fa-frown"></i></div>           				
+	           				<div id="reviewSucceeded" class="reviewSucceeded "><%= t.write("thanks for your opinion") %> <i class="fas fa-smile"></i></div>           				
+	           				<div id="reviewFailed" class="reviewFailed"><%= t.write("please login first") %> <i class="fas fa-frown"></i></div>           				
 	           				
 	           			</div>
 	           			<form class="review-form" method="post" action="/healthTrack/clinic/review/<%= clinic.getClinicId() %>/<%= user.getId() %>/comment">
 	           						<div class="col-sm-offset-2 col-sm-8 col-xs-12">
 	           							<div class="form-group">
-	           								<textarea class="form-control mb-0 border-top-0 border-right-0 border-left-0" rows="10" name="comment" placeholder="write any comment...." maxlength="500"></textarea>
+	           								<textarea class="form-control mb-0 border-top-0 border-right-0 border-left-0" rows="10" name="comment" placeholder="<%= t.write("write comments") %>" maxlength="500"></textarea>
 	           								${invalidComment} ${commentsLimitExceeded} ${commentLoginFirst}
 	           						<div class="">
 	           							<div class="form-group">
-	           								<button type="submit" class="btn btn-success form-group col-xs-12"> <i class="fas fa-location-arrow"></i> Submit your comment</button>
+	           								<button type="submit" class="btn btn-success form-group col-xs-12"> <i class="fas fa-location-arrow"></i> <%= t.write("submit your comment") %></button>
 	           							</div>
 	           						</div>
 	           							</div>

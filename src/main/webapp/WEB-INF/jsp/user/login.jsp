@@ -17,31 +17,31 @@
                             
                 	<div class="form-group">
                     	<label><%= t.write("username:") %></label>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required value="${oldUsername}">                          
+                        <input type="text" class="form-control" name="username" placeholder="<%= t.write("username") %>" required value="${oldUsername}">                          
                     </div>
                             
                     ${invalidUsername}
                             
                     <div class="form-group">
                     	<label><%= t.write("password:") %></label>
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" placeholder="<%= t.write("password") %>" required>
                     </div>
                             
           	        ${notAuthenticated}
                             
                     <div class="form-group">
-              	      <input type="submit" class="form-control btn btn-primary" value="Submit">
+              	      <input type="submit" class="form-control btn btn-primary" value="<%= t.write("submit") %>">
                     </div>
                     
              	</form>
                         
                 <div class="form-group">
-	                <a class="text-center" href="/HealthTrack/login/forgetmypassword">Forget your password?</a>
+	                <a class="text-center" href="/HealthTrack/login/forgetmypassword"><%= t.write("forget your password?") %></a>
                 </div>
                         
                 <div class="text-center">
                     <a href="/HealthTrack/signup" class="btn btn-danger form-control">
-                       	<i class="fa fa-plus fa-lg"></i> Create New Account
+                       	<i class="fa fa-plus fa-lg"></i> <%= t.write("create new account") %>
                   	</a>
                 </div>
                         

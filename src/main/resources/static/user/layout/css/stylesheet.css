@@ -304,6 +304,34 @@ header{
 	right: 12px;
 	top: 5px;
 }
+.login-register{
+	position: absolute;
+    top: 14px;
+    right: 131px;
+    color: #fff;
+}
+.login-register a{
+	color: #fff;
+}
+.translation img:first-of-type{
+	width: 35px;
+    height: 28px;
+    margin: 20px;
+    position: absolute;
+    top: -9px;
+    right: 10px;
+    cursor: pointer;
+}
+.translation img:nth-of-type(2){
+	width: 53px;
+    height: 44px;
+    margin: 20px;
+    margin-right: -7px;
+    position: absolute;
+    top: -15px;
+    right: 75px;
+    cursor: pointer;
+}
 .navbar-user img{
 	width: 34px;
     margin-right: 3px;

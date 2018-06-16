@@ -37,8 +37,8 @@ String dayName = dayFormat.format(today);
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title"><%= H.getHospitalName() %></h3>
-                        <p><%= H.getIntro() %></p>
+                        <h3 class="breadcumb-title text-capitalize"><%= t.write(H.getHospitalName()) %></h3>
+                        <p><%= t.write(H.getIntro()) %></p>
                     </div>
                     <div class="hospital-review">
                     	<i class="far fa-star fa-3x"></i> <span><%= Math.round(H.getReview()*10.0)/10.0 %></span>
@@ -64,8 +64,8 @@ String dayName = dayFormat.format(today);
                     <div class="single-service-area d-flex">
                         
                         <div class="service-content">
-                            <h5><%= d.getDeptName() %></h5>
-                            <p>Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
+                            <h5 class="text-capitalize"><%= t.write(d.getDeptName()) %></h5>
+                            <p><%= t.write("Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.") %></p>
                         </div>
                     </div>
                 </div>
@@ -82,24 +82,24 @@ String dayName = dayFormat.format(today);
                         <div class="blog-post-thumbnail">
                             <img src="/user/layout/images/profiles/blog-img/${service.getServiceName()}.png" alt="">
                             <!-- Post Date -->
-                            <div class="post-date">
+                            <div class="post-date text-capitalize">
                             <%	Service service = (Service)pageContext.getAttribute("service");
 					            Calendar calendar = Calendar.getInstance();
 			                	calendar.setTime(today);
 			                	//calendar.add(Calendar.DAY_OF_MONTH, -1);
 			                	if(service.getSlotType()== 1){
 	                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
-                                <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">Available today</a>
+                                <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}"> <%= t.write("available today") %></a>
                                 <% } 
                                 }else if(Validation.validateBookTime(service.getServiceId(), dayName , "hospital")){ %>
-                                	<a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">Available today</a>
+                                	<a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}"><%= t.write("available today") %></a>
                                 <% }%>
                             </div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}" class="headline">${service.serviceName}</a>
-                            <a href="#" class="comments">3 Comments</a>
+                            <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName()) %></a>
+                            <a href="#" class="comments">3 <%= t.write("comments") %></a>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,10 @@
-<%@page import="com.gp.user.Translation"%>
+<%@page import="com.gp.user.Translator"%>
+<%@page import="org.apache.commons.text.WordUtils" %>
 <%
     
     	String lang = (String)request.getAttribute("lang");
 
-    	Translation t = new Translation(lang);
+    	Translator t = new Translator(lang);
     
     %>
      	 
@@ -11,7 +12,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><%= title %></title>
+        <title><%= WordUtils.capitalize(t.write(title)) %></title>
 
 		<link rel="stylesheet" href="/user/layout/css/profiles/style.css">
         <link rel="stylesheet" href="/user/layout/css/bootstrap.min.css">
@@ -45,9 +46,10 @@
             <div class="container h-100">
                 <div class="row h-100">
                     <div class="col-12 h-100">
-                        <div class="h-100 d-md-flex justify-content-between align-items-center">
-                            <p><%= t.write("Welcome to") %><span><%= t.write("HealthTrack") %></span></p>
-                            <p class="pull-right" style="margin-right: 30px;"><%= t.write("introduction to healthtrack") %><span>+12-823-611-8721</span></p>
+                        <div class="h-100 d-md-flex justify-content-between align-items-center text-capitalize">
+                            <p><%= t.write("welcome to healthtrack") %></p>
+                            <p class="pull-right text-capitalize" style="margin-right: 220px;"><%= t.write("introduction to healthtrack") %>&ensp;<span>+12-823-611-8721</span></p>
+                        	<div class="translation"><img title="<%= t.write("english") %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png"><img id="ar" class="translate" title="<%= t.write("arabic") %>" src="/user/layout/images/egypt.svg"></div>
                         </div>
                         <% if(sessionExist){ %>
                         <div class="navbar-user">
@@ -57,8 +59,8 @@
 	                                <%= headerUsername %>
 	                                <span class="caret"></span>
 	                             </span>
-	                                <ul class="dropdown-menu">
-	                                    <li><a href="#"><%= t.write("My Profile") %></a></li>
+	                                <ul class="dropdown-menu text-capitalize">
+	                                    <li><a href="#"><%= t.write("my profile") %></a></li>
 	                                    <li><a href="#">My Ads</a></li>
 	                                    <li><a href="#">New Item</a></li>
 	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword"><%= t.write("change password") %></a></li>
@@ -67,9 +69,7 @@
 	                        </div>
 	                        </div>
 	                        <% }else{ %>
-	                        	<a href='/HealthTrack/login' class="login-signup">
-                        			<span class='pull-right'><%= t.write("login") %>&nbsp; | &nbsp; <%= t.write("signup") %></span>
-                    			</a>
+                        		<div class='login-register pull-right text-capitalize'><a href="/HealthTrack/login"><%= t.write("login") %></a>&nbsp; | &nbsp; <a href="/HealthTrack/signup"><%= t.write("signup") %></a></div>
 	                        <% }%>
                     </div>
                 </div>
@@ -89,31 +89,28 @@
 
                                 <div class="collapse navbar-collapse" id="medilifeMenu">
                                     <!-- Menu Area -->
-                                    <ul class="navbar-nav ml-auto">
+                                    <ul class="navbar-nav ml-auto text-capitalize">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html"><%= t.write("Home") %></a>
+                                            <a class="nav-link" href="index.html"><%= t.write("home") %></a>
                                         </li>
                                         
                                         <li class="nav-item">
-                                            <a class="nav-link" href="about-us.html"><%= t.write("About Us") %></a>
+                                            <a class="nav-link" href="about-us.html"><%= t.write("about us") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="services.html"><%= t.write("Services") %></a>
+                                            <a class="nav-link" href="services.html"><%= t.write("services") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="blog.html"><%= t.write("News") %></a>
+                                            <a class="nav-link" href="blog.html"><%= t.write("news") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="contact.html"><%= t.write("Contact") %></a>
+                                            <a class="nav-link" href="contact.html"><%= t.write("contact") %></a>
                                         </li>
                                     </ul>
                                     <!-- Appointment Button -->
                                     <a href="#" class="btn medilife-appoint-btn ml-30"><%= t.write("for") %> <span><%= t.write("emergencies") %></span> <%= t.write("click here") %></a>
                                 </div>
-                                <a id="en" class="translate"><%= t.write("English") %></a>
-						       &nbsp;|&nbsp;
-						        <a id="ar" class="translate"><%= t.write("Arabic") %></a>
-                            </nav>
+                             </nav>
                         </div>
                     </div>
                 </div>
