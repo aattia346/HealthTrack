@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +35,9 @@ import com.gp.user.Validation;
 public class DashboardController {
 	
 	@RequestMapping(value="/HealthTrack/admin/dashboard", method = RequestMethod.GET)
-	public ModelAndView dashboard(Model model, ModelAndView mav, HttpServletRequest request)
+	public ModelAndView dashboard(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -51,8 +52,9 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{place}", method = RequestMethod.GET)
-	public ModelAndView adminPlaces(Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
+	public ModelAndView adminPlaces(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -71,10 +73,11 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{place}/add", method = RequestMethod.GET)
-	public ModelAndView dashboard(Model model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
+	public ModelAndView dashboard(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
 			, @PathVariable("place") String place
 			, HttpSession session) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-			
+		
+		model.addAttribute("lang", cookie);
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
 			
@@ -97,9 +100,10 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/{place}/insert", method = RequestMethod.POST)
-	public ModelAndView insertHospital(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
+	public ModelAndView insertHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
 			, @PathVariable("place") String place) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+		    
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -210,7 +214,7 @@ public class DashboardController {
 								clinic.setDoctorName(doctorName);
 								clinic.setSpecialty(specialty);
 								ClinicDao.insertClinic(clinic);
-								mav.setViewName("redirect:/HealthTrack/admin"+username+"/clinics");
+								mav.setViewName("redirect:/HealthTrack/admin/"+username+"/clinics");
 							}else {
 								mav.setViewName("redirect/:HealthTrack/admin/login");
 							}
@@ -256,7 +260,7 @@ public class DashboardController {
 						center.setLat(lat);
 						center.setLang(lang);
 						CenterDao.insertCenter(center);
-						mav.setViewName("redirect:/HealthTrack/admin"+username+"/centers");
+						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/centers");
                        
 						
 					}
@@ -274,7 +278,7 @@ public class DashboardController {
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.insertPharmacy(pharmacy);
-						mav.setViewName("redirect:/HealthTrack/admin"+username+"/pharmacies");
+						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/pharmacies");
 					}
 					
 					
@@ -297,8 +301,9 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/addNewDepartment", method = RequestMethod.POST)
-	public ModelAndView submitDept(ModelMap model, ModelAndView mav, HttpServletRequest request)
+	public ModelAndView submitDept(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav, HttpServletRequest request)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -319,8 +324,9 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/deleteDepartment/{deptId}", method = RequestMethod.GET)
-	public ModelAndView deleteDept(Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("deptId") int deptId )
+	public ModelAndView deleteDept(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("deptId") int deptId )
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -339,11 +345,11 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{place}/{AdminId}/edit", method = RequestMethod.GET)
-	public ModelAndView editPlace(ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
+	public ModelAndView editPlace(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
 			, @PathVariable("place") String place
 			, HttpSession session, @PathVariable("AdminId") int AdminId)
 					throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-			
+		model.addAttribute("lang", cookie);	
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
 				if(username != null) {
