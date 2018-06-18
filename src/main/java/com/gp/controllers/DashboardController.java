@@ -210,6 +210,7 @@ public class DashboardController {
 								clinic.setDoctorName(doctorName);
 								clinic.setSpecialty(specialty);
 								ClinicDao.insertClinic(clinic);
+								mav.setViewName("redirect:/HealthTrack/admin"+username+"/clinics");
 							}else {
 								mav.setViewName("redirect/:HealthTrack/admin/login");
 							}
@@ -255,6 +256,7 @@ public class DashboardController {
 						center.setLat(lat);
 						center.setLang(lang);
 						CenterDao.insertCenter(center);
+						mav.setViewName("redirect:/HealthTrack/admin"+username+"/centers");
                        
 						
 					}
@@ -272,7 +274,7 @@ public class DashboardController {
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.insertPharmacy(pharmacy);
-                       
+						mav.setViewName("redirect:/HealthTrack/admin"+username+"/pharmacies");
 					}
 					
 					

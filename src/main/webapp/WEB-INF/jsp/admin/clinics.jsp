@@ -68,7 +68,7 @@
                       	%>
                       	<tr>
                         <td>${clinic.clinicId}</td>
-                        <td><a href="/HealthTrack/profile/hospital/${clinic.adminId}" target="_blank">${clinic.clinicName}</a></td>
+                        <td><a href="/HealthTrack/profile/clinic/${clinic.adminId}" target="_blank">${clinic.clinicName}</a></td>
                         <td>${clinic.adminId}</td>
                        
                         <td>${clinic.review}</td>

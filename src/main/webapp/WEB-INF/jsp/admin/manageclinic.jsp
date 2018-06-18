@@ -37,7 +37,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/hospitals">Clinics</a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics">Clinics</a></li>
                             <li>Add New Clinic</li>
                         </ol>
                     </div>
