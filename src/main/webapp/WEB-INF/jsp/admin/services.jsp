@@ -97,7 +97,7 @@
                   </table>
                         </div>
                     </div>
-                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Services/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Service</a>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Service2/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Service</a>
                 </div>
 
 

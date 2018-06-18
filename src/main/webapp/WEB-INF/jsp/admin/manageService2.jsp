@@ -73,60 +73,44 @@
                         ${nameExist}
                          ${shortName}                            
                             </div>
-                            
-                            
+                          
+
+<script type="text/javascript">
+	function populate(s1, s2) {
+	  var s1 = document.getElementById(s1);
+	  var s2 = document.getElementById(s2);
+	  s2.innerHTML = "";
+	  if (s1.value =="Hospital"){
+		  var optionArray = ["i10", "i20", "Verna"];
+	  }else if (s1.value =="Center"){
+		  var optionArray = ["mero", "Ahmed", "Khalid"];
+	  }	    
+	  for (var i = 0; i < optionArray.length; i++) {
+	    var newOption = document.createElement('option');
+	    newOption.value = optionArray[i];
+	    newOption.innerHTML = optionArray[i];
+	    s2.appendChild(newOption);
+	  }
+	} 
+</script>
+
                             <div class="form-group">
                       		  <label class=" form-control-label">Choose add on center or hospital</label>
-                              <select name="place" class="form-control">
+                              <select id="slct1" class="form-control" onchange="populate(this.id,'slct2')">
                                 <option value="0">Please select</option>
                                 
-                             <option value=1>Hospital</option>
-                             <option value=2>Center</option>                             
+                             <option value="Hospital">Hospital</option>
+                             <option value="Center">Center</option>                             
                               </select>                                                          
                             </div>                     
                             <div class="form-group">
                       		  <label class=" form-control-label">Choose the Center</label>
-                              <select name="centerId" class="form-control">
+                              <select id=slct2 name="centerId" class="form-control">
                                 <option value="0">Please select</option>
-                                <%
-                                	List<Center> centers = new ArrayList<Center>();
-                                    centers = CenterDao.getAllCenters();
-                                	request.setAttribute("centers", centers);
-                                %>
-                                <c:forEach var="center" items="${centers}">
-                           <%      
-                          Center c = (Center)pageContext.getAttribute("center");
-                           %>
-                             <option value="${center.centerId}">${center.centerName}</option>
-
-                                </c:forEach>
+                                
                               </select>                                                          
-                            </div>
+                            </div>                
                             
-                            
-                            <div class="form-group">
-                      		  <label class=" form-control-label">Choose the Hospital</label>
-                              <select name="hospitalId" class="form-control">
-                                <option value="0">Please select</option>
-                                <%
-                                	List<Hospital> hospitals = new ArrayList<Hospital>();
-                                    hospitals = HospitalDao.getAllHospitals();
-                                	request.setAttribute("hospitals", hospitals);
-                                %>
-                           
-                            <c:forEach var="hospital" items="${hospitals}">
-                           <%      
-                          Hospital h = (Hospital)pageContext.getAttribute("hospital");
-                           %>
-                             <option value="${hospital.hospitalId}">${hospital.hospitalName}</option>
-                                </c:forEach>
-                              </select>                                                          
-                            </div>  
-                            
-                                                     
-                            
-                       
-                         
                           <div class="form-group">
                       		  <label class=" form-control-label">Choose Type of Service</label>
                               <select name="type" class="form-control">
