@@ -33,8 +33,7 @@ abstract public class ServiceDao {
 		ResultSet result = ps.executeQuery();
 		result.next();
 		
-		Service service = new Service();
-		
+		Service service = new Service();		
 		service.setServiceId(result.getInt("service_id"));
 		service.setServiceName(result.getString("service_name"));
 		service.setCenterId(result.getInt("center_id"));
@@ -394,7 +393,117 @@ public static void insertServiceForCenter(Service service) throws InstantiationE
 	ps.executeUpdate();
 	con.close();	
 }
+/*
+public static String checkServiceCommentForHospitalOrCenter(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT * FROM service WHERE service_id=?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setInt(1, serviceId);
+	ResultSet result = ps.executeQuery();
+	result.next();
+	String ServiceType ;	
+	if(result.getRowId(3) != null) {
+		return ServiceType="Hospital";
+	}
+	else  {
+		return ServiceType="Center";
+	}
+	
+}
+*/
+public static List<Review> getServiceReview(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT * FROM review WHERE service_id=?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setInt(1, serviceId);
+	ResultSet result = ps.executeQuery();
+	
+	List<Review> reviews =new ArrayList <Review>();
+	while(result.next()) {
+		Review review =new Review();
+		review.setReviewId(result.getInt("review_id"));
+		review.setReview(result.getFloat("review"));
+		review.setUserId(result.getInt("user_id"));
+		review.setComment(result.getString("comment"));
+		review.setClinicId(result.getInt("clinic_id"));
+		//review.setServiceId(result.getInt("service_id"));
+		review.setShowComment(result.getInt("show_comment"));
+		reviews.add(review);
+	}
+	return reviews;	
+}
+public static List<Service> getServicesOfHospital(int hospitalId)
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+			
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT * FROM service JOIN department ON dept_id=department_id ";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ResultSet result = ps.executeQuery();
+	//ps.setInt(1, hospitalId);
+	List<Service> services = new ArrayList<Service>();
+	
+	while(result.next()) {
+	Service service = new Service();
+	service.setServiceId(result.getInt("service_id"));
+	service.setServiceName(result.getString("service_name"));
+	service.setDeptId(result.getInt("dept_id"));
+	service.setDeptName(result.getString("dept_name"));
+	service.setLastUpdated(result.getDate("last_updated"));
+	service.setFees(result.getString("fees"));
+	service.setServiceReview(result.getFloat("service_review"));
+	service.setSlotType(result.getInt("day_or_time"));
+	service.setSlot(result.getInt("slot"));
+	services.add(service);
+	}
+	
+	for(Service S: services) {
+		int deptId = S.getDeptId();
+		Connection con2 = DBConnection.getConnection();
+		String sql2="SELECT * FROM hospital JOIN department ON department.hospital_id=hospital.hospital_id WHERE hospital.hospital_id=? AND department_id=?";
+		PreparedStatement ps2 = con2.prepareStatement(sql2);
+		ps2.setInt(1, hospitalId);
+		ps2.setInt(2, deptId);
+		
+		ResultSet result2 = ps2.executeQuery();
+		result2.next();
+		S.setAdminId(result2.getInt("admin_id"));
+		S.setHospitalName(result2.getString("hospital_name"));
+		S.setGoogleMapsUrl(result2.getString("google_maps_url"));
+		S.setAddress(result2.getString("address"));
+		S.setLat(result2.getFloat("lat"));
+		S.setLang(result2.getFloat("lang"));
+		S.setWebsite(result2.getString("website"));
+	}
+	con.close();
+	return services;
+		
+}
 
+public static int getSrviceIdByCenterId(int centerId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT service_id FROM service WHERE center_id=?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setInt(1, centerId);
+	ResultSet result = ps.executeQuery();
+	result.next();
+	 int serviceId=result.getInt("service_id");
+	return serviceId ;
 
+}
 
+public static int getSrviceIdByHospitalId(int hospitalId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT service_id FROM service JOIN department ON service.dept_id=department.department_id WHERE department.hospital_id=?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setInt(1, hospitalId);
+	ResultSet result = ps.executeQuery();
+	result.next();
+	int serviceId =result.getInt("service_id");
+	return serviceId ;
+
+}
 }

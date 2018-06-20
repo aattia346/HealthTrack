@@ -32,7 +32,7 @@
 
 <%@include  file="../includes/header.jsp" %>
 
-<% 	
+<% 	boolean showComment =false ;
 	boolean showForm = false;
 	User user = new User();
 	String usernameSession = (String)hospitalSession.getAttribute("username");
@@ -40,6 +40,9 @@
 		user = UserDao.getUserByUsername(usernameSession);
 		if(user.getType().equalsIgnoreCase("person")){
 			showForm = true;
+		}
+		if((user.getType().equalsIgnoreCase("hospital")) || (user.getType().equalsIgnoreCase("center"))){
+			showComment=true ;
 		}
 		if(PersonDao.canPersonBook(user.getId())){
 			request.setAttribute("limitExceed", " ");
@@ -452,6 +455,10 @@
             </div>
         </div>
     </div>
+    <%  if(showComment){%>
+  
+     <a href="/HealthTrack/service/admin/<%= usernameSession %>/showComments" class="btn btn-primary"><i class="fa fa-plus"></i> Show Comments</a>
+   <% }%>
     <!-- ***** Book An Appoinment Area End ***** -->
     
     <div id="map" class="hospital-map"></div>

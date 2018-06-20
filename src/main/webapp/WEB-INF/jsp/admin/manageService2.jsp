@@ -104,7 +104,7 @@
                               </select>                                                          
                             </div>                     
                             <div class="form-group">
-                      		  <label class=" form-control-label">Choose the Center</label>
+                      		  <label class=" form-control-label">Choose the Center or Hospital</label>
                               <select id=slct2 name="centerId" class="form-control">
                                 <option value="0">Please select</option>
                                 

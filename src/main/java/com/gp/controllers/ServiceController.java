@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -426,9 +427,11 @@ public class ServiceController {
 				if(!Validation.validateText(comment)) {
 					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment") + "</p>");	
 				}else {
-					ServiceDao.insertComment(userId, serviceId, comment);
-				}				
-			}else {
+						
+					ServiceDao.insertComment(userId, serviceId, comment);						
+			}
+		}
+				else {
 				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service") + "</p>");
 			}
 		
@@ -477,5 +480,27 @@ public class ServiceController {
 		mav.setViewName("user/profiles/clinic");
 		return mav;
 	}
+	@RequestMapping(value="/HealthTrack/service/admin/{adminUsername}/{place}", method = RequestMethod.GET)
+	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
+		
+			String username = (String)session.getAttribute("username");
+			if(username != null) {
+				if(username.equalsIgnoreCase(adminUsername)) {
+					mav.setViewName("/user/profiles/" + place);
+				}else {
+					mav.setViewName("redirect/:HealthTrack/login");
+				}
+			}else {
+				mav.setViewName("/login");
+			}
+			
+		
+		
+		return mav;
+	}
+
+	
 }
 	

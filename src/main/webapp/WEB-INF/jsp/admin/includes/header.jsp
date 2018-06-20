@@ -60,6 +60,7 @@
                             <li><img src="/admin/icons/if_medical_icon_3_1290986.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/centers">Centers</a></li>
                             <li><img src="/admin/icons/if_pill_36347.png" class="my-icon pharmacy-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies">Pharmacies</a></li>
                             <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services">Services</a></li>
+                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/Comments">Comments</a></li>
                         </ul>
                     </li>
 
