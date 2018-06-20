@@ -3,18 +3,18 @@ package com.gp.user;
 public class Clinic {
 	
 	int clinicId, adminId, numOfSessions;
-	String clinicName, doctorName, specialty, phone, address, google_maps_url,intro,website;
-	float lat, lang, review, fees;
+	String clinicName, doctorName, specialty, phone, address, google_maps_url,intro,website, fees;
+	float lat, lang, review;
 	
 	public Clinic() {
 		super();
 	}
 
-	public float getFees() {
+	public String getFees() {
 		return fees;
 	}
 
-	public void setFees(float fees) {
+	public void setFees(String fees) {
 		this.fees = fees;
 	}
 

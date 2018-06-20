@@ -179,10 +179,18 @@ public class DashboardController {
 						}
 					}
 					if(place.equalsIgnoreCase("clinic")) {
+						String fees             =request.getParameter("fees");
 						String doctorName		= request.getParameter("doctorName");
 						String specialty		= request.getParameter("specialty");
+						model.addAttribute("oldFees",fees);
 						model.addAttribute("oldDoctorName"	, doctorName);
 						model.addAttribute("oldSpecialty"	, specialty);
+						/*
+						if(!Validation.validateFees(fees)) {
+							model.addAttribute("invalidFees", "<p class=\"wrong-input \">Invalid Fees </p>");
+							errors = true;
+						}
+						*/
 						if(!Validation.validateName(doctorName)) {
 							model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Clinic Name</p>");
 							errors = true;
@@ -207,6 +215,7 @@ public class DashboardController {
 								clinic.setPhone(phone);
 								clinic.setWebsite(website);
 								clinic.setAddress(address);
+								clinic.setFees(fees);
 								clinic.setIntro(intro);
 								clinic.setGoogle_maps_url(url);
 								clinic.setLat(lat);

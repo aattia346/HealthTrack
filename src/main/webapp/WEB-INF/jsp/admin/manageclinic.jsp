@@ -73,6 +73,12 @@
                           <div class="col-12">
                           <div class="form-group"><label class=" form-control-label">Address</label><input maxlength="50" type="text" placeholder="Address" class="form-control" name="address" required="required" value="${oldAddress}"></div>
                         	${invalidAddress}
+                        	</div>
+                        	<div class="col-12">
+                        	<div class="form-group"><label class=" form-control-label">Fees</label><input maxlength="10" type="text" placeholder="fees" class="form-control" name="fees" required="required" value="${oldFees}"></div>
+                        	  <!--  ${invalidFees} -->	
+                        	  </div>
+                        	  <div class="col-12">
                      	 <div class="form-group"><label class=" form-control-label">Speciality</label><input type="text" placeholder="Speciality" class="form-control" name="specialty" required="required" value="${oldSpecialty}"></div> 
                          ${invalidName}
                         ${nameExist}
@@ -178,6 +184,12 @@
                           <div class="col-12">
                           <div class="form-group"><label class=" form-control-label">Address</label><input type="text" placeholder="Address" class="form-control" name="address" required="required" value="<%= clinic.getAddress() %>" maxlength="50"></div>
                         	${invalidAddress}
+                        	</div>
+                        </div>
+                        
+                         <div class="col-12">
+                          <div class="form-group"><label class=" form-control-label">Fees</label><input type="text" placeholder="fees" class="form-control" name="fees" required="required" value="<%= clinic.getFees() %>" maxlength="10"></div>
+                      
                         	</div>
                         </div>
                                              

@@ -63,10 +63,7 @@
 			
 		}
 	
-	User admin = UserDao.getUserByUsername(username);
-	List<Hospital> hospitals = new ArrayList<Hospital>();
-	hospitals = HospitalDao.getAllHospitals();
-	request.setAttribute("hospitals", hospitals);
+	
 
 %>
 <%@include  file="../includes/header.jsp" %>
