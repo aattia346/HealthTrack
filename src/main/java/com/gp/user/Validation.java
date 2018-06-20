@@ -209,9 +209,7 @@ public static boolean validateText(String name) {
 		List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
 		
 		for(Booking B : bookings) {
-			
-			
-			
+
 			if((bookDate.after(B.getDateFrom()) || bookDate.equals(B.getDateFrom())) && (bookDate.before(B.getDateTo()) ||bookDate.equals(B.getDateTo())) ){
 				valid = false;
 			}
@@ -337,8 +335,7 @@ public static boolean validateText(String name) {
 				valid = false;
 			}
 			
-		}
-		
+		}		
 		
 		return valid;
 	}

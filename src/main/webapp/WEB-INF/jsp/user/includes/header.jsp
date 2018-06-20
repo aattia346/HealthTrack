@@ -53,7 +53,6 @@
                         </div>
                         <% if(sessionExist){ %>
                         <div class="navbar-user">
-                            <img class="img-circle upper-img img-thumbnail" src="/user/layout/images/default.jpg">
 	                         <div class="btn-group pull-right">
 	                            <span class="btn btn-default dropdown-toggle btn-sm user-dropdown" data-toggle="dropdown">
 	                                <%= headerUsername %>
@@ -100,15 +99,13 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="services.html"><%= t.write("services") %></a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="blog.html"><%= t.write("news") %></a>
-                                        </li>
+                                       
                                         <li class="nav-item">
                                             <a class="nav-link" href="contact.html"><%= t.write("contact") %></a>
                                         </li>
                                     </ul>
                                     <!-- Appointment Button -->
-                                    <a href="#" class="btn medilife-appoint-btn ml-30"><%= t.write("for") %> <span><%= t.write("emergencies") %></span> <%= t.write("click here") %></a>
+                                    <a href="/HealthTrack/Emergency" class="btn medilife-appoint-btn ml-30"><%= t.write("for") %> <span><%= t.write("emergencies") %></span> <%= t.write("click here") %></a>
                                 </div>
                              </nav>
                         </div>

@@ -17,7 +17,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% 	String title = "comments";
+<% 	String title = "Comments";
     User user = new User();
 	String username = (String)session.getAttribute("username");
 	List<Service> services =new ArrayList<Service>();
@@ -31,13 +31,13 @@
 		
 		if(user.getType().equalsIgnoreCase("center")){
 			
-			placeType ="center";
-			Center center  = new Center();
-			center         = CenterDao.getCenterById(userId);
-			placeId        = center.getCenterId();
-			placeName      = center.getCenterName();
-			serviceId      =ServiceDao.getSrviceIdByCenterId(placeId);
-			services       =ServiceDao.getServicesOfCenter(placeId);
+			placeType 		="center";
+			Center center  	= new Center();
+			center         	= CenterDao.getCenterById(userId);
+			placeId        	= center.getCenterId();
+			placeName      	= center.getCenterName();
+			serviceId      	=ServiceDao.getSrviceIdByCenterId(placeId);
+			services       	=ServiceDao.getServicesOfCenter(placeId);
 			
 			
 		}else if (user.getType().equalsIgnoreCase("hospital")){

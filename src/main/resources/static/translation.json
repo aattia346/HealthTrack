@@ -19,7 +19,7 @@
 		"unavailable today" : "Unavailable today",
 		"locate me" : "locate me",
 		"bdaya" : "bdaya",
-		"dr Ahmed Clinic for opthalmology" : "Dr Ahmed Clinic for opthalmology",
+		"dr ahmed clinic for opthalmology" : "Dr Ahmed Clinic for opthalmology",
 		"Hazem Saaed" : "Hazem Saaed",
 		"Dr Mahmoud for cardiology" : "Dr Mahmoud for cardiology",
 		"Mahmoud Fathy" : "Mahmoud Fathy",
@@ -51,6 +51,7 @@
 		 "change password" : "change password",
 		 "logout" : "logout",
 		 "login" : "login",
+		 "Login" : "Login",
 		 "signup" : "signup",
 		 "home" : "Home",
 		 "about us" : "About Us",
@@ -64,7 +65,8 @@
 		 "Sorry you have reached the maximum number of bookings per day(3)" : "Sorry you have reached the maximum number of bookings per day(3)",
 		 "to book please" : "To book please",
 		 "first or" : "first or",
-		 "register" : "register",
+		 "register" : "Register",
+		 "Register" : "Register",
 		 "available session" : "Available Session",
 		 "sat" : "Sat",
 		 "sun" : "Sun",
@@ -135,7 +137,8 @@
 		 "Invalid Last Name" : "Invalid Last Name",
 		 "Sorry this username has been taken" : "Sorry this username has been taken",
 		 "Sorry this email alreay exists" : "Sorry this email alreay exists",
-		 "Sorry this email is banned" : "Sorry this email is banned"
+		 "Sorry this email is banned" : "Sorry this email is banned",
+		 "Emergency" : "Emergency"
 		 
 		 },
 	"ar" : {
@@ -158,7 +161,7 @@
 		"unavailable today" : "غير متاح اليوم",
 		"locate me" : "حدد موقعى",
 		"bdaya" : "بدايه",
-		"Dr Ahmed Clinic for opthalmology" : "عيادة دكتور احمد للرمد",
+		"dr ahmed clinic for opthalmology" : "عيادة دكتور احمد للرمد",
 		"Hazem Saaed" : "حازم سعيد",
 		"Dr Mahmoud for cardiology" : "عيادة دكتور محمود لامراض القلب",
 		"Mahmoud Fathy" : "محمود فتحى",
@@ -190,6 +193,7 @@
 		 "change password" : "تغيير كلمة المرور",
 		 "logout" : "تسجيل الخروج",
 		 "login" : "تسجيل الدخول",
+		 "Login" : "تسجيل الدخول",
 		 "signup" : "أنشاء حساب جديد",
 		 "home" : "الصفحه الرئيسيه",
 		 "about us" : "معلومات عن الموقع",
@@ -204,6 +208,7 @@
 		 "to book please" : "للحجز من فضلك",
 		 "first or" : "أولا أو",
 		 "register" : "سجل",
+		 "Register" : "سجل",
 		 "available session" : "المواعيد المتاحه",
 		 "sat" : "السبت",
 		 "sun" : "الاحد",
@@ -282,6 +287,7 @@
 		 "Invalid Last Name" : "الاسم الاخير غير صالح",
 		 "Sorry this username has been taken" : "عذرا أسم المستخدم ماخوذ سابقا",
 		 "Sorry this email alreay exists" : " عذرا البريد الالكترونى موجود مسبقا",
-		 "Sorry this email is banned" : "عذرا هذا البريد الالتكترونى ممنوع من التسجيل"
+		 "Sorry this email is banned" : "عذرا هذا البريد الالتكترونى ممنوع من التسجيل",
+		 "Emergency" : "الطوارئ"
 	}
 }
