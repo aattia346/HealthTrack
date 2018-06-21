@@ -138,8 +138,17 @@
 		 "Sorry this username has been taken" : "Sorry this username has been taken",
 		 "Sorry this email alreay exists" : "Sorry this email alreay exists",
 		 "Sorry this email is banned" : "Sorry this email is banned",
-		 "Emergency" : "Emergency"
-		 
+		 "Emergency" : "Emergency",
+		  "Special Services" : "Special Services",
+		  "you are looking for" : "you are looking for",
+		  "Incubator" : "Incubator",
+		  "ICU" : "ICU",
+		  "Ambulance" : "Ambulance",
+		  "hospital" : "hospital",
+		  "sorry we didn't find what you are looking for you can put yourself in the" : "sorry we didn't find what you are looking for you can put yourself in the",
+		  "waiting list" : "waiting list",
+		  "Here" : "Here",
+		  "We Found the nearest service you need " : "We Found the nearest service you need "
 		 },
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -288,6 +297,16 @@
 		 "Sorry this username has been taken" : "عذرا أسم المستخدم ماخوذ سابقا",
 		 "Sorry this email alreay exists" : " عذرا البريد الالكترونى موجود مسبقا",
 		 "Sorry this email is banned" : "عذرا هذا البريد الالتكترونى ممنوع من التسجيل",
-		 "Emergency" : "الطوارئ"
+		 "Emergency" : "الطوارئ",
+		 "Special Services" : "خدمات أخرى",
+		 "you are looking for" : "عن ماذا تبحث ؟",
+		 "Incubator" : "حضّانه",
+		 "ICU" : "عنايه مركزه",
+		 "Ambulance" : "أسعاف",
+		 "hospital" : "مستشفى",
+		 "sorry we didn't find what you are looking for you can put yourself in the" :"عذرا لم نستطع إيجاد ما تبحث عنه تستطيع اضافة نفسك فى ",
+		 "waiting list" : "قائمة الانتظار",
+		 "Here" : "هنا",
+		 "We Found the nearest service you need " : "لقد وجدنا ما تبحث عنه "
 	}
 }

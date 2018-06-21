@@ -1,13 +1,5 @@
 $(document).ready(function(){
 
-$(".emergency-part a").click(function(){
-		
-	$('html, body').animate({
-        scrollTop: $("#map").offset().top
-    }, 500);
-
-	});
-	
 	var cookie = document.cookie;
 	console.log(cookie);
 	switch(cookie){

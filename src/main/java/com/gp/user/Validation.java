@@ -308,7 +308,7 @@ public static boolean validateText(String name) {
 	public static boolean validateBookTime(int serviceId, String day, String table) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		boolean valid = true;
-		
+				
 		Service service = ServiceDao.getServiceById(serviceId, table);
 		
 		Appointment app = ServiceDao.getAppointmentOfService(serviceId, day);
@@ -328,7 +328,7 @@ public static boolean validateText(String name) {
 			String todayAsString = format.format(today);
 			
 			int numOfBookings = BookingDao.getBookingsOfTheDay(serviceId, todayAsString);
-			
+			System.out.println(numOfBookings);
 			if(numOfBookings < numberOfTableRows) {
 				valid = true;
 			}else {
