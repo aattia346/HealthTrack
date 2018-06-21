@@ -117,16 +117,16 @@ String title = "comments";
                       	<tr>
                         <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%=S.getServiceName() %></a></td>
                         <td><a href="/HealthTrack/profile/${placeType}/<%=S.getServiceId() %>" target="_blank">${placeName}</a></td>
-                        
+                         <td class="depts-td"><%=S.getServiceReview()%></td>
                         <%
                         
                         List<Review> reviews= new ArrayList<Review>();		
-                	//	reviews=ServiceDao.getServiceReview(ServiceId);
-                	//	request.setAttribute("reviews",reviews); 
+                		reviews=ServiceDao.getServiceReview(ServiceId);
+                		request.setAttribute("reviews",reviews); 
                 		
                 		%>
                         
-                        <td class="depts-td"><%=S.getServiceReview()%></td>
+                       
                         <td>
                         <c:forEach var="review" items="${reviews}">
                         	<div class="dept-in-hospital-table">
@@ -136,7 +136,7 @@ String title = "comments";
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/hospital/edit" title=" "><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HelthTrack/admin/<%=username%>/review/delete"     ><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HelthTrack/admin/<%=username%>/review/delete/"     ><i class="fa fa-close"></i></a>
                         </div>
                         </td>
                       </tr>
