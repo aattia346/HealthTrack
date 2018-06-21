@@ -304,11 +304,14 @@ header{
 	right: 12px;
 	top: 5px;
 }
-.login-register{
+.login-register , .navbar-user{
 	position: absolute;
     top: 14px;
     right: 131px;
     color: #fff;
+}
+.navbar-user{
+	top: 10px;
 }
 .login-register a{
 	color: #fff;
@@ -508,3 +511,43 @@ label{
 .medilife-contact-info-clinic{
     padding: 30px 30px 168px 30px !important;
 }
+/*********************************************** Emergency page*****************************************************/
+.emergency-body {
+	/*background: #fff; */
+	background-image: url("/user/layout/images/emergency.jpg");
+}
+.emergency-body #map{
+	height: 630px;
+	width: 100%;
+}
+.emergency-header {
+	font-family: 'Song Myung';
+	font-weight: 700;
+	color: #3498db;
+	font-size: 40px;
+	margin: 0;
+	padding-top: 170px;
+}
+.emergency-parts {
+	border: 3px solid #081F3E;
+	margin: 50px 0;
+	background: #081F3E;
+	padding: 30px 25px;
+}
+.inner-emergency-part{
+	background: #006CFF;
+	width: 100%;
+	height: 100%;
+	border: 3px solid #fff; 
+	margin-bottom: 25px;
+}
+.inner-emergency-part p {
+	color: #fff;
+	font-size: 35px;
+	font-weight: 600;
+	line-height: 180px;
+}
+.emergency-part a:hover {
+	text-decoration: none;
+}
+/*****************************************end of emergency page*****************************************************/

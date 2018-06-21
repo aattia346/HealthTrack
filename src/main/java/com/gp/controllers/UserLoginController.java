@@ -33,6 +33,12 @@ public class UserLoginController {
         return new ModelAndView("/user/findService");
     }
 	
+	@RequestMapping(value="/HealthTrack/Emergency", method = RequestMethod.GET)
+    public ModelAndView emergency(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) {
+		model.addAttribute("lang", cookie);
+        return new ModelAndView("/user/emergency");
+    }
+	
 	@RequestMapping(value = "/HealthTrack/login", method = RequestMethod.GET)
     public ModelAndView showForm(ModelMap model, ModelAndView mav, HttpServletRequest request,@CookieValue(value = "lang", defaultValue="en") String cookie){
 		HttpSession session = request.getSession();

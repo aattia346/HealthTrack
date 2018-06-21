@@ -82,7 +82,7 @@ if(username != null){
         <div class="container">
             <div class="row">
             <% if(!showForm){ %>
-                    <div class="col-sm-12 alert alert-info text-center booking-alert"><%= t.write("to book please") %> <a href="/HealthTrack/login" target="_blank">Login</a> First or <a href="/HealthTrack/signup">Register</a></div>
+                    <div class="col-sm-12 alert alert-info text-center booking-alert"><%= t.write("to book please") %> <a href="/HealthTrack/login" target="_blank"><%= t.write("login") %></a> <%= t.write("first or") %> <a href="/HealthTrack/signup"><%= t.write("Register") %></a></div>
                      <% } %>
                 <div class="col-12">
                     <div class="appointment-form-content">
@@ -128,7 +128,7 @@ if(username != null){
                               </c:forEach>
                           </tr>
                           <tr>
-                             <td class="another-table-head"><%= t.write("to") %>To</td>
+                             <td class="another-table-head"><%= t.write("to") %></td>
                               <c:forEach var="day" items="${days}">
                               <% String singleDay = (String)pageContext.getAttribute("day");
                               	 Appointment A = apps.get(singleDay.toLowerCase());

@@ -100,6 +100,7 @@ abstract public class BookingDao {
 		
 		con.close();
 		}
+	
 	public static List<Booking> getAllBookings()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 					
@@ -162,7 +163,6 @@ abstract public class BookingDao {
 				return B;
 			}
 	
-	
 	public static List<Booking> getBookingTimeOrDaySlot(int day_or_time)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 					
@@ -189,8 +189,7 @@ abstract public class BookingDao {
 			return bookings;
 				
 				}
-		
-	
+			
 	public static void verifyBooking(int bookingId)
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 				
@@ -344,6 +343,7 @@ abstract public class BookingDao {
 		con.close();
 
 	}
+
 	public static void updateStatus(int status, int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Connection con = DBConnection.getConnection();
 		String sql="UPDATE booking set status=? WHERE booking_id=?";
