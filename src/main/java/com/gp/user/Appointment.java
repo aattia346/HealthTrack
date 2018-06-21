@@ -10,7 +10,6 @@ public class Appointment extends Service{
 	Time appFrom, appTo;
 	Date dayDate;
 	
-	
 	public Date getDayDate() {
 		return dayDate;
 	}

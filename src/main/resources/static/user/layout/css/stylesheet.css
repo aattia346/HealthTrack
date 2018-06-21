@@ -517,8 +517,12 @@ label{
 	background-image: url("/user/layout/images/emergency.jpg");
 }
 .emergency-body #map{
-	height: 630px;
+	height: 400px;
 	width: 100%;
+	margin-bottom: 40px;
+}
+.emergency-result{
+	font-weight: 700;
 }
 .emergency-header {
 	font-family: 'Song Myung';

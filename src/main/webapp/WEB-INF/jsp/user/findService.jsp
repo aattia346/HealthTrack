@@ -4,6 +4,8 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat" %>
 
 <%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.HospitalDao"%>
@@ -33,6 +35,7 @@ String servicePinColor = null;
 Date today = Calendar.getInstance().getTime();
 String serviceUrl = null;
 Calendar calendar = Calendar.getInstance();
+
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
 	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
@@ -59,11 +62,12 @@ for(Hospital hospital : hospitals){
 	locations.add(location);
 }
 
+SimpleDateFormat formatter = new SimpleDateFormat("E");  
 List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
-	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();
+	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();	
 	calendar.setTime(today);
-	calendar.add(Calendar.DAY_OF_MONTH, -1);
+	//calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";
@@ -71,8 +75,13 @@ for(Service service : servicesOfHospital){
 		else{
 			servicePinColor = "ff0b0b";
 		}
-	}else if(service.getSlotType()==2){
-		
+	} else if(service.getSlotType()==2){
+		if(Validation.validateBookTime(service.getServiceId(), formatter.format(calendar.getTime()), "hospital")){
+			servicePinColor = "52BC5F";
+		}
+		else{
+			servicePinColor = "ff0b0b";
+		} 
 	}
 	
 	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
@@ -81,19 +90,28 @@ for(Service service : servicesOfHospital){
 
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
-	serviceUrl = "/HealthTrack/profile/service/"+service.getServiceId();
+	serviceUrl = "/HealthTrack/profile/service/center/"+service.getServiceId();	
 	calendar.setTime(today);
-	calendar.add(Calendar.DAY_OF_MONTH, -1);
-	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
-		servicePinColor = "52BC5F";
+	//calendar.add(Calendar.DAY_OF_MONTH, -1);
+	if(service.getSlotType()==1){
+		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
+			servicePinColor = "52BC5F";
+		}
+		else{
+			servicePinColor = "ff0b0b";
+		}
+	} else if(service.getSlotType()==2){
+		if(Validation.validateBookTime(service.getServiceId(), formatter.format(calendar.getTime()), "center")){
+			servicePinColor = "52BC5F";
+		}
+		else{
+			servicePinColor = "ff0b0b";
+		} 
 	}
-	else{
-		servicePinColor = "ff0b0b";
-	}
+	
 	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }
-
 %>
 <%@include  file="includes/header.jsp" %>    
 	<div class="main-page-container">   
@@ -123,7 +141,7 @@ for(Service service : servicesOfCenters){
                           <input type="radio" name="service" value="lab"> <%= t.write("labs") %> <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
                   	  </ul>
                   	  <ul class="list-unstyled text-uppercase">
-                  	  	  <h4 class="text-center special-services">Special Services</h4>
+                  	  	  <h4 class="text-center special-services"><%= t.write("Special Services") %></h4>
                           <input type="radio" name="service" value="icu"> <%= t.write("icu") %> <br>
                           <input type="radio" name="service" value="mri"> <%= t.write("mri") %><br>
                       </ul>
@@ -154,7 +172,7 @@ var setPin = false;
 $("input[type='radio'][name='service']").change(function(){
         
     selectedService = $(this).val();
-    
+    console.log(selectedService);
     initAutocomplete();
     });
 function initAutocomplete() {
@@ -176,14 +194,12 @@ var locations = [
           for (i = 0; i < locations.length; i++) {
         	  
         	  if(selectedService.toLowerCase() == "all" && allSelected.includes(locations[i][4].toLowerCase())){ 		  
-        			  console.log("all");
         			  setPin = true;
         		  }else{
             		  setPin = false;
             	  }
               
               if(locations[i][4].toLowerCase() == selectedService.toLowerCase()){
-            	  console.log("selected service");
             	  setPin = true;
               }
             if(setPin){

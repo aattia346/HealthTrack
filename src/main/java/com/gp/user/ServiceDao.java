@@ -14,7 +14,7 @@ abstract public class ServiceDao {
 
 	public static Service getServiceById(int id, String table) throws
 	InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+
 		Connection con = DBConnection.getConnection();
 		String sql = null;
 		boolean executeLine = false;
@@ -446,7 +446,6 @@ public static String checkServiceCommentForHospitalOrCenter(int serviceId) throw
 		String sql="SELECT * FROM service JOIN department ON dept_id=department_id ";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet result = ps.executeQuery();
-		//ps.setInt(1, hospitalId);
 		List<Service> services = new ArrayList<Service>();
 		
 		while(result.next()) {
