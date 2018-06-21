@@ -10,6 +10,8 @@
 <%@page import="com.gp.user.ClinicDao"%>
 <%@page import="com.gp.user.Pharmacy"%>
 <%@page import="com.gp.user.PharmacyDao"%>
+<%@page import="com.gp.user.Booking"%>
+<%@page import="com.gp.user.BookingDao"%>
 <%@page import="com.gp.user.Department"%>
 <%@page import="com.gp.user.Review"%>
 <%@page import="java.util.List"%>
@@ -60,7 +62,7 @@ String title = "comments";
 
 		}
 	
-		//request.setAttribute("services", services);
+		request.setAttribute("userId", userId);
 		request.setAttribute("placeType",placeType);
 		request.setAttribute("placeName", placeName);
 			
@@ -104,55 +106,65 @@ String title = "comments";
                       <tr>
                       	
                         <th>Service Name</th>
-                        <th>PlaceName</th>
-                        <th>service_review</th>
-                        <th>Comment</th>
-                       
-                        
+    
                       </tr>
                     </thead>
                     <tbody>
                         
                       	<tr>
                         <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%=S.getServiceName() %></a></td>
-                        <td><a href="/HealthTrack/profile/${placeType}/<%=S.getServiceId() %>" target="_blank">${placeName}</a></td>
-                         <td class="depts-td"><%=S.getServiceReview()%></td>
-                        <%
+                       <td>
+                       <div class="dept-in-hospital-table">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                        <th>Patient Name</th>
+                        <th>Date</th>
+                        <th>time of Booking</th>
+                        <th>Patient phone</th>
+                        <th>Action</th>
+                        <th>Delete</kth>
+                        </tr>
+                        </thead>
                         
-                        List<Review> reviews= new ArrayList<Review>();		
-                		reviews=ServiceDao.getServiceReview(ServiceId);
-                		request.setAttribute("reviews",reviews); 
-                		
-                		%>
-                        
-                       
-                        <td>
-                        
-                        	<div class="dept-in-hospital-table">
-                        	<table id="bootstrap-data-table" class="table table-striped table-bordered"><thead>
-                        	<tr>
-                        	<th>Comment</th>
-                        	<th>Show Button</th>
-                        	<th>Delete Button</th>
-                        	</tr>
-                        	</thead>
-                        	<tbody>
-                        	<c:forEach var="review" items="${reviews}">
-	                        	 <tr>
-	                        	  <td> ${review.comment}</td>
-	                        	  <td> <a href="/HealthTrack/user/unban" class="btn btn-success confirm-unBan-user">show</a> </td>
-	                        	  <td><a href="/HealthTrack/admin/<%=username%>/<%=ServiceId %>/<%=placeType%>/review/delete/${review.reviewId}/showComments" class="btn btn-success confirm-unBan-user">Delete</a></td>
-	                        	 </tr>
-	                        	   </c:forEach>
-	                        	  </tbody>
-                        	</table>
-                        	</div>
-                       </td>
-                       
-                      </tr>
+                        <tbody>
+                          <%
+                        List<Booking> bookings =new ArrayList<Booking>();
+                        bookings=BookingDao.getBookingsByServiceId(S.getServiceId());
+                        request.setAttribute("bookings",bookings);
+                        %>
+                        <c:forEach var="booking" items="${bookings}">
+                        <tr>
                       
-                    
-                    
+                        <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank">${booking.firstName} ${booking.lastName}</a></td>
+                         <td class="depts-td">From:${booking.dateFrom} ${booking.timeFrom}>>>
+                          To:${booking.dateTo}</td>
+                          <td>${booking.timeOfBooking}</td>
+                          <td>${booking.bookingPhone}</td>
+                          <% 
+                      	    Booking booking = (Booking)pageContext.getAttribute("booking");
+            
+                      	%>
+                          <td>
+                           
+                         
+                         <%if(booking.getStatus()==0){ %>
+                       <a href="/HealthTrack/booking/confirm/${userId}/${booking.bookingId}/<%=S.getServiceId()%>/${placeType}/showBookings" class="btn btn-success confirm-verify-booking">Confirm</a>
+                       
+                        <%}else{ %>
+                        <a href="/HealthTrack/booking/unconfirm/${userId}/${booking.bookingId}/<%=S.getServiceId()%>/${placeType}/showBookings" class="btn btn-warning confirm-unverify-booking">UnConfirm</a>
+                       
+                        <%} %>
+                          </td>
+                          <td><a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%=username %>/<%=S.getServiceId() %>/${placeType}/booking/delete/${booking.bookingId}/showBookings" title="Delete this booking"><i class="fa fa-close"></i></a></td>
+                      
+                        </tr>
+                        </c:forEach>
+                        </tbody>
+                        </table>
+                        </div>
+                       <td>
+                      </tr>                  
                     </tbody>
                   </table>
                         </div>
