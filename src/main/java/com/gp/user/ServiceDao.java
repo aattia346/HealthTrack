@@ -506,4 +506,60 @@ public static int getSrviceIdByHospitalId(int hospitalId) throws InstantiationEx
 	return serviceId ;
 
 }
+
+public static Service getServiceById(int serviceId)
+		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+			
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT * FROM service WHERE service_id=?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setInt(1, serviceId);
+	ResultSet result = ps.executeQuery();	
+	result.next();
+	Service service = new Service();
+	service.setServiceId(result.getInt("service_id"));
+	service.setServiceName(result.getString("service_name"));
+	service.setCenterId(result.getInt("center_id"));
+	service.setCenterName(result.getString("center_name"));
+	service.setLastUpdated(result.getDate("last_updated"));
+	service.setFees(result.getString("fees"));
+	service.setAdminId(result.getInt("admin_id"));
+	service.setGoogleMapsUrl(result.getString("google_maps_url"));
+	service.setAddress(result.getString("address"));
+	service.setServiceReview(result.getFloat("service_review"));
+	service.setLat(result.getFloat("lat"));
+	service.setLang(result.getFloat("lang"));
+	service.setWebsite(result.getString("website"));
+	service.setSlotType(result.getInt("day_or_time"));
+	service.setSlot(result.getInt("slot"));
+	con.close();
+	return service;
+		
+}
+
+/*
+public static List getServiceReview(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+	Connection con = DBConnection.getConnection();
+	String sql="SELECT * FROM review WHERE service_id=?";
+	PreparedStatement ps = con.prepareStatement(sql);
+	ps.setInt(1, serviceId);
+	ResultSet result = ps.executeQuery();
+	
+	List<Review> reviews =new ArrayList <Review>();
+	while(result.next()) {
+		Review review =new Review();
+		review.setReviewId(result.getInt("review_id"));
+		review.setReview(result.getFloat("review"));
+		review.setUserId(result.getInt("user_id"));
+		review.setComment(result.getString("comment"));
+		review.setClinicId(result.getInt("clinic_id"));
+		//review.setServiceId(result.getInt("service_id"));
+		review.setShowComment(result.getInt("show_comment"));
+		reviews.add(review);
+	}
+	return reviews;	
+	
+}
+*/
 }

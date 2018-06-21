@@ -63,7 +63,7 @@
                     </thead>
                     <tbody>
                     
-                      <c:forEach var="center" items="${centers}">
+                    <c:forEach var="center" items="${centers}">
                     
                       	
                       	<%
@@ -77,10 +77,46 @@
                         <td>${center.centerId}</td>
                         <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank">${center.centerName}</a></td>
                         <td>${center.adminId}</td>
-                        <td><c:forEach var="service" items="${services}">
-                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
+                        
+                        <td class="depts-td">
+                        <c:forEach var="service" items="${services}">
+                        	<div class="dept-in-hospital-table">
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
                         		
-                        </c:forEach></td>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title="Delete this Service"> </i> </a>
+                        	</div>
+                        </c:forEach>
+                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title="Add new Service"><i class="fa fa-plus"></i></a>
+                        <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/service/add" class="add-dept hidden add-dept-<%=C.getCenterId() %>">
+	                        	<input type="hidden" value="<%=C.getCenterId()%>" name="centerId">
+	                        	<select name="service" class="form-control select-new-dept">
+                                <%
+                                	List<String> allServices 			= ServiceDao.getServices();
+                                	
+                                	List<String> servicesNames			= new ArrayList<String>();
+                                	List<String> servicesList			= new ArrayList<String>();
+
+                                	for(Service s : services){
+                                		servicesNames.add(s.getServiceName());
+                                		;
+                                	}
+                                	for(String s : allServices){
+                                		if(!servicesNames.contains(s)){
+                                			servicesList.add(s);
+                                		}
+                                	}
+                                	request.setAttribute("serv", servicesList); %>
+                               		<option value="0">select a Service</option>
+                           			<c:forEach var="service" items="${serv}">  
+			                       		<option value="${service}">${service}</option>
+		                           </c:forEach>
+                                	<%	
+                                %>
+                                </select>
+                                <button class="btn submit-dept btn-success btn-sm" type="submit"><i class="fa fa-send"></i></button>
+	                      </form>
+                        
+                        </td>
                         <td>${center.review}</td>
                         <td>
                         <div>

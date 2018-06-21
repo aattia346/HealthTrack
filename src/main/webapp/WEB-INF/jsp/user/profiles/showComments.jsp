@@ -17,16 +17,29 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% 	String title = "comments";
-    User user = new User();
+<% // HttpSession hospitalSession = request.getSession();
+	int ServiceId = (Integer)request.getAttribute("serviceId");
+	String place = (String)request.getAttribute("place");
+    Service S = ServiceDao.getServiceById(ServiceId, place);
+	String title=S.getServiceName();
+/*
+String title = "comments";
+    int ServiceId=(Integer)request.getAttribute("serviceId"); 
+    String place =(String)request.getAttribute("place");
+    service = ServiceDao.getServiceById(ServiceId, place);
+    */
+    //service =ServiceDao.getServiceById(ServiceId);
+    request.setAttribute("service", S);
+   
 	String username = (String)session.getAttribute("username");
-	List<Service> services =new ArrayList<Service>();
+	//List<Service> services =new ArrayList<Service>();
+	
 	String placeName = "" ;
 	String placeType ="";
 	int placeId;
-	int serviceId=0 ;
+	
 	if(username != null){
-		user = UserDao.getUserByUsername(username);
+		User user = UserDao.getUserByUsername(username);
 		int userId= user.getId();
 		
 		if(user.getType().equalsIgnoreCase("center")){
@@ -36,36 +49,25 @@
 			center         = CenterDao.getCenterById(userId);
 			placeId        = center.getCenterId();
 			placeName      = center.getCenterName();
-			serviceId      =ServiceDao.getSrviceIdByCenterId(placeId);
-			services       =ServiceDao.getServicesOfCenter(placeId);
-			
+		//	services       =ServiceDao.getServicesOfCenter(placeId);
 			
 		}else if (user.getType().equalsIgnoreCase("hospital")){
-			placeType ="hospital";
-			Hospital hospital =new Hospital();
-			hospital = HospitalDao.getHospitalById(userId);
-			placeId= hospital.getHospitalId();
-			placeName =hospital.getHospitalName();	
-			serviceId =ServiceDao.getSrviceIdByHospitalId(placeId);
-			services=ServiceDao.getServicesOfHospital(placeId);
-		//Department department = new Department();
-			
+			placeType          ="hospital";
+			Hospital hospital  =new Hospital();
+			hospital           = HospitalDao.getHospitalById(userId);
+			placeId            = hospital.getHospitalId();
+			placeName          =hospital.getHospitalName();	
+			//services           =ServiceDao.getServicesOfHospital(placeId);
 
 		}
-		List<Review> reviews= new ArrayList<Review>();		
-		reviews=ServiceDao.getServiceReview(serviceId);
-		request.setAttribute("reviews",reviews);
-		
-		//request.setAttribute("serviceId", serviceId);
-		request.setAttribute("services", services);
+	
+		//request.setAttribute("services", services);
 		request.setAttribute("placeType",placeType);
 		request.setAttribute("placeName", placeName);
 			
 		}
-	
-	
-
 %>
+
 <%@include  file="../includes/header.jsp" %>
 
         <div class="breadcrumbs">
@@ -102,7 +104,7 @@
                     <thead>
                       <tr>
                       	
-                        <th>Service Id</th>
+                        <th>Service Name</th>
                         <th>PlaceName</th>
                         <th>service_review</th>
                         <th>Comment</th>
@@ -111,26 +113,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach var="service" items="${services}">
-                      	
-                      	<% 
-                      		Service service 	    = (Service)pageContext.getAttribute("service");                      	
-                      	%>
-                      	<tr>
-                        <td><a href="/HealthTrack/profile/service/${placeType}/${service.serviceId}" target="_blank">${service.serviceId}</a></td>
-                        <td><a href="/HealthTrack/profile/${placeType}/${service.serviceId}" target="_blank">${placeName}</a></td>
-                        <% %>
                         
-                        <td class="depts-td">
-                        <c:forEach var="review" items="${reviews}">
-                        	<div class="dept-in-hospital-table">
-	                        	${review.review},
-	                        	
-	                        	
-	                        	
-                        	</div>
-                        </c:forEach>
-                      </td>
+                      	<tr>
+                        <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%=S.getServiceName() %></a></td>
+                        <td><a href="/HealthTrack/profile/${placeType}/<%=S.getServiceId() %>" target="_blank">${placeName}</a></td>
+                        
+                        <%
+                        
+                        List<Review> reviews= new ArrayList<Review>();		
+                	//	reviews=ServiceDao.getServiceReview(ServiceId);
+                	//	request.setAttribute("reviews",reviews); 
+                		
+                		%>
+                        
+                        <td class="depts-td"><%=S.getServiceReview()%></td>
                         <td>
                         <c:forEach var="review" items="${reviews}">
                         	<div class="dept-in-hospital-table">
@@ -139,13 +135,13 @@
                         </c:forEach></td>
                         <td>
                         <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/hospital/edit" title="Edit this hospital"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin" title="Delete this hospital"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/hospital/edit" title=" "><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HelthTrack/admin/<%=username%>/review/delete"     ><i class="fa fa-close"></i></a>
                         </div>
                         </td>
                       </tr>
                       
-                      </c:forEach>
+                    
                     
                     </tbody>
                   </table>

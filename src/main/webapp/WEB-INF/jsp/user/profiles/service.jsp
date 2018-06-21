@@ -457,7 +457,7 @@
     </div>
     <%  if(showComment){%>
   
-     <a href="/HealthTrack/service/admin/<%= usernameSession %>/showComments" class="btn btn-primary"><i class="fa fa-plus"></i> Show Comments</a>
+     <a href="/HealthTrack/admin/<%= usernameSession %>/<%=S.getServiceId() %>/<%=place %>/showComments" class="btn btn-primary"><i class="fa fa-plus"></i> Show Comments</a>
    <% }%>
     <!-- ***** Book An Appoinment Area End ***** -->
     

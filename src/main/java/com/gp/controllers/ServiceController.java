@@ -480,15 +480,17 @@ public class ServiceController {
 		mav.setViewName("user/profiles/clinic");
 		return mav;
 	}
-	@RequestMapping(value="/HealthTrack/service/admin/{adminUsername}/{place}", method = RequestMethod.GET)
-	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
+	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/showComments", method = RequestMethod.GET)
+	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") String serviceId, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		model.addAttribute("lang", cookie);
-		
+		    model.addAttribute("lang", cookie);
+		    model.addAttribute("serviceId",serviceId);
+		    model.addAttribute("place",place);
+		   // System.out.println("serviceId"+serviceId);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(username.equalsIgnoreCase(adminUsername)) {
-					mav.setViewName("/user/profiles/" + place);
+					mav.setViewName("/user/profiles/showComments" );
 				}else {
 					mav.setViewName("redirect/:HealthTrack/login");
 				}
