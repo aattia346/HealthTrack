@@ -18,7 +18,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% // HttpSession hospitalSession = request.getSession();
-	int ServiceId = (Integer)request.getAttribute("serviceId");
+	int ServiceId = (Integer)((request.getAttribute("serviceId")));
 	String place = (String)request.getAttribute("place");
     Service S = ServiceDao.getServiceById(ServiceId, place);
 	String title=S.getServiceName();
@@ -26,7 +26,7 @@
 String title = "comments";
     int ServiceId=(Integer)request.getAttribute("serviceId"); 
     String place =(String)request.getAttribute("place");
-    service = ServiceDao.getServiceById(ServiceId, place);
+    Service service = ServiceDao.getServiceById(ServiceId, place);
     */
     //service =ServiceDao.getServiceById(ServiceId);
     request.setAttribute("service", S);
