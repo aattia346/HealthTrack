@@ -17,17 +17,20 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <% // HttpSession hospitalSession = request.getSession();
 	int ServiceId = (Integer)(request.getAttribute("serviceId"));
 	String place = (String)request.getAttribute("place");
     Service S = ServiceDao.getServiceById(ServiceId, place);
-	String title=S.getServiceName();
-
-//String title = "comments";
-  
-    request.setAttribute("service", S); 
-
+	String title=S.getServiceName()+" comments";
+/*
+String title = "comments";
+    int ServiceId=(Integer)request.getAttribute("serviceId"); 
+    String place =(String)request.getAttribute("place");
+    Service service = ServiceDao.getServiceById(ServiceId, place);
+    */
+    //service =ServiceDao.getServiceById(ServiceId);
+    request.setAttribute("service", S);
+   
 	String username = (String)session.getAttribute("username");
 	
 	String placeName = "" ;
@@ -40,15 +43,12 @@
 		
 		if(user.getType().equalsIgnoreCase("center")){
 			
-
 			placeType ="center";
 			Center center  = new Center();
 			center         = CenterDao.getCenterById(userId);
 			placeId        = center.getCenterId();
 			placeName      = center.getCenterName();
 		//	services       =ServiceDao.getServicesOfCenter(placeId);
-
-		
 			
 		}else if (user.getType().equalsIgnoreCase("hospital")){
 			placeType          ="hospital";
@@ -107,7 +107,7 @@
                         <th>PlaceName</th>
                         <th>service_review</th>
                         <th>Comment</th>
-                        <th>Action</th>
+                       
                         
                       </tr>
                     </thead>
@@ -127,17 +127,28 @@
                         
                        
                         <td>
-                        <c:forEach var="review" items="${reviews}">
+                        
                         	<div class="dept-in-hospital-table">
-	                        	${review.comment},	
+                        	<table id="bootstrap-data-table" class="table table-striped table-bordered"><thead>
+                        	<tr>
+                        	<th>Comment</th>
+                        	<th>Show Button</th>
+                        	<th>Delete Button</th>
+                        	</tr>
+                        	</thead>
+                        	<tbody>
+                        	<c:forEach var="review" items="${reviews}">
+	                        	 <tr>
+	                        	  <td> ${review.comment}</td>
+	                        	  <td> <a href="/HealthTrack/user/unban" class="btn btn-success confirm-unBan-user">show</a> </td>
+	                        	  <td><a href="/HealthTrack/admin/<%=username%>/<%=ServiceId %>/<%=placeType%>/review/delete/${review.reviewId}" class="btn btn-success confirm-unBan-user">Delete</a></td>
+	                        	 </tr>
+	                        	   </c:forEach>
+	                        	  </tbody>
+                        	</table>
                         	</div>
-                        </c:forEach></td>
-                        <td>
-                        <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/hospital/edit" title=" "><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HelthTrack/admin/<%=username%>/review/delete/"     ><i class="fa fa-close"></i></a>
-                        </div>
-                        </td>
+                       </td>
+                       
                       </tr>
                       
                     

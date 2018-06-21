@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gp.user.Booking;
 import com.gp.user.BookingDao;
 import com.gp.user.ClinicDao;
+import com.gp.user.HospitalDao;
 import com.gp.user.PersonDao;
 import com.gp.user.ServiceDao;
 import com.gp.user.Translator;
@@ -481,7 +482,7 @@ public class ServiceController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/showComments", method = RequestMethod.GET)
-	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") String serviceId, @PathVariable("place") String place)
+	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		model.addAttribute("lang", cookie);
 		model.addAttribute("serviceId", serviceId);
@@ -491,17 +492,34 @@ public class ServiceController {
 				if(username.equalsIgnoreCase(adminUsername)) {
 					mav.setViewName("/user/profiles/showComments");
 				}else {
-					mav.setViewName("redirect/:HealthTrack/login");
+					mav.setViewName("redirect:/HealthTrack/login");
 				}
 			}else {
 				mav.setViewName("/login");
-			}
-			
-		
-		
+			}		
 		return mav;
 	}
-
 	
+	@RequestMapping(value="/HealthTrack/admin/{username}/{serviceId}/{placeType}/{place}/delete/{placeId}", method = RequestMethod.GET)
+	public ModelAndView deleteHospital(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("placeId") String placeId , @PathVariable("serviceId") int serviceId
+			, @PathVariable("place") String place, @PathVariable("placeType") String placeType)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);	
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfSomethingExists(place+"_id", place, placeId)) {			
+				HospitalDao.deleteSomthing(place , place+"_id" , Integer.parseInt(placeId));
+				mav.setViewName("redirect:/HealthTrack/admin/"+username+"/"+serviceId+"/"+placeType+"/showComments");
+			}else {
+				mav.setViewName("/user/login");
+			}
+			
+		}
+
+		return mav;
+	}
 }
 	
