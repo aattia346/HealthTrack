@@ -17,20 +17,17 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <% // HttpSession hospitalSession = request.getSession();
 	int ServiceId = (Integer)(request.getAttribute("serviceId"));
 	String place = (String)request.getAttribute("place");
     Service S = ServiceDao.getServiceById(ServiceId, place);
 	String title=S.getServiceName();
-/*
-String title = "comments";
-    int ServiceId=(Integer)request.getAttribute("serviceId"); 
-    String place =(String)request.getAttribute("place");
-    Service service = ServiceDao.getServiceById(ServiceId, place);
-    */
-    //service =ServiceDao.getServiceById(ServiceId);
-    request.setAttribute("service", S);
-   
+
+//String title = "comments";
+  
+    request.setAttribute("service", S); 
+
 	String username = (String)session.getAttribute("username");
 	
 	String placeName = "" ;
@@ -43,12 +40,15 @@ String title = "comments";
 		
 		if(user.getType().equalsIgnoreCase("center")){
 			
+
 			placeType ="center";
 			Center center  = new Center();
 			center         = CenterDao.getCenterById(userId);
 			placeId        = center.getCenterId();
 			placeName      = center.getCenterName();
 		//	services       =ServiceDao.getServicesOfCenter(placeId);
+
+		
 			
 		}else if (user.getType().equalsIgnoreCase("hospital")){
 			placeType          ="hospital";
