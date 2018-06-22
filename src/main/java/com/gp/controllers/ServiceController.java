@@ -481,9 +481,8 @@ public class ServiceController {
 		mav.setViewName("user/profiles/clinic");
 		return mav;
 	}
-	
-	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/showComments", method = RequestMethod.GET)
-	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place)
+	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/{url}", method = RequestMethod.GET)
+	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav,@PathVariable("url") String url, @PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		model.addAttribute("lang", cookie);
 		model.addAttribute("serviceId", serviceId);
@@ -491,7 +490,7 @@ public class ServiceController {
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(username.equalsIgnoreCase(adminUsername)) {
-					mav.setViewName("/user/profiles/showComments");
+					mav.setViewName("/user/profiles/"+url);
 				}else {
 					mav.setViewName("redirect:/HealthTrack/login");
 				}
@@ -501,8 +500,8 @@ public class ServiceController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/HealthTrack/admin/{username}/{serviceId}/{placeType}/{place}/delete/{placeId}", method = RequestMethod.GET)
-	public ModelAndView deleteHospital(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("placeId") String placeId , @PathVariable("serviceId") int serviceId
+	@RequestMapping(value="/HealthTrack/admin/{username}/{serviceId}/{placeType}/{place}/delete/{placeId}/{url}", method = RequestMethod.GET)
+	public ModelAndView deleteHospital(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("url") String url , @PathVariable("placeId") String placeId , @PathVariable("serviceId") int serviceId
 			, @PathVariable("place") String place, @PathVariable("placeType") String placeType)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		model.addAttribute("lang", cookie);	
@@ -513,7 +512,7 @@ public class ServiceController {
 		}else {
 			if(Validation.checkIfSomethingExists(place+"_id", place, placeId)) {			
 				HospitalDao.deleteSomthing(place , place+"_id" , Integer.parseInt(placeId));
-				mav.setViewName("redirect:/HealthTrack/admin/"+username+"/"+serviceId+"/"+placeType+"/showComments");
+				mav.setViewName("redirect:/HealthTrack/admin/"+username+"/"+serviceId+"/"+placeType+"/"+url);
 			}else {
 				mav.setViewName("/user/login");
 			}
@@ -522,5 +521,54 @@ public class ServiceController {
 
 		return mav;
 	}
-}
+	@RequestMapping(value="/HealthTrack/booking/confirm/{adminId}/{bookingId}/{serviceId}/{placeType}/{url}", method = RequestMethod.GET)
+    public ModelAndView Confirm(@CookieValue(value="lang", defaultValue="en") String cookie,@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request
+    		, @PathVariable("url") String url , @PathVariable("serviceId") int serviceId
+			, @PathVariable("placeType") String placeType)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if( Validation.checkIfSomethingExists("user_id", "user" , adminId)) {	
+				
+					BookingDao.updateStatus(1, bookingId);
+					mav.setViewName("redirect:/HealthTrack/admin/"+username+"/"+serviceId+"/"+placeType+"/"+url);
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}
+		
+		return mav;
+	}
+	@RequestMapping(value="/HealthTrack/booking/unconfirm/{adminId}/{bookingId}/{serviceId}/{placeType}/{url}", method = RequestMethod.GET)
+    public ModelAndView unConfirm(@CookieValue(value="lang", defaultValue="en") String cookie,@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request
+    		, @PathVariable("url") String url , @PathVariable("serviceId") int serviceId
+			, @PathVariable("placeType") String placeType)
+    		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfSomethingExists("user_id", "user" , adminId)) {					
+					BookingDao.updateStatus(0, bookingId);					
+				
+				//mav.setViewName("redirect:/HealthTrack/admin/" + username + "/daySlotBooking");
+				mav.setViewName("redirect:/HealthTrack/admin/"+username+"/"+serviceId+"/"+placeType+"/"+url);
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}
+		
+		return mav;
+	}
+
 	
+	
+}

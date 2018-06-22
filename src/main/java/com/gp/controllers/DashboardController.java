@@ -382,9 +382,9 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/hospital/{AdminId}/update", method = RequestMethod.POST)
-	public ModelAndView updateHospital(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
+	public ModelAndView updateHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -485,9 +485,10 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/{username}/{place}/delete/{placeId}", method = RequestMethod.GET)
-	public ModelAndView deleteHospital(Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("placeId") String placeId
+	public ModelAndView deleteHospital(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request, @PathVariable("placeId") String placeId
 			, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -508,9 +509,9 @@ public class DashboardController {
 	//******************************************************Centers*******************************************//
 	
 	@RequestMapping(value="/HealthTrack/admin/center/{AdminId}/update", method = RequestMethod.POST)
-	public ModelAndView updateCenter(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
+	public ModelAndView updateCenter(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -616,9 +617,9 @@ public class DashboardController {
 	
 	
 	@RequestMapping(value="/HealthTrack/admin/clinic/{AdminId}/update", method = RequestMethod.POST)
-	public ModelAndView updateClinic(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
+	public ModelAndView updateClinic(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -745,7 +746,7 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/admin/pharmacy/{AdminId}/update", method = RequestMethod.POST)
-	public ModelAndView updatePharmacy(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
+	public ModelAndView updatePharmacy(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 			String username = (String)session.getAttribute("username");
@@ -851,10 +852,10 @@ public class DashboardController {
 	}
 //**************************Services*******************************************
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/service/{serviceId}/edit", method = RequestMethod.GET)
-	public ModelAndView editService(ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername			
+	public ModelAndView editService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername			
 			, HttpSession session, @PathVariable("serviceId") int serviceId)
 					throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-			
+		model.addAttribute("lang", cookie);
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
 				if(username != null) {
@@ -878,9 +879,9 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/service/{AdminId}/update", method = RequestMethod.POST)
-	public ModelAndView updateService(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
+	public ModelAndView updateService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+		model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -986,9 +987,10 @@ public class DashboardController {
 //**********************************Booking ***********************************
 	///HealthTrack/profile/booking/delete/{userId}/{bookingId}
 	@RequestMapping(value="/HealthTrack/admin/{username}/booking/delete/{bookingId}", method = RequestMethod.GET)
-	public ModelAndView deleteBooking(Model model, ModelAndView mav, HttpServletRequest request
+	public ModelAndView deleteBooking(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request
 			, @PathVariable("bookingId") String bookingId)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -1007,9 +1009,10 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/admin/{username}/user/delete/{userId}", method = RequestMethod.GET)
-	public ModelAndView deleteUser(Model model, ModelAndView mav, HttpServletRequest request
+	public ModelAndView deleteUser(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request
 			, @PathVariable("userId") String userId)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -1027,9 +1030,10 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/admin/{username}/bannedUser/delete/{userId}", method = RequestMethod.GET)
-	public ModelAndView deleteBannedUser(Model model, ModelAndView mav, HttpServletRequest request
+	public ModelAndView deleteBannedUser(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request
 			, @PathVariable("userId") String userId)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		if(username == null) {
@@ -1047,10 +1051,11 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/user/{userId}/edit", method = RequestMethod.GET)
-	public ModelAndView editUser(ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
+	public ModelAndView editUser(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
 			
 			, HttpSession session, @PathVariable("userId") int userId)
 					throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
 			
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
@@ -1075,8 +1080,9 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/user/ban/{adminId}/{userId}", method = RequestMethod.GET)
-    public ModelAndView Ban(@PathVariable("adminId") String adminId, @PathVariable("userId") int userId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView Ban(@CookieValue(value="lang", defaultValue="en") String cookie,@PathVariable("adminId") String adminId, @PathVariable("userId") int userId,ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -1096,8 +1102,9 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/user/unban/{adminId}/{userId}", method = RequestMethod.GET)
-    public ModelAndView UnBan(@PathVariable("adminId") String adminId, @PathVariable("userId") int userId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView UnBan(@CookieValue(value="lang", defaultValue="en") String cookie,@PathVariable("adminId") String adminId, @PathVariable("userId") int userId,ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -1115,8 +1122,9 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/booking/confirm/{adminId}/{bookingId}", method = RequestMethod.GET)
-    public ModelAndView Confirm(@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView Confirm(@CookieValue(value="lang", defaultValue="en") String cookie,@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -1138,8 +1146,9 @@ public class DashboardController {
 		return mav;
 	}
 	@RequestMapping(value="/HealthTrack/booking/unconfirm/{adminId}/{bookingId}", method = RequestMethod.GET)
-    public ModelAndView unConfirm(@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request)
+    public ModelAndView unConfirm(@CookieValue(value="lang", defaultValue="en") String cookie,@PathVariable("adminId") String adminId, @PathVariable("bookingId") int bookingId,ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
@@ -1159,9 +1168,10 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value="/HealthTrack/admin/user/insert", method = RequestMethod.POST)
-	public ModelAndView insertUser(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
+	public ModelAndView insertUser(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
 			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
-		
+		  
+		model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -1289,9 +1299,9 @@ public class DashboardController {
 
 //***************************************Services***********************************************
 	@RequestMapping(value="/HealthTrack/admin/service/insert", method = RequestMethod.POST)
-	public ModelAndView insertService(ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
+	public ModelAndView insertService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
 			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
-		
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
