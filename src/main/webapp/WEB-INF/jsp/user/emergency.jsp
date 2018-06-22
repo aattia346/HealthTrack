@@ -64,35 +64,25 @@ for(Service service : servicesOfHospital){
 	//calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
-			servicePinColor = "52BC5F";
-		}
-		else{
-			servicePinColor = "ff0b0b";
-		}
+			Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
+			locations.add(location);		}
+		
 	} else if(service.getSlotType()==2){
 		if(Validation.validateBookTime(service.getServiceId(), formatter.format(calendar.getTime()), "hospital")){
-			servicePinColor = "52BC5F";
+			Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
+			locations.add(location);
 		}
-		else{
-			servicePinColor = "ff0b0b";
-		} 
 	}
-	
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
-	locations.add(location);
 }
+
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
 	serviceUrl = "/HealthTrack/profile/service/center/"+service.getServiceId();
 	calendar.setTime(today);
 	//calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
-		servicePinColor = "52BC5F";
 		Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
 		locations.add(location);
-	}
-	else{
-		servicePinColor = "ff0b0b";
 	}
 }
 %>
@@ -264,7 +254,7 @@ var locations = [
       } 
     
     if($("#emergencyResult").hasClass("alert-success")){
-		$("#emergencyResult").html(" <%= t.write("sorry we didn't find what you are looking for you can put yourself in the")%> " + "<a href='#'>" + " <%= t.write("waiting list") %> " + "</a>").removeClass("hidden").addClass("alert-danger").removeClass("alert-success");	
+		$("#emergencyResult").html(" <%= t.write("sorry we didn't find what you are looking for you can put yourself in the")%> " + "<a href='/HealthTrack/WaitingList'>" + " <%= t.write("waiting list") %> " + "</a>").removeClass("hidden").addClass("alert-danger").removeClass("alert-success");	
     }
     
   }		

@@ -148,7 +148,17 @@
 		  "sorry we didn't find what you are looking for you can put yourself in the" : "sorry we didn't find what you are looking for you can put yourself in the",
 		  "waiting list" : "waiting list",
 		  "Here" : "Here",
-		  "We Found the nearest service you need " : "We Found the nearest service you need "
+		  "We Found the nearest service you need " : "We Found the nearest service you need ",
+		  "Waiting List" : "Waiting List",
+		  "insert your contact info." : "insert your contact info.",
+		  "name" : "Name",
+		  "select service" : "select service",
+		  "MRI" : "MRI",
+		  "CT" : "CT",
+		  "invalide name" : "Invalide Name",
+		  "invalide phone" : "Invalide Phone",
+		  "please select a service" : "please select a service",
+		  "your request has been sent successfully" : "your request has been sent successfully"
 		 },
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -307,6 +317,16 @@
 		 "sorry we didn't find what you are looking for you can put yourself in the" :"عذرا لم نستطع إيجاد ما تبحث عنه تستطيع اضافة نفسك فى ",
 		 "waiting list" : "قائمة الانتظار",
 		 "Here" : "هنا",
-		 "We Found the nearest service you need " : "لقد وجدنا ما تبحث عنه "
+		 "We Found the nearest service you need " : "لقد وجدنا ما تبحث عنه ",
+		 "Waiting List" : "قائمة الانتظار",
+		 "insert your contact info." : "أدخل بيانات الاتصال الخاصه بك",
+		 "name" : "الاسم",
+		 "select service" : "أختر خدمه",
+		 "MRI" : "الرنين المغناطيسى",
+		 "CT" : "الاشعه المقطعيه",
+		 "invalide name" : "أسم غير صالح",
+		 "invalide phone" : "رقم الهاتف غير صالح",
+		 "please select a service" : "من فضلك اختر خدمه",
+		 "your request has been sent successfully" : "تم إرسال طلبك بنجاح"
 	}
 }

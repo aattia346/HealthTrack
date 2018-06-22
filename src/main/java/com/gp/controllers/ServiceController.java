@@ -481,6 +481,7 @@ public class ServiceController {
 		mav.setViewName("user/profiles/clinic");
 		return mav;
 	}
+	
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/showComments", method = RequestMethod.GET)
 	public ModelAndView adminPlace(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{

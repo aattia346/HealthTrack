@@ -555,3 +555,55 @@ label{
 	text-decoration: none;
 }
 /*****************************************end of emergency page*****************************************************/
+
+/*****************************************start of waiting list page*****************************************************/
+.waiting-body{
+	background-color: #F1F2F7;
+}
+.waiting-header{
+	color: #555;
+    font-weight: 900;
+    font-family: 'Song Myung', 'serif';
+    margin-bottom: 40px;
+    padding: 11px 0 11px 11px;
+    border: 1px solid #D8D8D8;
+    margin-left: -13px;
+    margin-right: -13px;
+    margin-top: -4px;
+    background: #F6F6F7;
+}
+.waiting-form{
+	margin-top: 200px;
+	background-color: #fff;
+	padding: 4px 13px;
+	margin-bottom: 30px;
+}
+.waiting-form .form-group {
+	position: relative;
+}
+.waiting-form input{
+	border-radius: 0 !important;
+}
+.waiting-icon {
+	position: absolute;
+    top: 2px;
+    right: 7px;
+    font-size: 12px;
+    color: #999;
+    border-left: 1px solid #999;
+    padding-left: 6px;
+    margin-right: -6px;
+    background-color: #eee;
+    padding-right: 5px;
+    margin-top: -1px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.submit-icon {
+	color: #fff;
+    font-size: 11px;
+    background: #d9534f;
+    border-left: 1px solid #fff;
+    padding: 5px 5px;
+}
+/*****************************************end of waiting list page*****************************************************/
