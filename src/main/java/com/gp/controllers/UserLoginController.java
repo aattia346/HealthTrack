@@ -23,10 +23,19 @@ import com.gp.user.Translator;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
+import com.gp.user.WaitingRequest;
+import com.gp.user.WaitingRequestDao;
 
 @RestController
 public class UserLoginController {	
 		
+	@RequestMapping(value="/HealthTrack/WaitingList", method = RequestMethod.GET)
+    public ModelAndView waitingList(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) {
+		model.addAttribute("lang", cookie);
+		
+        return new ModelAndView("/user/waitingList");
+    }
+	
 	@RequestMapping(value="/HealthTrack", method = RequestMethod.GET)
     public ModelAndView home(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) {
 		model.addAttribute("lang", cookie);
@@ -312,4 +321,47 @@ public class UserLoginController {
 	
 		return mav;
     }
+	
+	@RequestMapping(value="/HealthTrack/Waiting/Submit", method = RequestMethod.POST)
+    public ModelAndView waitingListSubmit(HttpServletRequest request ,ModelAndView mav , @CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) throws ParseException, JSONException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		model.addAttribute("lang", cookie);
+		Translator t = new Translator(cookie);
+		
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String service = request.getParameter("service");
+		
+		model.addAttribute("oldName"	, name);
+		model.addAttribute("oldPhone"	, phone);
+		
+		boolean errors = false;
+		
+		if(!Validation.validateName(name)) {
+			model.addAttribute("invalidName", "<p class=\"wrong-input\">" + t.write("invalide name") + "</p>");
+			errors = true;			
+		}
+		
+		if(!Validation.validatePhone(phone)) {
+			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">" + t.write("invalide phone") + "</p>");
+			errors = true;			
+		}
+		
+		if(service.equals("0")) {
+			model.addAttribute("invalidService", "<p class=\"wrong-input\">" + t.write("please select a service") + "</p>");
+			errors = true;			
+		}
+		
+		if(!errors) {
+			model.addAttribute("submitSucceed", "<p class=\"alert alert-success col-sm-offset-3 col-sm-6\">" + t.write("your request has been sent successfully") + "</p>");
+			WaitingRequest waitingRequest = new WaitingRequest(name, phone, service);
+			WaitingRequestDao.insertRequest(waitingRequest);
+			//send whatsup message
+		}
+		//String url = request.getHeader("Referer");
+		mav.setViewName("/user/waitingList");
+		
+        return mav;
+    }
+	
 }

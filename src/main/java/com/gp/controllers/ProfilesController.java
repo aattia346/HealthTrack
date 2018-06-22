@@ -98,7 +98,6 @@ public class ProfilesController {
 	
 	}
 	
-	
 	@RequestMapping(value="/HealthTrack/profile/user/{id}", method = RequestMethod.GET)   
 	public ModelAndView personPage(ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request, @PathVariable("id") int id, ModelAndView mav) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
