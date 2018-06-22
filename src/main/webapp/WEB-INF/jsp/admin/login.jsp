@@ -5,7 +5,7 @@
     	<div class="row">
                     
         	<div class="login-header col-sm-6 col-sm-offset-4 col-lg-4">
-        		<h3 class="text-center"> ADMIN LOGIN </h3>
+        		<h3 class="text-center"><%=t.write("ADMIN LOGIN") %>  </h3>
             </div>
                     
             <div class="col-lg-4 col-sm-offset-4 col-xs-12 login-form col-sm-6">
@@ -13,15 +13,15 @@
             	<form method="post" action="/HealthTrack/admin/login/submit" >
                             
                 	<div class="form-group">
-                    	<label>Username:</label>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>                          
+                    	<label><%=t.write("Username:") %></label>
+                        <input type="text" class="form-control" name="username" placeholder=<%=t.write("Username") %> required>                          
                     </div>
                             
                     ${invalidUsername}
                             
                     <div class="form-group">
-                    	<label>Password:</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    	<label><%=t.write("Password:") %></label>
+                        <input type="password" class="form-control" name="password" placeholder=<%=t.write("Password") %> required>
                     </div>
                             
           	        ${notAuthenticated}

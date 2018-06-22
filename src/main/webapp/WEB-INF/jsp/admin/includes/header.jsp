@@ -1,9 +1,20 @@
+<%@page import="com.gp.user.Translator"%>
+<%@page import="org.apache.commons.text.WordUtils" %>
+<%
+    
+    	String lang = (String)request.getAttribute("lang");
+
+    	Translator t = new Translator(lang);
+    
+    %>
+
 <!DOCTYPE html>
 <html>
     <head>
     <meta charset="utf-8">
+    <title><%= WordUtils.capitalize(t.write(title)) %></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= title %></title>
+  
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,36 +58,36 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="/HealthTrack/admin/dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="/HealthTrack/admin/dashboard"> <i class="menu-icon fa fa-dashboard"></i><%=t.write("Dashboard") %> </a>
                     </li>
                     <h3 class="menu-title">Services</h3><!-- /.menu-title -->
                     
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Locations</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i><%=t.write("Locations") %></a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-h-square menu-icon"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/hospitals">Hospitals</a></li>
-                            <li><i class="fa fa-h-square menu-icon"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments">Departments</a></li>
-                            <li><i class="fa fa-stethoscope"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics">Clinics</a></li>
-                            <li><img src="/admin/icons/if_medical_icon_3_1290986.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/centers">Centers</a></li>
-                            <li><img src="/admin/icons/if_pill_36347.png" class="my-icon pharmacy-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies">Pharmacies</a></li>
-                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services">Services</a></li>
-                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/Comments">Comments</a></li>
+                            <li><i class="fa fa-h-square menu-icon"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/hospitals"><%=t.write("Hospitals") %></a></li>
+                            <li><i class="fa fa-h-square menu-icon"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments"><%=t.write("Departments") %></a></li>
+                            <li><i class="fa fa-stethoscope"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics") %></a></li>
+                            <li><img src="/admin/icons/if_medical_icon_3_1290986.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/centers"><%=t.write("Centers") %></a></li>
+                            <li><img src="/admin/icons/if_pill_36347.png" class="my-icon pharmacy-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies"><%=t.write("Pharmacies") %></a></li>
+                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services"><%=t.write("Services") %></a></li>
+                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/Comments"><%=t.write("Comments") %></a></li>
                         </ul>
                     </li>
 
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar menu-icon"></i>Bookings</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar menu-icon"></i><%=t.write("Bookings") %></a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-calendar"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/daySlotBooking">Day Slots</a></li>
-                            <li><i class="fa fa-calendar"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/timeSlotBooking">Time Slots</a></li>
+                            <li><i class="fa fa-calendar"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/daySlotBooking"><%=t.write("Day Slots") %></a></li>
+                            <li><i class="fa fa-calendar"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/timeSlotBooking"><%=t.write("Time Slots") %></a></li>
                         </ul>
                     </li>
                     
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i><%=t.write("Users") %></a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-h-square"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/users">All Users</a></li>
-                            <li><i class="fa fa-ban"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/bannedUsers">Banned Users</a></li>
+                            <li><i class="fa fa-h-square"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/users"><%=t.write("All Users") %></a></li>
+                            <li><i class="fa fa-ban"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/bannedUsers"><%=t.write("Banned Users") %></a></li>
                         </ul>
                     </li>
                     
@@ -109,18 +120,18 @@
                             <span class="count bg-danger">5</span>
                           </button>
                           <div class="dropdown-menu" aria-labelledby="notification">
-                            <p class="red">You have 3 Notification</p>
+                            <p class="red"><%=t.write("You have 3 Notification") %></p>
                             <a class="dropdown-item media bg-flat-color-1" href="#">
                                 <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
+                                <p><%=t.write("Server #1 overloaded.") %></p>
                             </a>
                             <a class="dropdown-item media bg-flat-color-4" href="#">
                                 <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
+                                <p><%=t.write("Server #2 overloaded.") %></p>
                             </a>
                             <a class="dropdown-item media bg-flat-color-5" href="#">
                                 <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
+                                <p><%=t.write("Server #3 overloaded.") %></p>
                             </a>
                           </div>
                         </div>
@@ -134,13 +145,13 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                                <a class="nav-link" href="#"><i class="fa fa- user"></i><%=t.write("My Profile") %></a>
 
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
+                                <a class="nav-link" href="#"><i class="fa fa- user"></i><%=t.write("Notifications") %> <span class="count">13</span></a>
 
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                                <a class="nav-link" href="#"><i class="fa fa -cog"></i><%=t.write("Settings") %></a>
 
-                                <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                                <a class="nav-link" href="#"><i class="fa fa-power -off"></i><%=t.write("Logout") %></a>
                         </div>
                     </div>
 

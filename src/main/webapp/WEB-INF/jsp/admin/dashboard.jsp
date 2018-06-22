@@ -12,7 +12,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li class="active">Dashboard</li>
+                            <li class="active"><%=t.write("Dashboard") %></li>
                         </ol>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
 
             <div class="col-sm-12">
                 <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                  <span class="badge badge-pill badge-success">Success</span> You successfully read this important alert message.
+                  <span class="badge badge-pill badge-success"><%=t.write("Success") %></span> <%=t.write("You successfully read this important alert message.") %>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -48,16 +48,16 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light"><%=t.write("Members online") %></p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70"/>
                             <canvas id="widgetChart1"></canvas>
@@ -78,16 +78,16 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light"><%=t.write("Members online") %></p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70"/>
                             <canvas id="widgetChart2"></canvas>
@@ -107,16 +107,16 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light"><%=t.write("Members online") %></p>
 
                     </div>
 
@@ -136,16 +136,16 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
+                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
                             <span class="count">10468</span>
                         </h4>
-                        <p class="text-light">Members online</p>
+                        <p class="text-light"><%=t.write("Members online") %></p>
 
                         <div class="chart-wrapper px-3" style="height:70px;" height="70"/>
                             <canvas id="widgetChart4"></canvas>

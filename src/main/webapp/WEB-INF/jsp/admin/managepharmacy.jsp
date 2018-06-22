@@ -26,7 +26,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -34,9 +34,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies">Pharmacies</a></li>
-                            <li>Add New Pharmacy</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies"><%=t.write("Pharmacies") %></a></li>
+                            <li><%=t.write("Add New Pharmacy") %></li>
                         </ol>
                     </div>
                 </div>
@@ -45,36 +45,36 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong>Pharmacy</strong><small> Form</small></div>
+                      <div class="card-header"><strong><%=t.write("Pharmacy") %></strong><small><%=t.write("Form") %></small></div>
                       <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter pharmacy name" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Name") %></label><input type="text" placeholder="<%=t.write("Enter pharmacy name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
                         ${invalidName}
                         ${nameExist}
                          ${shortName}
-                        <div class="form-group"><label class=" form-control-label">Intro</label><textarea maxlength="254" placeholder="Say something about the pharmacy" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea maxlength="254" placeholder="<%=t.write("Say something about the pharmacy") %>" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
                         ${invalidIntro}
                          ${shortIntro}
-                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="${oldUrl}"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="${oldUrl}"></div>
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">phone</label><input maxlength="11" type="text" placeholder="Phone Number" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone") %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number") %>" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="Website url" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
                             ${invalidWebsite}
                           </div>
                           <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label">Address</label><input maxlength="50" type="text" placeholder="Address" class="form-control" name="address" required="required" value="${oldAddress}"></div>
+                          <div class="form-group"><label class=" form-control-label"><%=t.write("Address") %></label><input maxlength="50" type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="${oldAddress}"></div>
                         	${invalidAddress}
                         	</div>
                         </div>
                                              
                       	<div class="form-group">
-                      		  <label class=" form-control-label">Choose the Admin</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Admin") %></label>
                               <select name="Admin" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 <%
                                 	List<User> clinicUsers = UserDao.getUsers("pharmacy");
                                 	request.setAttribute("users", clinicUsers);
@@ -92,7 +92,7 @@
                             
                            
                             
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %> </button>
                       </div>
                     </div>
                   </form>
@@ -109,7 +109,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -117,9 +117,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies">Pharmacy</a></li>
-                            <li>Edit Pharmacy</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies"><%=t.write("Pharmacy") %></a></li>
+                            <li><%=t.write("Edit Pharmacy") %></li>
                         </ol>
                     </div>
                 </div>
@@ -129,36 +129,36 @@
         <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/<%=pharmacy.getAdminId() %>/update" method="post">
         	<input type="hidden" name="pharmacyId" value="<%= pharmacy.getPharmacyId() %>">
                     <div class="card">
-                      <div class="card-header"><strong>Pharmacy</strong><small> Form</small></div>
+                      <div class="card-header"><strong><%=t.write("Pharmacy") %></strong><small> <%=t.write("Form") %></small></div>
                       <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label">Name</label><input type="text" placeholder="Enter pharmacy name" class="form-control" name="name" required="required" value="<%=pharmacy.getPharmacyName() %>" maxlength="50"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Name") %></label><input type="text" placeholder="<%=t.write("Enter pharmacy name") %>" class="form-control" name="name" required="required" value="<%=pharmacy.getPharmacyName() %>" maxlength="50"></div>
                         ${invalidName}
                         ${nameExist}
                         ${shortName}
-                        <div class="form-group"><label class=" form-control-label">Intro</label><textarea placeholder="Say something about the pharmacy" class="form-control" name="intro" required="required" maxlength="254"><%= pharmacy.getIntro() %></textarea></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea placeholder="<%=t.write("Say something about the pharmacy") %>" class="form-control" name="intro" required="required" maxlength="254"><%= pharmacy.getIntro() %></textarea></div>
                         ${invalidIntro} ${shortIntro}
                       
-                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="<%= pharmacy.getGoogle_maps_url() %>"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="<%= pharmacy.getGoogle_maps_url() %>"></div>
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">phone</label><input type="text" placeholder="Phone Number" class="form-control" name="phone" required="required" value="<%= pharmacy.getPhone() %>" maxlength="11"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone") %></label><input type="text" placeholder="<%=t.write("Phone Number") %>" class="form-control" name="phone" required="required" value="<%= pharmacy.getPhone() %>" maxlength="11"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="Website url" class="form-control"  required="required" name="website" value="<%= pharmacy.getWebsite() %>"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="<%= pharmacy.getWebsite() %>"></div>
                             ${invalidWebsite}
                           </div>
                           <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label">Address</label><input type="text" placeholder="Address" class="form-control" name="address" required="required" value="<%= pharmacy.getAddress() %>" maxlength="50"></div>
+                          <div class="form-group"><label class=" form-control-label"><%=t.write("Address") %></label><input type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="<%= pharmacy.getAddress() %>" maxlength="50"></div>
                         	${invalidAddress}
                         	</div>
                         </div>
                                              
                       	<div class="form-group">
-                      		  <label class=" form-control-label">Choose the Admin</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Admin") %></label>
                               <select name="Admin" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 <%
                                 	List<User> hospitalUsers = UserDao.getUsers("pharmacy");
                                 	request.setAttribute("users", hospitalUsers);
@@ -174,7 +174,7 @@
                               ${invalidAdmin}
                             </div>
    
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %></button>
                       </div>
                     </div>
                   </form>

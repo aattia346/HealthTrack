@@ -28,7 +28,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -36,9 +36,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics">Clinics</a></li>
-                            <li>Add New Clinic</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics") %></a></li>
+                            <li><%=t.write("Add New Clinic") %></li>
                         </ol>
                     </div>
                 </div>
@@ -47,39 +47,39 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/clinic/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong>Clinic</strong><small> Form</small></div>
+                      <div class="card-header"><strong><%=t.write("Clinic") %></strong><small><%=t.write("Form") %> </small></div>
                       <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label">Clinic name</label><input type="text" placeholder="Enter Clinic name" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Clinic name") %></label><input type="text" placeholder="<%=t.write("Enter Clinic name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
                         ${invalidName}
                         ${nameExist}
-                       <div class="form-group"><label class=" form-control-label">Doctor Name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" value="${oldDoctorName}"></div> 
+                       <div class="form-group"><label class=" form-control-label"><%=t.write("Doctor Name") %></label><input type="text" placeholder="<%=t.write("Doctor Name") %>" class="form-control" name="doctorName" required="required" value="${oldDoctorName}"></div> 
                          ${invalidName}
                         ${nameExist}
                        
-                        <div class="form-group"><label class=" form-control-label">Intro</label><textarea maxlength="254" placeholder="Say something about the Clinic" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea maxlength="254" placeholder="<%=t.write("Say something about the Clinic") %>" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
                         ${invalidIntro}
                          ${shortIntro}
-                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="${oldUrl}"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="${oldUrl}"></div>
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">phone</label><input maxlength="11" type="text" placeholder="Phone Number" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone") %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number") %>" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="Website url" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
                             ${invalidWebsite}
                           </div>
                           <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label">Address</label><input maxlength="50" type="text" placeholder="Address" class="form-control" name="address" required="required" value="${oldAddress}"></div>
+                          <div class="form-group"><label class=" form-control-label"><%=t.write("Address") %></label><input maxlength="50" type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="${oldAddress}"></div>
                         	${invalidAddress}
                         	</div>
                         	<div class="col-12">
-                        	<div class="form-group"><label class=" form-control-label">Fees</label><input maxlength="10" type="text" placeholder="fees" class="form-control" name="fees" required="required" value="${oldFees}"></div>
+                        	<div class="form-group"><label class=" form-control-label"><%=t.write("Fees") %></label><input maxlength="10" type="text" placeholder="<%=t.write("fees") %>" class="form-control" name="fees" required="required" value="${oldFees}"></div>
                         	  <!--  ${invalidFees} -->	
                         	  </div>
                         	  <div class="col-12">
-                     	 <div class="form-group"><label class=" form-control-label">Speciality</label><input type="text" placeholder="Speciality" class="form-control" name="specialty" required="required" value="${oldSpecialty}"></div> 
+                     	 <div class="form-group"><label class=" form-control-label"><%=t.write("Speciality") %></label><input type="text" placeholder="<%=t.write("Speciality") %>" class="form-control" name="specialty" required="required" value="${oldSpecialty}"></div> 
                          ${invalidName}
                         ${nameExist}
                      
@@ -88,9 +88,9 @@
                         </div>
                                              
                       	<div class="form-group">
-                      		  <label class=" form-control-label">Choose the Admin</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Admin") %></label>
                               <select name="Admin" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 <%
                                 	List<User> CenterUsers = UserDao.getUsers("clinic");
                                 	request.setAttribute("users", CenterUsers);
@@ -107,7 +107,7 @@
                             </div>
                              
                           
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %> </button>
                       </div>
                     </div>
                   </form>
@@ -124,7 +124,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -132,9 +132,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics">Clinics</a></li>
-                            <li>Edit clinic</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics") %></a></li>
+                            <li><%=t.write("Edit clinic") %></li>
                         </ol>
                     </div>
                 </div>
@@ -144,59 +144,59 @@
         <form class="col-lg-12" action="/HealthTrack/admin/clinic/<%= clinic.getAdminId() %>/update" method="post">
         	<input type="hidden" name="clinicId" value="<%= clinic.getClinicId() %>">
                     <div class="card">
-                      <div class="card-header"><strong>Clinic</strong><small> Form</small></div>
+                      <div class="card-header"><strong><%=t.write("Clinic") %></strong><small><%=t.write("Form") %> </small></div>
                       <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label"> Clinic Name</label><input type="text" placeholder="Enter clinic name" class="form-control" name="name" required="required" value="<%=clinic.getClinicName()%>" maxlength="50"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Clinic Name") %> </label><input type="text" placeholder="<%=t.write("Enter clinic name") %>" class="form-control" name="name" required="required" value="<%=clinic.getClinicName()%>" maxlength="50"></div>
                         ${invalidName}
                         ${nameExist}
                         ${shortName}
 
-                     <div class="form-group"><label class=" form-control-label">Doctor Clinic Name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" value="<%= clinic.getDoctorName()%>"></div>
+                     <div class="form-group"><label class=" form-control-label"><%=t.write("Doctor Clinic Name") %></label><input type="text" placeholder="<%=t.write("Doctor Name") %>" class="form-control" name="doctorName" required="required" value="<%= clinic.getDoctorName()%>"></div>
                         ${invalidName}
                         ${nameExist}
                         ${shortName}
                     
-                         <div class="form-group"><label class=" form-control-label">Intro</label><textarea placeholder="say something about Clinic" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
+                         <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea placeholder="<%=t.write("say something about Clinic") %>" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
                         ${invalidIntro} ${shortIntro}
                       
 
-                     <div class="form-group"><label class=" form-control-label">doctor_clinic_name</label><input type="text" placeholder="Doctor Name" class="form-control" name="doctorName" required="required" value=<%= clinic.getDoctorName() %>></div>
+                     <div class="form-group"><label class=" form-control-label"><%=t.write("doctor_clinic_name") %></label><input type="text" placeholder="<%=t.write("Doctor Name") %>" class="form-control" name="doctorName" required="required" value=<%= clinic.getDoctorName() %>></div>
                         ${invalidName}
                         ${nameExist}
                         ${shortName}     
-                         <div class="form-group"><label class=" form-control-label">intro</label><textarea placeholder="say something about Clinic" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
+                         <div class="form-group"><label class=" form-control-label"><%=t.write("intro") %></label><textarea placeholder="<%=t.write("say something about Clinic") %>" class="form-control" name="intro" required="required" maxlength="254"><%= clinic.getIntro() %></textarea></div>
                         ${invalidIntro}
                          ${shortIntro}       
 
-                        <div class="form-group"><label class=" form-control-label">Google Maps URL</label><input type="text" placeholder="Enter the link of the location of google maps" class="form-control" name="url" required="required" value="<%=clinic.getGoogle_maps_url()%>"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps")%>" class="form-control" name="url" required="required" value="<%=clinic.getGoogle_maps_url()%>"></div>
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label">phone</label><input type="text" placeholder="Phone Number" class="form-control" name="phone" required="required" value="<%=clinic.getPhone() %>" maxlength="11"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone") %></label><input type="text" placeholder="<%=t.write("Phone Number")%>" class="form-control" name="phone" required="required" value="<%=clinic.getPhone() %>" maxlength="11"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                         <div class="form-group"><label class=" form-control-label">Specialty</label><input type="text" placeholder="Doctor speciality" class="form-control"  required="required" name="specialty" value="<%= clinic.getSpecialty() %>"></div>    
+                         <div class="form-group"><label class=" form-control-label"><%=t.write("Specialty") %></label><input type="text" placeholder="<%=t.write("Doctor speciality")%>" class="form-control"  required="required" name="specialty" value="<%= clinic.getSpecialty() %>"></div>    
                        
-                        <div class="form-group"><label class=" form-control-label">Website</label><input type="text" placeholder="website" class="form-control"  required="required" name="website" value="<%= clinic.getWebsite() %>"></div> 
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("website")%>" class="form-control"  required="required" name="website" value="<%= clinic.getWebsite() %>"></div> 
                             ${invalidWebsite}
                           </div>
                           <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label">Address</label><input type="text" placeholder="Address" class="form-control" name="address" required="required" value="<%= clinic.getAddress() %>" maxlength="50"></div>
+                          <div class="form-group"><label class=" form-control-label"><%=t.write("Address") %></label><input type="text" placeholder="<%=t.write("Address")%>" class="form-control" name="address" required="required" value="<%= clinic.getAddress() %>" maxlength="50"></div>
                         	${invalidAddress}
                         	</div>
                         </div>
                         
                          <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label">Fees</label><input type="text" placeholder="fees" class="form-control" name="fees" required="required" value="<%= clinic.getFees() %>" maxlength="10"></div>
+                          <div class="form-group"><label class=" form-control-label"><%=t.write("Fees") %></label><input type="text" placeholder="<%=t.write("fees")%>" class="form-control" name="fees" required="required" value="<%= clinic.getFees() %>" maxlength="10"></div>
                       
                         	</div>
                         </div>
                                              
                       	<div class="form-group">
-                      		  <label class=" form-control-label">Choose the Admin</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Admin") %></label>
                               <select name="Admin" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 <%
                                 	List<User> clinicUsers = UserDao.getUsers("clinic");
                                 	request.setAttribute("users", clinicUsers);
@@ -214,9 +214,10 @@
                             
                             
    
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %> </button>
                       </div>
-                    </div>
+                
+                    
                   </form>
 	<% } %>
 <%@include  file="includes/footer.jsp" %>

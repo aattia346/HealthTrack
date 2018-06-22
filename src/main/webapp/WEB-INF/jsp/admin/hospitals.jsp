@@ -22,7 +22,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Hospitals</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><%=t.write("Hospitals") %></li>
                         </ol>
                     </div>
                 </div>
@@ -45,18 +45,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%=t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>ID</th>
-                        <th>Name</th>
-                        <th>Admin</th>
-                        <th>Departments</th>
-                        <th>Review</th>
-                        <th>Action</th>
+                      	<th><%=t.write("ID") %></th>
+                        <th><%=t.write("Name") %></th>
+                        <th><%=t.write("Admin") %></th>
+                        <th><%=t.write("Departments") %></th>
+                        <th><%=t.write("Review") %></th>
+                        <th><%=t.write("Action") %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -75,10 +75,10 @@
                         <c:forEach var="dept" items="${depts}">
                         	<div class="dept-in-hospital-table">
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}">${dept.deptName}</a>
-	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}" class="confirm-delete-dept"><i class="fa fa-close" title="Delete this department"> </i> </a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}" class="confirm-delete-dept"><i class="fa fa-close" title=<%=t.write("Delete this department") %>> </i> </a>
                         	</div>
                         </c:forEach>
-                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%= hospital.getHospitalId() %>" title="Add new department"><i class="fa fa-plus"></i></a>
+                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%= hospital.getHospitalId() %>" title=<%=t.write("Add new department") %>><i class="fa fa-plus"></i></a>
                         <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/addNewDepartment" class="add-dept hidden add-dept-<%= hospital.getHospitalId() %>">
 	                        	<input type="hidden" value="<%= hospital.getHospitalId()%>" name="hospitalId">
 	                        	<select name="dept" class="form-control select-new-dept">
@@ -111,8 +111,8 @@
                         <td>${hospital.review}</td>
                         <td>
                         <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/<%= hospital.getAdminId() %>/edit" title="Edit this hospital"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/delete/<%= hospital.getHospitalId() %>" title="Delete this hospital"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/<%= hospital.getAdminId() %>/edit" title=<%=t.write("Edit this hospital") %>><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/delete/<%= hospital.getHospitalId() %>" title=<%=t.write("Delete this hospital") %>><i class="fa fa-close"></i></a>
                         </div>
                         </td>
                       </tr>
@@ -123,7 +123,7 @@
                   </table>
                         </div>
                     </div>
-                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Hospital</a>
+                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Hospital") %> </a>
                 </div>
 
                 </div>

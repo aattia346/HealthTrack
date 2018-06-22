@@ -9,6 +9,7 @@
 <%@page import="com.gp.user.Service"%>
 <%@page import="com.gp.user.ServiceDao"%>
 
+
 <% 	String title = "Centers"; 
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
@@ -24,7 +25,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -32,8 +33,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Centers</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><%=t.write("Centers") %></li>
                         </ol>
                     </div>
                 </div>
@@ -47,18 +48,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%=t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>ID</th>
-                        <th>Name</th>
-                        <th>Admin</th>
-                        <th>Services</th>
-                        <th>Review</th>
-                        <th>Action</th>
+                      	<th><%=t.write("ID") %></th>
+                        <th><%=t.write("Name") %></th>
+                        <th><%=t.write("Admin") %></th>
+                        <th><%=t.write("Services") %></th>
+                        <th><%=t.write("Review") %></th>
+                        <th><%=t.write("Action") %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -74,7 +75,7 @@
                     
                       
                       	<tr>
-                        <td>${center.centerId}</td>
+                        <td >${center.centerId}</td>
                         <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank">${center.centerName}</a></td>
                         <td>${center.adminId}</td>
                         
@@ -83,10 +84,10 @@
                         	<div class="dept-in-hospital-table">
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
                         		
-	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title="Delete this Service"> </i> </a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title=<%=t.write("Delete this Service") %>> </i> </a>
                         	</div>
                         </c:forEach>
-                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title="Add new Service"><i class="fa fa-plus"></i></a>
+                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title=<%=t.write("Add new Service") %>><i class="fa fa-plus"></i></a>
                         <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/service/add" class="add-dept hidden add-dept-<%=C.getCenterId() %>">
 	                        	<input type="hidden" value="<%=C.getCenterId()%>" name="centerId">
 	                        	<select name="service" class="form-control select-new-dept">
@@ -106,9 +107,9 @@
                                 		}
                                 	}
                                 	request.setAttribute("serv", servicesList); %>
-                               		<option value="0">select a Service</option>
+                               		<option value="0"><%=t.write("select a Service") %></option>
                            			<c:forEach var="service" items="${serv}">  
-			                       		<option value="${service}">${service}</option>
+			                       		<option value="${service}"><%=t.write("${service}") %></option>
 		                           </c:forEach>
                                 	<%	
                                 %>
@@ -120,8 +121,8 @@
                         <td>${center.review}</td>
                         <td>
                         <div>
-                      <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/<%= C.getAdminId() %>/edit" title="Edit this center"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title="Delete this center"><i class="fa fa-close"></i></a>
+                      <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/<%= C.getAdminId() %>/edit" title=<%=t.write("Edit this center") %>><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title=<%=t.write("Delete this center") %>><i class="fa fa-close"></i></a>
                          </div>
                         </td>
                       </tr>
@@ -132,7 +133,7 @@
                   </table>
                         </div>
                     </div>
-                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/center/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Center</a>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/center/add" class="btn btn-primary"><i class="fa fa-plus"></i> <%=t.write("Add New Center") %></a>
                 </div>
 
 

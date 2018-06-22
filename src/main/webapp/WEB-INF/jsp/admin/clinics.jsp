@@ -6,6 +6,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% 	String title = "Clinics";
@@ -22,7 +23,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -30,8 +31,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Clinics</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><%=t.write("Clinics") %></li>
                         </ol>
                     </div>
                 </div>
@@ -45,18 +46,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%=t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>ID</th>
-                        <th>Name</th>
-                        <th>Admin</th>
+                      	<th><%=t.write("ID") %></th>
+                        <th><%=t.write("Name") %></th>
+                        <th><%=t.write("Admin") %></th>
                         
-                        <th>Review</th>
-                        <th>Action</th>
+                        <th><%=t.write("Review") %></th>
+                        <th><%=t.write("Action") %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -86,7 +87,7 @@
                   </table>
                         </div>
                     </div>
-                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Clinic</a>
+                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Clinic") %> </a>
                 </div>
 
                 </div>

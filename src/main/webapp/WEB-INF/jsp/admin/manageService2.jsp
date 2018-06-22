@@ -30,7 +30,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services">Services</a></li>
-                            <li>Add New Service</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services"><%=t.write("Services") %></a></li>
+                            <li><%=t.write("Add New Service") %></li>
                         </ol>
                     </div>
                 </div>
@@ -49,13 +49,13 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/service/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong>Service</strong><small> Form</small></div>
+                      <div class="card-header"><strong><%=t.write("Service") %></strong><small><%=t.write("Form") %></small></div>
                       <div class="card-body card-block">
                       
                          	<div class="form-group">
-                      		  <label class=" form-control-label">Choose the Service Name</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Service Name") %></label>
                               <select name="serviceName" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 <%
                                 	List<String> services = new ArrayList<String>();
                                     services = ServiceDao.getServices();
@@ -95,34 +95,34 @@
 </script>
 
                             <div class="form-group">
-                      		  <label class=" form-control-label">Choose add on center or hospital</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose add on center or hospital") %></label>
                               <select id="slct1" class="form-control" onchange="populate(this.id,'slct2')">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 
-                             <option value="Hospital">Hospital</option>
-                             <option value="Center">Center</option>                             
+                             <option value="Hospital"><%=t.write("Hospital") %></option>
+                             <option value="Center"><%=t.write("Center") %></option>                             
                               </select>                                                          
                             </div>                     
                             <div class="form-group">
-                      		  <label class=" form-control-label">Choose the Center or Hospital</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Center or Hospital") %></label>
                               <select id=slct2 name="centerId" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 
                               </select>                                                          
                             </div>                
                             
                           <div class="form-group">
-                      		  <label class=" form-control-label">Choose Type of Service</label>
+                      		  <label class=" form-control-label"><%=t.write("Choose Type of Service") %></label>
                               <select name="type" class="form-control">
-                                <option value="0">Please select</option>
+                                <option value="0"><%=t.write("Please select") %></option>
                                 
-                             <option value=1>Day Service</option>
-                             <option value=2>Time Service</option>                             
+                             <option value=1><%=t.write("Day Service") %></option>
+                             <option value=2><%=t.write("Time Service") %></option>                             
                               </select>                                                          
                             </div>
 
                             
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> Submit</button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %></button>
                       </div>
                     </div>
                   </form>

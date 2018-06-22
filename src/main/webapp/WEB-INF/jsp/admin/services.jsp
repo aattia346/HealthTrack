@@ -30,7 +30,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -38,8 +38,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Services</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><%=t.write("Services") %></li>
                         </ol>
                     </div>
                 </div>
@@ -53,16 +53,16 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%=t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>ID</th>
-                        <th>Name</th>
-                        <th>Hospital or Center</th>
-                        <th>Review</th>
+                      	<th><%=t.write("ID") %></th>
+                        <th><%=t.write("Name") %></th>
+                        <th><%=t.write("Hospital or Center") %></th>
+                        <th><%=t.write("Review") %></th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -86,8 +86,8 @@
                         <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank">${service.hospitalName}${service.centerName}</a></td>
                         <td>${service.serviceReview}</td>
                         <td>
-                       <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/${service.serviceId}/edit" title="Edit this Service"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-service" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" title="Delete this Service"><i class="fa fa-close"></i></a>
+                       <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/${service.serviceId}/edit" title="<%=t.write("Edit this Service") %>"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-service" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" title="<%=t.write("Delete this Service") %>"><i class="fa fa-close"></i></a>
                         </td>
                       </tr>
                       
@@ -97,7 +97,7 @@
                   </table>
                         </div>
                     </div>
-                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Service2/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Service</a>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Service2/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Service") %> </a>
                 </div>
 
 

@@ -22,7 +22,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%=t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Day slot Booking</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                            <li><%=t.write("Day slot Booking") %></li>
                         </ol>
                     </div>
                 </div>
@@ -45,17 +45,17 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%=t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>Booking Id</th>
-                        <th>User Id</th>
-                        <th>Service Id</th>
-                        <th>Date</th>
-                        <th>Action</th>
+                      	<th><%=t.write("Booking Id") %></th>
+                        <th><%=t.write("User Id") %></th>
+                        <th><%=t.write("Service Id") %></th>
+                        <th><%=t.write("Date") %></th>
+                        <th><%=t.write("Action") %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -75,12 +75,12 @@
                         <td>
                         <div>
                       <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title="Delete this booking"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title=<%=t.write("Delete this booking") %>><i class="fa fa-close"></i></a>
                          <%if(booking.getStatus()==0){ %>
-                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking">Confirm</a>
+                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking"><%=t.write("Confirm") %></a>
                        
                         <%}else{ %>
-                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking">UnConfirm</a>
+                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking"><%=t.write("UnConfirm") %></a>
                        
                         <%} %>
                         </div>
