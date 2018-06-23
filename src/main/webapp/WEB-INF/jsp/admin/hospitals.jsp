@@ -69,12 +69,15 @@
                       	%>
                       	<tr>
                         <td>${hospital.hospitalId}</td>
-                        <td><a href="/HealthTrack/profile/hospital/${hospital.adminId}" target="_blank">${hospital.hospitalName}</a></td>
+                        <td><a href="/HealthTrack/profile/hospital/${hospital.adminId}" target="_blank"><%= t.write(hospital.getHospitalName()) %></a></td>
                         <td>${hospital.adminId}</td>
                         <td class="depts-td">
                         <c:forEach var="dept" items="${depts}">
+                        <%
+                        Department D 		= (Department)pageContext.getAttribute("dept");
+                        %>
                         	<div class="dept-in-hospital-table">
-	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}">${dept.deptName}</a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}"><%= t.write(D.getDeptName()) %>${dept.deptName}</a>
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}" class="confirm-delete-dept"><i class="fa fa-close" title=<%=t.write("Delete this department") %>> </i> </a>
                         	</div>
                         </c:forEach>
@@ -97,9 +100,12 @@
                                 		}
                                 	}
                                 	request.setAttribute("departs", deptsList); %>
-                               		<option value="0">select a department</option>
+                               		<option value="0"><%= t.write("select a department") %></option>
                            			<c:forEach var="depart" items="${departs}">  
-			                       		<option value="${depart}">${depart}</option>
+                           			  <%
+				                       String  List 		= (String)pageContext.getAttribute("depart");
+				                       %>
+			                       		<option value="${depart}"><%= t.write(List) %></option>
 		                           </c:forEach>
                                 	<%	
                                 %>

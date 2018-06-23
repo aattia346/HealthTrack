@@ -84,7 +84,7 @@ String title = "comments";
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                            
-                            <li>Comments</li>
+                            <li><%= t.write("Comments") %></li>
                         </ol>
                     </div>
                 </div>
@@ -98,32 +98,32 @@ String title = "comments";
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%= t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                       	
-                        <th>Service Name</th>
+                        <th><%= t.write("Service Name") %></th>
     
                       </tr>
                     </thead>
                     <tbody>
                         
                       	<tr>
-                        <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%=S.getServiceName() %></a></td>
+                        <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%= t.write(S.getServiceName()) %></a></td>
                        <td>
                        <div class="dept-in-hospital-table">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                        <th>Patient Name</th>
-                        <th>Date</th>
-                        <th>time of Booking</th>
-                        <th>Patient phone</th>
-                        <th>Action</th>
-                        <th>Delete</kth>
+                        <th><%= t.write("Patient Name") %></th>
+                        <th><%= t.write("Date") %></th>
+                        <th><%= t.write("time of Booking") %></th>
+                        <th><%= t.write("Patient phone") %></th>
+                        <th><%= t.write("Action") %></th>
+                        <th><%= t.write("Delete") %></kth>
                         </tr>
                         </thead>
                         
@@ -134,29 +134,27 @@ String title = "comments";
                         request.setAttribute("bookings",bookings);
                         %>
                         <c:forEach var="booking" items="${bookings}">
+                        <%Booking B = (Booking)pageContext.getAttribute("booking"); %> 
                         <tr>
                       
-                        <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank">${booking.firstName} ${booking.lastName}</a></td>
+                        <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank"><%= t.write(B.getFirstName()) %><%= t.write(B.getLastName()) %></a></td>
                          <td class="depts-td">From:${booking.dateFrom} ${booking.timeFrom}>>>
                           To:${booking.dateTo}</td>
                           <td>${booking.timeOfBooking}</td>
                           <td>${booking.bookingPhone}</td>
-                          <% 
-                      	    Booking booking = (Booking)pageContext.getAttribute("booking");
-            
-                      	%>
+                          
                           <td>
                            
                          
-                         <%if(booking.getStatus()==0){ %>
-                       <a href="/HealthTrack/booking/confirm/${userId}/${booking.bookingId}/<%=S.getServiceId()%>/${placeType}/showBookings" class="btn btn-success confirm-verify-booking">Confirm</a>
+                         <%if(B.getStatus()==0){ %>
+                       <a href="/HealthTrack/booking/confirm/${userId}/${booking.bookingId}/<%=S.getServiceId()%>/${placeType}/showBookings" class="btn btn-success confirm-verify-booking"><%= t.write("Confirm") %></a>
                        
                         <%}else{ %>
-                        <a href="/HealthTrack/booking/unconfirm/${userId}/${booking.bookingId}/<%=S.getServiceId()%>/${placeType}/showBookings" class="btn btn-warning confirm-unverify-booking">UnConfirm</a>
+                        <a href="/HealthTrack/booking/unconfirm/${userId}/${booking.bookingId}/<%=S.getServiceId()%>/${placeType}/showBookings" class="btn btn-warning confirm-unverify-booking"><%= t.write("UnConfirm") %></a>
                        
                         <%} %>
                           </td>
-                          <td><a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%=username %>/<%=S.getServiceId() %>/${placeType}/booking/delete/${booking.bookingId}/showBookings" title="Delete this booking"><i class="fa fa-close"></i></a></td>
+                          <td><a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%=username %>/<%=S.getServiceId() %>/${placeType}/booking/delete/${booking.bookingId}/showBookings" title="<%= t.write("Delete this booking") %>"><i class="fa fa-close"></i></a></td>
                       
                         </tr>
                         </c:forEach>

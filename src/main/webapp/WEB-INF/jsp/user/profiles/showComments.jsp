@@ -63,6 +63,8 @@ String title = "comments";
 		//request.setAttribute("services", services);
 		request.setAttribute("placeType",placeType);
 		request.setAttribute("placeName", placeName);
+		 String placetype = (String)pageContext.getAttribute("placeType");
+		 
 			
 		}
 %>
@@ -82,7 +84,7 @@ String title = "comments";
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                            
-                            <li>Comments</li>
+                            <li><%= t.write("Comments") %></li>
                         </ol>
                     </div>
                 </div>
@@ -96,17 +98,17 @@ String title = "comments";
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%= t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                       	
-                        <th>Service Name</th>
-                        <th>PlaceName</th>
-                        <th>service_review</th>
-                        <th>Comment</th>
+                        <th><%= t.write("Service Name") %></th>
+                        <th><%= t.write("PlaceName") %></th>
+                        <th><%= t.write("service_review") %></th>
+                        <th><%= t.write("Comment") %></th>
                        
                         
                       </tr>
@@ -114,8 +116,9 @@ String title = "comments";
                     <tbody>
                         
                       	<tr>
-                        <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%=S.getServiceName() %></a></td>
-                        <td><a href="/HealthTrack/profile/${placeType}/<%=S.getServiceId() %>" target="_blank">${placeName}</a></td>
+                        <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%= t.write(S.getServiceName()) %></a></td>
+                        <%String placename = (String)pageContext.getAttribute("placeName"); %>
+                        <td><a href="/HealthTrack/profile/${placeType}/<%=S.getServiceId() %>" target="_blank"><%= t.write(placename) %></a></td>
                          <td class="depts-td"><%=S.getServiceReview()%></td>
                         <%
                         
@@ -131,17 +134,18 @@ String title = "comments";
                         	<div class="dept-in-hospital-table">
                         	<table id="bootstrap-data-table" class="table table-striped table-bordered"><thead>
                         	<tr>
-                        	<th>Comment</th>
-                        	<th>Show Button</th>
-                        	<th>Delete Button</th>
+                        	<th><%= t.write("Comment") %></th>
+                        	<th><%= t.write("Show Button") %></th>
+                        	<th><%= t.write("Delete Button") %></th>
                         	</tr>
                         	</thead>
                         	<tbody>
                         	<c:forEach var="review" items="${reviews}">
+                        	<% Review r = (Review)pageContext.getAttribute("review"); %>
 	                        	 <tr>
-	                        	  <td> ${review.comment}</td>
-	                        	  <td> <a href="/HealthTrack/user/unban" class="btn btn-success confirm-unBan-user">show</a> </td>
-	                        	  <td><a href="/HealthTrack/admin/<%=username%>/<%=ServiceId %>/<%=placeType%>/review/delete/${review.reviewId}/showComments" class="btn btn-success confirm-unBan-user">Delete</a></td>
+	                        	  <td> <%= t.write(r.getComment()) %></td>
+	                        	  <td> <a href="/HealthTrack/user/unban" class="btn btn-success confirm-unBan-user"><%= t.write("show") %></a> </td>
+	                        	  <td><a href="/HealthTrack/admin/<%=username%>/<%=ServiceId %>/<%=placeType%>/review/delete/${review.reviewId}/showComments" class="btn btn-success confirm-unBan-user"><%= t.write("Delete") %></a></td>
 	                        	 </tr>
 	                        	   </c:forEach>
 	                        	  </tbody>

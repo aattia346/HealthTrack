@@ -71,12 +71,15 @@
                       %>
                       	<tr id="dept-${D.deptId}">
                         <td>${dept.deptId}</td>
-                        <td>${dept.deptName}</td>
-                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank">${dept.hospitalName}</a></td>
+                        <td><%= t.write(D.getDeptName()) %></td>
+                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName()) %>${dept.hospitalName}</a></td>
                         <td>${dept.adminId}</td>
                         <td>
                         	<c:forEach var="service" items="${services}">
-                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
+                        	<%
+                        	Service S = (Service)pageContext.getAttribute("service");
+                        	%>
+                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName()) %></a>
                         	</c:forEach>
                         </td>
                         <td>

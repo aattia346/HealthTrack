@@ -68,13 +68,13 @@
                     </thead>
                     <tbody>
                       <c:forEach var="service" items="${services}">
-                      
+                      <%Service s = (Service)pageContext.getAttribute("service"); %>
                       	<tr id="service-${service.serviceId}">
                         <td>${service.serviceId}</td>
-                        <td><a href="/HealthTrack/profile/service/${service.serviceId}" target="_blank">${service.serviceName}</a></td>
+                        <td><a href="/HealthTrack/profile/service/${service.serviceId}" target="_blank"><%= t.write(s.getServiceName()) %></a></td>
                         
                         <%
-                        	Service s = (Service)pageContext.getAttribute("service");
+                        	
                         	String placeType;
                         	if(s.getCenterId() == 0){
                         		placeType = "hospital";
@@ -83,7 +83,7 @@
                         	}
                         %>
                         
-                        <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank">${service.hospitalName}${service.centerName}</a></td>
+                        <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank"><%= t.write(s.getHospitalName()) %> <%= t.write(s.getCenterName()) %></a></td>
                         <td>${service.serviceReview}</td>
                         <td>
                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/${service.serviceId}/edit" title="<%=t.write("Edit this Service") %>"><i class="fa fa-edit"></i></a>

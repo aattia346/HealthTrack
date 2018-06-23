@@ -65,7 +65,7 @@
                            <%      
                           String s = (String)pageContext.getAttribute("service");
                            %>
-                             <option value="${service}">${service}</option>
+                             <option value="${service}"><%= t.write(s) %></option>
 
                                 </c:forEach>
                               </select>

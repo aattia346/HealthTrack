@@ -19,7 +19,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h1><%= t.write("Dashboard") %></h1>
                     </div>
                 </div>
             </div>
@@ -27,8 +27,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard">Dashboard</a></li>
-                            <li>Banned Users</li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%= t.write("Dashboard") %></a></li>
+                            <li><%= t.write("Banned Users") %></li>
                         </ol>
                     </div>
                 </div>
@@ -42,16 +42,16 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Data Table</strong>
+                            <strong class="card-title"><%= t.write("Data Table") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th>User ID</th>
-                        <th>User Name</th>
-                        <th>Type</th>                        
-                        <th>Action</th>
+                      	<th><%= t.write("User ID") %></th>
+                        <th><%= t.write("User Name") %></th>
+                        <th><%= t.write("Type") %></th>                        
+                        <th><%= t.write("Action") %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -63,13 +63,13 @@
                       	<tr>
                         
                         <td><a href="/HealthTrack/profile/user/${user.id}" target="_blank">${user.id}</a></td>
-                        <td>${user.username}</td>
-                        <td>${user.type}</td>
+                        <td><%= t.write(user.getUsername()) %></td>
+                        <td><%= t.write(user.getType()) %></td>
                         <td>
                         <div>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/bannedUser/delete/<%=user.getId() %>" title="Delete this User"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/bannedUser/delete/<%=user.getId() %>" title="<%= t.write("Delete this User") %>"><i class="fa fa-close"></i></a>
                        
-                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user">unBan</a>                    
+                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user"><%= t.write("unBan") %></a>                    
                        
                         </div>
                         </td>

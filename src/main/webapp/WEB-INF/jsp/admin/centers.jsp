@@ -68,6 +68,8 @@
                     
                       	
                       	<%
+                      //	Center c = (Center)pageContext.getAttribute("center");
+                      	
                       	Center C = (Center)pageContext.getAttribute("center");
                       	List<Service> services = ServiceDao.getServicesOfCenter(C.getCenterId());
                       	request.setAttribute("services", services);
@@ -75,14 +77,17 @@
                     
                       
                       	<tr>
-                        <td >${center.centerId}</td>
-                        <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank">${center.centerName}</a></td>
+                        <td ><%=C.getCenterId()%></td>
+                        <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank"><%=t.write(C.getCenterName()) %></a></td>
                         <td>${center.adminId}</td>
                         
                         <td class="depts-td">
                         <c:forEach var="service" items="${services}">
+                        <%
+                        Service S=(Service)pageContext.getAttribute("service");
+                        %>
                         	<div class="dept-in-hospital-table">
-	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table">${service.serviceName}</a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName()) %></a>
                         		
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title=<%=t.write("Delete this Service") %>> </i> </a>
                         	</div>
@@ -107,9 +112,12 @@
                                 		}
                                 	}
                                 	request.setAttribute("serv", servicesList); %>
+                                	<%
+                                	String L =(String)pageContext.getAttribute("serv");
+                                	%>
                                		<option value="0"><%=t.write("select a Service") %></option>
                            			<c:forEach var="service" items="${serv}">  
-			                       		<option value="${service}"><%=t.write("${service}") %></option>
+			                       		<option value="${service}"><%= t.write(L) %> </option>
 		                           </c:forEach>
                                 	<%	
                                 %>
@@ -121,8 +129,8 @@
                         <td>${center.review}</td>
                         <td>
                         <div>
-                      <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/<%= C.getAdminId() %>/edit" title=<%=t.write("Edit this center") %>><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title=<%=t.write("Delete this center") %>><i class="fa fa-close"></i></a>
+                      <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/<%= C.getAdminId() %>/edit" title="<%=t.write("Edit this center") %>"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title="<%=t.write("Delete this center") %>"><i class="fa fa-close"></i></a>
                          </div>
                         </td>
                       </tr>

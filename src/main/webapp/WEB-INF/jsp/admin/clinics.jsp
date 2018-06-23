@@ -69,7 +69,7 @@
                       	%>
                       	<tr>
                         <td>${clinic.clinicId}</td>
-                        <td><a href="/HealthTrack/profile/clinic/${clinic.adminId}" target="_blank">${clinic.clinicName}</a></td>
+                        <td><a href="/HealthTrack/profile/clinic/${clinic.adminId}" target="_blank"><%= t.write(clinic.getClinicName()) %></a></td>
                         <td>${clinic.adminId}</td>
                        
                         <td>${clinic.review}</td>
