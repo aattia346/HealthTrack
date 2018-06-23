@@ -29,10 +29,8 @@
                         <div class="form-group">
                             <select name="service" class="form-control">
                                 <option value="0"><%= t.write("select service") %></option>
-                                <c:forEach var="service" items="${services}">
-                                	<option value="ICU"><%= t.write("ICU") %></option>
-                                	<option value="Incubator"><%= t.write("Incubator") %></option>
-                                </c:forEach>
+                                <option value="ICU"><%= t.write("ICU") %></option>
+                               	<option value="Incubator"><%= t.write("Incubator") %></option>
                             </select>
                         </div>
                         ${invalidService}
