@@ -388,12 +388,19 @@
                                     </form>
                                 </div>
                             </div>
+                            <% 
+                                        if(S.getHospitalName() == null){
+                                        	request.setAttribute("placeName", S.getCenterName());
+                                        }else{
+                                        	request.setAttribute("placeName", S.getHospitalName());
+                                        }
+                                        %>
                             <div class="col-12 col-lg-3">
                                 <div class="medilife-contact-info">
                                     <!-- Single Contact Info -->
                                      <div class="single-contact-info mb-30">
                                      <div class="single-contact-info-icon"><i class="fas fa-h-square fa-3x"></i></div>
-                                        <p><%= t.write(S.getHospitalName()) %></p>
+                                        <p><%= t.write(request.getAttribute("placeName").toString()) %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">

@@ -29,13 +29,9 @@
                         <div class="form-group">
                             <select name="service" class="form-control">
                                 <option value="0"><%= t.write("select service") %></option>
-                                
-                                <%
-                                List<String> services = ServiceDao.getServices(); 
-                                request.setAttribute("services", services);
-                                %>
                                 <c:forEach var="service" items="${services}">
-                                	<option value="${service}"><%= t.write(pageContext.getAttribute("service").toString()) %></option>
+                                	<option value="ICU"><%= t.write("ICU") %></option>
+                                	<option value="Incubator"><%= t.write("Incubator") %></option>
                                 </c:forEach>
                             </select>
                         </div>

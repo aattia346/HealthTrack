@@ -42,7 +42,9 @@ abstract public class ServiceDao {
 			service.setDeptName(result.getString("dept_name"));
 			service.setHospitalName(result.getString("hospital_name"));
 			service.setHospitalId(result.getInt("hospital_id"));
-		}	
+		}else {
+			service.setCenterName(result.getString("center_name"));
+		}
 		service.setLastUpdated(result.getDate("last_updated"));
 		service.setFees(result.getString("fees"));
 		service.setAdminId(result.getInt("admin_id"));
@@ -485,7 +487,7 @@ public static String checkServiceCommentForHospitalOrCenter(int serviceId) throw
 		
 }
 
-public static int getSrviceIdByCenterId(int centerId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public static int getSrviceIdByCenterId(int centerId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 	Connection con = DBConnection.getConnection();
 	String sql="SELECT service_id FROM service WHERE center_id=?";
@@ -498,7 +500,7 @@ public static int getSrviceIdByCenterId(int centerId) throws InstantiationExcept
 
 }
 
-public static int getSrviceIdByHospitalId(int hospitalId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public static int getSrviceIdByHospitalId(int hospitalId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 	Connection con = DBConnection.getConnection();
 	String sql="SELECT service_id FROM service JOIN department ON service.dept_id=department.department_id WHERE department.hospital_id=?";
@@ -510,4 +512,77 @@ public static int getSrviceIdByHospitalId(int hospitalId) throws InstantiationEx
 	return serviceId ;
 
 }
+
+	
+	public static List<Service> getServices(String serviceName) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM service JOIN department ON dept_id=department_id WHERE service_name=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, serviceName);
+		ResultSet result = ps.executeQuery();
+		
+		List<Service> services = new ArrayList<Service>();
+		
+		while(result.next()) {
+		Service service = new Service();
+		service.setServiceId(result.getInt("service_id"));
+		service.setServiceName(result.getString("service_name"));
+		service.setDeptId(result.getInt("dept_id"));
+		service.setDeptName(result.getString("dept_name"));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setSlot(result.getInt("slot"));
+		services.add(service);
+		}
+		
+		for(Service S: services) {
+			int deptId = S.getDeptId();
+			Connection con2 = DBConnection.getConnection();
+			String sql2="SELECT * FROM hospital JOIN department ON department.hospital_id=hospital.hospital_id"
+					+ " WHERE department_id=?";
+			PreparedStatement ps2 = con2.prepareStatement(sql2);
+			ps2.setInt(1, deptId);
+			ResultSet result2 = ps2.executeQuery();
+			result2.next();
+			S.setAdminId(result2.getInt("admin_id"));
+			S.setHospitalName(result2.getString("hospital_name"));
+			S.setGoogleMapsUrl(result2.getString("google_maps_url"));
+			S.setAddress(result2.getString("address"));
+			S.setLat(result2.getFloat("lat"));
+			S.setLang(result2.getFloat("lang"));
+			S.setWebsite(result2.getString("website"));
+		}
+		
+		String sql2="SELECT * FROM service JOIN center ON service.center_id=center.center_id WHERE service_name=?";
+		PreparedStatement ps2 = con.prepareStatement(sql2);
+		ps2.setString(1, serviceName);
+		ResultSet result2 = ps2.executeQuery();
+				
+		while(result2.next()) {
+		Service service = new Service();
+		service.setServiceId(result2.getInt("service_id"));
+		service.setServiceName(result2.getString("service_name"));
+		service.setCenterId(result2.getInt("center_id"));
+		service.setCenterName(result2.getString("center_name"));
+		service.setLastUpdated(result2.getDate("last_updated"));
+		service.setFees(result2.getString("fees"));
+		service.setAdminId(result2.getInt("admin_id"));
+		service.setGoogleMapsUrl(result2.getString("google_maps_url"));
+		service.setAddress(result2.getString("address"));
+		service.setServiceReview(result2.getFloat("service_review"));
+		service.setLat(result2.getFloat("lat"));
+		service.setLang(result2.getFloat("lang"));
+		service.setWebsite(result2.getString("website"));
+		service.setSlotType(result2.getInt("day_or_time"));
+		service.setSlot(result2.getInt("slot"));
+		services.add(service);
+		}
+		
+		con.close();
+		
+		return services;
+	}
 }

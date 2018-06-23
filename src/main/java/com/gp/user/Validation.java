@@ -79,7 +79,7 @@ abstract public class Validation {
 		return Pattern.matches("[\\sa-zA-Z0-9-\\u0621-\\u064A\\u0660-\\u0669]*", name.trim());
 	}
 	
-public static boolean validateText(String name) {
+	public static boolean validateText(String name) {
 		
 		return Pattern.matches("[\\sa-zA-Z0-9-<>]*", name.trim());
 	}
@@ -236,7 +236,6 @@ public static boolean validateText(String name) {
 		
 		return admin;
 	}
-
 	
 	public static boolean validateURL(String url) {
 		
@@ -304,7 +303,6 @@ public static boolean validateText(String name) {
 		return ban;
 	}
 	
-
 	public static boolean validateBookTime(int serviceId, String day, String table) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		boolean valid = true;
