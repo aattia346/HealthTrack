@@ -117,7 +117,7 @@
                                 	%>
                                		<option value="0"><%=t.write("select a Service") %></option>
                            			<c:forEach var="service" items="${serv}">  
-			                       		<option value="${service}"><%= t.write(L) %> </option>
+			                       		<option value="${service}">${service} </option>
 		                           </c:forEach>
                                 	<%	
                                 %>

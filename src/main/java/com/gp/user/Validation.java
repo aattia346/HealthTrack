@@ -103,11 +103,18 @@ public static boolean validateText(String name) {
 			}
 		
 		}
+	
+	public static boolean validateArStatement(String statement) {
+			
+			return Pattern.matches("^[^[\\u0621-\\u064A\\u0660-\\u0669 ]+$]+$", statement);
+		
+		}
 		
 	public static boolean validateFees(String fees) {
 		
 		
-		if( Pattern.matches("[0-9]*", fees.trim())) {
+		
+		if( Pattern.matches("[0-9\\$\\LE]*", fees.trim())) {
 			return true;
 		}else {
 			return false;

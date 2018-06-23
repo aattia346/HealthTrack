@@ -1,11 +1,14 @@
 package com.gp.controllers;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.json.JSONException;
+import org.json.simple.parser.ParseException;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +30,7 @@ import com.gp.user.Pharmacy;
 import com.gp.user.PharmacyDao;
 import com.gp.user.Service;
 import com.gp.user.ServiceDao;
+import com.gp.user.Translator;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -101,8 +105,8 @@ public class DashboardController {
 	
 	@RequestMapping(value="/HealthTrack/admin/{place}/insert", method = RequestMethod.POST)
 	public ModelAndView insertHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
-			, @PathVariable("place") String place) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		    
+			, @PathVariable("place") String place) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
+		   Translator t = new Translator(cookie);
 		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -130,38 +134,38 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">thezxcvb,.xbm,./ dj;' name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
 						errors = true;
 					}
 					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
-					model.addAttribute("nameExist", "<p class=\"wrong-input \">This place already exists</p>");
+					model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists")+"</p>");
 					errors = true;
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This place already exists</p>");
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro")+"</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
 					
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -169,12 +173,12 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 							errors = true;
 						}
 						
 						if(admin == 0) {
-							model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the new hospital</p>");
+							model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the new hospital")+"</p>");
 							errors = true;
 						}
 					}
@@ -192,20 +196,20 @@ public class DashboardController {
 						}
 						*/
 						if(!Validation.validateName(doctorName)) {
-							model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Clinic Name</p>");
+							model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Clinic Name")+"</p>");
 							errors = true;
 						}
 						
 						if(doctorName.length() < 4) {
-							model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+							model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
 							errors = true;
 						}
 						if(!Validation.validateName(specialty)) {
-							model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Specialty</p>");
+							model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Specialty")+"</p>");
 							errors = true;
 						}
 						if(specialty.length() < 4) {
-							model.addAttribute("shortName", "<p class=\"wrong-input \">tha Specialty should be at least 4 characters</p>");
+							model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters")+"</p>");
 							errors = true;
 						}
 							if(errors == false) {
@@ -383,8 +387,9 @@ public class DashboardController {
 	
 	@RequestMapping(value="/HealthTrack/admin/hospital/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
 		    model.addAttribute("lang", cookie);
+		    Translator t = new Translator(cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -411,36 +416,38 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
 						errors = true;
 					}
 
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro")+"</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
+					
+					
 					if(admin == 0) {
-						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the hospital</p>");
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -448,7 +455,7 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 							errors = true;
 						}
 					}
@@ -510,7 +517,8 @@ public class DashboardController {
 	
 	@RequestMapping(value="/HealthTrack/admin/center/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateCenter(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
+		    Translator t = new Translator(cookie);
 		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -538,39 +546,38 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
 						errors = true;
 					}
-					if(Validation.checkIfSomethingExists("center_name", "center", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
-						errors = true;
-					}
+
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro")+"</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
+					
+					
 					if(admin == 0) {
-						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the hospital</p>");
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -578,10 +585,16 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 							errors = true;
 						}
+					
 					}
+					if(Validation.checkIfSomethingExists("center_name", "center", name)) {
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This hospital already exists")+"</p>");
+						errors = true;
+					}
+					
 
 					if(errors == false) {
 						Center center = new Center();
@@ -618,7 +631,8 @@ public class DashboardController {
 	
 	@RequestMapping(value="/HealthTrack/admin/clinic/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateClinic(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
+		    Translator t = new Translator(cookie);
 		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -650,58 +664,58 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("the name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateName(doctorName)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					
 					if(doctorName.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("the name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateName(specialty)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(specialty.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">the name should be at least 4 characters</p>");
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("the name should be at least 4 characters")+"</p>");
+						
 						errors = true;
 					}
 					if(Validation.checkIfSomethingExists("clinic_name", "clinic", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This hospital already exists")+"</p>");
 						errors = true;
 					}
 
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro")+"</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
 					if(admin == 0) {
-						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the hospital</p>");
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -709,7 +723,7 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 							errors = true;
 						}
 					}
@@ -747,8 +761,9 @@ public class DashboardController {
 	}
 	@RequestMapping(value="/HealthTrack/admin/pharmacy/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updatePharmacy(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
+			Translator t = new Translator(cookie);
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -775,39 +790,39 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("the name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(Validation.checkIfSomethingExists("pharmacy_name", "pharmacy", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This hospital already exists")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro")+"</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
 					if(admin == 0) {
-						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the hospital</p>");
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -815,7 +830,7 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 							errors = true;
 						}
 					}
@@ -880,8 +895,9 @@ public class DashboardController {
 	
 	@RequestMapping(value="/HealthTrack/admin/service/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		model.addAttribute("lang", cookie);
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
+		    Translator t=new Translator(cookie);
+		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -908,39 +924,39 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">Invalid Name</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("the name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(Validation.checkIfSomethingExists("pharmacy_name", "pharmacy", name)) {
-						model.addAttribute("nameExist", "<p class=\"wrong-input \">This hospital already exists</p>");
+						model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This hospital already exists")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">Invalid characters in the intro</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intr")+"o</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">tha name should be at least 25 characters</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
 					if(admin == 0) {
-						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">Please Select the admin of the hospital</p>");
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -948,7 +964,7 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">Invalid url</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 							errors = true;
 						}
 					}
@@ -1169,9 +1185,9 @@ public class DashboardController {
 
 	@RequestMapping(value="/HealthTrack/admin/user/insert", method = RequestMethod.POST)
 	public ModelAndView insertUser(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
-			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
-		  
-		model.addAttribute("lang", cookie);
+			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
+		    Translator t= new Translator(cookie);
+			model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -1199,58 +1215,58 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(firstName)) {
-						model.addAttribute("invalidFirstName", "<p class=\"wrong-input \">Invalid FirstName</p>");
+						model.addAttribute("invalidFirstName", "<p class=\"wrong-input \">"+t.write("Invalid FirstName")+"</p>");
 						errors = true;
 					}
 					if(firstName.length() < 4) {
-						model.addAttribute("shortFirstName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortFirstName", "<p class=\"wrong-input \">"+t.write("the first name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateName(lastName)) {
-						model.addAttribute("invalidlastName", "<p class=\"wrong-input \">Invalid lastName</p>");
+						model.addAttribute("invalidlastName", "<p class=\"wrong-input \">"+t.write("Invalid lastName")+"</p>");
 						errors = true;
 					}
 					if(lastName.length() < 4) {
-						model.addAttribute("shortlastName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortlastName", "<p class=\"wrong-input \">"+t.write("tha last name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateName(username1)) {
-						model.addAttribute("invalidUserName", "<p class=\"wrong-input \">Invalid username</p>");
+						model.addAttribute("invalidUserName", "<p class=\"wrong-input \">"+t.write("Invalid username")+"</p>");
 						errors = true;
 					}
 					if(username1.length() < 4) {
-						model.addAttribute("shortUserName", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortUserName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(Validation.checkIfSomethingExists("username", "user", username1)) {
-					model.addAttribute("UsernameExist", "<p class=\"wrong-input \">This username already exists</p>");
+					model.addAttribute("UsernameExist", "<p class=\"wrong-input \">"+t.write("This username already exists")+"</p>");
 					errors = true;
 						
 					}
 					
 					if(!Validation.validateEmail(Email)) {
-						model.addAttribute("invalidEmail", "<p class=\"wrong-input \">Invalid Email</p>");
+						model.addAttribute("invalidEmail", "<p class=\"wrong-input \">"+t.write("Invalid Email")+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">Invalid Phone length: must be mobile number 11 characters or landline number 8 characters</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
 						errors = true;
 					}
 					
 					if(!Validation.validateName(Type)) {
-						model.addAttribute("invalidType", "<p class=\"wrong-input \">Invalid Type</p>");
+						model.addAttribute("invalidType", "<p class=\"wrong-input \">"+t.write("Invalid Type")+"</p>");
 						errors = true;
 					}
 					if(firstName.length() < 4) {
-						model.addAttribute("shortType", "<p class=\"wrong-input \">tha name should be at least 4 characters</p>");
+						model.addAttribute("shortType", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
 						errors = true;
 					}
 					if(password.length()<6) {
-						model.addAttribute("invalidPassword", "<p class=\"wrong-input\">Password shouldn't be less than 6 characters</p>");
+						model.addAttribute("invalidPassword", "<p class=\"wrong-input\">"+t.write("Password shouldn't be less than 6 characters")+"</p>");
 						errors = false;
 					}
 					if(!password.equals(ConfirmPassword)) {
-						model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">Password doesn't match</p>");
+						model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">"+t.write("Password doesn't match")+"</p>");
 						errors = false;
 					}
 					
@@ -1265,7 +1281,6 @@ public class DashboardController {
 								user.setUsername(username1);
 								user.setPassword(encryptedPassword);
 								user.setId(UserDao.insertUser(user));	
-								System.out.println("Hellllllllllooooooooo  :"+user.getId());
 								if(Type.equals("person")) {
 									Person person =new Person();
 									person.setId(user.getId());
@@ -1300,7 +1315,8 @@ public class DashboardController {
 //***************************************Services***********************************************
 	@RequestMapping(value="/HealthTrack/admin/service/insert", method = RequestMethod.POST)
 	public ModelAndView insertService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
-			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
+		    Translator t =new Translator(cookie);
 		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -1314,7 +1330,7 @@ public class DashboardController {
 					boolean errors = false;					
 					
 					if(!Validation.validateFees(fees)) {
-						model.addAttribute("invalidFees", "<p class=\"wrong-input \">Invalid Fees</p>");
+						model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees")+"</p>");
 						errors = true;
 					}
 					
@@ -1355,6 +1371,29 @@ public class DashboardController {
 			}
 			
 			mav.addAllObjects(model);
+		return mav;
+	}
+	
+	@RequestMapping(value="/HealthTrack/admin/{username}/service/addNewService", method = RequestMethod.POST)
+	public ModelAndView submitService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav, HttpServletRequest request)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		model.addAttribute("lang", cookie);
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if(username == null) {
+			mav.setViewName("/admin/login");
+		}else {
+			if(Validation.checkIfTheUserIsAdmin(username)) {
+				
+				int hospitalId 	= Integer.parseInt(request.getParameter("hospitalId"));
+				String deptName = request.getParameter("dept");
+				
+				if(!deptName.equals("0")) {
+					HospitalDao.insertDepartment(deptName, hospitalId);
+			}
+			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
+		}
+		}
 		return mav;
 	}
 	

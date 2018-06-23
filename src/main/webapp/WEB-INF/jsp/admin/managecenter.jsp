@@ -45,16 +45,55 @@
         </div>
         
         <form class="col-lg-12" action="/HealthTrack/admin/center/insert" method="post">
-                    <div class="card">
+                <div class="card">
                       <div class="card-header"><strong><%=t.write("Center") %></strong><small> <%=t.write("Form") %></small></div>
-                      <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label"><%=t.write("Center name") %></label><input type="text" placeholder="<%=t.write("Enter Center Name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50"></div>
-                        ${invalidName}
-                        ${nameExist}
-                         ${shortName}
-                        <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea></div>
-                        ${invalidIntro}
-                         ${shortIntro}
+                <div class="container">
+                
+					    <div class="row">
+					        <div class="form-group name1 col-md-6">
+					            <label for="exampleInputEmail1" class="formText">Center Name</label>
+					            <input type="text" placeholder="<%=t.write("Enter Center Name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50">
+					             ${invalidName}
+					             ${nameExist}
+					             ${shortName}
+					        </div>
+					
+					        <div class="form-group name2 col-md-6">
+					            <label for="exampleInputEmail1## Heading ##" class="formText">Center Name in Arabic</label>
+					            <input type="text" placeholder="<%=t.write("Enter Center Name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50">
+					        </div>
+					    </div>
+					    
+					    <div class="row">
+					        <div class="form-group name1 col-md-6">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Intro") %></label>
+					           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+					         ${invalidIntro}
+					         ${shortIntro}
+					        </div>
+					
+					        <div class="form-group name2 col-md-6">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Intro in Arabic") %></label>
+					            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+					        </div>
+					    </div>
+					    
+					    
+					    <div class="row">
+					        <div class="form-group name1 col-md-6">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Address") %></label>
+					           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+					        ${invalidAddress}
+					        </div>
+					
+					        <div class="form-group name2 col-md-6">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Address in Arabic") %></label>
+					            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+					        </div>
+					    </div>
+                     </div>
+                    
+                     
                         <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="${oldUrl}"></div>
                         ${invalidUrl}
                         <div class="row form-group">
@@ -66,10 +105,7 @@
                             <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
                             ${invalidWebsite}
                           </div>
-                          <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label"><%=t.write("Address") %></label><input maxlength="50" type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="${oldAddress}"></div>
-                        	${invalidAddress}
-                        	</div>
+                         
                         </div>
                                              
                       	<div class="form-group">
@@ -130,13 +166,52 @@
         	<input type="hidden" name="centerId" value="<%= center.getCenterId() %>">
                     <div class="card">
                       <div class="card-header"><strong><%=t.write("Center") %></strong><small><%=t.write("Form") %> </small></div>
-                      <div class="card-body card-block">
-                        <div class="form-group"><label class=" form-control-label"><%=t.write("Name") %></label><input type="text" placeholder="<%=t.write("Enter Center name")%>" class="form-control" name="name" required="required" value="<%= center.getCenterName()%>" maxlength="50"></div>
-                        ${invalidName}
-                        ${nameExist}
-                        ${shortName}
-                        <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea placeholder="<%=t.write("Say something about the Center") %>" class="form-control" name="intro" required="required" maxlength="254"><%= center.getIntro() %></textarea></div>
-                        ${invalidIntro} ${shortIntro}
+                      
+                      <div class="container">
+                
+						    <div class="row">
+						        <div class="form-group name1 col-md-6">
+						            <label for="exampleInputEmail1" class="formText">Center Name</label>
+						            <input type="text" placeholder="<%=t.write("Enter Center Name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50">
+						             ${invalidName}
+						             ${nameExist}
+						             ${shortName}
+						        </div>
+						
+						        <div class="form-group name2 col-md-6">
+						            <label for="exampleInputEmail1## Heading ##" class="formText">Center Name in Arabic</label>
+						            <input type="text" placeholder="<%=t.write("Enter Center Name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50">
+						        </div>
+						    </div>
+						    
+						    <div class="row">
+						        <div class="form-group name1 col-md-6">
+						            <label for="exampleInputEmail1" class="formText"><%=t.write("Intro") %></label>
+						           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+						         ${invalidIntro}
+						         ${shortIntro}
+						        </div>
+						
+						        <div class="form-group name2 col-md-6">
+						            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Intro in Arabic") %></label>
+						            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+						        </div>
+						    </div>
+						    
+						    
+						    <div class="row">
+						        <div class="form-group name1 col-md-6">
+						            <label for="exampleInputEmail1" class="formText"><%=t.write("Address") %></label>
+						           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+						        ${invalidAddress}
+						        </div>
+						
+						        <div class="form-group name2 col-md-6">
+						            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Address in Arabic") %></label>
+						            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+						        </div>
+						    </div>
+	                     </div>
                       
                         <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps")%>" class="form-control" name="url" required="required" value="<%=center.getGoogleMapsUrl() %>"></div>
                         ${invalidUrl}
@@ -149,10 +224,7 @@
                             <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="<%= center.getWebsite() %>"></div>
                             ${invalidWebsite}
                           </div>
-                          <div class="col-12">
-                          <div class="form-group"><label class=" form-control-label"><%=t.write("Address") %></label><input type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="<%= center.getAddress() %>" maxlength="50"></div>
-                        	${invalidAddress}
-                        	</div>
+                         
                         </div>
                                              
                       	<div class="form-group">
