@@ -105,7 +105,7 @@
                            			  <%
 				                       String  List 		= (String)pageContext.getAttribute("depart");
 				                       %>
-			                       		<option value="${depart}">${depart}</option>
+			                       		<option value="${depart}"><%=t.write(List)%></option>
 		                           </c:forEach>
                                 	<%	
                                 %>

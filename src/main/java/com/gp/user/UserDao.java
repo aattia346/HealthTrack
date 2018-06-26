@@ -254,6 +254,24 @@ abstract public class UserDao {
 		return result.getRow() < 10;
 
 	}
+	public static void updateUser(User user)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE user "
+				+ "SET username=?, password=?, type=? "
+				+ "WHERE user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, user.getUsername());
+		ps.setString(2, user.getPassword());		
+		ps.setString(3, user.getType());
+		ps.setInt(4, user.getId());
+		
+		ps.executeUpdate();
+		
+	}
+	
 	
 
 }

@@ -65,7 +65,7 @@
                         
                         <td><a href="/HealthTrack/profile/user/${user.id}" target="_blank">${user.id}</a></td>
                         <td><%= t.write(user.getUsername()) %></td>
-                        <td><%= t.write(user.getType()) %>${user.type}</td>
+                        <td><%= t.write(user.getType()) %></td>
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/<%= user.getId() %>/edit" title="<%= t.write("Edit this User") %> "><i class="fa fa-edit"></i></a>
