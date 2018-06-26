@@ -158,7 +158,8 @@
 		  "invalide name" : "Invalide Name",
 		  "invalide phone" : "Invalide Phone",
 		  "please select a service" : "please select a service",
-		  "your request has been sent successfully" : "your request has been sent successfully"
+		  "your request has been sent successfully" : "your request has been sent successfully",
+		  "Admin Login" : "Admin Login"
 		 },
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -327,6 +328,7 @@
 		 "invalide name" : "أسم غير صالح",
 		 "invalide phone" : "رقم الهاتف غير صالح",
 		 "please select a service" : "من فضلك اختر خدمه",
-		 "your request has been sent successfully" : "تم إرسال طلبك بنجاح"
+		 "your request has been sent successfully" : "تم إرسال طلبك بنجاح",
+		 "Admin Login" : "تسجيل دخول المدير"
 	}
 }

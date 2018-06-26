@@ -6,7 +6,13 @@ a{
 }
 /*************************** login page *****************************/
 .login-body{
-    background-color: #F2F2F2;
+    background-color: #F1F2F7;
+}
+.admin-login {
+	margin-top: 120px !important;
+}
+.admin-login .submit-icon {
+	background-color: #337AB7;
 }
 .frame{
     background-color: #fff;
@@ -291,6 +297,52 @@ input[type="submit"]{
 /*======================================================================================*/
 
 /***************************** Navbar **************************************/
+@media (min-width: 767px)and (max-width: 991px){
+	.container {
+    	width: 100%; !important;
+	}
+	.top-header-area p{
+		padding-left: 15px;
+	}
+	.navbar{
+		height: 100px;
+	}
+	.navbar-nav{
+		margin: -23px 0;
+	}
+	.header-area .main-menu .nav-link{
+		padding: 10px 13px;
+	}
+	.medilife-appoint-btn, .medilife-appoint-btn:hover, .medilife-appoint-btn:focus {
+		font-size: 10px;
+	    margin-top: -40px;
+	    margin-left: 7px;
+	    padding: 3px;
+	    height: 44px;
+	}
+	#medilifeMenu{
+		max-height: 85px;
+	}
+}
+@media (max-width: 767px){
+	.app-intro{
+		display: none;
+	}
+	.welcome-msg{
+		margin: -10px 15px;
+	}
+	.medilife-appoint-btn, .medilife-appoint-btn:hover, .medilife-appoint-btn:focus {
+		font-size: 20px !important;
+	}
+}
+@media (max-width: 991px){
+	.single-blog-area {
+		height: 215px;
+		overflow: visible;
+		float: left;
+		margin-right: 10px;
+	}
+}
 .navbar-brand , .navbar-brand:hover{
 	line-height: 46px;
 	color: #f7f7f7;

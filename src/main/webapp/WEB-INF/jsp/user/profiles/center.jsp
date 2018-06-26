@@ -63,7 +63,7 @@ String title = center.getCenterName();
                     
                     <c:forEach var="service" items="${services}">
                     
-                   <div class="col-12 col-md-6 col-lg-3">
+                   <div class="col-md-6 col-lg-3">
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">

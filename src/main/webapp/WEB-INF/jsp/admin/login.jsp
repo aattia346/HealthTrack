@@ -1,40 +1,46 @@
-<% String title="Login"; %>
-<%@include  file="../user/includes/header.jsp" %>
-<div class="login-body">
-	<div class="container login-container">
-    	<div class="row">
-                    
-        	<div class="login-header col-sm-6 col-sm-offset-4 col-lg-4">
-        		<h3 class="text-center"><%=t.write("ADMIN LOGIN") %>  </h3>
-            </div>
-                    
-            <div class="col-lg-4 col-sm-offset-4 col-xs-12 login-form col-sm-6">
+<%@page import="com.gp.user.Translator"%>
 
-            	<form method="post" action="/HealthTrack/admin/login/submit" >
-                            
-                	<div class="form-group">
-                    	<label><%=t.write("Username:") %></label>
-                        <input type="text" class="form-control" name="username" placeholder=<%=t.write("Username") %> required>                          
-                    </div>
-                            
-                    ${invalidUsername}
-                            
-                    <div class="form-group">
-                    	<label><%=t.write("Password:") %></label>
-                        <input type="password" class="form-control" name="password" placeholder=<%=t.write("Password") %> required>
-                    </div>
-                            
-          	        ${notAuthenticated}
-                            
-                    <div class="form-group">
-              	      <input type="submit" class="form-control btn btn-primary admin-login-submit-btn" value="Submit">
-                    </div>
-                    
-             	</form>
-                        
-        	</div>
+<%
 
-     	</div>
-    </div>
- </div>
-<%@include  file="includes/footer.jsp" %>
+String lang = (String)request.getAttribute("lang");
+
+Translator t = new Translator(lang);
+
+String title=t.write("Admin Login");
+%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/user/layout/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/user/layout/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/user/layout/css/stylesheet.css">
+
+    </head>    
+<body class="login-body">
+
+<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
+	<form method="post" action="/HealthTrack/admin/login/submit">
+		<h4 class="waiting-header text-center"><%= t.write("Admin Login") %></h4>
+        <div class="form-group">
+        	<input type="text" name="username" class="form-control" placeholder="<%=t.write("Username") %>" required="required">
+            <div class="waiting-icon"><i class="fa fa-user fa-2x"></i></div>
+        </div>
+        ${invalidUsername}
+        <div class="form-group">
+        	<input type="password" name="password" class="form-control" placeholder="<%=t.write("Password") %>" required="required">
+            <div class="waiting-icon"><i class="fa fa-phone fa-2x"></i></div>
+        </div>
+        ${notAuthenticated}
+        <div class="form-group">
+        	<input type="submit" value="<%= t.write("submit") %>" class="form-control btn btn-primary">
+            <div class="waiting-icon submit-icon"><i class="fa fa-send fa-2x"></i></div>
+        </div>
+	</form>
+</div>
+
+<script src="/user/layout/js/jquery-3.2.1.min.js"></script>
+<script src="/user/layout/js/bootstrap.min.js"></script>
+	</body>
+</html>
