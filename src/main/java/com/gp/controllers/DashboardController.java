@@ -151,14 +151,17 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
 						errors = true;
 					}
+					/*
 					if(!Validation.validateArStatement(ARname)) {
 						model.addAttribute("invalidARName", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Name")+"</p>");
 						errors = true;
 					}
+					
 					if(ARname.length() < 4) {
 						model.addAttribute("shortARName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
 						errors = true;
 					}
+					*/
 					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
 					model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists")+"</p>");
 					errors = true;
@@ -172,14 +175,17 @@ public class DashboardController {
 						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
+					/*
 					if(!Validation.validateArStatement(ARintro)) {
 						model.addAttribute("invalidARIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the arabic intro")+"</p>");
 						errors = true;
 					}
+					
 					if(ARintro.length() < 25) {
 						model.addAttribute("shortARIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
 						errors = true;
 					}
+					*/
 					if(!Validation.validateURL(website)) {
 						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
 						errors = true;
@@ -192,10 +198,12 @@ public class DashboardController {
 						model.addAttribute("invalidaddress", "<p class=\"wrong-input \">"+t.write("Invalid Address")+"</p>");
 						errors = true;
 					}
+					/*
 					if(!Validation.validateArStatement(ARaddress)) {
 						model.addAttribute("invalidARaddress", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Address")+"</p>");
 						errors = true;
 					}
+					*/
 					
 					if(!Validation.validateURL(url)) {
 						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
@@ -228,7 +236,7 @@ public class DashboardController {
 						model.addAttribute("oldARSpecialty"	, ARspecialty);
 						
 						if(!Validation.validateFees(fees)) {
-							model.addAttribute("invalidFees", "<p class=\"wrong-input \">Invalid Fees </p>");
+							model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees")+" </p>");
 							errors = true;
 						}
 						
@@ -236,35 +244,43 @@ public class DashboardController {
 							model.addAttribute("invalidDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name")+"</p>");
 							errors = true;
 						}
+						/*
 						if(!Validation.validateArStatement(ARdoctorName)) {
 							model.addAttribute("invalidARDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name in Arabic")+"</p>");
 							errors = true;
 						}
-						
+						*/
 						if(doctorName.length() < 4) {
 							model.addAttribute("shortDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
 							errors = true;
 						}
+						/*
 						if(ARdoctorName.length() < 4) {
 							model.addAttribute("shortARDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
 							errors = true;
 						}
+						*/
 						if(!Validation.validateName(specialty)) {
 							model.addAttribute("invalidSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty")+"</p>");
 							errors = true;
 						}
+						/*
 						if(!Validation.validateName(ARspecialty)) {
 							model.addAttribute("invalidARSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty in Arabic")+"</p>");
 							errors = true;
 						}
-						if(specialty.length() < 4) {
-							model.addAttribute("shortSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters")+"</p>");
-							errors = true;
-						}
+						
 						if(ARspecialty.length() < 4) {
 							model.addAttribute("shortARSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters")+"</p>");
 							errors = true;
 						}
+						
+						*/
+						if(specialty.length() < 4) {
+							model.addAttribute("shortSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters")+"</p>");
+							errors = true;
+						}
+						
 							if(errors == false) {
 								Clinic clinic =new Clinic();
 								clinic.setClinicName(name);
@@ -280,6 +296,12 @@ public class DashboardController {
 								clinic.setDoctorName(doctorName);
 								clinic.setSpecialty(specialty);
 								ClinicDao.insertClinic(clinic);
+								t.translate2Arabic(doctorName, ARdoctorName);
+								t.translate2Arabic(specialty, ARspecialty);
+								t.translate2Arabic(name,ARname);
+								t.translate2Arabic(intro,ARintro);
+								t.translate2Arabic(address,ARaddress);
+								
 								mav.setViewName("redirect:/HealthTrack/admin/"+username+"/clinics");
 							}else {
 								mav.setViewName("redirect/:HealthTrack/admin/login");
@@ -302,9 +324,11 @@ public class DashboardController {
 						hospital.setIntro(intro);
 						hospital.setGoogleMapsUrl(url);
 						hospital.setLat(lat);
-						hospital.setLang(lang);
-						
+						hospital.setLang(lang);						
 						HospitalDao.insertHospital(hospital);
+						t.translate2Arabic(name,ARname);
+						t.translate2Arabic(intro,ARintro);
+						t.translate2Arabic(address,ARaddress);
 						
 						Hospital H = HospitalDao.getHospitalById(admin);
 						
@@ -327,6 +351,9 @@ public class DashboardController {
 						center.setLat(lat);
 						center.setLang(lang);
 						CenterDao.insertCenter(center);
+						t.translate2Arabic(name,ARname);
+						t.translate2Arabic(intro,ARintro);
+						t.translate2Arabic(address,ARaddress);
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/centers");
                        
 						
@@ -345,6 +372,9 @@ public class DashboardController {
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.insertPharmacy(pharmacy);
+						t.translate2Arabic(name,ARname);
+						t.translate2Arabic(intro,ARintro);
+						t.translate2Arabic(address,ARaddress);
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/pharmacies");
 					}
 					
@@ -388,8 +418,9 @@ public class DashboardController {
 					error=true; //there is some action should done later
 				}
 				
-				if(!deptName.equals("0")) {
+				if((!deptName.equals("0")) & (error==false)) {
 					HospitalDao.insertDepartment(deptName, hospitalId);
+					t.translate2Arabic(deptName, ARdeptName);
 			}
 			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
 		}
@@ -1256,9 +1287,14 @@ public class DashboardController {
 					String firstName	 		= request.getParameter("firstName");
 					String lastName		        = request.getParameter("lastName");
 					String username1			= request.getParameter("userName");
+					
+					String ARfirstName	 		= request.getParameter("ARfirstName");
+					String ARlastName		        = request.getParameter("ARlastName");
+					String ARusername1			= request.getParameter("ARuserName");
 					String phone		        = request.getParameter("phone");
 					String Email		        = request.getParameter("email");
 					String Type		            = request.getParameter("type");
+					String ARType		            = request.getParameter("ARtype");
 					String password             =(request.getParameter("password"));
 					String ConfirmPassword      =request.getParameter("confirmPassword");
 					//int admin			= Integer.parseInt(request.getParameter("Admin"));

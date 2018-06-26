@@ -15,6 +15,12 @@ import org.json.simple.parser.ParseException;
 public class Translator {
 	
 	private Map<String , String> translate = new HashMap<String , String>();
+	private HashMap<String,String> attributes = new HashMap<String,String>();
+	private HashMap<Integer,HashMap<String,String>> keyAndAttributes = new HashMap<Integer,HashMap<String,String>>();
+	
+	private HashMap<String,String> ARattributes = new HashMap<String,String>();
+	private HashMap<Integer,HashMap<String,String>> ARkeyAndAttributes = new HashMap<Integer,HashMap<String,String>>();
+	JSONObject obj = new JSONObject();
 	
 	public Translator(String language) throws ParseException, JSONException, IOException {
 				
@@ -45,6 +51,43 @@ public class Translator {
 		}
 		
 	}
+	public void translate2English(String key,String value) throws IOException {
+		
+	    int index =0;
+	    attributes.put(key, value);
+	    keyAndAttributes.put(index, attributes);
+	    index++;
+	   // System.out.println("hash"+ hash1);
+	    obj.put("en", attributes);
+	    try  {
+	    	FileWriter file = new FileWriter("src\\main\\resources\\static\\translation.json");
+	        file.write(obj.toJSONString());
+	        file.flush();
+	        file.close();
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	}
+public void translate2Arabic(String key,String value) throws IOException {
+		
+	    int index =0;
+	    ARattributes.put(key, value);
+	    ARkeyAndAttributes.put(index, ARattributes);
+	    index++;
+	    obj.put("ar", ARattributes);
+	    try  {
+	    	FileWriter file = new FileWriter("src\\main\\resources\\static\\translation.json");
+	        file.write(obj.toJSONString());
+	        file.flush();
+	        file.close();
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 	
 	
 }
