@@ -1,9 +1,58 @@
 $(document).ready(function(){
-
-	var cookie = document.cookie;
-	console.log(cookie);
-	switch(cookie){
 	
+	/*****************************my carousel***********************************************/
+	$(".comment").hide();
+	$(".comment1").show();
+	$(".comments ul li").click(function(){
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+		var id = $(this).attr("id");
+		$("." + id).siblings(".comment").hide().removeClass("active-comment");
+		$("." + id).show().addClass("active-comment");
+	});
+	$("#myCarousel .left-arrow").click(function(){
+		if($(".comment1").hasClass("active-comment")){
+			$(".comment1").removeClass("active-comment");
+			$(".comment1").hide();
+			$(".comment5").addClass("active-comment").show();
+			$("#comment5").addClass("active").siblings("li").removeClass("active");
+		}else{
+			$(".active-comment").removeClass("active-comment").prev(".comment").addClass("active-comment");	
+			$(".active-comment").siblings(".comment").hide();
+			$(".active-comment").show();
+			$(".active").removeClass("active").prev("li").addClass("active");
+		}
+	});
+	$("#myCarousel .right-arrow").click(function(){
+		if($(".comment5").hasClass("active-comment")){
+			$(".comment5").removeClass("active-comment");
+			$(".comment5").hide();
+			$(".comment1").addClass("active-comment").show();
+			$("#comment1").addClass("active").siblings("li").removeClass("active");
+		}else{
+			$(".active-comment").removeClass("active-comment").next(".comment").addClass("active-comment");	
+			$(".active-comment").siblings(".comment").hide();
+			$(".active-comment").show();
+			$(".active").removeClass("active").next("li").addClass("active");
+		}
+	});
+	setInterval(changeComment, 3000);
+	function changeComment(){
+		if($(".comment5").hasClass("active-comment")){
+			$(".comment5").removeClass("active-comment");
+			$(".comment5").hide(500);
+			$(".comment1").addClass("active-comment").show(1000);
+			$("#comment1").addClass("active").siblings("li").removeClass("active");
+		}else{
+			$(".active-comment").removeClass("active-comment").next(".comment").addClass("active-comment");	
+			$(".active-comment").siblings(".comment").hide(500);
+			$(".active-comment").show(1000);
+			$(".active").removeClass("active").next("li").addClass("active");
+		}
+	}
+	/*=====================================================================================*/
+	var cookie = document.cookie;
+	switch(cookie){	
 		case "lang=en": 
 			break;
 		case "lang=ar":

@@ -4,6 +4,9 @@ textarea{
 a{
 	cursor: pointer;
 }
+*{
+	font-family: 'El Messiri', sans-serif;
+}
 /*************************** login page *****************************/
 .login-body{
     background-color: #F1F2F7;
@@ -257,8 +260,10 @@ input[type="submit"]{
 	background-image: url("/user/layout/images/rating.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	margin: 80px -20px;
+	margin: 80px 0;
 	position: relative;
+	max-width: 1366px;
+	overflow: hidden;
 }
 .overlay{
 	background-color: #081F3E;
@@ -295,6 +300,77 @@ input[type="submit"]{
 
 /*======================================================================================*/
 /*======================================================================================*/
+
+/******************************************carousel***************************************/
+#myCarousel{
+	background-image: url("/user/layout/images/comments-carousel-background-1.jpg");
+	height: 400px;
+	margin: 70px 0;
+	position: relative;
+}
+.comments ul li{
+	height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: transparent;
+    display: inline-block;
+    margin: 2px;
+    cursor: pointer;
+}
+.comments ul li:hover{
+	background-color: #fff;
+}
+.comments ul{
+	position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+.comments h3{
+	color: #fff;
+    font-weight: 600;
+    padding-top: 75px;
+}
+.comment-content{
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	color: #fff;
+	font-size: 20px;
+	padding-left: 20%;
+    padding-right: 20%;
+    overflow: hidden;
+}
+.comment-name{
+	color: #fff;
+    font-style: italic;
+    font-size: 17px;
+    position: absolute;
+    top: 73%;
+    width: 100%;
+}
+.comments .active{
+	background-color: #fff;
+}
+.left-arrow, .right-arrow{
+	position: absolute;
+	top: 50%;
+	display: block;
+	color: #9a9c9c;
+}
+.left-arrow:hover, .right-arrow:hover{
+	color: #fff;
+	cursor: pointer;
+}
+.left-arrow{
+	left: 20%;
+}
+.right-arrow {
+	right: 20%;
+}
+/*=========================================================================================*/
+
 
 /***************************** Navbar **************************************/
 @media (min-width: 767px)and (max-width: 991px){
@@ -565,7 +641,6 @@ label{
 }
 /*********************************************** Emergency page*****************************************************/
 .emergency-body {
-	/*background: #fff; */
 	background-image: url("/user/layout/images/emergency.jpg");
 }
 .emergency-body #map{

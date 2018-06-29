@@ -99,7 +99,7 @@ String dayName = dayFormat.format(today);
                         <!-- Post Content -->
                         <div class="post-content">
                             <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName()) %></a>
-                            <a href="#" class="comments">3 <%= t.write("comments") %></a>
+                            <a href="#" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments") %></a>
                         </div>
                     </div>
                 </div>

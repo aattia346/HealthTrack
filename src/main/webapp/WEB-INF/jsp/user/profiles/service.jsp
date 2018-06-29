@@ -10,6 +10,7 @@
 <%@page import="com.gp.user.PersonDao"%>
 <%@page import="com.gp.user.Person"%>
 <%@page import="com.gp.user.Appointment"%>
+<%@page import="com.gp.user.Review"%>
 
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -107,6 +108,7 @@
 	Time midNight = new Time(midNightFormat.parse("00:00").getTime());
 	LocalTime localMidNight = midNight.toLocalTime();
 
+	List<Review> comments = ServiceDao.get5Comments(serviceId);
 %>
 
 <input type="hidden" id="serviceId" value="<%= S.getServiceId() %>">
@@ -432,9 +434,52 @@
                         </div>
                     </div>
                 </div>
-            </div>
-                        
-            <div class="review service-review">            
+            </div>      
+        </div>
+    </div>
+    
+    <% if(!(comments.size() < 5)){ %>
+    
+    <div id="myCarousel">
+    	<div class="overlay">
+    		<div class="comments">
+    			<ul>
+    				<li id="comment1" class="active"></li>
+    				<li id="comment2"></li>
+    				<li id="comment3"></li>
+    				<li id="comment4"></li>
+    				<li id="comment5"></li>		
+    			</ul>
+    			<h3 class="text-center">What Our Clients Say</h3>
+    			<div class="comment1 comment active-comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(0).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(0).getUserFirstName() + " " + comments.get(0).getUserLastName() %></p>
+    			</div>
+    			<div class="comment2 comment">    			
+	    			<p class="text-center comment-content">&ldquo;<%= comments.get(1).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(1).getUserFirstName() + " " + comments.get(1).getUserLastName() %></p>
+    			</div>
+    			<div class="comment3 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(2).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(2).getUserFirstName() + " " + comments.get(2).getUserLastName() %></p>
+    			</div>
+    			<div class="comment4 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(3).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(3).getUserFirstName() + " " + comments.get(3).getUserLastName() %></p>
+    			</div>
+    			<div class="comment5 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(4).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(4).getUserFirstName() + " " + comments.get(4).getUserLastName() %></p>
+    			</div>
+    		</div>
+    		<div class="right-arrow"><i class="fas fa-chevron-right fa-2x"></i></div>
+    		<div class="left-arrow"><i class="fas fa-chevron-left fa-2x"></i></div>
+    	</div>
+    </div>
+    
+    <% } %>
+
+    <div class="review service-review">            
 	            <div class="overlay">
 	           		<h2 class="text-center text-capitalize"><%= t.write("rate this service") %></h2>
 	           		<div class="row">
@@ -460,8 +505,6 @@
 	           		</div>
 	            </div>    
             </div>
-        </div>
-    </div>
     <%  if(showComment){%>
   
      <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn btn-primary"><i class="fa fa-plus"></i> Show Comments</a>
@@ -483,6 +526,7 @@
                <% } %>
 
 <%@include  file="../includes/footer.jsp" %>
+<script src="/user/layout/js/profiles/carousel.js"></script>
 <%
 
 List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);

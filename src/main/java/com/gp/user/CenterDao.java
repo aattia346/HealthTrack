@@ -109,7 +109,7 @@ abstract public class CenterDao {
 		ps.executeUpdate();
 		
 	}
-public static List<String> getServices(){
+	public static List<String> getServices(){
 		
 		List<String> services = new ArrayList<String>();
 		services.add("MRI");
@@ -119,21 +119,18 @@ public static List<String> getServices(){
 		return services;
 	}
 
-public static void insertService(String service, int centerId)
+	public static void insertService(String service, int centerId)
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
-	Connection con = DBConnection.getConnection();
-	String sql="INSERT INTO `service`( `name`,`dept_id`) VALUES(?,?)";
-	PreparedStatement ps = con.prepareStatement(sql);
-	
-	ps.setInt(1, centerId);
-	ps.setString(2, service);
-	
-	ps.executeUpdate();
-}
-
-
-
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO `service`( `name`,`dept_id`) VALUES(?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, centerId);
+		ps.setString(2, service);
+		
+		ps.executeUpdate();
+	}
 
 }
 

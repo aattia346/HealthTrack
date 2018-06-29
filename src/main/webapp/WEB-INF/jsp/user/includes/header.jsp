@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="/user/layout/css/jquery.selectBoxIt.css">
         <link rel="stylesheet" href="/user/layout/css/fullcalendar.css">
         <link rel="stylesheet" href="/user/layout/css/jquery.rateyo.css">
+        <link href="https://fonts.googleapis.com/css?family=El+Messiri" rel="stylesheet">
         
        	<link rel="stylesheet" href="/user/layout/css/stylesheet.css">
 
@@ -83,7 +84,7 @@
                         <div class="main-menu h-100">
                             <nav class="navbar h-100 navbar-expand-lg">
                                 <!-- Logo Area  -->
-                                <a class="navbar-brand" href="index.html">Health Service Navigator</a>
+                                <a class="navbar-brand" href="/HealthTrack">Health Service Navigator</a>
 
                                 <div class="collapse navbar-collapse" id="medilifeMenu">
                                     <!-- Menu Area -->

@@ -62,7 +62,7 @@ String title = center.getCenterName();
                     <div class="row">
                     
                     <c:forEach var="service" items="${services}">
-                    
+                    <a href="/HealthTrack/profile/service/center/${service.getServiceId()}">
                    <div class="col-md-6 col-lg-3">
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
@@ -82,10 +82,11 @@ String title = center.getCenterName();
                         <!-- Post Content -->
                         <div class="post-content">
                             <a href="/HealthTrack/profile/service/center/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName()) %></a>
-                            <a href="#" class="comments">3 <%= t.write("comments") %></a>
+                            <a href="/HealthTrack/profile/service/center/${service.getServiceId()}#comments" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments") %></a>
                         </div>
                     </div>
                 </div>
+                </a>
                     
                     </c:forEach>
                 

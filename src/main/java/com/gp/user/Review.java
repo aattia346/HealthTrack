@@ -4,11 +4,24 @@ public class Review {
 	private int reviewId;
 	private int userId ;
 	private int serviceId ;
-	private String comment ;
+	private String comment, userFirstName, userLastName ;
 	private float review ;
 	private int clinicId;
 	private int showComment;
 	
+	
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+	public String getUserLastName() {
+		return userLastName;
+	}
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
 	public int getReviewId() {
 		return reviewId;
 	}
