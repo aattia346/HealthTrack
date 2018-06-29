@@ -31,6 +31,7 @@ import com.gp.user.PharmacyDao;
 import com.gp.user.Service;
 import com.gp.user.ServiceDao;
 import com.gp.user.Translator;
+import com.gp.user.Translator.language;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -296,11 +297,11 @@ public class DashboardController {
 								clinic.setDoctorName(doctorName);
 								clinic.setSpecialty(specialty);
 								ClinicDao.insertClinic(clinic);
-								t.translate2Arabic(doctorName, ARdoctorName);
-								t.translate2Arabic(specialty, ARspecialty);
-								t.translate2Arabic(name,ARname);
-								t.translate2Arabic(intro,ARintro);
-								t.translate2Arabic(address,ARaddress);
+								t.fileWeiter(doctorName, ARdoctorName,language.ar);
+								t.fileWeiter(specialty, ARspecialty,language.ar);
+								t.fileWeiter(name,ARname,language.ar);
+								t.fileWeiter(intro,ARintro,language.ar);
+								t.fileWeiter(address,ARaddress,language.ar);
 								
 								mav.setViewName("redirect:/HealthTrack/admin/"+username+"/clinics");
 							}else {
@@ -326,9 +327,9 @@ public class DashboardController {
 						hospital.setLat(lat);
 						hospital.setLang(lang);						
 						HospitalDao.insertHospital(hospital);
-						t.translate2Arabic(name,ARname);
-						t.translate2Arabic(intro,ARintro);
-						t.translate2Arabic(address,ARaddress);
+						t.fileWeiter(name,ARname,language.ar);
+						t.fileWeiter(intro,ARintro,language.ar);
+						t.fileWeiter(address,ARaddress,language.ar);
 						
 						Hospital H = HospitalDao.getHospitalById(admin);
 						
@@ -351,9 +352,9 @@ public class DashboardController {
 						center.setLat(lat);
 						center.setLang(lang);
 						CenterDao.insertCenter(center);
-						t.translate2Arabic(name,ARname);
-						t.translate2Arabic(intro,ARintro);
-						t.translate2Arabic(address,ARaddress);
+						t.fileWeiter(name,ARname,language.ar);
+						t.fileWeiter(intro,ARintro,language.ar);
+						t.fileWeiter(address,ARaddress,language.ar);
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/centers");
                        
 						
@@ -372,9 +373,9 @@ public class DashboardController {
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.insertPharmacy(pharmacy);
-						t.translate2Arabic(name,ARname);
-						t.translate2Arabic(intro,ARintro);
-						t.translate2Arabic(address,ARaddress);
+						t.fileWeiter(name,ARname,language.ar);
+						t.fileWeiter(intro,ARintro,language.ar);
+						t.fileWeiter(address,ARaddress,language.ar);
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/pharmacies");
 					}
 					

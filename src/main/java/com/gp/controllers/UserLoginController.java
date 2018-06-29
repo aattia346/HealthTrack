@@ -50,9 +50,11 @@ public class UserLoginController {
 	
 	@RequestMapping(value = "/HealthTrack/login", method = RequestMethod.GET)
     public ModelAndView showForm(ModelMap model, ModelAndView mav, HttpServletRequest request,@CookieValue(value = "lang", defaultValue="en") String cookie){
-		HttpSession session = request.getSession();
-		String username = (String)session.getAttribute("username");
 		model.addAttribute("lang", cookie);
+		HttpSession session = request.getSession();
+		System.out.println(cookie);
+		String username = (String)session.getAttribute("username");
+		
 		if(username == null) {
 			mav.setViewName("/user/login");
 		}else {
@@ -71,11 +73,12 @@ public class UserLoginController {
 
 	@RequestMapping(value = "/HealthTrack/login/submit", method = RequestMethod.POST)
     public ModelAndView submit(@CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request, User user, ModelMap model, ModelAndView mav)throws InstantiationException,
-    IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
+    IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException, JSONException, IOException ,NullPointerException{
 		
 	    model.addAttribute("lang", cookie);
 	    
-	    Translator t = new Translator(cookie); 
+	    Translator t= new Translator(cookie); ;
+		
 	    
 	   	String username = request.getParameter("username");
 	   	String password = request.getParameter("password");

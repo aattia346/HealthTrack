@@ -1,8 +1,10 @@
 <%@page import="javax.servlet.http.Cookie" %> 
+
 <% String title="Login";%>
 
 <%@include  file="includes/header.jsp" %>
 <div class="login-body">
+
 
 	<div class="container login-container">
     	<div class="row">
@@ -43,6 +45,7 @@
                     <a href="/HealthTrack/signup" class="btn btn-danger form-control">
                        	<i class="fa fa-plus fa-lg"></i> <%= t.write("create new account") %>
                   	</a>
+                  	
                 </div>
                         
         	</div>
