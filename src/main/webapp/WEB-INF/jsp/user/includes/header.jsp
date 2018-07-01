@@ -47,8 +47,7 @@
                 <div class="row h-100">
                     <div class="col-12 h-100">
                         <div class="h-100 d-md-flex justify-content-between align-items-center text-capitalize">
-                            <p><%= t.write("welcome to healthtrack") %></p>
-                            <p class="pull-right text-capitalize" style="margin-right: 220px;"><%= t.write("introduction to healthtrack") %>&ensp;<span>+12-823-611-8721</span></p>
+                            <p class="welcome-msg"><%= t.write("welcome to healthtrack") %></p>
                         	<div class="translation"><img title="<%= t.write("english") %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png"><img id="ar" class="translate" title="<%= t.write("arabic") %>" src="/user/layout/images/egypt.svg"></div>
                         </div>
                         <% if(sessionExist){ %>

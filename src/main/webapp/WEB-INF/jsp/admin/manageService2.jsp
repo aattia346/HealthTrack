@@ -76,23 +76,67 @@
                           
 
 <script type="text/javascript">
-	function populate(s1, s2) {
-	  var s1 = document.getElementById(s1);
-	  var s2 = document.getElementById(s2);
-	  s2.innerHTML = "";
-	  if (s1.value =="Hospital"){
-		  var optionArray = ["i10", "i20", "Verna"];
-	  }else if (s1.value =="Center"){
-		  var optionArray = ["mero", "Ahmed", "Khalid"];
-	  }	    
-	  for (var i = 0; i < optionArray.length; i++) {
-	    var newOption = document.createElement('option');
-	    newOption.value = optionArray[i];
-	    newOption.innerHTML = optionArray[i];
-	    s2.appendChild(newOption);
-	  }
-	} 
+function serialize (){
+	 var filePath = @"E:\\GP_folder\\progress\\test.json ";
+	// Read existing json data
+	var jsonData = System.IO.File.ReadAllText(filePath);
+	// De-serialize to object or create new list
+	var employeeList = JsonConvert.DeserializeObject<List<EmployeeDetail>>(jsonData) 
+	                      ?? new List<EmployeeDetail>();
+
+	// Add any new employees
+	employeeList.Add(new EmployeeDetail()
+	{
+	    Name = "Test Person 1"
+	});
+	employeeList.Add(new EmployeeDetail()
+	{
+	    Name = "Test Person 2"
+	});
+
+	// Update json data string
+	jsonData = JsonConvert.SerializeObject(employeeList);
+	System.IO.File.WriteAllText(filePath, jsonData);
+  }
+
+	
+	
+	int count = 0;
+    EmployeeDetail employee = new EmployeeDetail
+    {
+
+        EmpId = ++count,
+        Name = formCollection["Name"],
+        Designation = formCollection["Designation"],
+        JoiningDate = formCollection["JoiningDate"],
+        Skill = new List 
+        {
+            new Skills(){Id = 1, SkillName = "C#"},
+            new Skills(){Id = 2, SkillName = "PHP"},
+            new Skills(){Id = 3, SkillName = "java"}
+        }
+
+    };
+    
+    function populate(s1, s2) {
+  	  var s1 = document.getElementById(s1);
+  	  var s2 = document.getElementById(s2);
+  	  s2.innerHTML = "";
+  	  if (s1.value =="Hospital"){
+  		  var optionArray = ["i10", "i20", "Verna"];
+  	  }else if (s1.value =="Center"){
+  		  var optionArray = ["mero", "Ahmed", "Khalid"];
+  	  }	    
+  	  for (var i = 0; i < optionArray.length; i++) {
+  	    var newOption = document.createElement('option');
+  	    newOption.value = optionArray[i];
+  	    newOption.innerHTML = optionArray[i];
+  	    s2.appendChild(newOption);
+  	  }
+  	} 
+  
 </script>
+
 
                             <div class="form-group">
                       		  <label class=" form-control-label"><%=t.write("Choose add on center or hospital") %></label>

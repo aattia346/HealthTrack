@@ -36,12 +36,12 @@ import com.gp.user.Validation;
 
 @RestController
 public class ServiceController {
-	
+	/*
 	@RequestMapping(value="/HealthTrack/clinic/{clinicId}/BookingClinic/Submit", method = RequestMethod.POST)
     public ModelAndView submitBookingClinic(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("clinicId") int clinicId,ModelAndView mav, ModelMap model, HttpServletRequest request)
     throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		int userId 			= Integer.parseInt(request.getParameter("userId"));
 		String firstName 	= request.getParameter("firstName");
@@ -569,6 +569,6 @@ public class ServiceController {
 		return mav;
 	}
 
-	
+	*/
 	
 }

@@ -31,7 +31,7 @@ import com.gp.user.PharmacyDao;
 import com.gp.user.Service;
 import com.gp.user.ServiceDao;
 import com.gp.user.Translator;
-import com.gp.user.Translator.language;
+import com.gp.user.Translator.langType;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -60,6 +60,7 @@ public class DashboardController {
 	public ModelAndView adminPlaces(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		model.addAttribute("lang", cookie);
+		System.out.println("cookie:"+ cookie);
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -81,7 +82,7 @@ public class DashboardController {
 	public ModelAndView dashboard(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
 			, @PathVariable("place") String place
 			, HttpSession session) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
-		Translator t =new Translator(cookie);
+		Translator t =new Translator();
 		model.addAttribute("lang", cookie);
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
@@ -91,7 +92,7 @@ public class DashboardController {
 						
 						//t.translate2English("Amiar","amira");
 						model.addAttribute("action","add");
-						String x=t.write("username");
+						String x=t.write("username",cookie);
 						System.out.println(x);
 						mav.setViewName("/admin/manage"+place);
 					}else {
@@ -111,7 +112,7 @@ public class DashboardController {
 	@RequestMapping(value="/HealthTrack/admin/{place}/insert", method = RequestMethod.POST)
 	public ModelAndView insertHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
 			, @PathVariable("place") String place) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
-		   Translator t = new Translator(cookie);
+		   Translator t = new Translator();
 		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -145,11 +146,11 @@ public class DashboardController {
 					boolean errors = false;
 					
 					if(!Validation.validateName(name)) {
-						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name")+"</p>");
+						model.addAttribute("invalidName", "<p class=\"wrong-input \">"+t.write("Invalid Name",cookie)+"</p>");
 						errors = true;
 					}
 					if(name.length() < 4) {
-						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
+						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters",cookie)+ "</p>");
 						errors = true;
 					}
 					/*
@@ -164,16 +165,16 @@ public class DashboardController {
 					}
 					*/
 					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
-					model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists")+"</p>");
+					model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
 					errors = true;
 						
 					}
 					if(!Validation.validateText(intro)) {
-						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro")+"</p>");
+						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro",cookie)+"</p>");
 						errors = true;
 					}
 					if(intro.length() < 25) {
-						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
+						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters",cookie)+"</p>");
 						errors = true;
 					}
 					/*
@@ -188,15 +189,15 @@ public class DashboardController {
 					}
 					*/
 					if(!Validation.validateURL(website)) {
-						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
+						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url",cookie)+"</p>");
 						errors = true;
 					}
 					if(!Validation.validatePhone(phone)) {
-						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters")+"</p>");
+						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters",cookie)+"</p>");
 						errors = true;
 					}
 					if(!Validation.validateText(address)) {
-						model.addAttribute("invalidaddress", "<p class=\"wrong-input \">"+t.write("Invalid Address")+"</p>");
+						model.addAttribute("invalidaddress", "<p class=\"wrong-input \">"+t.write("Invalid Address",cookie)+"</p>");
 						errors = true;
 					}
 					/*
@@ -207,7 +208,7 @@ public class DashboardController {
 					*/
 					
 					if(!Validation.validateURL(url)) {
-						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
+						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url",cookie)+"</p>");
 						errors = true;
 					}else {
 						location 	= Validation.getLatAndLangFromUrl(url);
@@ -215,12 +216,12 @@ public class DashboardController {
 							lat		= Float.valueOf(location[0]);
 							lang	= Float.valueOf(location[1]);
 						} catch (Exception e) {
-							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url")+"</p>");
+							model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url",cookie)+"</p>");
 							errors = true;
 						}
 						
 						if(admin == 0) {
-							model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the new hospital")+"</p>");
+							model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the new hospital",cookie)+"</p>");
 							errors = true;
 						}
 					}
@@ -237,12 +238,12 @@ public class DashboardController {
 						model.addAttribute("oldARSpecialty"	, ARspecialty);
 						
 						if(!Validation.validateFees(fees)) {
-							model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees")+" </p>");
+							model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees",cookie)+" </p>");
 							errors = true;
 						}
 						
 						if(!Validation.validateName(doctorName)) {
-							model.addAttribute("invalidDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name")+"</p>");
+							model.addAttribute("invalidDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name",cookie)+"</p>");
 							errors = true;
 						}
 						/*
@@ -252,7 +253,7 @@ public class DashboardController {
 						}
 						*/
 						if(doctorName.length() < 4) {
-							model.addAttribute("shortDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
+							model.addAttribute("shortDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters",cookie)+"</p>");
 							errors = true;
 						}
 						/*
@@ -262,7 +263,7 @@ public class DashboardController {
 						}
 						*/
 						if(!Validation.validateName(specialty)) {
-							model.addAttribute("invalidSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty")+"</p>");
+							model.addAttribute("invalidSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty",cookie)+"</p>");
 							errors = true;
 						}
 						/*
@@ -278,7 +279,7 @@ public class DashboardController {
 						
 						*/
 						if(specialty.length() < 4) {
-							model.addAttribute("shortSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters")+"</p>");
+							model.addAttribute("shortSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters",cookie)+"</p>");
 							errors = true;
 						}
 						
@@ -297,11 +298,11 @@ public class DashboardController {
 								clinic.setDoctorName(doctorName);
 								clinic.setSpecialty(specialty);
 								ClinicDao.insertClinic(clinic);
-								t.fileWeiter(doctorName, ARdoctorName,language.ar);
-								t.fileWeiter(specialty, ARspecialty,language.ar);
-								t.fileWeiter(name,ARname,language.ar);
-								t.fileWeiter(intro,ARintro,language.ar);
-								t.fileWeiter(address,ARaddress,language.ar);
+								t.fileWriter(doctorName, ARdoctorName,"ar");
+								t.fileWriter(specialty, ARspecialty,"ar");
+								t.fileWriter(name,ARname,"ar");
+								t.fileWriter(intro,ARintro,"ar");
+								t.fileWriter(address,ARaddress,"ar");
 								
 								mav.setViewName("redirect:/HealthTrack/admin/"+username+"/clinics");
 							}else {
@@ -327,9 +328,9 @@ public class DashboardController {
 						hospital.setLat(lat);
 						hospital.setLang(lang);						
 						HospitalDao.insertHospital(hospital);
-						t.fileWeiter(name,ARname,language.ar);
-						t.fileWeiter(intro,ARintro,language.ar);
-						t.fileWeiter(address,ARaddress,language.ar);
+						t.fileWriter(name,ARname,"ar");
+						t.fileWriter(intro,ARintro,"ar");
+						t.fileWriter(address,ARaddress,"ar");
 						
 						Hospital H = HospitalDao.getHospitalById(admin);
 						
@@ -352,9 +353,9 @@ public class DashboardController {
 						center.setLat(lat);
 						center.setLang(lang);
 						CenterDao.insertCenter(center);
-						t.fileWeiter(name,ARname,language.ar);
-						t.fileWeiter(intro,ARintro,language.ar);
-						t.fileWeiter(address,ARaddress,language.ar);
+						t.fileWriter(name,ARname,"ar");
+						t.fileWriter(intro,ARintro,"ar");
+						t.fileWriter(address,ARaddress,"ar");
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/centers");
                        
 						
@@ -373,9 +374,9 @@ public class DashboardController {
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.insertPharmacy(pharmacy);
-						t.fileWeiter(name,ARname,language.ar);
-						t.fileWeiter(intro,ARintro,language.ar);
-						t.fileWeiter(address,ARaddress,language.ar);
+						t.fileWriter(name,ARname,"ar");
+						t.fileWriter(intro,ARintro,"ar");
+						t.fileWriter(address,ARaddress,"ar");
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/pharmacies");
 					}
 					
@@ -401,7 +402,7 @@ public class DashboardController {
 	@RequestMapping(value="/HealthTrack/admin/{username}/hospital/addNewDepartment", method = RequestMethod.POST)
 	public ModelAndView submitDept(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav, HttpServletRequest request)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException{
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
 		boolean error =false;
@@ -415,13 +416,13 @@ public class DashboardController {
 				String deptName = request.getParameter("dept");
 				String ARdeptName = request.getParameter("ARdept");
 				if(!Validation.validateName(ARdeptName)) {
-					model.addAttribute("invalidARdeptName", "<p class=\"wrong-input \">"+t.write("Invalid department name in Arabic")+"</p>");
+					model.addAttribute("invalidARdeptName", "<p class=\"wrong-input \">"+t.write("Invalid department name in Arabic",cookie)+"</p>");
 					error=true; //there is some action should done later
 				}
 				
 				if((!deptName.equals("0")) & (error==false)) {
 					HospitalDao.insertDepartment(deptName, hospitalId);
-					t.translate2Arabic(deptName, ARdeptName);
+					//t.translate2Arabic(deptName, ARdeptName);
 			}
 			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
 		}
@@ -477,12 +478,13 @@ public class DashboardController {
 		
 		return mav;
 	}
+	/*
 	
 	@RequestMapping(value="/HealthTrack/admin/hospital/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
 		    model.addAttribute("lang", cookie);
-		    Translator t = new Translator(cookie);
+		    Translator t = new Translator();
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
@@ -605,9 +607,9 @@ public class DashboardController {
 
 		return mav;
 	}
-	
+	*/
 	//******************************************************Centers*******************************************//
-	
+	/*
 	@RequestMapping(value="/HealthTrack/admin/center/{AdminId}/update", method = RequestMethod.POST)
 	public ModelAndView updateCenter(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("AdminId") int AdminId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
@@ -1498,7 +1500,7 @@ public class DashboardController {
 					*/
 					
 					
-					
+				/*	
 					
 					if(errors == false) {
 						String encryptedPassword = Validation.encryptePssword(password);
@@ -1630,5 +1632,6 @@ public class DashboardController {
 		}
 		return mav;
 	}
+	*/
 	
 }	

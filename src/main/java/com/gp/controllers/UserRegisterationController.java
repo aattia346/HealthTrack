@@ -72,7 +72,7 @@ public class UserRegisterationController {
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException,
     NoSuchAlgorithmException, AddressException, ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		ModelAndView verifyMav  = new ModelAndView("/user/verificationPage");
 		ModelAndView registerMav = new ModelAndView("/user/userRegisteration");
@@ -92,7 +92,7 @@ public class UserRegisterationController {
 		model.addAttribute("oldEmail", email);
 		
 		boolean errors = true;
-		
+		/*
 		if(!Validation.validateName(firstName)) {
 			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid First Name") + "</p>");
 			errors = false;
@@ -134,7 +134,7 @@ public class UserRegisterationController {
 			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">" + t.write("Sorry this email is banned") + "</p>");
 			errors = false;
 		}
-	
+	*/
 		if(errors) {
 			//create the info of login
 			String encryptedPassword = Validation.encryptePssword(password);

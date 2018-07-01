@@ -77,7 +77,7 @@ public class UserLoginController {
 		
 	    model.addAttribute("lang", cookie);
 	    
-	    Translator t= new Translator(cookie); ;
+	    Translator t= new Translator(); ;
 		
 	    
 	   	String username = request.getParameter("username");
@@ -111,13 +111,13 @@ public class UserLoginController {
 	       	   	
 	          }else {
 	        	  
-	       	   model.addAttribute("notAuthenticated", "<p class=\"wrong-input\">" + t.write("please check username and password") + "</p>");
+	       	   model.addAttribute("notAuthenticated", "<p class=\"wrong-input\">" + t.write("please check username and password",cookie) + "</p>");
 	       	   mav.addAllObjects(model);
 	       	   mav.setViewName("/user/login");
 	          }
 	   	}else {
 	   		
-	   		model.addAttribute("invalidUsername", "<p class=\"wrong-input\">" + t.write("Invalid username") + "</p>");
+	   		model.addAttribute("invalidUsername", "<p class=\"wrong-input\">" + t.write("Invalid username",cookie) + "</p>");
 	   		mav.addAllObjects(model);
 	   		mav.setViewName("/user/login");
    	}
@@ -128,7 +128,7 @@ public class UserLoginController {
 	@RequestMapping(value="/HealthTrack/login/recovermypassword/submit", method = RequestMethod.POST)
 	public ModelAndView recoverPasswordSubmitByPostRequest(@CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request,ModelAndView mav, ModelMap m) throws NumberFormatException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		m.addAttribute("lang", cookie);
 		if(Validation.validateNumber(request.getParameter("code"))) {
 			int insertedCode = Integer.parseInt(request.getParameter("code"));
@@ -140,10 +140,10 @@ public class UserLoginController {
 					mav.setViewName("/user/recoverPassword");
 				}else {
 					mav.setViewName("/user/insertCodeWhenForgetPassword");
-					m.addAttribute("wrongeCode", "<p class=\"wrong-input\">" + t.write("wronge Code") + "</p>");
+					m.addAttribute("wrongeCode", "<p class=\"wrong-input\">" + t.write("wronge Code",cookie) + "</p>");
 				}
 			}else {
-				m.addAttribute("wrongeCode", "<p class=\"wrong-input\">" + t.write("Invalid Code") + "</p>");
+				m.addAttribute("wrongeCode", "<p class=\"wrong-input\">" + t.write("Invalid Code",cookie) + "</p>");
 				mav.setViewName("/user/insertCodeWhenForgetPassword");
 			}
 		
@@ -153,7 +153,7 @@ public class UserLoginController {
 	@RequestMapping(value="/HealthTrack/forgetmypassword/submit", method = RequestMethod.POST)
     public ModelAndView forgetSubmit(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model, HttpServletRequest request) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, AddressException, ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		ModelAndView mav = new ModelAndView();
 		String email = request.getParameter("email");
@@ -161,7 +161,7 @@ public class UserLoginController {
 		if(Validation.validateEmail(email)) {		
 			if(!Validation.checkIfSomethingExists("email", "person", email)) {				
 				mav.setViewName("/user/forgetPassword");
-				model.addAttribute("wrongeEmail" , "<p class=\"wrong-input\">" + t.write("please check the Email") + "</p>"); 
+				model.addAttribute("wrongeEmail" , "<p class=\"wrong-input\">" + t.write("please check the Email",cookie) + "</p>"); 
 			}else {
 				Person person = PersonDao.getAllInfoAboutUserByEmail(email); 
 				Validation.sendEmail(email, person.getFirstName(), person.getVerificationCode());
@@ -171,7 +171,7 @@ public class UserLoginController {
 			}
 		}else {
 			mav.setViewName("/user/forgetPassword");
-			model.addAttribute("invalidEmail" , "<p class=\"wrong-input\">" + t.write("Invalid Email") + "</p>");
+			model.addAttribute("invalidEmail" , "<p class=\"wrong-input\">" + t.write("Invalid Email",cookie) + "</p>");
 		}
 		
 		mav.addAllObjects(model);
@@ -182,7 +182,7 @@ public class UserLoginController {
     public ModelAndView changePasswordSubmit(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelAndView mav, HttpSession session, HttpServletRequest request, ModelMap model)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, AddressException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		String username = (String)session.getAttribute("username");
 		
@@ -199,16 +199,16 @@ public class UserLoginController {
 			boolean errors = false;
 			
 			if(!user.getPassword().equals(oldPassword)) {
-				model.addAttribute("wrongPassword", "<p class=\"wrong-input\">" + t.write("Wrong Password") + "</p>");
+				model.addAttribute("wrongPassword", "<p class=\"wrong-input\">" + t.write("Wrong Password",cookie) + "</p>");
 				errors = true;
 			}
 			
 			if(password.length()<6) {
-				model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters") + "</p>");
+				model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters",cookie) + "</p>");
 				errors = true;
 			}
 			if(!password.equals(confirmPassword)) {
-				model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match") + "</p>");
+				model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match",cookie) + "</p>");
 				errors = true;
 			}
 			
@@ -228,7 +228,7 @@ public class UserLoginController {
     public ModelAndView recoverPasswordSubmit(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelAndView mav, HttpSession session, HttpServletRequest request, ModelMap model)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, AddressException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		String username = (String)session.getAttribute("username");
 		
@@ -243,11 +243,11 @@ public class UserLoginController {
 			boolean errors = false;
 		
 			if(password.length()<6) {
-				model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters") + "</p>");
+				model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters",cookie) + "</p>");
 				errors = true;
 			}
 			if(!password.equals(confirmPassword)) {
-				model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match") + "</p>");
+				model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match",cookie) + "</p>");
 				errors = true;
 			}
 			
@@ -293,7 +293,7 @@ public class UserLoginController {
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException,
     		SQLException, AddressException, ParseException, JSONException, IOException {
         
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		String username = (String)session.getAttribute("username");
 		if(Validation.validateNumber(request.getParameter("code"))) {
@@ -312,13 +312,13 @@ public class UserLoginController {
 	        }else {
 	        	
 	        	mav.setViewName("/user/verificationPage");
-	        	model.addAttribute("wrongeCode", "<p class=\"wrong-input\">" + t.write("wronge Code") + "</p>");
+	        	model.addAttribute("wrongeCode", "<p class=\"wrong-input\">" + t.write("wronge Code",cookie) + "</p>");
 	        	mav.addAllObjects(model);
 	        	
 	        	}
 		}else {
 				mav.setViewName("/user/verificationPage");
-	        	model.addAttribute("invalidCode", "<p class=\"wrong-input\">" + t.write("Invalid Code") + "</p>");
+	        	model.addAttribute("invalidCode", "<p class=\"wrong-input\">" + t.write("Invalid Code",cookie) + "</p>");
 	        	mav.addAllObjects(model);	
 		}
 	
@@ -329,7 +329,7 @@ public class UserLoginController {
     public ModelAndView waitingListSubmit(HttpServletRequest request ,ModelAndView mav , @CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) throws ParseException, JSONException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		model.addAttribute("lang", cookie);
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
@@ -341,22 +341,22 @@ public class UserLoginController {
 		boolean errors = false;
 		
 		if(!Validation.validateName(name)) {
-			model.addAttribute("invalidName", "<p class=\"wrong-input\">" + t.write("invalide name") + "</p>");
+			model.addAttribute("invalidName", "<p class=\"wrong-input\">" + t.write("invalide name",cookie) + "</p>");
 			errors = true;			
 		}
 		
 		if(!Validation.validatePhone(phone)) {
-			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">" + t.write("invalide phone") + "</p>");
+			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">" + t.write("invalide phone",cookie) + "</p>");
 			errors = true;			
 		}
 		
 		if(service.equals("0")) {
-			model.addAttribute("invalidService", "<p class=\"wrong-input\">" + t.write("please select a service") + "</p>");
+			model.addAttribute("invalidService", "<p class=\"wrong-input\">" + t.write("please select a service",cookie) + "</p>");
 			errors = true;			
 		}
 		
 		if(!errors) {
-			model.addAttribute("submitSucceed", "<p class=\"alert alert-success col-sm-offset-3 col-sm-6\">" + t.write("your request has been sent successfully") + "</p>");
+			model.addAttribute("submitSucceed", "<p class=\"alert alert-success col-sm-offset-3 col-sm-6\">" + t.write("your request has been sent successfully",cookie) + "</p>");
 			WaitingRequest waitingRequest = new WaitingRequest(name, phone, service);
 			WaitingRequestDao.insertRequest(waitingRequest);
 			//send whatsup message
