@@ -67,7 +67,7 @@ String title = center.getCenterName();
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="/user/layout/images/profiles/blog-img/Delivery.png" alt="">
+                            <img src="/user/layout/images/profiles/blog-img/Delivery.png">
                             <!-- Post Date -->
                             <div class="post-date">
                             <%	Service service = (Service)pageContext.getAttribute("service");
@@ -82,7 +82,7 @@ String title = center.getCenterName();
                         <!-- Post Content -->
                         <div class="post-content">
                             <a href="/HealthTrack/profile/service/center/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName()) %></a>
-                            <a href="/HealthTrack/profile/service/center/${service.getServiceId()}#comments" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments") %></a>
+                            <a href="/HealthTrack/profile/service/center/${service.getServiceId()}#myCarousel" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments") %></a>
                         </div>
                     </div>
                 </div>

@@ -748,7 +748,8 @@ textarea {
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  line-height: 40px; }
 
 /* :: 7.0 About Us Area CSS */
 @media only screen and (min-width: 768px) and (max-width: 991px) {

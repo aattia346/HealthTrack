@@ -402,32 +402,32 @@
                                     <!-- Single Contact Info -->
                                      <div class="single-contact-info mb-30">
                                      <div class="single-contact-info-icon"><i class="fas fa-h-square fa-3x"></i></div>
-                                        <p><%= t.write(request.getAttribute("placeName").toString()) %></p>
+                                        <p class="text-center"><%= t.write(request.getAttribute("placeName").toString()) %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
                                     	<div class="single-contact-info-icon"><i class="fa fa-phone fa-3x"></i></div>
-                                        <p><%= S.getPhone() %></p>
+                                        <p class="text-center"><%= S.getPhone() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
-                                        <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
+                                        <div class="single-contact-info-icon"><i class="far fa-address-book fa-3x"></i></div>
                                         <p> <%= t.write(S.getAddress()) %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
-                                        <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
-                                        <p><%= S.getFees() %></p>
-                                    </div><br><br>
+                                        <div class="single-contact-info-icon text-capitalize"><i class="fas fa-map-marker-alt fa-3x"></i></div>
+                                        <a href="#map"><%= t.write("find the location google maps")%></a>
+                                    </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
-                                        <div class="single-contact-info-icon text-capitalize"><i class="fas fa-map-marker-alt fa-3x"></i></div>
-                                        <p><%= t.write("find the location google maps")%></p>
+                                        <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
+                                        <p class="text-center"><%= S.getFees() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
-                                        <p><%= Math.round(S.getServiceReview()*10.0)/10.0 %></p>
+                                        <p class="text-center"><%= Math.round(S.getServiceReview()*10.0)/10.0 %></p>
                                     </div>
                                 </div>
                             </div>
@@ -526,7 +526,6 @@
                <% } %>
 
 <%@include  file="../includes/footer.jsp" %>
-<script src="/user/layout/js/profiles/carousel.js"></script>
 <%
 
 List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);

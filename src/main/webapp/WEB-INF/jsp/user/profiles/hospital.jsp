@@ -56,7 +56,7 @@ String dayName = dayFormat.format(today);
     %>
     	
     	<!-- ***** Department Area Start ***** -->
-    <div class="medilife-services-area section-padding-100-20">
+    <div class="medilife-services-area section-padding-100-20 edit-padding">
         <div class="container">
             <div class="row">
                 <!-- Single Service Area -->
@@ -71,16 +71,16 @@ String dayName = dayFormat.format(today);
                 </div>
                 <div class="col-md-6 col-lg-8">
                 
-                    <div class="row">
+                    <div class="row dept-row">
                     
                     <c:forEach var="service" items="${services}">
                     
                     <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}">
-                   <div class="col-12 col-md-6 col-lg-3">
+                   <div class="col-md-6 col-lg-3">
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="/user/layout/images/profiles/blog-img/${service.getServiceName()}.png" alt="">
+                            <img src="/user/layout/images/profiles/blog-img/${service.getServiceName()}.png">
                             <!-- Post Date -->
                             <div class="post-date text-capitalize">
                             <%	Service service = (Service)pageContext.getAttribute("service");
@@ -99,8 +99,7 @@ String dayName = dayFormat.format(today);
                         <!-- Post Content -->
                         <div class="post-content">
                             <a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName()) %></a>
-                            <a href="#" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments") %></a>
-                        </div>
+							<a href="/HealthTrack/profile/service/hospital/${service.getServiceId()}#myCarousel" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments") %></a>                        </div>
                     </div>
                 </div>
                 </a>

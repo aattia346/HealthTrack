@@ -236,4 +236,25 @@ abstract public class ClinicDao {
 		
 	}
 	
+	public static List<Review> get5Comments(int id) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		List<Review> reviews = new ArrayList<Review>();
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM review JOIN person ON person.user_id  = review.user_id"
+				+ " WHERE clinic_id=? AND show_comment = 1 AND comment IS NOT NULL"
+				+ " ORDER BY review_id DESC LIMIT 5";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet result = ps.executeQuery();
+				
+		while(result.next()) {
+			Review review = new Review();
+			review.setUserFirstName(result.getString("firstname"));
+			review.setUserLastName(result.getString("lastname"));
+			review.setComment(result.getString("comment"));
+			reviews.add(review);
+		}
+		return reviews;
+	}
 }

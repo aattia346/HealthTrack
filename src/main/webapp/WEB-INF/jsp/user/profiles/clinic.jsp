@@ -13,6 +13,7 @@
 <%@page import="com.gp.user.User"%>
 <%@page import="com.gp.user.UserDao"%>
 <%@page import="com.gp.user.PersonDao"%>
+<%@page import="com.gp.user.Review"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
@@ -55,6 +56,7 @@ if(username != null){
 		showForm = true;
 	}
 }
+List<Review> comments = ClinicDao.get5Comments(clinicId);
 %>
     <!-- Preloader -->
     <div id="preloader">
@@ -176,7 +178,12 @@ if(username != null){
                                                 	</select>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-md-4">
+											<div class="col-12 col-sm-12 booking-form-label text-capitalize">
+                                                <div class="form-group">
+                                                	<label><%= t.write("choose the day:") %></label> 
+                                                </div>
+                                             </div>                                            
+                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
                                                     <select name="date" class="form-control" required="required">                                                    
                                                     	<c:forEach var="day" items="${days}">
@@ -222,23 +229,28 @@ if(username != null){
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
                                         <div class="single-contact-info-icon"><i class="fas fa-user-md fa-3x"></i></div>
-                                        <p><%= t.write(clinic.getClinicName()) %></p>                                        
+                                        <p class="text-center"><%= t.write(clinic.getClinicName()) %></p>                                        
                                     </div>
                                     <div class="single-contact-info mb-30">
                                     	<div class="single-contact-info-icon"><i class="fa fa-phone fa-3x"></i></div>
-                                        <p><%= clinic.getPhone() %></p>
+                                        <p class="text-center"><%= clinic.getPhone() %></p>
                                     </div>
                                     <div class="single-contact-info">
-                                        <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
+                                        <div class="single-contact-info-icon"><i class="far fa-address-book fa-3x"></i></div>
                                         <p> <%= t.write(clinic.getAddress()) %></p>
-                                    </div><br><br>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon text-capitalize"><i class="fas fa-map-marker-alt fa-3x"></i></div>
+                                        <a href="#map"><%= t.write("find the location google maps")%></a>
+                                    </div>
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
-                                        <p><%= clinic.getFees() %></p>
-                                    </div><br><br>
+                                        <p class="text-center"><%= clinic.getFees() %></p>
+                                    </div>
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
-                                        <p><%= Math.round(clinic.getReview()*10.0)/10.0 %></p>
+                                        <p class="text-center"><%= Math.round(clinic.getReview()*10.0)/10.0 %></p>
                                     </div>                                   
                                 </div>
                             </div>
@@ -246,6 +258,46 @@ if(username != null){
                     </div>
                 </div>
             </div>
+            <% if(!(comments.size() < 5)){ %>
+    
+    <div id="myCarousel">
+    	<div class="overlay">
+    		<div class="comments">
+    			<ul>
+    				<li id="comment1" class="active"></li>
+    				<li id="comment2"></li>
+    				<li id="comment3"></li>
+    				<li id="comment4"></li>
+    				<li id="comment5"></li>		
+    			</ul>
+    			<h3 class="text-center">What Our Clients Say</h3>
+    			<div class="comment1 comment active-comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(0).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(0).getUserFirstName() + " " + comments.get(0).getUserLastName() %></p>
+    			</div>
+    			<div class="comment2 comment">    			
+	    			<p class="text-center comment-content">&ldquo;<%= comments.get(1).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(1).getUserFirstName() + " " + comments.get(1).getUserLastName() %></p>
+    			</div>
+    			<div class="comment3 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(2).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(2).getUserFirstName() + " " + comments.get(2).getUserLastName() %></p>
+    			</div>
+    			<div class="comment4 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(3).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(3).getUserFirstName() + " " + comments.get(3).getUserLastName() %></p>
+    			</div>
+    			<div class="comment5 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(4).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(4).getUserFirstName() + " " + comments.get(4).getUserLastName() %></p>
+    			</div>
+    		</div>
+    		<div class="right-arrow"><i class="fas fa-chevron-right fa-2x"></i></div>
+    		<div class="left-arrow"><i class="fas fa-chevron-left fa-2x"></i></div>
+    	</div>
+    </div>
+    
+    <% } %>
             <div class="review clinic-review">            
 	            <div class="overlay">
 	           		<h2 class="text-center"><%= t.write("rate this service") %></h2>

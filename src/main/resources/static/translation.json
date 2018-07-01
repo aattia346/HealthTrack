@@ -159,7 +159,8 @@
 		  "invalide phone" : "Invalide Phone",
 		  "please select a service" : "please select a service",
 		  "your request has been sent successfully" : "your request has been sent successfully",
-		  "Admin Login" : "Admin Login"
+		  "Admin Login" : "Admin Login",
+		  "choose the day:" : "choose the day:"
 		 },
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -329,6 +330,7 @@
 		 "invalide phone" : "رقم الهاتف غير صالح",
 		 "please select a service" : "من فضلك اختر خدمه",
 		 "your request has been sent successfully" : "تم إرسال طلبك بنجاح",
-		 "Admin Login" : "تسجيل دخول المدير"
+		 "Admin Login" : "تسجيل دخول المدير",
+		 "choose the day:" : "أختر اليوم"
 	}
 }

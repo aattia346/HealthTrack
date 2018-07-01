@@ -1256,10 +1256,7 @@ public class DashboardController {
 					
 							if(errors == false) {
 								String encryptedPassword = Validation.encryptePssword(password);
-								//int verificationCode = Validation.generateCode();
-								//User user = new User(username1, encryptedPassword, "person",verificationCode);
-								//user.setId(UserDao.insertUser(user));
-								
+																
 								User user= new User();
 								user.setType(Type);
 								user.setUsername(username1);
