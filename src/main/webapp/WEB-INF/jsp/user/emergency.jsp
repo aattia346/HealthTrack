@@ -38,7 +38,7 @@ for(Center center : centers){
 }
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
-	serviceUrl = "/HealthTrack/profile/pharmacy/"+pharmacy.getAdminId();
+	serviceUrl = "";
 	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), pharmacy.getPharmacyName(), "pharmacy", serviceUrl, "C35ED4");
 	locations.add(location);
 }

@@ -1,5 +1,7 @@
 package com.gp.user;
 
+import java.util.Date;
+
 public class Review {
 	private int reviewId;
 	private int userId ;
@@ -8,8 +10,15 @@ public class Review {
 	private float review ;
 	private int clinicId;
 	private int showComment;
+	private Date time;
 	
 	
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
 	public String getUserFirstName() {
 		return userFirstName;
 	}

@@ -22,6 +22,7 @@
 <%@page import="com.gp.user.PharmacyDao"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@include  file="includes/header.jsp" %> 
 <%
 
 List<Float> 	lats  = new ArrayList<Float>();
@@ -39,26 +40,25 @@ Calendar calendar = Calendar.getInstance();
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
 	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
-	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", serviceUrl, "71e486");
+	Location location = new Location(center.getLat(), center.getLang(), t.write(center.getCenterName()), "center", serviceUrl, "71e486");
 	locations.add(location);
 }
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
-	serviceUrl = "/HealthTrack/profile/pharmacy/"+pharmacy.getAdminId();
-	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), pharmacy.getPharmacyName(), "pharmacy", serviceUrl, "C35ED4");
+	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), t.write(pharmacy.getPharmacyName()) + " " + t.write("at") + " " + t.write(pharmacy.getAddress()) , "pharmacy", pharmacy.getGoogle_maps_url(), "C35ED4");
 	locations.add(location);
 }
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
-	Location location = new Location(clinic.getLat(), clinic.getLang(), clinic.getClinicName(), "clinic", serviceUrl, "4089C7");
+	Location location = new Location(clinic.getLat(), clinic.getLang(), t.write(clinic.getClinicName()), "clinic", serviceUrl, "4089C7");
 	locations.add(location);
 }
 
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
 	serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
-	Location location = new Location(hospital.getLat(), hospital.getLang(), hospital.getHospitalName(), "hospital", serviceUrl, "ff6e6e");
+	Location location = new Location(hospital.getLat(), hospital.getLang(), t.write(hospital.getHospitalName()), "hospital", serviceUrl, "ff6e6e");
 	locations.add(location);
 }
 
@@ -84,7 +84,7 @@ for(Service service : servicesOfHospital){
 		} 
 	}
 	
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
+	Location location = new Location(service.getLat(), service.getLang(), t.write(service.getServiceName()), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }
 
@@ -109,11 +109,10 @@ for(Service service : servicesOfCenters){
 		} 
 	}
 	
-	Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
+	Location location = new Location(service.getLat(), service.getLang(), t.write(service.getServiceName()), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }
-%>
-<%@include  file="includes/header.jsp" %>    
+%>   
 	<div class="main-page-container">   
             <h3 class="text-center"><%= t.write("find a location") %></h3>
             <div class="row">

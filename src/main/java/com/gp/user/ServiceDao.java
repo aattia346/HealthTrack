@@ -313,7 +313,7 @@ abstract public class ServiceDao {
 	public static void updateServiceReview(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		Connection con = DBConnection.getConnection();
-		String sql="UPDATE service SET service_review = (SELECT AVG(review) FROM review WHERE service_id=?) WHERE service_id=?";
+		String sql="UPDATE service SET service_review = (SELECT AVG(review) FROM review WHERE service_id=? AND review != 0) WHERE service_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, serviceId);
 		ps.setInt(2, serviceId);
@@ -337,7 +337,7 @@ abstract public class ServiceDao {
 	public static void insertComment(int userId, int serviceId, String comment) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		Connection con = DBConnection.getConnection();
-		String sql="INSERT INTO review (user_id, service_id, comment) VALUES(?,?,?)";
+		String sql="INSERT INTO review (user_id, service_id, comment, time_of_comment) VALUES(?,?,?, now()";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, userId);
 		ps.setInt(2, serviceId);
@@ -396,32 +396,14 @@ abstract public class ServiceDao {
 		ps.setInt(4, service.getSlotType());
 		ps.executeUpdate();
 		con.close();	
-}
-/*
-	
-public static String checkServiceCommentForHospitalOrCenter(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-	
-	Connection con = DBConnection.getConnection();
-	String sql="SELECT * FROM service WHERE service_id=?";
-	PreparedStatement ps = con.prepareStatement(sql);
-	ps.setInt(1, serviceId);
-	ResultSet result = ps.executeQuery();
-	result.next();
-	String ServiceType ;	
-	if(result.getRowId(3) != null) {
-		return ServiceType="Hospital";
 	}
-	else  {
-		return ServiceType="Center";
-	}
-	
-}
-*/
 
 	public static List<Review> getServiceReview(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 		Connection con = DBConnection.getConnection();
-		String sql="SELECT * FROM review WHERE service_id=?";
+		String sql = "SELECT * FROM review JOIN person ON person.user_id  = review.user_id" + 
+				" WHERE service_id=? AND comment IS NOT NULL" + 
+				" ORDER BY review_id DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, serviceId);
 		ResultSet result = ps.executeQuery();
@@ -433,9 +415,12 @@ public static String checkServiceCommentForHospitalOrCenter(int serviceId) throw
 			review.setReview(result.getFloat("review"));
 			review.setUserId(result.getInt("user_id"));
 			review.setComment(result.getString("comment"));
+			review.setUserFirstName(result.getString("firstname"));
+			review.setUserLastName(result.getString("lastname"));
 			review.setClinicId(result.getInt("clinic_id"));
-			//review.setServiceId(result.getInt("service_id"));
+			review.setServiceId(result.getInt("service_id"));
 			review.setShowComment(result.getInt("show_comment"));
+			review.setTime(result.getDate("time_of_comment"));
 			reviews.add(review);
 		}
 		return reviews;	
@@ -615,8 +600,39 @@ public static String checkServiceCommentForHospitalOrCenter(int serviceId) throw
 			review.setUserFirstName(result.getString("firstname"));
 			review.setUserLastName(result.getString("lastname"));
 			review.setComment(result.getString("comment"));
+			review.setTime(result.getDate("time_of_comment"));
 			reviews.add(review);
 		}
 		return reviews;
+	}
+
+	public static void showComment(int reviewId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE review SET show_comment = 1 WHERE review_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, reviewId);
+		ps.executeUpdate();
+		
+	}
+
+	public static void hideComment(int reviewId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE review SET show_comment = 0 WHERE review_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, reviewId);
+		ps.executeUpdate();
+		
+	}
+
+	public static void deleteComment(int reviewId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql="DELETE FROM review WHERE review_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, reviewId);
+		ps.executeUpdate();
+		
 	}
 }

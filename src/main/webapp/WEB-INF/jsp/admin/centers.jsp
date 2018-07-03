@@ -22,24 +22,24 @@
 <%@include  file="includes/header.jsp" %>
 
 <div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1><%=t.write("Dashboard") %></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
-                            <li><%=t.write("Centers") %></li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<div class="col-sm-4">
+    	<div class="page-header float-left">
+            <div class="page-title">
+            	<h1><%=t.write("Dashboard") %></h1>
+          	</div>
+       </div>
+   	</div>
+    <div class="col-sm-8">
+    	<div class="page-header float-right">
+        	<div class="page-title">
+            	<ol class="breadcrumb text-right">
+                	<li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
+                    <li><%=t.write("Centers") %></li>
+                </ol>
+           	</div>
+   	   </div>
+	</div>
+</div>
 
  <div class="content mt-3">
             <div class="animated fadeIn">

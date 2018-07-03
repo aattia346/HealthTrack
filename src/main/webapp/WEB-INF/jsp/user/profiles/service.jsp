@@ -134,6 +134,11 @@
                         <h3 class="breadcumb-title text-capitalize"><%= t.write(S.getServiceName()) %></h3>
                         <p class="breadcumb-intro"><%= t.write(S.getIntro()) %></p>
                     </div>
+                     <%  if(showComment){%>
+  
+     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Comments") %></a>
+     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showBookings" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Bookings") %></a>
+   					<% }%>
                 </div>
                 ${checkYourBooking} ${loginFirst}
             </div>
@@ -141,7 +146,7 @@
     </section>
 
         <!-- ***** Book An Appoinment Area Start ***** -->
-    <div class="medilife-book-an-appoinment-area">
+    <div class="medilife-book-an-appoinment-area medilife-book-an-appoinment-area-service">
         <div class="container">
             <div class="row">
             <% if(!showForm){ %>
@@ -230,7 +235,7 @@
                                 ${invalidName} ${invalidPhone} ${invalidDate} ${invalidmsg} ${invalidEmail} ${invalidTime} ${limitExceed}
                                     <form class="${hideCalendar}" method="post" action="/HealthTrack/<%= place %>/Service/<%=S.getServiceId() %>/BookingDay/Submit">
                                     <input type="hidden" value="<%= user.getId() %>" name="userId" id="userId">
-                                        <div class="row align-items-end">
+                                        <div class="row align-items-end align-items-end-service">
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="firstName" id="name" placeholder="<%= t.write("first name") %>" value="${oldFirstName}">
@@ -273,7 +278,7 @@
                                                 	<label><%= t.write("from:") %></label> 
                                                 </div>
                                              </div>
-                                             <div class="col-12 col-md-6 booking-form-label">
+                                             <div class="col-12 col-md-6 booking-form-label service-input-to-lg">
                                                 <div class="form-group">
                                                 	<label><%= t.write("to:") %></label> 
                                                 </div>
@@ -283,7 +288,11 @@
                                                     <input type="date" class="form-control" required name="bookFrom" id="date" placeholder="<%= t.write("date") %>" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
                                                 </div>
                                             </div>
-                                           
+											<div class="col-12 col-md-6 booking-form-label service-input-to-sm">
+                                                <div class="form-group">
+                                                	<label><%= t.write("to:") %></label> 
+                                                </div>
+                                            </div>                                           
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                     <input type="date" class="form-control" required name="bookTo" id="date" placeholder="<%= t.write("date") %>" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
@@ -420,12 +429,12 @@
                                         <a href="#map"><%= t.write("find the location google maps")%></a>
                                     </div>
                                     <!-- Single Contact Info -->
-                                    <div class="single-contact-info">
+                                    <div class="single-contact-info single-contact-info-icon-money">
                                         <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
                                         <p class="text-center"><%= S.getFees() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
-                                    <div class="single-contact-info">
+                                    <div class="single-contact-info single-contact-info-icon-review">
                                         <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
                                         <p class="text-center"><%= Math.round(S.getServiceReview()*10.0)/10.0 %></p>
                                     </div>
@@ -505,11 +514,7 @@
 	           		</div>
 	            </div>    
             </div>
-    <%  if(showComment){%>
-  
-     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn btn-primary"><i class="fa fa-plus"></i> Show Comments</a>
-     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showBookings" class="btn btn-primary"><i class="fa fa-plus"></i> Show Bookings</a>
-   <% }%>
+   
     <!-- ***** Book An Appoinment Area End ***** -->
     
     <div id="map" class="hospital-map"></div>

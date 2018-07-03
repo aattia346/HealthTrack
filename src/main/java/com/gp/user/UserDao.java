@@ -254,6 +254,31 @@ abstract public class UserDao {
 		return result.getRow() < 10;
 
 	}
+
+	public static boolean isTheUserAuthorized(int userId, String place, int serviceId)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = null;
+		
+		if(place.equalsIgnoreCase("hospital")) {
+			sql="SELECT * FROM service"
+					+ " JOIN department ON service.dept_id = department.department_id"
+					+ " JOIN hospital ON hospital.hospital_id = department.hospital_id"
+					+ " WHERE service_id=?";
+		}else if(place.equalsIgnoreCase("center")){
+			sql="SELECT * FROM service JOIN center ON service.center_id = center.center_id"
+					+ " WHERE service_id=?";
+		}
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		
+		ResultSet result = ps.executeQuery();
+		
+		result.next();
+		
+		return result.getInt("admin_id") == userId;	
+	}
 	
 
 }

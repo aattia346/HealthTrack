@@ -214,7 +214,7 @@ abstract public class ClinicDao {
 	public static void updateClinicReview(int clinicId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		Connection con = DBConnection.getConnection();
-		String sql="UPDATE clinic SET review = (SELECT AVG(review) FROM review WHERE clinic_id=?) WHERE clinic_id=?";
+		String sql="UPDATE clinic SET review = (SELECT AVG(review) FROM review WHERE clinic_id=? AND review != 0) WHERE clinic_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, clinicId);
 		ps.setInt(2, clinicId);

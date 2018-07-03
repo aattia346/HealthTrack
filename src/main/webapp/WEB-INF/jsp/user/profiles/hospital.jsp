@@ -27,6 +27,13 @@ String dayName = dayFormat.format(today);
 
 %>
 <%@include  file="../includes/header.jsp" %>
+<style>
+	@media (max-width: 636px){
+		.single-blog-area{
+			margin-bottom: 60px !important;
+		}
+	}
+</style>
     <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>

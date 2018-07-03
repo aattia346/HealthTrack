@@ -6,6 +6,7 @@ a{
 }
 *{
 	font-family: 'El Messiri', sans-serif;
+	overflow: hidden: 
 }
 /*************************** login page *****************************/
 .login-body{
@@ -308,7 +309,50 @@ input[type="submit"]{
     color: #f00;
     font-weight: 800;
 }
-
+@media screen and (max-width: 1199px) and (min-width: 991px){
+    .single-contact-info-icon-money .single-contact-info-icon{
+    	margin-left: -227px;
+    }
+    .single-contact-info-icon-money, .single-contact-info-icon-review{
+    	margin-top: 20px;
+    }
+    .single-contact-info-icon-review .single-contact-info-icon{
+    	margin-left: 0;
+    }
+    .medilife-book-an-appoinment-area-service .medilife-contact-info{
+    	padding-bottom: 40px !important;
+    }
+    .medilife-book-an-appoinment-area-service .single-contact-info p, .medilife-book-an-appoinment-area-service .single-contact-info a{
+    	text-align: left;
+    }
+    .align-items-end-service{
+        width: 250%;
+    	padding-top: 50px;
+    }
+}
+	@media screen and (max-width: 991px) and (min-width: 768px){
+	    .medilife-book-an-appoinment-area-service .medilife-contact-info{
+	    	padding-bottom: 55px !important;
+	    }
+    }
+    @media screen and (max-width: 991px){
+    	.service-input-to-lg{
+    		display: none;
+    	}
+    }
+    @media screen and (min-width: 991px){
+    	.service-input-to-sm{
+    		display: none;
+    	}
+    }
+    .gradient-background-overlay a:hover, .gradient-background-overlay a:focus{
+    	font-size: 18px;
+    	font-weight: 600;
+    }
+    .gradient-background-overlay .btn-imperial {
+    	background-color: #222f3e;
+    	color: #fff;
+    }
 /*======================================================================================*/
 /*======================================================================================*/
 
