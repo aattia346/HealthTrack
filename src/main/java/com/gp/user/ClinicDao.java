@@ -257,4 +257,83 @@ abstract public class ClinicDao {
 		}
 		return reviews;
 	}
+
+	public static boolean isTheUserAuthorized(String username, int clinicId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		
+		String sql = "SELECT * FROM clinic JOIN user ON clinic.admin_id = user.user_id"
+					+ " WHERE username=? AND clinic_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, username);
+		ps.setInt(2, clinicId);
+		
+		ResultSet result = ps.executeQuery();
+		
+		result.next();
+		
+		return result.getInt("admin_id") == result.getInt("user_id");	
+	}
+	
+	public static List<Review> getClinicReviews(int clinicId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM review JOIN person ON person.user_id  = review.user_id" + 
+				" WHERE clinic_id=? AND comment IS NOT NULL";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, clinicId);
+		ResultSet result = ps.executeQuery();
+		
+		List<Review> reviews =new ArrayList <Review>();
+		while(result.next()) {
+			Review review =new Review();
+			review.setReviewId(result.getInt("review_id"));
+			review.setReview(result.getFloat("review"));
+			review.setUserId(result.getInt("user_id"));
+			review.setComment(result.getString("comment"));
+			review.setUserFirstName(result.getString("firstname"));
+			review.setUserLastName(result.getString("lastname"));
+			review.setClinicId(result.getInt("clinic_id"));
+			review.setServiceId(result.getInt("service_id"));
+			review.setShowComment(result.getInt("show_comment"));
+			review.setTime(result.getDate("time_of_comment"));
+			reviews.add(review);
+		}
+		return reviews;	
+	}
+
+
+	public static Booking getBookingOfClinicById(int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM booking" + " JOIN clinic ON booking.clinic_id=clinic.clinic_id"
+				+ " WHERE booking.booking_id=? LIMIT 1";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, bookingId);
+
+		ResultSet result = ps.executeQuery();
+		result.next();
+
+		Booking B = new Booking();
+		B.setBookingId(result.getInt("booking_id"));
+		B.setUserId(result.getInt("user_id"));
+		B.setFirstName(result.getString("firstname"));
+		B.setLastName(result.getString("lastname"));
+		B.setAge(result.getInt("age"));
+		B.setDateFrom(result.getDate("date_from"));
+		B.setDateTo(result.getDate("date_to"));
+		B.setTimeFrom(result.getTime("time_from"));
+		B.setDayOfBooking(result.getDate("day_of_time"));
+		B.setStatus(result.getInt("status"));
+		B.setTimeOfBooking(result.getDate("time_of_booking"));
+		B.setBookingPhone(result.getString("booking_phone"));
+		B.setAdminId(result.getInt("admin_id"));
+
+		con.close();
+		return B;
+	}
+
 }

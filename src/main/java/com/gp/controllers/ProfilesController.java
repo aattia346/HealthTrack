@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gp.user.Booking;
 import com.gp.user.BookingDao;
+import com.gp.user.ClinicDao;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -150,5 +151,51 @@ public class ProfilesController {
         return mav;
 	
 	}
-
+	@RequestMapping(value="/HealthTrack/admin/{username}/Clinic/{clinicId}/showComments", method = RequestMethod.GET)
+    public ModelAndView showCommentsClinic(HttpServletRequest request, @PathVariable("clinicId") int clinicId, @PathVariable("username") String username, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
+    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		m.addAttribute("lang", cookie);
+		
+		HttpSession session = request.getSession();
+		
+		String usernameSession = (String)session.getAttribute("username");
+		if(usernameSession == null) {
+			mav.setViewName("/user/login");
+		}else if(usernameSession.equals(username)) {
+			if(ClinicDao.isTheUserAuthorized(username , clinicId)) {
+				m.addAttribute("clinicId", clinicId);
+				mav.setViewName("/user/profiles/showCommentsClinic");
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}else {
+			mav.setViewName("/user/login");
+		}
+        return mav;
+	}
+	
+	@RequestMapping(value="/HealthTrack/admin/{username}/Clinic/{clinicId}/showBookings", method = RequestMethod.GET)
+    public ModelAndView showBookingsClinic(HttpServletRequest request, @PathVariable("clinicId") int clinicId, @PathVariable("username") String username, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
+    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		m.addAttribute("lang", cookie);
+		
+		HttpSession session = request.getSession();
+		
+		String usernameSession = (String)session.getAttribute("username");
+		if(usernameSession == null) {
+			mav.setViewName("/user/login");
+		}else if(usernameSession.equals(username)) {
+			if(ClinicDao.isTheUserAuthorized(username , clinicId)) {
+				m.addAttribute("clinicId", clinicId);
+				mav.setViewName("/user/profiles/showBookingsClinic");
+			}else {
+				mav.setViewName("/user/login");
+			}
+		}else {
+			mav.setViewName("/user/login");
+		}
+        return mav;
+	}
 }

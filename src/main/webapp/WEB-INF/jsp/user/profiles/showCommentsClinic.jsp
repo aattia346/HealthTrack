@@ -27,12 +27,11 @@
 
 	String username = (String)session.getAttribute("username");
 	
-	int serviceId = (Integer)(request.getAttribute("serviceId"));
-	String place = (String)request.getAttribute("place");
-    Service service = ServiceDao.getServiceById(serviceId, place);
-    request.setAttribute("serviceId", serviceId);
+	int clinicId = (Integer)(request.getAttribute("clinicId"));
+	
+    Clinic clinic = ClinicDao.getClinicById(clinicId);
     
-    List<Review> reviews = ServiceDao.getServiceReview(serviceId);
+    List<Review> reviews = ClinicDao.getClinicReviews(clinicId);
 	request.setAttribute("reviews", reviews);
 	
 	User user = UserDao.getUserByUsername(username);
@@ -43,7 +42,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= t.write(service.getServiceName()) + " " + t.write("Reviews") %></title>
+    <title><%= t.write(clinic.getClinicName()) + " " + t.write("Reviews") %></title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -109,14 +108,14 @@
             <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-                       <h4><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service") %></a></h4>
+                       <h4><a href="/HealthTrack/profile/clinic/<%= user.getId() %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Clinic Page") %></a></h4>
                     </div>
                 </div>
             </div>
              <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h4><%= t.write(service.getServiceName()) + t.write("/") + t.write("Reviews") %></h4>
+                        <h4><%= t.write(clinic.getClinicName()) + t.write("/") + t.write("Reviews") %></h4>
                     </div>
                 </div>
             </div>
@@ -152,10 +151,10 @@
                         <td>
 	                        <div>
 	                        	<% Review r = (Review)pageContext.getAttribute("review");
-	                        	System.out.println(r.getShowComment()); %>
-		                    	<% if(r.getShowComment()==0){ %><a class="confirm-show-comment dashboard-btn" href="/HealthTrack/Service/ShowComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Confirm This Booking") %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
-		                     	<a class="confirm-hide-comment dashboard-btn" href="/HealthTrack/Service/HideComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Unconfirm This Booking") %>"><i class="fa fa-close"></i></a> <% } %>
-	                         	<a class="confirm-delete-comment dashboard-btn" href="/HealthTrack/Service/DeleteComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Delete This Booking") %>"><i class="fa fa-trash"></i></a> 	
+	                        	%>
+		                    	<% if(r.getShowComment()==0){ %><a class="confirm-show-comment-clinic dashboard-btn" href="/HealthTrack/Clinic/ShowComment/${clinicId}/<%= r.getReviewId() %>" title="<%=t.write("Confirm This Booking") %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
+		                     	<a class="confirm-hide-comment-clinic dashboard-btn" href="/HealthTrack/Clinic/HideComment/${clinicId}/<%= r.getReviewId() %>" title="<%=t.write("Unconfirm This Booking") %>"><i class="fa fa-close"></i></a> <% } %>
+	                         	<a class="confirm-delete-comment-clinic dashboard-btn" href="/HealthTrack/Clinic/DeleteComment/${clinicId}/<%= r.getReviewId() %>" title="<%=t.write("Delete This Booking") %>"><i class="fa fa-trash"></i></a> 	
 	                         </div>
                         </td>     
                         </tr>                 
@@ -203,6 +202,5 @@
         });
     </script>
     <script src="/admin/assets/js/src.js"></script>
-    <script src="/user/layout/js/src.js"></script>
     </body>
 </html>

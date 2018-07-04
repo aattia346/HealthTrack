@@ -280,5 +280,4 @@ abstract public class UserDao {
 		return result.getInt("admin_id") == userId;	
 	}
 	
-
 }

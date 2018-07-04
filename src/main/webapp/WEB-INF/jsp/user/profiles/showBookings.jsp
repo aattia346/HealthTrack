@@ -100,17 +100,17 @@
     </div>
 	<div class="container">
         <div class="breadcrumbs">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-                       <h2><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service") %></a></h2>
+                       <h4><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service") %></a></h4>
                     </div>
                 </div>
             </div>
-             <div class="col-sm-4">
+             <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h2><%= t.write(service.getServiceName()) + t.write("/") + t.write("Bookings") %></h2>
+                        <h4><%= t.write(service.getServiceName()) + t.write("/") + t.write("Bookings") %></h4>
                     </div>
                 </div>
             </div>

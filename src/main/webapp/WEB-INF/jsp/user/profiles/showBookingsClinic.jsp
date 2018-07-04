@@ -24,16 +24,16 @@
 
 	String lang = (String)request.getAttribute("lang");
 	Translator t = new Translator(lang);
-
+	
 	String username = (String)session.getAttribute("username");
 	
-	int serviceId = (Integer)(request.getAttribute("serviceId"));
-	String place = (String)request.getAttribute("place");
-    Service service = ServiceDao.getServiceById(serviceId, place);
-    request.setAttribute("serviceId", serviceId);
+	int clinicId = (Integer)(request.getAttribute("clinicId"));
+	
+	Clinic clinic = ClinicDao.getClinicById(clinicId);
+
     
-    List<Review> reviews = ServiceDao.getServiceReview(serviceId);
-	request.setAttribute("reviews", reviews);
+    List<Booking> bookings = BookingDao.getBookingsByClinicId(clinicId);
+	request.setAttribute("bookings", bookings);
 	
 	User user = UserDao.getUserByUsername(username);
 %>
@@ -43,7 +43,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= t.write(service.getServiceName()) + " " + t.write("Reviews") %></title>
+    <title><%= t.write(clinic.getClinicName()) + " " + t.write("Bookings") %></title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -93,9 +93,6 @@
 		    right: 75px;
 		    cursor: pointer;
 		}
-		.comment-th{
-			width: 46%;
-		}
 	</style>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     </head>    
@@ -109,53 +106,56 @@
             <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-                       <h4><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service") %></a></h4>
+                       <h4><a href="/HealthTrack/profile/clinic/<%= user.getId() %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Clinic Page") %></a></h4>
                     </div>
                 </div>
             </div>
              <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h4><%= t.write(service.getServiceName()) + t.write("/") + t.write("Reviews") %></h4>
+                        <h4><%= t.write(clinic.getClinicName()) + t.write("/") + t.write("Bookings") %></h4>
                     </div>
                 </div>
             </div>
         </div>
-	<div class="content mt-3">
+        <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
 
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title"><%=t.write("Comments' detials") %></strong>
+                            <strong class="card-title"><%=t.write("Bookings' detials") %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th><%=t.write("Review ID") %></th>
-                        <th><%=t.write("Name") %></th>
-                        <th class="comment-th"><%=t.write("Comment") %></th>
-                        <th><%=t.write("At") %></th>
-                        <th><%=t.write("Action") %></th>
+                      	<th><%=t.write("Booking ID") %></th>
+                        <th><%=t.write("Patient Name") %></th>
+                        <th><%=t.write("Age") %></th>
+                        <th><%=t.write("Day") %></th>
+                        <th><%=t.write("Time Of Booking") %></th>
+                        <th><%=t.write("Phone") %></th>
+                        <th><%=t.write("action") %></th>
                       </tr>
                     </thead>
                     <tbody>
                     
-                    <c:forEach var="review" items="${reviews}">
+                    <c:forEach var="booking" items="${bookings}">
                       	<tr>
-                        <td>${review.reviewId}</td>
-                        <td>${review.userFirstName} ${booking.userLastName}</td>
-                        <td>${review.comment}</td>
-                        <td>${review.time}</td>
+                        <td>${booking.bookingId}</td>
+                        <td>${booking.firstName} ${booking.lastName}</td>
+                        <td>${booking.age}</td>
+                        <td>${booking.dayOfBooking}</td>
+                        <td>${booking.timeOfBooking}</td>
+                        <td>${booking.bookingPhone}</td>
                         <td>
 	                        <div>
-	                        	<% Review r = (Review)pageContext.getAttribute("review");
-	                        	System.out.println(r.getShowComment()); %>
-		                    	<% if(r.getShowComment()==0){ %><a class="confirm-show-comment dashboard-btn" href="/HealthTrack/Service/ShowComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Confirm This Booking") %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
-		                     	<a class="confirm-hide-comment dashboard-btn" href="/HealthTrack/Service/HideComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Unconfirm This Booking") %>"><i class="fa fa-close"></i></a> <% } %>
-	                         	<a class="confirm-delete-comment dashboard-btn" href="/HealthTrack/Service/DeleteComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Delete This Booking") %>"><i class="fa fa-trash"></i></a> 	
+		                    	<% Booking b = (Booking)pageContext.getAttribute("booking"); %>
+		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Clinic/VerifyBooking/<%= clinic.getClinicId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking") %>"><i class="fa fa-check-circle"></i></a><% }else{ %>
+		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Clinic/UnverifyBooking/<%= clinic.getClinicId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking") %>"><i class="fa fa-close"></i></a><% } %>
+	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Clinic/DeleteBooking/<%= clinic.getClinicId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking") %>"><i class="fa fa-trash"></i></a> 	
 	                         </div>
                         </td>     
                         </tr>                 
@@ -171,7 +171,7 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->	
-       
+        
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
@@ -203,6 +203,5 @@
         });
     </script>
     <script src="/admin/assets/js/src.js"></script>
-    <script src="/user/layout/js/src.js"></script>
     </body>
 </html>
