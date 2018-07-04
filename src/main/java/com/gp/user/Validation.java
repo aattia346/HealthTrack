@@ -81,7 +81,7 @@ abstract public class Validation {
 	
 	public static boolean validateText(String name) {
 		
-		return Pattern.matches("[\\sa-zA-Z0-9-<>\\u0621-\\u064A\\u0660-\\u0669]*", name.trim());
+		return Pattern.matches("[\\sa-zA-Z0-9-<,.:>\\u0621-\\u064A\\u0660-\\u0669]*", name.trim());
 	}
 	
 	public static boolean validatePhone(String phone) {

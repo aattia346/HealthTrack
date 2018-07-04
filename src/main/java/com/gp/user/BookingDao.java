@@ -15,7 +15,7 @@ abstract public class BookingDao {
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 				
 		List<Booking> bookedDates = new ArrayList<Booking>();
-				
+
 		Connection con = DBConnection.getConnection();
 		String sql="SELECT * FROM booking where service_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -134,14 +134,14 @@ abstract public class BookingDao {
 		String sql="SELECT * FROM booking"
 				+ " JOIN service ON booking.service_id=service.service_id"
 				+ " JOIN department ON service.dept_id=department.department_id"
-				+ " JOIN hospital ON department.hospital_id=hospital.id"
+				+ " JOIN hospital ON department.hospital_id=hospital.hospital_id"
 				+ " WHERE booking.booking_id=? LIMIT 1";
 				
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setInt(1, bookingId);
 
 				ResultSet result = ps.executeQuery();
-				//result.next();
+				result.next();
 				
 				Booking B = new Booking();
 				B.setBookingId(result.getInt("booking_id"));

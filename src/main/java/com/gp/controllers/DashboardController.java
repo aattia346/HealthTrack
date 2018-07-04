@@ -365,11 +365,8 @@ public class DashboardController {
 						
 						Pharmacy pharmacy = new Pharmacy();
 						pharmacy.setPharmacyName(name);
-						pharmacy.setAdminId(admin);
 						pharmacy.setPhone(phone);
-						pharmacy.setWebsite(website);
 						pharmacy.setAddress(address);
-						pharmacy.setIntro(intro);
 						pharmacy.setGoogle_maps_url(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
@@ -973,11 +970,8 @@ public class DashboardController {
 						Pharmacy pharmacy = new Pharmacy();
 						pharmacy.setPharmacyId(pharmacyId);
 						pharmacy.setPharmacyName(name);
-						pharmacy.setAdminId(admin);
 						pharmacy.setPhone(phone);
-						pharmacy.setWebsite(website);
 						pharmacy.setAddress(address);
-						pharmacy.setIntro(intro);
 						pharmacy.setGoogle_maps_url(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
@@ -1116,11 +1110,8 @@ public class DashboardController {
 						Pharmacy pharmacy = new Pharmacy();
 						pharmacy.setPharmacyId(pharmacyId);
 						pharmacy.setPharmacyName(name);
-						pharmacy.setAdminId(admin);
 						pharmacy.setPhone(phone);
-						pharmacy.setWebsite(website);
 						pharmacy.setAddress(address);
-						pharmacy.setIntro(intro);
 						pharmacy.setGoogle_maps_url(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);

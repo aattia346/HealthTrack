@@ -151,21 +151,4 @@ public class ProfilesController {
 	
 	}
 
-	@RequestMapping(value="/HealthTrack/profile/pharmacy/{userId}", method = RequestMethod.GET)
-    public ModelAndView pharmacyProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
-    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
-		m.addAttribute("lang", cookie);
-		if(Validation.validateNumber(id) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(id))) {
-			m.addAttribute("parmacyId", id);
-			String url = "/user/profiles/pharmacy";
-			mav.setViewName(url);
-		}else {
-			mav.setViewName("/user/login");
-		}
-		
-        return mav;
-	
-	}
-
 }
