@@ -4,6 +4,9 @@ textarea{
 a{
 	cursor: pointer;
 }
+*{
+	font-family: 'El Messiri', sans-serif;
+}
 /*************************** login page *****************************/
 .login-body{
     background-color: #F1F2F7;
@@ -105,10 +108,21 @@ a{
 }
 .medilife-services-area:nth-of-type(even), .medilife-services-area:nth-of-type(even) p,
  .medilife-services-area:nth-of-type(even) a{
-	color: #fff;
+	color: #fff !important;
 }
 .medilife-services-area:nth-of-type(even) .service-content h5{
 	color: #fff;
+}
+@media (max-width: 991px){
+	.blog-post-thumbnail img{
+		max-height: 215px;
+	}
+	.dept-row{
+		margin-bottom: 50px;
+	}
+	.edit-padding{
+		padding-top: 50px;
+	}
 }
 /*======================================================================================*/
 /*======================================================================================*/
@@ -257,8 +271,10 @@ input[type="submit"]{
 	background-image: url("/user/layout/images/rating.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	margin: 80px -20px;
+	margin: 80px 0;
 	position: relative;
+	max-width: 1366px;
+	overflow: hidden;
 }
 .overlay{
 	background-color: #081F3E;
@@ -295,6 +311,77 @@ input[type="submit"]{
 
 /*======================================================================================*/
 /*======================================================================================*/
+
+/******************************************carousel***************************************/
+#myCarousel{
+	background-image: url("/user/layout/images/comments-carousel-background-1.jpg");
+	height: 400px;
+	margin: 70px 0;
+	position: relative;
+}
+.comments ul li{
+	height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: transparent;
+    display: inline-block;
+    margin: 2px;
+    cursor: pointer;
+}
+.comments ul li:hover{
+	background-color: #fff;
+}
+.comments ul{
+	position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+.comments h3{
+	color: #fff;
+    font-weight: 600;
+    padding-top: 75px;
+}
+.comment-content{
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	color: #fff;
+	font-size: 20px;
+	padding-left: 20%;
+    padding-right: 20%;
+    overflow: hidden;
+}
+.comment-name{
+	color: #fff;
+    font-style: italic;
+    font-size: 17px;
+    position: absolute;
+    top: 73%;
+    width: 100%;
+}
+.comments .active{
+	background-color: #fff;
+}
+.left-arrow, .right-arrow{
+	position: absolute;
+	top: 50%;
+	display: block;
+	color: #9a9c9c;
+}
+.left-arrow:hover, .right-arrow:hover{
+	color: #fff;
+	cursor: pointer;
+}
+.left-arrow{
+	left: 20%;
+}
+.right-arrow {
+	right: 20%;
+}
+/*=========================================================================================*/
+
 
 /***************************** Navbar **************************************/
 @media (min-width: 767px)and (max-width: 991px){
@@ -561,11 +648,62 @@ label{
 	margin-top: -40px;
 }
 .medilife-contact-info-clinic{
-    padding: 30px 30px 168px 30px !important;
+    padding: 30px 30px 50px 30px !important;
+}
+@media (min-width: 767px)and (max-width: 991px){
+	.single-contact-info{
+		margin-bottom: -48px;
+		max-width: 130px;
+	}	
+	.single-contact-info p, .single-contact-info a{
+		line-height: 28px;
+	    width: 80%;
+	    float: left !important;
+	}
+	.single-contact-info-icon{
+		margin-left: 21%;
+	}
+}
+@media (max-width: 767px){
+
+	.single-contact-info p{
+		text-align: left;
+	}
+	.single-contact-info:nth-of-type(5){
+		margin-top: 22px;
+	}
+	.right-arrow{
+		right: 5%
+	}
+	.left-arrow{
+		left: 5%
+	}
+	.comment-content{
+		max-height: 70px;
+    	line-height: 1.5;
+    	font-size: 14px;
+	}
+	.rateYo{
+		margin-left: 30%;
+	}
+	.reviewFailed, .reviewSucceeded {
+		margin-left: 11%;
+	}
+	#myCarousel, .clinic-review{
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+	.review-form textarea, .review-form button{
+	    margin-left: 3%;
+	    width: 94%;
+	}
+	#map {
+    	width: 100%;
+    	margin-top: 20px !important;
+	}
 }
 /*********************************************** Emergency page*****************************************************/
 .emergency-body {
-	/*background: #fff; */
 	background-image: url("/user/layout/images/emergency.jpg");
 }
 .emergency-body #map{

@@ -113,49 +113,49 @@ for(Service service : servicesOfCenters){
 	locations.add(location);
 }
 %>
-<%@include  file="includes/header.jsp" %>    
+<%@include  file="includes/header.jsp" %>
 	<div class="main-page-container">   
-            <h3 class="text-center"><%= t.write("find a location") %></h3>
+            <h3 class="text-center"><%= t.write("find a location",lang) %></h3>
             <div class="row">
                 
                 <div class="enter-address col-sm-11 col-sm-offset-1">
                     
-                    <h4 class="col-sm-3 text-capitalize"><%= t.write("enter an address") %></h4>
+                    <h4 class="col-sm-3 text-capitalize"><%= t.write("enter an address",lang) %></h4>
                         <div class="col-sm-4">
-                            <input id="pac-input" type="text" class="input-sm form-control text-capitalize" placeholder="<%= t.write("search by place") %>">
+                            <input id="pac-input" type="text" class="input-sm form-control text-capitalize" placeholder="<%= t.write("search by place",lang) %>">
                     	</div>
             </div>
                 <div class="col-sm-offset-1 col-sm-3 choose-service">
                     
                     <div class="panel panel-primary ">
                       <div class="panel-heading">
-                        <h3 class="panel-title text-center text-capitalize"><%= t.write("services") %></h3>
+                        <h3 class="panel-title text-center text-capitalize"><%= t.write("services",lang) %></h3>
                       </div>
                       <div class="panel-body">
                       <ul class="list-unstyled">
-                          <input type="radio" name="service" value="all" checked> <%= t.write("all") %><br>
-                          <input type="radio" name="service" value="clinic"><%= t.write("clinics") %><i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
-                          <input type="radio" name="service" value="hospital"> <%= t.write("hospitals") %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
-                          <input type="radio" name="service" value="center"> <%= t.write("centers") %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
-                          <input type="radio" name="service" value="pharmacy"> <%= t.write("pharmacies") %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
-                          <input type="radio" name="service" value="lab"> <%= t.write("labs") %> <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
+                          <input type="radio" name="service" value="all" checked> <%= t.write("all",lang) %><br>
+                          <input type="radio" name="service" value="clinic"><%= t.write("clinics",lang) %><i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
+                          <input type="radio" name="service" value="hospital"> <%= t.write("hospitals",lang) %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
+                          <input type="radio" name="service" value="center"> <%= t.write("centers",lang) %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
+                          <input type="radio" name="service" value="pharmacy"> <%= t.write("pharmacies",lang) %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
+                          <input type="radio" name="service" value="lab"> <%= t.write("labs",lang) %> <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
                   	  </ul>
                   	  <ul class="list-unstyled text-uppercase">
-                  	  	  <h4 class="text-center special-services"><%= t.write("Special Services") %></h4>
-                          <input type="radio" name="service" value="icu"> <%= t.write("icu") %> <br>
-                          <input type="radio" name="service" value="mri"> <%= t.write("mri") %><br>
+                  	  	  <h4 class="text-center special-services"><%= t.write("Special Services",lang) %></h4>
+                          <input type="radio" name="service" value="icu"> <%= t.write("icu",lang) %> <br>
+                          <input type="radio" name="service" value="mri"> <%= t.write("mri",lang) %><br>
                       </ul>
                       <div class="guide-label text-capitalize">
                       	<div class="available-color">
-                      		<i class="fa fa-map-marker-alt avialable-pin"></i> <span><%= t.write("available today") %></span>
+                      		<i class="fa fa-map-marker-alt avialable-pin"></i> <span><%= t.write("available today",lang) %></span>
                       	</div>
                       	<div class="unavailable-color">
-                      		<i class="fa fa-map-marker-alt unavialable-pin"></i> <span><%= t.write("unavailable today") %></span>
+                      		<i class="fa fa-map-marker-alt unavialable-pin"></i> <span><%= t.write("unavailable today",lang) %></span>
                       	</div>
                       </div>
                       </div>
                     </div>
-                    <button class="btn btn-primary find-me text-capitalize" id="findme"><%= t.write("locate me") %></button>
+                    <button class="btn btn-primary find-me text-capitalize" id="findme"><%= t.write("locate me",lang) %></button>
                     
                 </div>
                 

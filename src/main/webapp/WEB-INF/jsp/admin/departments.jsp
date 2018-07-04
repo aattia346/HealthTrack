@@ -24,7 +24,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1> <%=t.write("Dashboard") %></h1>
+                        <h1> <%=t.write("Dashboard",lang) %></h1>
                     </div>
                 </div>
             </div>
@@ -32,8 +32,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
-                            <li><%=t.write("Department") %></li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard",lang) %></a></li>
+                            <li><%=t.write("Department",lang) %></li>
                         </ol>
                     </div>
                 </div>
@@ -47,18 +47,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title"><%=t.write("Data Table") %></strong>
+                            <strong class="card-title"><%=t.write("Data Table",lang) %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th><%=t.write("ID") %></th>
-                        <th><%=t.write("Name") %></th>
-                        <th><%=t.write("Hospital") %></th>
-                        <th><%=t.write("Admin") %></th>
-                        <th><%=t.write("Services") %></th>
-                        <th><%=t.write("Action") %></th>
+                      	<th><%=t.write("ID",lang) %></th>
+                        <th><%=t.write("Name",lang) %></th>
+                        <th><%=t.write("Hospital",lang) %></th>
+                        <th><%=t.write("Admin",lang) %></th>
+                        <th><%=t.write("Services",lang) %></th>
+                        <th><%=t.write("Action",lang) %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -71,19 +71,19 @@
                       %>
                       	<tr id="dept-${D.deptId}">
                         <td>${dept.deptId}</td>
-                        <td><%= t.write(D.getDeptName()) %></td>
-                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName()) %>${dept.hospitalName}</a></td>
+                        <td><%= t.write(D.getDeptName(),lang) %></td>
+                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName(),lang) %>${dept.hospitalName}</a></td>
                         <td>${dept.adminId}</td>
                         <td>
                         	<c:forEach var="service" items="${services}">
                         	<%
                         	Service S = (Service)pageContext.getAttribute("service");
                         	%>
-                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName()) %></a>
+                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName(),lang) %></a>
                         	</c:forEach>
                         </td>
                         <td>
-                        <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i><%=t.write("Delete") %> </a>
+                        <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i><%=t.write("Delete",lang) %> </a>
                         </td>
                       </tr>
                       

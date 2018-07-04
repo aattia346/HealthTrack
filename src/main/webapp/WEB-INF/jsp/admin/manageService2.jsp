@@ -30,7 +30,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1><%=t.write("Dashboard") %></h1>
+                        <h1><%=t.write("Dashboard",lang) %></h1>
                     </div>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services"><%=t.write("Services") %></a></li>
-                            <li><%=t.write("Add New Service") %></li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard",lang) %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services"><%=t.write("Services",lang) %></a></li>
+                            <li><%=t.write("Add New Service",lang) %></li>
                         </ol>
                     </div>
                 </div>
@@ -49,13 +49,13 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/service/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong><%=t.write("Service") %></strong><small><%=t.write("Form") %></small></div>
+                      <div class="card-header"><strong><%=t.write("Service",lang) %></strong><small><%=t.write("Form",lang) %></small></div>
                       <div class="card-body card-block">
                       
                          	<div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose the Service Name") %></label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Service Name",lang) %></label>
                               <select name="serviceName" class="form-control">
-                                <option value="0"><%=t.write("Please select") %></option>
+                                <option value="0"><%=t.write("Please select",lang) %></option>
                                 <%
                                 	List<String> services = new ArrayList<String>();
                                     services = ServiceDao.getServices();
@@ -65,7 +65,7 @@
                            <%      
                           String s = (String)pageContext.getAttribute("service");
                            %>
-                             <option value="${service}"><%= t.write(s) %></option>
+                             <option value="${service}"><%= t.write(s,lang) %></option>
 
                                 </c:forEach>
                               </select>
@@ -76,48 +76,7 @@
                           
 
 <script type="text/javascript">
-function serialize (){
-	 var filePath = @"E:\\GP_folder\\progress\\test.json ";
-	// Read existing json data
-	var jsonData = System.IO.File.ReadAllText(filePath);
-	// De-serialize to object or create new list
-	var employeeList = JsonConvert.DeserializeObject<List<EmployeeDetail>>(jsonData) 
-	                      ?? new List<EmployeeDetail>();
 
-	// Add any new employees
-	employeeList.Add(new EmployeeDetail()
-	{
-	    Name = "Test Person 1"
-	});
-	employeeList.Add(new EmployeeDetail()
-	{
-	    Name = "Test Person 2"
-	});
-
-	// Update json data string
-	jsonData = JsonConvert.SerializeObject(employeeList);
-	System.IO.File.WriteAllText(filePath, jsonData);
-  }
-
-	
-	
-	int count = 0;
-    EmployeeDetail employee = new EmployeeDetail
-    {
-
-        EmpId = ++count,
-        Name = formCollection["Name"],
-        Designation = formCollection["Designation"],
-        JoiningDate = formCollection["JoiningDate"],
-        Skill = new List 
-        {
-            new Skills(){Id = 1, SkillName = "C#"},
-            new Skills(){Id = 2, SkillName = "PHP"},
-            new Skills(){Id = 3, SkillName = "java"}
-        }
-
-    };
-    
     function populate(s1, s2) {
   	  var s1 = document.getElementById(s1);
   	  var s2 = document.getElementById(s2);
@@ -127,46 +86,40 @@ function serialize (){
   	  }else if (s1.value =="Center"){
   		  var optionArray = ["mero", "Ahmed", "Khalid"];
   	  }	    
-  	  for (var i = 0; i < optionArray.length; i++) {
-  	    var newOption = document.createElement('option');
-  	    newOption.value = optionArray[i];
-  	    newOption.innerHTML = optionArray[i];
-  	    s2.appendChild(newOption);
-  	  }
-  	} 
+  	 
   
 </script>
 
 
                             <div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose add on center or hospital") %></label>
+                      		  <label class=" form-control-label"><%=t.write("Choose add on center or hospital",lang) %></label>
                               <select id="slct1" class="form-control" onchange="populate(this.id,'slct2')">
-                                <option value="0"><%=t.write("Please select") %></option>
+                                <option value="0"><%=t.write("Please select",lang) %></option>
                                 
-                             <option value="Hospital"><%=t.write("Hospital") %></option>
-                             <option value="Center"><%=t.write("Center") %></option>                             
+                             <option value="Hospital"><%=t.write("Hospital",lang) %></option>
+                             <option value="Center"><%=t.write("Center",lang) %></option>                             
                               </select>                                                          
                             </div>                     
                             <div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose the Center or Hospital") %></label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Center or Hospital",lang) %></label>
                               <select id=slct2 name="centerId" class="form-control">
-                                <option value="0"><%=t.write("Please select") %></option>
+                                <option value="0"><%=t.write("Please select",lang) %></option>
                                 
                               </select>                                                          
                             </div>                
                             
                           <div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose Type of Service") %></label>
+                      		  <label class=" form-control-label"><%=t.write("Choose Type of Service",lang) %></label>
                               <select name="type" class="form-control">
-                                <option value="0"><%=t.write("Please select") %></option>
+                                <option value="0"><%=t.write("Please select",lang) %></option>
                                 
-                             <option value=1><%=t.write("Day Service") %></option>
-                             <option value=2><%=t.write("Time Service") %></option>                             
+                             <option value=1><%=t.write("Day Service",lang) %></option>
+                             <option value=2><%=t.write("Time Service",lang) %></option>                             
                               </select>                                                          
                             </div>
 
                             
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %></button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit",lang) %></button>
                       </div>
                     </div>
                   </form>

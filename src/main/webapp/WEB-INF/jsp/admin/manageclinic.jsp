@@ -28,7 +28,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1><%=t.write("Dashboard") %></h1>
+                        <h1><%=t.write("Dashboard",lang) %></h1>
                     </div>
                 </div>
             </div>
@@ -36,9 +36,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics") %></a></li>
-                            <li><%=t.write("Add New Clinic") %></li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard",lang) %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics",lang) %></a></li>
+                            <li><%=t.write("Add New Clinic",lang) %></li>
                         </ol>
                     </div>
                 </div>
@@ -47,20 +47,20 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/clinic/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong><%=t.write("Clinic") %></strong><small><%=t.write("Form") %> </small></div>
+                      <div class="card-header"><strong><%=t.write("Clinic",lang) %></strong><small><%=t.write("Form",lang) %> </small></div>
                       
                        <div class="container">
                           <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Clinic name") %></label>
-					          <input type="text" placeholder="<%=t.write("Enter Clinic name") %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Clinic name",lang) %></label>
+					          <input type="text" placeholder="<%=t.write("Enter Clinic name",lang) %>" class="form-control" name="name" required="required" value="${oldName}" maxlength="50">
 					        ${invalidName}
                         	${nameExist}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Clinic name in Arabic") %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Clinic name in Arabic") %>" class="form-control" name="ARname" required="required" value="${oldName}" maxlength="50">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Clinic name in Arabic",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Enter Clinic name in Arabic",lang) %>" class="form-control" name="ARname" required="required" value="${oldName}" maxlength="50">
 					        	${invalidARName}
 					        </div>
 					    </div>
@@ -68,15 +68,15 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Doctor Name") %></label>
-					          <input type="text" placeholder="<%=t.write("Doctor Name") %>" class="form-control" name="doctorName" required="required" value="${oldDoctorName}">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Doctor Name",lang) %></label>
+					          <input type="text" placeholder="<%=t.write("Doctor Name",lang) %>" class="form-control" name="doctorName" required="required" value="${oldDoctorName}">
 					         ${invalidDoctorName}
                             
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Doctor Name in Arabic") %></label>
-					            <input type="text" placeholder="<%=t.write("Doctor Name in Arabic") %>" class="form-control" name="ARdoctorName" required="required" value="${oldDoctorName}">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Doctor Name in Arabic",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Doctor Name in Arabic",lang) %>" class="form-control" name="ARdoctorName" required="required" value="${oldDoctorName}">
 					        	${invalidARDoctorName}
 					        </div>
 					    </div>
@@ -84,15 +84,15 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Intro") %></label>
-					           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Intro",lang) %></label>
+					           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ,lang) %>" class="form-control" name="intro" required="required">${oldIntro}</textarea>
 					         ${invalidIntro}
 					         ${shortIntro}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Intro in Arabic") %></label>
-					            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center in Arabic" ) %>" class="form-control" name="ARintro" required="required">${oldARIntro}</textarea>
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Intro in Arabic",lang) %></label>
+					            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center in Arabic",lang ) %>" class="form-control" name="ARintro" required="required">${oldARIntro}</textarea>
 					             ${invalidARIntro}
 					         	 ${shortARIntro}
 					        </div>
@@ -101,14 +101,14 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Address") %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="${oldAddress}">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Address",lang) %></label>
+					           <input maxlength="50" type="text" placeholder="<%=t.write("Address",lang) %>" class="form-control" name="address" required="required" value="${oldAddress}">
 					        ${invalidAddress}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Address in Arabic") %></label>
-					            <input maxlength="50" type="text" placeholder="<%=t.write("Address in Arabic") %>" class="form-control" name="ARaddress" required="required" value="${oldARaddress}">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Address in Arabic",lang) %></label>
+					            <input maxlength="50" type="text" placeholder="<%=t.write("Address in Arabic",lang) %>" class="form-control" name="ARaddress" required="required" value="${oldARaddress}">
 					        	${invalidARaddress}
 					        </div>
 					    </div>
@@ -117,15 +117,15 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Speciality") %></label>
-					          <input type="text" placeholder="<%=t.write("Speciality") %>" class="form-control" name="specialty" required="required" value="${oldSpecialty}">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Speciality",lang) %></label>
+					          <input type="text" placeholder="<%=t.write("Speciality",lang) %>" class="form-control" name="specialty" required="required" value="${oldSpecialty}">
 					         ${invalidSpeciality}
                        		 ${shortSpecialityName}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Speciality in Arabic ") %></label>
-					            <input type="text" placeholder="<%=t.write("Speciality in Arabic") %>" class="form-control" name="ARspecialty" required="required" value="${oldSpecialty}">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Speciality in Arabic ",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Speciality in Arabic",lang) %>" class="form-control" name="ARspecialty" required="required" value="${oldSpecialty}">
 					        	 ${invalidARSpeciality}
                        			 ${shortARSpecialityName}
 					        </div>
@@ -133,20 +133,20 @@
 					    
                      </div>
               
-                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="${oldUrl}"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL",lang) %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps",lang) %>" class="form-control" name="url" required="required" value="${oldUrl}"></div>
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone") %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number") %>" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone",lang) %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number",lang) %>" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
                             ${invalidWebsite}
                           </div>
                           
                         	<div class="col-12">
-                        	<div class="form-group"><label class=" form-control-label"><%=t.write("Fees") %></label><input maxlength="10" type="text" placeholder="<%=t.write("fees") %>" class="form-control" name="fees" required="required" value="${oldFees}"></div>
+                        	<div class="form-group"><label class=" form-control-label"><%=t.write("Fees",lang) %></label><input maxlength="10" type="text" placeholder="<%=t.write("fees",lang) %>" class="form-control" name="fees" required="required" value="${oldFees}"></div>
                         	${invalidFees} 
                         	  </div>
                         	 
@@ -154,9 +154,9 @@
                         </div>
                                              
                       	<div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose the Admin") %></label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Admin",lang) %></label>
                               <select name="Admin" class="form-control">
-                                <option value="0"><%=t.write("Please select") %></option>
+                                <option value="0"><%=t.write("Please select",lang) %></option>
                                 <%
                                 	List<User> CenterUsers = UserDao.getUsers("clinic");
                                 	request.setAttribute("users", CenterUsers);
@@ -165,7 +165,7 @@
                                 	<%
                                 User u = (User)pageContext.getAttribute("user");
                                 if(!Validation.checkIfTheUserAlreadyAdmin(u.getId() , "clinic")){ %>
-		                             <option value="${user.id}"><%= t.write(u.getUsername()) %></option>
+		                             <option value="${user.id}"><%= t.write(u.getUsername(),lang) %></option>
 		                             <%	} %>
                                 </c:forEach>
                               </select>
@@ -173,7 +173,7 @@
                             </div>
                              
                           
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %> </button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit",lang) %> </button>
                       </div>
                     </div>
                   </form>
@@ -190,7 +190,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1><%=t.write("Dashboard") %></h1>
+                        <h1><%=t.write("Dashboard",lang) %></h1>
                     </div>
                 </div>
             </div>
@@ -198,9 +198,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
-                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics") %></a></li>
-                            <li><%=t.write("Edit clinic") %></li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard",lang) %></a></li>
+                            <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/clinics"><%=t.write("Clinics",lang) %></a></li>
+                            <li><%=t.write("Edit clinic",lang) %></li>
                         </ol>
                     </div>
                 </div>
@@ -210,20 +210,20 @@
         <form class="col-lg-12" action="/HealthTrack/admin/clinic/<%= clinic.getAdminId() %>/update" method="post">
         	<input type="hidden" name="clinicId" value="<%= clinic.getClinicId() %>">
                     <div class="card">
-                      <div class="card-header"><strong><%=t.write("Clinic") %></strong><small><%=t.write("Form") %> </small></div>
+                      <div class="card-header"><strong><%=t.write("Clinic",lang) %></strong><small><%=t.write("Form",lang) %> </small></div>
                       <div class="card-body card-block">
                        <div class="container">
                           <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Clinic name") %></label>
-					          <input type="text" placeholder="<%=t.write("Enter Clinic name") %>" class="form-control" name="name" required="required" value="<%= clinic.getClinicName()%>" maxlength="50">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Clinic name",lang) %></label>
+					          <input type="text" placeholder="<%=t.write("Enter Clinic name",lang) %>" class="form-control" name="name" required="required" value="<%= clinic.getClinicName()%>" maxlength="50">
 					        ${invalidName}
                         	${nameExist}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Clinic name in Arabic") %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Clinic name in Arabic") %>" class="form-control" name="ARname" required="required" value="${oldName}" maxlength="50">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Clinic name in Arabic",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Enter Clinic name in Arabic",lang) %>" class="form-control" name="ARname" required="required" value="${oldName}" maxlength="50">
 					        	${invalidARName}
 					        </div>
 					    </div>
@@ -231,15 +231,15 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Doctor Name") %></label>
-					          <input type="text" placeholder="<%=t.write("Doctor Name") %>" class="form-control" name="doctorName" required="required" value="<%= clinic.getDoctorName()%>">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Doctor Name",lang) %></label>
+					          <input type="text" placeholder="<%=t.write("Doctor Name",lang) %>" class="form-control" name="doctorName" required="required" value="<%= clinic.getDoctorName()%>">
 					         ${invalidDoctorName}
                             
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Doctor Name in Arabic") %></label>
-					            <input type="text" placeholder="<%=t.write("Doctor Name in Arabic") %>" class="form-control" name="ARdoctorName" required="required" value="${oldDoctorName}">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Doctor Name in Arabic",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Doctor Name in Arabic",lang) %>" class="form-control" name="ARdoctorName" required="required" value="${oldDoctorName}">
 					        	${invalidARDoctorName}
 					        </div>
 					    </div>
@@ -247,15 +247,15 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Intro") %></label>
-					           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center" ) %>" class="form-control" name="intro" required="required"><%= clinic.getIntro()%></textarea>
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Intro",lang) %></label>
+					           <textarea maxlength="254" placeholder="<%=t.write("Say something about the center",lang ) %>" class="form-control" name="intro" required="required"><%= clinic.getIntro()%></textarea>
 					         ${invalidIntro}
 					         ${shortIntro}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Intro in Arabic") %></label>
-					            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center in Arabic" ) %>" class="form-control" name="ARintro" required="required">${oldARIntro}</textarea>
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Intro in Arabic",lang) %></label>
+					            <textarea maxlength="254" placeholder="<%=t.write("Say something about the center in Arabic",lang ) %>" class="form-control" name="ARintro" required="required">${oldARIntro}</textarea>
 					             ${invalidARIntro}
 					         	 ${shortARIntro}
 					        </div>
@@ -264,14 +264,14 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Address") %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Address") %>" class="form-control" name="address" required="required" value="<%= clinic.getAddress()%>">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Address",lang) %></label>
+					           <input maxlength="50" type="text" placeholder="<%=t.write("Address",lang) %>" class="form-control" name="address" required="required" value="<%= clinic.getAddress()%>">
 					        ${invalidAddress}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Address in Arabic") %></label>
-					            <input maxlength="50" type="text" placeholder="<%=t.write("Address in Arabic") %>" class="form-control" name="ARaddress" required="required" value="${oldARaddress}">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Address in Arabic",lang) %></label>
+					            <input maxlength="50" type="text" placeholder="<%=t.write("Address in Arabic",lang) %>" class="form-control" name="ARaddress" required="required" value="${oldARaddress}">
 					        	${invalidARaddress}
 					        </div>
 					    </div>
@@ -280,15 +280,15 @@
 					    
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Speciality") %></label>
-					          <input type="text" placeholder="<%=t.write("Speciality") %>" class="form-control" name="specialty" required="required" value="<%= clinic.getSpecialty()%>">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Speciality",lang) %></label>
+					          <input type="text" placeholder="<%=t.write("Speciality",lang) %>" class="form-control" name="specialty" required="required" value="<%= clinic.getSpecialty()%>">
 					         ${invalidSpeciality}
                        		 ${shortSpecialityName}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Speciality in Arabic ") %></label>
-					            <input type="text" placeholder="<%=t.write("Speciality in Arabic") %>" class="form-control" name="ARspecialty" required="required" value="${oldSpecialty}">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Speciality in Arabic ",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Speciality in Arabic",lang) %>" class="form-control" name="ARspecialty" required="required" value="${oldSpecialty}">
 					        	 ${invalidARSpeciality}
                        			 ${shortARSpecialityName}
 					        </div>
@@ -296,20 +296,20 @@
 					    
                      </div>
               
-                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="<%= clinic.getGoogle_maps_url()%>"></div>
+                        <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL",lang) %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps",lang) %>" class="form-control" name="url" required="required" value="<%= clinic.getGoogle_maps_url()%>"></div>
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone") %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number") %>" class="form-control" name="phone" required="required" value="<%= clinic.getPhone()%>"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone",lang) %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number",lang) %>" class="form-control" name="phone" required="required" value="<%= clinic.getPhone()%>"></div>
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website") %></label><input type="text" placeholder="<%=t.write("Website url") %>" class="form-control"  required="required" name="website" value="<%= clinic.getWebsite()%>"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="<%= clinic.getWebsite()%>"></div>
                             ${invalidWebsite}
                           </div>
                           
                         	<div class="col-12">
-                        	<div class="form-group"><label class=" form-control-label"><%=t.write("Fees") %></label><input maxlength="10" type="text" placeholder="<%=t.write("fees") %>" class="form-control" name="fees" required="required" value="<%= clinic.getFees()%>"></div>
+                        	<div class="form-group"><label class=" form-control-label"><%=t.write("Fees",lang) %></label><input maxlength="10" type="text" placeholder="<%=t.write("fees",lang) %>" class="form-control" name="fees" required="required" value="<%= clinic.getFees()%>"></div>
                         	${invalidFees} 
                         	  </div>
                         	 
@@ -317,9 +317,9 @@
                         </div>
                                              
                       	<div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose the Admin") %></label>
+                      		  <label class=" form-control-label"><%=t.write("Choose the Admin",lang) %></label>
                               <select name="Admin" class="form-control">
-                                <option value="0"><%=t.write("Please select") %></option>
+                                <option value="0"><%=t.write("Please select",lang) %></option>
                                 <%
                                 	List<User> clinicUsers = UserDao.getUsers("clinic");
                                 	request.setAttribute("users", clinicUsers);
@@ -328,7 +328,7 @@
                                 	<%
                                 User u = (User)pageContext.getAttribute("user");
                                 if(!Validation.checkIfTheUserAlreadyAdmin(u.getId() , "clinic")){ %>
-		                             <option value="${user.id}"><%= t.write(u.getUsername()) %></option>
+		                             <option value="${user.id}"><%= t.write(u.getUsername(),lang) %></option>
 		                             <%	} %>
                                 </c:forEach>
                               </select>
@@ -337,7 +337,7 @@
                             
                             
    
-                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit") %> </button>
+                            <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit",lang) %> </button>
                       </div>
                 
                     

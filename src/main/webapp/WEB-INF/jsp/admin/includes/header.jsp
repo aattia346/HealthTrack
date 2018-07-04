@@ -3,7 +3,6 @@
 <%
     
     	String lang = (String)request.getAttribute("lang");
-
     	Translator t = new Translator();
     
     %>

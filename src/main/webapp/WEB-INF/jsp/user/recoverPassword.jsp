@@ -16,7 +16,7 @@
 	    	<div class="row">
 	                    
 	        	<div class="login-header col-sm-4 col-sm-offset-4">
-	        		<h3 class="text-center"> <%= t.write("set a new password") %></h3>
+	        		<h3 class="text-center"> <%= t.write("set a new password",lang) %></h3>
 	            </div>
 	                    
 	            <div class="col-sm-4 col-sm-offset-4 col-xs-12 login-form">
@@ -24,14 +24,14 @@
 	            	<form method="post" action="/HealthTrack/recoverPassword/submit">
 	                            
 	                	<div class="form-group">
-	                        <input type="password" class="form-control" name="password" placeholder="<%= t.write("new password") %>" required>
+	                        <input type="password" class="form-control" name="password" placeholder="<%= t.write("new password",lang) %>" required>
 	                        ${invalidPassword}
-	                        <input type="password" class="form-control" name="confirmPassword" placeholder="<%= t.write("re-enter the password") %>" required>                          
+	                        <input type="password" class="form-control" name="confirmPassword" placeholder="<%= t.write("re-enter the password",lang) %>" required>                          
 	                    	${passwordNotMatch}
 	                    </div>
 	                            
 	                    <div class="form-group">
-	              	      <input type="submit" class="form-control btn btn-info" value="<%= t.write("submit") %>">
+	              	      <input type="submit" class="form-control btn btn-info" value="<%= t.write("submit",lang) %>">
 	                    </div>
 	 
 	             	</form>

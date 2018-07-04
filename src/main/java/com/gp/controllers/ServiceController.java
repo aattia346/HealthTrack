@@ -127,6 +127,10 @@ public class ServiceController {
 		
 		Translator t = new Translator(cookie);
 		model.addAttribute("lang", cookie);
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		
 		int userId 			= Integer.parseInt(request.getParameter("userId"));
 		String firstName 	= request.getParameter("firstName");
 		String lastName 	= request.getParameter("lastName");
@@ -136,7 +140,7 @@ public class ServiceController {
 		String bookFrom 	= request.getParameter("bookFrom"); 
 		String bookTo 		= request.getParameter("bookTo");
 		String msg			= request.getParameter("msg");
-		String email			= request.getParameter("email");
+		String email		= request.getParameter("email");
 		
 		DateFormat format 	= new SimpleDateFormat("yyyy-MM-dd");
 		Date bookFromAsDate = format.parse(bookFrom);
@@ -203,6 +207,7 @@ public class ServiceController {
 				booking.setSex(sex);
 				BookingDao.insertBookingDays(booking);
 				PersonDao.increaseBookings(userId);
+				model.addAttribute("username", username);
 				mav.setViewName("user/profiles/user");
 			}
 		}else {

@@ -21,7 +21,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1><%=t.write("Dashboard") %></h1>
+                        <h1><%=t.write("Dashboard",lang) %></h1>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard") %></a></li>
-                            <li><%=t.write("Pharmacies") %></li>
+                            <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard",lang) %></a></li>
+                            <li><%=t.write("Pharmacies",lang) %></li>
                         </ol>
                     </div>
                 </div>
@@ -44,18 +44,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title"><%=t.write("Data Table") %></strong>
+                            <strong class="card-title"><%=t.write("Data Table",lang) %></strong>
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                      	<th><%=t.write("ID") %></th>
-                        <th><%=t.write("Name") %></th>
-                        <th><%=t.write("Admin") %></th>
+                      	<th><%=t.write("ID",lang) %></th>
+                        <th><%=t.write("Name",lang) %></th>
+                        <th><%=t.write("Admin",lang) %></th>
                         
-                        <th><%=t.write("Review") %></th>
-                        <th><%=t.write("Action") %></th>
+                        <th><%=t.write("Review",lang) %></th>
+                        <th><%=t.write("Action",lang) %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -67,14 +67,14 @@
                       	%>
                       	<tr>
                         <td>${pharmacy.pharmacyId}</td>
-                        <td><a href="/HealthTrack/profile/pharmacy/${pharmacy.adminId}" target="_blank"><%= t.write(pharmacy.getPharmacyName()) %></a></td>
+                        <td><a href="/HealthTrack/profile/pharmacy/${pharmacy.adminId}" target="_blank"><%= t.write(pharmacy.getPharmacyName(),lang) %></a></td>
                         <td>${pharmacy.adminId}</td>
                        
                         <td>${pharmacy.review}</td>
                         <td>
                         <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/<%= pharmacy.getAdminId() %>/edit" title="<%=t.write("Edit this pharmacy") %>"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/delete/<%= pharmacy.getPharmacyId()%>" title="<%=t.write("Delete this pharmacy")%>"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/<%= pharmacy.getAdminId() %>/edit" title="<%=t.write("Edit this pharmacy",lang) %>"><i class="fa fa-edit"></i></a>
+                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/delete/<%= pharmacy.getPharmacyId()%>" title="<%=t.write("Delete this pharmacy",lang)%>"><i class="fa fa-close"></i></a>
                         </div>
                         </td>
                       </tr>
@@ -85,7 +85,7 @@
                   </table>
                         </div>
                     </div>
-                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Pharmacy") %> </a>
+                    <a href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Pharmacy",lang) %> </a>
                 </div>
 
                 </div>

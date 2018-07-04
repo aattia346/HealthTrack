@@ -89,49 +89,49 @@ for(Service service : servicesOfCenters){
 <%@include  file="includes/header.jsp" %>
 
 <div class="emergency-body">
-	<h1 class="text-center emergency-header"> <%= t.write("you are looking for") %> </h1>
+	<h1 class="text-center emergency-header"> <%= t.write("you are looking for",lang) %> </h1>
 	        <div class="container">
 	            <section class="emergency-parts">
 	                <div class="row">
 	                        <div class="emergency-part col-sm-4">
 	                            <a href="#" id="INCUBATOR">
 	                                <div class="inner-emergency-part">
-	                                    <p class="text-center"><%= t.write("Incubator") %></p>
+	                                    <p class="text-center"><%= t.write("Incubator",lang) %></p>
 	                                </div>
 	                            </a>
 	                        </div>
 	                    <div class="emergency-part col-sm-4">
 	                        <a href="#" id="ICU">
 	                            <div class="inner-emergency-part">
-	                                <p class="text-center"><%= t.write("ICU") %></p>
+	                                <p class="text-center"><%= t.write("ICU",lang) %></p>
 	                            </div>
 	                        </a>
 	                    </div>
 	                    <div class="emergency-part col-sm-4">
 	                        <a href="#" id="AMB">
 	                            <div class="inner-emergency-part">
-	                                <p class="text-center"><%= t.write("Ambulance") %></p>
+	                                <p class="text-center"><%= t.write("Ambulance",lang) %></p>
 	                            </div>
 	                        </a>
 	                    </div>
 	                    <div class="emergency-part col-sm-4">
 	                        <a href="#" id="MRI">
 	                            <div class="inner-emergency-part">
-	                                <p class="text-center"><%= t.write("mri") %></p>
+	                                <p class="text-center"><%= t.write("mri",lang) %></p>
 	                            </div>
 	                        </a>
 	                    </div>
 	                    <div class="emergency-part col-sm-4">
 	                        <a href="#" id="Delivery">
 	                            <div class="inner-emergency-part">
-	                                <p class="text-center"><%= t.write("Delivery") %></p>
+	                                <p class="text-center"><%= t.write("Delivery",lang) %></p>
 	                            </div>
 	                        </a>
 	                    </div>
 	                    <div class="emergency-part col-sm-4">
 	                        <a href="#" id="hospital">
 	                            <div class="inner-emergency-part">
-	                                <p class="text-center"><%= t.write("hospital") %></p>
+	                                <p class="text-center"><%= t.write("hospital",lang) %></p>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -254,7 +254,7 @@ var locations = [
       } 
     
     if($("#emergencyResult").hasClass("alert-success")){
-		$("#emergencyResult").html(" <%= t.write("sorry we didn't find what you are looking for you can put yourself in the")%> " + "<a href='/HealthTrack/WaitingList'>" + " <%= t.write("waiting list") %> " + "</a>").removeClass("hidden").addClass("alert-danger").removeClass("alert-success");	
+		$("#emergencyResult").html(" <%= t.write("sorry we didn't find what you are looking for you can put yourself in the",lang)%> " + "<a href='/HealthTrack/WaitingList'>" + " <%= t.write("waiting list",lang) %> " + "</a>").removeClass("hidden").addClass("alert-danger").removeClass("alert-success");	
     }
     
   }		

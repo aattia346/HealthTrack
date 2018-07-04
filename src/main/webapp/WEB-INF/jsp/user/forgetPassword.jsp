@@ -5,7 +5,7 @@
 	    	<div class="row">
 	                    
 	        	<div class="login-header col-sm-4 col-sm-offset-4">
-	        		<h3 class="text-center"> <%= t.write("change your password") %></h3>
+	        		<h3 class="text-center"> <%= t.write("change your password",lang) %></h3>
 	            </div>
 	                    
 	            <div class="col-sm-4 col-sm-offset-4 col-xs-12 login-form">
@@ -14,15 +14,15 @@
 	                            
 	                	<div class="form-group">
 	                    	<label class="write-email">
-	                    	<%= t.write("please insert your email and we will send to you the instructions to set a new password") %></label>
-	                        <input type="email" class="form-control" name="email" placeholder="<%= t.write("email") %>" required>                          
+	                    	<%= t.write("please insert your email and we will send to you the instructions to set a new password",lang) %></label>
+	                        <input type="email" class="form-control" name="email" placeholder="<%= t.write("email",lang) %>" required>                          
 	                    </div>
 	                            
 	                    ${invalidEmail}
 	                    ${wrongeEmail}        
                  
 	                    <div class="form-group">
-	              	      <input type="submit" class="form-control btn btn-info" value="<%= t.write("submit") %>">
+	              	      <input type="submit" class="form-control btn btn-info" value="<%= t.write("submit",lang) %>">
 	                    </div>
 	 
 	             	</form>

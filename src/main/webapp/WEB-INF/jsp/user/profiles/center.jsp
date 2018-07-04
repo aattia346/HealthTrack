@@ -32,8 +32,8 @@ String title = center.getCenterName();
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title text-capitalize"> <%= t.write(center.getCenterName()) %> </h3>
-                        <p><%= t.write(center.getIntro()) %></p>
+                        <h3 class="breadcumb-title text-capitalize"> <%= t.write(center.getCenterName(),lang) %> </h3>
+                        <p><%= t.write(center.getIntro(),lang) %></p>
                     </div>
                     <div class="hospital-review">
                     	<i class="far fa-star fa-3x"></i> <span><%= Math.round(center.getReview()*10.0)/10.0 %></span>
@@ -52,8 +52,8 @@ String title = center.getCenterName();
                     <div class="single-service-area d-flex">
                         
                         <div class="service-content">
-                            <h5 class="text-capitalize"><%= t.write("our services") %></h5>
-                            <p><%= t.write(center.getIntro()) %></p>
+                            <h5 class="text-capitalize"><%= t.write("our services",lang) %></h5>
+                            <p><%= t.write(center.getIntro(),lang) %></p>
                         </div>
                     </div>
                 </div>
@@ -62,12 +62,12 @@ String title = center.getCenterName();
                     <div class="row">
                     
                     <c:forEach var="service" items="${services}">
-                    
+                    <a href="/HealthTrack/profile/service/center/${service.getServiceId()}">
                    <div class="col-md-6 col-lg-3">
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="/user/layout/images/profiles/blog-img/Delivery.png" alt="">
+                            <img src="/user/layout/images/profiles/blog-img/Delivery.png">
                             <!-- Post Date -->
                             <div class="post-date">
                             <%	Service service = (Service)pageContext.getAttribute("service");
@@ -75,17 +75,18 @@ String title = center.getCenterName();
 			                	calendar.setTime(today);
 			                	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
-                                <a class="text-capitalize" href="#"><%= t.write("available today") %></a>
+                                <a class="text-capitalize" href="#"><%= t.write("available today",lang) %></a>
                                 <% } %>
                             </div>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
-                            <a href="/HealthTrack/profile/service/center/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName()) %></a>
-                            <a href="#" class="comments">3 <%= t.write("comments") %></a>
+                            <a href="/HealthTrack/profile/service/center/${service.getServiceId()}" class="headline text-capitalize"><%= t.write(service.getServiceName(),lang) %></a>
+                            <a href="/HealthTrack/profile/service/center/${service.getServiceId()}#myCarousel" class="comments"><%= ServiceDao.getNumerOfComments(service.getServiceId()) %> <%= t.write("comments",lang) %></a>
                         </div>
                     </div>
                 </div>
+                </a>
                     
                     </c:forEach>
                 

@@ -29,11 +29,13 @@ public class Translator {
 	public String write(String word,String language) throws IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		File translationFile;
-		if(language=="en") {		
+		if(language.equals("en")) {		
 			translationFile = new File("E:\\GP_folder\\json\\ENtranslation.txt"); 
+			System.out.println("open ENtranslation.txt");
 		}
 		else {
 			translationFile = new File("E:\\GP_folder\\json\\ARtranslation.txt"); 
+			System.out.println("open ARtranslation.txt");
 		}
 		
 		path = translationFile.getPath();
@@ -44,14 +46,19 @@ public class Translator {
 		  
 		JSONObject jsonObject = new JSONObject();
 		
-		jsonObject = (JSONObject) obj.get("en");
+		jsonObject = (JSONObject) obj.get(language);
+		//System.out.println("jsonObject :"+ jsonObject);
 				
-		translate = (Map<String, String>) obj.get("en");
-		
+		translate = (Map<String, String>) obj.get(language);
+		//System.out.println("translate :"+ translate);
 		if(translate.get(word) != null) {
+			System.out.println("translate not equal null");
 			return translate.get(word);
+			
 		}else {
+			System.out.println("translate is equal to null");
 			return word;
+			
 		}
 		
 	}

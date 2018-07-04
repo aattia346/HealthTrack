@@ -10,6 +10,7 @@
 <%@page import="com.gp.user.PersonDao"%>
 <%@page import="com.gp.user.Person"%>
 <%@page import="com.gp.user.Appointment"%>
+<%@page import="com.gp.user.Review"%>
 
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -47,7 +48,7 @@
 		if(PersonDao.canPersonBook(user.getId())){
 			request.setAttribute("limitExceed", " ");
 		}else{
-			request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
+			request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)",lang) + "</p>");
 		}
 	}
 	
@@ -107,6 +108,7 @@
 	Time midNight = new Time(midNightFormat.parse("00:00").getTime());
 	LocalTime localMidNight = midNight.toLocalTime();
 
+	List<Review> comments = ServiceDao.get5Comments(serviceId);
 %>
 
 <input type="hidden" id="serviceId" value="<%= S.getServiceId() %>">
@@ -129,8 +131,8 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-content">
-                        <h3 class="breadcumb-title text-capitalize"><%= t.write(S.getServiceName()) %></h3>
-                        <p class="breadcumb-intro"><%= t.write(S.getIntro()) %></p>
+                        <h3 class="breadcumb-title text-capitalize"><%= t.write(S.getServiceName(),lang) %></h3>
+                        <p class="breadcumb-intro"><%= t.write(S.getIntro(),lang) %></p>
                     </div>
                 </div>
                 ${checkYourBooking} ${loginFirst}
@@ -143,18 +145,18 @@
         <div class="container">
             <div class="row">
             <% if(!showForm){ %>
-                    <div class="col-sm-12 alert alert-info text-center booking-alert text-capitalize"><%= t.write("to book please") %> <a href="/HealthTrack/login" target="_blank"><%= t.write("login") %></a><%= t.write("first or") %> <a href="/HealthTrack/signup"><%= t.write("register") %></a></div>
+                    <div class="col-sm-12 alert alert-info text-center booking-alert text-capitalize"><%= t.write("to book please",lang) %> <a href="/HealthTrack/login" target="_blank"><%= t.write("login",lang) %></a><%= t.write("first or",lang) %> <a href="/HealthTrack/signup"><%= t.write("register",lang) %></a></div>
                      <% } %>
                      <div class="col-12">
                     <div class="appointment-form-content">
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9 col-md-6">
                              <div class="my-table text-center ${hideTable}">
-                             <div class="unbooked-slots pull-left"></div><span><%= t.write("available session") %></span>
+                             <div class="unbooked-slots pull-left"></div><span><%= t.write("available session",lang) %></span>
                             <table class="table table-bordered">
                             <thead>
                             <tr class="table-head  text-capitalize">
-                                <th><%= t.write(todayInTableFormat) %></th>
+                                <th><%= t.write(todayInTableFormat,lang) %></th>
                                 <% for(int i=1; i<7; i++){
                                 		tableCalendar.add(Calendar.DAY_OF_MONTH, 1);
                                 		Date d = tableCalendar.getTime();
@@ -162,7 +164,7 @@
                                 		days[i] = dayFormat.format(d);
                                 		daysAsHashMap.put(days[i], weekDateFormat.format(d));
                                  %>
-                                	<th><%= t.write(nextDay) %></th>
+                                	<th><%= t.write(nextDay,lang) %></th>
                                <% }  %>
                                                     
                             </tr>
@@ -210,7 +212,7 @@
                            		request.setAttribute("booked", " ");
                            	}                         	                           	                 	                           	
                         	%>              		 
-                        	<td class="${booked}"><%= t.write(finalFormat) %></td>                       		
+                        	<td class="${booked}"><%= t.write(finalFormat,lang) %></td>                       		
                         <% 
                         }                                               
                         %>
@@ -231,26 +233,26 @@
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="firstName" id="name" placeholder="<%= t.write("first name") %>" value="${oldFirstName}">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="firstName" id="name" placeholder="<%= t.write("first name",lang) %>" value="${oldFirstName}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="lastName" id="name" placeholder="<%= t.write("last name") %>" value="${oldLastName}">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="lastName" id="name" placeholder="<%= t.write("last name",lang) %>" value="${oldLastName}">
                                                 </div>
                                             </div>
                                            
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="number" class="form-control border-top-0 border-right-0 border-left-0" required name="age" placeholder="<%= t.write("age") %>"  required min="0" max = "120" value="${oldAge}">
+                                                    <input type="number" class="form-control border-top-0 border-right-0 border-left-0" required name="age" placeholder="<%= t.write("age",lang) %>"  required min="0" max = "120" value="${oldAge}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
                                                     <select class="form-control border-top-0 border-right-0 border-left-0" required name="sex">
                                                     	
-                                                    	<option value="male"><%= t.write("male") %></option>
-                                                    	<option value="female"><%= t.write("female") %></option>
+                                                    	<option value="male"><%= t.write("male",lang) %></option>
+                                                    	<option value="female"><%= t.write("female",lang) %></option>
                                                     
                                                     </select>
                                                 </div>
@@ -258,43 +260,43 @@
                                                                                         
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" required maxlength="11" id="number" placeholder="<%= t.write("phone") %>" value="${oldPhone}">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" required maxlength="11" id="number" placeholder="<%= t.write("phone",lang) %>" value="${oldPhone}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="<%= t.write("email") %>" value="${oldEmail}">
+                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="<%= t.write("email",lang) %>" value="${oldEmail}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 booking-form-label">
                                                 <div class="form-group">
-                                                	<label><%= t.write("from:") %></label> 
+                                                	<label><%= t.write("from:",lang) %></label> 
                                                 </div>
                                              </div>
                                              <div class="col-12 col-md-6 booking-form-label">
                                                 <div class="form-group">
-                                                	<label><%= t.write("to:") %></label> 
+                                                	<label><%= t.write("to:",lang) %></label> 
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="date" class="form-control" required name="bookFrom" id="date" placeholder="<%= t.write("date") %>" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
+                                                    <input type="date" class="form-control" required name="bookFrom" id="date" placeholder="<%= t.write("date",lang) %>" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
                                                 </div>
                                             </div>
                                            
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="date" class="form-control" required name="bookTo" id="date" placeholder="<%= t.write("date") %>" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
+                                                    <input type="date" class="form-control" required name="bookTo" id="date" placeholder="<%= t.write("date",lang) %>" min="<%= todayInMyFormat %>" value="<%= todayInMyFormat %>">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12">
                                                 <div class="form-group mb-0">
-                                                    <textarea name="msg" class="form-control mb-0 border-top-0 border-right-0 border-left-0" id="message" cols="30" rows="10" placeholder="<%= t.write("message") %>" maxlength="500">${oldmsg}</textarea>
+                                                    <textarea name="msg" class="form-control mb-0 border-top-0 border-right-0 border-left-0" id="message" cols="30" rows="10" placeholder="<%= t.write("message",lang) %>" maxlength="500">${oldmsg}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-4 mb-0">
                                                 <div class="form-group mb-0">
-                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment text-capitalize"><%= t.write("make an appointment") %><span>+</span></button>
+                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment text-capitalize"><%= t.write("make an appointment",lang) %><span>+</span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -304,26 +306,26 @@
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="firstName" id="name" placeholder="<%= t.write("first name") %>" value="${oldFirstName}">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="firstName" id="name" placeholder="<%= t.write("first name",lang) %>" value="${oldFirstName}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="lastName" id="name" placeholder="<%= t.write("last name") %>" value="${oldLastName}">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" required maxlength="15" name="lastName" id="name" placeholder="<%= t.write("last name",lang) %>" value="${oldLastName}">
                                                 </div>
                                             </div>
                                            
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="number" class="form-control border-top-0 border-right-0 border-left-0" required name="age" placeholder="<%= t.write("age") %>"  required min="0" max = "120" value="${oldAge}">
+                                                    <input type="number" class="form-control border-top-0 border-right-0 border-left-0" required name="age" placeholder="<%= t.write("age",lang) %>"  required min="0" max = "120" value="${oldAge}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
                                                     <select class="form-control border-top-0 border-right-0 border-left-0 text-capitalize" required name="sex">
                                                     	
-                                                    	<option value="male"><%= t.write("male") %></option>
-                                                    	<option value="female"><%= t.write("female") %></option>
+                                                    	<option value="male"><%= t.write("male",lang) %></option>
+                                                    	<option value="female"><%= t.write("female",lang) %></option>
                                                     
                                                     </select>
                                                 </div>
@@ -331,41 +333,41 @@
                                                                                         
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" required maxlength="11" id="number" placeholder="<%= t.write("phone") %>" value="${oldPhone}">
+                                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="phone" required maxlength="11" id="number" placeholder="<%= t.write("phone",lang) %>" value="${oldPhone}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="<%= t.write("email") %>" value="${oldEmail}">
+                                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="email" placeholder="<%= t.write("email",lang) %>" value="${oldEmail}">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 booking-form-label text-capitalize">
                                                 <div class="form-group">
-                                                	<label><%= t.write("day:") %></label> 
+                                                	<label><%= t.write("day:",lang) %></label> 
                                                 </div>
                                              </div>
                                              <div class="col-12 col-md-6 booking-form-label text-capitalize">
                                                 <div class="form-group">
-                                                	<label><%= t.write("time:") %></label> 
+                                                	<label><%= t.write("time:",lang) %></label> 
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                 	<select required id="day-select" name="day" class="form-control">
-                                                			<option id="Sat" value="<%=  daysAsHashMap.get("Sat") %>" <% if(days[0].equalsIgnoreCase("Sat")){%> selected <% } %>><%= t.write("sat") %> &ensp; <%=  daysAsHashMap.get("Sat") %></option>
-                                                			<option id="Sun" value="<%=  daysAsHashMap.get("Sun") %>" <% if(days[0].equalsIgnoreCase("Sun")){%> selected <% } %>><%= t.write("sun") %> &ensp; <%=  daysAsHashMap.get("Sun") %></option>
-                                                			<option id="Mon" value="<%=  daysAsHashMap.get("Mon") %>" <% if(days[0].equalsIgnoreCase("Mon")){%> selected <% } %>><%= t.write("mon") %> &ensp; <%=  daysAsHashMap.get("Mon") %></option>
-                                                			<option id="Tue" value="<%=  daysAsHashMap.get("Tue") %>" <% if(days[0].equalsIgnoreCase("Tue")){%> selected <% } %>><%= t.write("tue") %> &ensp; <%=  daysAsHashMap.get("Tue") %></option>
-                                                			<option id="Wed" value="<%=  daysAsHashMap.get("Wed") %>" <% if(days[0].equalsIgnoreCase("Wed")){%> selected <% } %>><%= t.write("wed") %> &ensp; <%=  daysAsHashMap.get("Wed") %></option>
-                                                			<option id="Thu" value="<%=  daysAsHashMap.get("Thu") %>" <% if(days[0].equalsIgnoreCase("Thu")){%> selected <% } %>><%= t.write("thu") %> &ensp; <%=  daysAsHashMap.get("Thu") %></option>
-                                                			<option id="Fri" value="<%=  daysAsHashMap.get("Fri") %>" <% if(days[0].equalsIgnoreCase("Fri")){%> selected <% } %>><%= t.write("fri") %> &ensp; <%=  daysAsHashMap.get("Fri") %></option>
+                                                			<option id="Sat" value="<%=  daysAsHashMap.get("Sat") %>" <% if(days[0].equalsIgnoreCase("Sat")){%> selected <% } %>><%= t.write("sat",lang) %> &ensp; <%=  daysAsHashMap.get("Sat") %></option>
+                                                			<option id="Sun" value="<%=  daysAsHashMap.get("Sun") %>" <% if(days[0].equalsIgnoreCase("Sun")){%> selected <% } %>><%= t.write("sun",lang) %> &ensp; <%=  daysAsHashMap.get("Sun") %></option>
+                                                			<option id="Mon" value="<%=  daysAsHashMap.get("Mon") %>" <% if(days[0].equalsIgnoreCase("Mon")){%> selected <% } %>><%= t.write("mon",lang) %> &ensp; <%=  daysAsHashMap.get("Mon") %></option>
+                                                			<option id="Tue" value="<%=  daysAsHashMap.get("Tue") %>" <% if(days[0].equalsIgnoreCase("Tue")){%> selected <% } %>><%= t.write("tue",lang) %> &ensp; <%=  daysAsHashMap.get("Tue") %></option>
+                                                			<option id="Wed" value="<%=  daysAsHashMap.get("Wed") %>" <% if(days[0].equalsIgnoreCase("Wed")){%> selected <% } %>><%= t.write("wed",lang) %> &ensp; <%=  daysAsHashMap.get("Wed") %></option>
+                                                			<option id="Thu" value="<%=  daysAsHashMap.get("Thu") %>" <% if(days[0].equalsIgnoreCase("Thu")){%> selected <% } %>><%= t.write("thu",lang) %> &ensp; <%=  daysAsHashMap.get("Thu") %></option>
+                                                			<option id="Fri" value="<%=  daysAsHashMap.get("Fri") %>" <% if(days[0].equalsIgnoreCase("Fri")){%> selected <% } %>><%= t.write("fri",lang) %> &ensp; <%=  daysAsHashMap.get("Fri") %></option>
                                                 	</select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6">
                                                 <div class="form-group">
                                                 	<select required id="time-select" name="time" class="form-control">
-                                                		<option value="0" class="text-capitalize"><%= t.write("choose time") %></option>
+                                                		<option value="0" class="text-capitalize"><%= t.write("choose time",lang) %></option>
                                                 	<c:forEach var="time" items="${times}">
                                                     	<c:forEach var="list" items="${time.value}">                                                    	
                                                     		<option class="${time.key} hidden" value="${list}">${list}</option>
@@ -381,7 +383,7 @@
                                             </div>
                                             <div class="col-12 col-md-4 mb-0">
                                                 <div class="form-group mb-0">
-                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment"><%= t.write("make an appointment") %> <span>+</span></button>
+                                                    <button type="submit" class="btn medilife-btn medilife-btn-appointment"><%= t.write("make an appointment",lang) %> <span>+</span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -400,58 +402,101 @@
                                     <!-- Single Contact Info -->
                                      <div class="single-contact-info mb-30">
                                      <div class="single-contact-info-icon"><i class="fas fa-h-square fa-3x"></i></div>
-                                        <p><%= t.write(request.getAttribute("placeName").toString()) %></p>
+                                        <p class="text-center"><%= t.write(request.getAttribute("placeName").toString(),lang) %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
                                     	<div class="single-contact-info-icon"><i class="fa fa-phone fa-3x"></i></div>
-                                        <p><%= S.getPhone() %></p>
+                                        <p class="text-center"><%= S.getPhone() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
-                                        <div class="single-contact-info-icon"><i class="fas fa-globe fa-3x"></i></div>
-                                        <p> <%= t.write(S.getAddress()) %></p>
+                                        <div class="single-contact-info-icon"><i class="far fa-address-book fa-3x"></i></div>
+                                        <p> <%= t.write(S.getAddress(),lang) %></p>
+                                    </div>
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info">
+                                        <div class="single-contact-info-icon text-capitalize"><i class="fas fa-map-marker-alt fa-3x"></i></div>
+                                        <a href="#map"><%= t.write("find the location google maps",lang)%></a>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
-                                        <p><%= S.getFees() %></p>
-                                    </div><br><br>
-                                    <!-- Single Contact Info -->
-                                    <div class="single-contact-info">
-                                        <div class="single-contact-info-icon text-capitalize"><i class="fas fa-map-marker-alt fa-3x"></i></div>
-                                        <p><%= t.write("find the location google maps")%></p>
+                                        <p class="text-center"><%= S.getFees() %></p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
                                         <div class="single-contact-info-icon"><i class="far fa-star fa-3x"></i></div>
-                                        <p><%= Math.round(S.getServiceReview()*10.0)/10.0 %></p>
+                                        <p class="text-center"><%= Math.round(S.getServiceReview()*10.0)/10.0 %></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                        
-            <div class="review service-review">            
+            </div>      
+        </div>
+    </div>
+    
+    <% if(!(comments.size() < 5)){ %>
+    
+    <div id="myCarousel">
+    	<div class="overlay">
+    		<div class="comments">
+    			<ul>
+    				<li id="comment1" class="active"></li>
+    				<li id="comment2"></li>
+    				<li id="comment3"></li>
+    				<li id="comment4"></li>
+    				<li id="comment5"></li>		
+    			</ul>
+    			<h3 class="text-center">What Our Clients Say</h3>
+    			<div class="comment1 comment active-comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(0).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(0).getUserFirstName() + " " + comments.get(0).getUserLastName() %></p>
+    			</div>
+    			<div class="comment2 comment">    			
+	    			<p class="text-center comment-content">&ldquo;<%= comments.get(1).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(1).getUserFirstName() + " " + comments.get(1).getUserLastName() %></p>
+    			</div>
+    			<div class="comment3 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(2).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(2).getUserFirstName() + " " + comments.get(2).getUserLastName() %></p>
+    			</div>
+    			<div class="comment4 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(3).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(3).getUserFirstName() + " " + comments.get(3).getUserLastName() %></p>
+    			</div>
+    			<div class="comment5 comment">    			
+	    			<p class="text-center comment-content">&ldquo; <%= comments.get(4).getComment() %> &rdquo;</p>
+	    			<p class="text-center comment-name"><%= comments.get(4).getUserFirstName() + " " + comments.get(4).getUserLastName() %></p>
+    			</div>
+    		</div>
+    		<div class="right-arrow"><i class="fas fa-chevron-right fa-2x"></i></div>
+    		<div class="left-arrow"><i class="fas fa-chevron-left fa-2x"></i></div>
+    	</div>
+    </div>
+    
+    <% } %>
+
+    <div class="review service-review">            
 	            <div class="overlay">
-	           		<h2 class="text-center text-capitalize"><%= t.write("rate this service") %></h2>
+	           		<h2 class="text-center text-capitalize"><%= t.write("rate this service",lang) %></h2>
 	           		<div class="row">
 	           			<div class="col-sm-offset-2 col-sm-4 rateYo">
 	           				<div id="rateYo"></div>	
-	           				<div id="reviewSucceeded" class="reviewSucceeded "><%= t.write("thanks for your opinion") %> <i class="fas fa-smile"></i></div>           				
-	           				<div id="reviewFailed" class="reviewFailed"><%= t.write("please login first") %> <i class="fas fa-frown"></i></div>           				
+	           				<div id="reviewSucceeded" class="reviewSucceeded "><%= t.write("thanks for your opinion",lang) %> <i class="fas fa-smile"></i></div>           				
+	           				<div id="reviewFailed" class="reviewFailed"><%= t.write("please login first",lang) %> <i class="fas fa-frown"></i></div>           				
 	           				
 	           			</div>
 	           			<form class="review-form" method="post" action="/healthTrack/Service/<%= place %>/review/<%= S.getServiceId() %>/<%= user.getId() %>/comment">
 	           						<div class="col-sm-offset-2 col-sm-8 col-xs-12">
 	           							<div class="form-group">
-	           								<textarea class="form-control mb-0 border-top-0 border-right-0 border-left-0" rows="10" name="comment" placeholder="<%= t.write("write comments") %>...." maxlength="500"></textarea>
+	           								<textarea class="form-control mb-0 border-top-0 border-right-0 border-left-0" rows="10" name="comment" placeholder="<%= t.write("write comments",lang) %>...." maxlength="500"></textarea>
 	           								${invalidComment} ${commentsLimitExceeded} ${commentLoginFirst}
 	           						<div class="">
 	           							<div class="form-group">
-	           								<button type="submit" class="btn btn-success form-group col-xs-12"> <i class="fas fa-location-arrow"></i><%= t.write("submit your comment") %></button>
+	           								<button type="submit" class="btn btn-success form-group col-xs-12"> <i class="fas fa-location-arrow"></i><%= t.write("submit your comment",lang) %></button>
 	           							</div>
 	           						</div>
 	           							</div>
@@ -460,8 +505,6 @@
 	           		</div>
 	            </div>    
             </div>
-        </div>
-    </div>
     <%  if(showComment){%>
   
      <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn btn-primary"><i class="fa fa-plus"></i> Show Comments</a>
