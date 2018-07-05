@@ -183,7 +183,8 @@
 		  "/" : "/",
 		  "Comments' detials" : "Comments' detials",
 		  "Back To Clinic Page" : "Back To Clinic Page",
-		  "Date Of Booking" : "Date Of Booking"
+		  "Date Of Booking" : "Date Of Booking",
+		  "Profile" : "Profile"
 		 },
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -377,6 +378,7 @@
 		 "/" : "\\",
 		 "Comments' detials" : "أداره التعليقات",
 		 "Back To Clinic Page" : "العوده الى صفحة السابقه",
-		 "Date Of Booking" : "تاريخ الحجز"
+		 "Date Of Booking" : "تاريخ الحجز",
+		 "Profile" : "صفحتى الشخصيه"
 	}
 }

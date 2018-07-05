@@ -841,3 +841,90 @@ label{
     padding: 5px 5px;
 }
 /*****************************************end of waiting list page*****************************************************/
+
+/*****************************************start of user page*****************************************************/
+.user-profile-body{
+	background-color: #E9EBEE;
+}
+.personal-data{
+    border: 1px solid #CED0D4;
+    margin-top: 160px;
+    padding-top: 0px;
+}
+.personal-data-head h3{
+    color: #4b4f56;
+    line-height: 50px;
+    padding-left: 25px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.personal-data-head{
+    background-color: #F6F7F9;
+    margin-top: -20px;
+    height: 50px;
+    border-bottom: 1px solid #CED0D4;
+}
+.personal-data-details{
+    padding: 12px;
+    background-color: #fff;
+}
+.personal-data-details legend{
+    border-bottom: 1px solid #DDDFE2;
+    color: #999DA4;
+    font-size: 18px;
+}
+.personal-data-details label{
+    color: #90949c;
+    font-size: 16px;
+    font-weight: 400;
+}
+.single-personal-info{
+    margin: 5px 0;
+    line-height: 2;
+}
+.bookings-details{
+    background-color: #fff;
+    height: 315px;
+}
+.card-head{
+    background-color: #343A40;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 13%;
+    padding-top: 9px;
+    padding-bottom: 1px;
+}
+.card-body{
+    border: 1px solid #CED0D4;
+    height: 230px;
+}
+.single-booking-info label, .single-booking-info p{
+    font-size: 12px;
+    color: #a3a3a3;
+}
+.single-booking-info{
+    margin-top: 6px;
+    height: 14%;
+    border-bottom: 1px solid #dddfe2;
+    padding-bottom: 25px;
+}
+.single-booking-info label{
+    color: #767676
+}
+.confirmed{
+    color: #2ed573 !important;
+}
+.card-body .single-booking-info:last-of-type {
+    border-bottom: none;
+}
+.cancelled{
+    color: #f00 !important;
+}
+.card-head p{
+	color: #fff;
+	font-weight: 700;
+}
+.all-bookings{
+	height: 340px;
+}
+/*****************************************end of user page*****************************************************/

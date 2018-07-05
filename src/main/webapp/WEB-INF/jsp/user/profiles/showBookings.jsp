@@ -134,7 +134,7 @@
                         <th><%=t.write("Age") %></th>
                         <th><%=t.write("From") %></th>
                         <th><%=t.write("To") %></th>
-                        <th><%=t.write("Time Of Booking") %></th>
+                        <th><%=t.write("Date Of Booking") %></th>
                         <th><%=t.write("Phone") %></th>
                         <th><%=t.write("action") %></th>
                       </tr>
@@ -192,7 +192,7 @@
                         <th><%=t.write("Age") %></th>
                         <th><%=t.write("Day") %></th>
                         <th><%=t.write("Time") %></th>
-                        <th><%=t.write("Time Of Booking") %></th>
+                        <th><%=t.write("Date Of Booking") %></th>
                         <th><%=t.write("Phone") %></th>
                         <th><%=t.write("action") %></th>
                       </tr>

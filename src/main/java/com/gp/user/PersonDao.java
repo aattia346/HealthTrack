@@ -90,7 +90,7 @@ abstract public class PersonDao {
 		Person person = new Person();
 		person.setUserId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
-		person.setFirstName(result.getString("lastname"));
+		person.setLastName(result.getString("lastname"));
 		person.setUsername(result.getString("username"));
 		person.setEmail(result.getString("email"));
 		person.setPhone(result.getString("phone"));
@@ -135,5 +135,16 @@ abstract public class PersonDao {
 		con.close();	
 	}
 
-
+	public static int countUserBookings(int userId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT COUNT(booking_id) AS NoOfBookings FROM booking WHERE user_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		int NoOfBookings = result.getInt("NoOfBookings");
+		con.close();
+		return NoOfBookings;
+	}
 }
