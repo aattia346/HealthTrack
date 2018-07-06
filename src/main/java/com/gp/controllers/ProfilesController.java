@@ -151,6 +151,14 @@ public class ProfilesController {
         return mav;
 	
 	}
+	@RequestMapping(value="/HealthTrack/MyProfile", method = RequestMethod.GET)
+    public ModelAndView userProfile(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap m) 
+    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		m.addAttribute("lang", cookie);
+        return new ModelAndView("/user/profiles/user");
+	
+	}
 	@RequestMapping(value="/HealthTrack/admin/{username}/Clinic/{clinicId}/showComments", method = RequestMethod.GET)
     public ModelAndView showCommentsClinic(HttpServletRequest request, @PathVariable("clinicId") int clinicId, @PathVariable("username") String username, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {

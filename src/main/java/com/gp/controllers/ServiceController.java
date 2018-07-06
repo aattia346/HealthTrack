@@ -117,7 +117,7 @@ public class ServiceController {
 				booking.setDayOfBooking(dayAsDate);
 				BookingDao.insertBookingClinic(booking);
 				PersonDao.increaseBookings(userId);
-				mav.setViewName("user/profiles/user");
+				mav.setViewName("redirect:/HealthTrack/MyProfile");
 			}
 		} else {
 			model.addAttribute("clinicId", clinicId);

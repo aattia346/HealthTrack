@@ -257,7 +257,7 @@ abstract public class BookingDao {
 		List<Booking> bookedDates = new ArrayList<Booking>();
 
 		Connection con = DBConnection.getConnection();
-		String sql = "SELECT * FROM booking JOIN service ON booking.service_id=service.service_id WHERE user_id=?";
+		String sql = "SELECT * FROM booking WHERE user_id=? ORDER BY booking_id DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, userId);
 		ResultSet result = ps.executeQuery();
@@ -266,6 +266,7 @@ abstract public class BookingDao {
 			Booking B = new Booking();
 			B.setBookingId(result.getInt("booking_id"));
 			B.setServiceId(result.getInt("service_id"));
+			B.setClinicId(result.getInt("clinic_id"));
 			B.setUserId(result.getInt("user_id"));
 			B.setFirstName(result.getString("firstname"));
 			B.setLastName(result.getString("lastname"));
@@ -275,12 +276,10 @@ abstract public class BookingDao {
 			B.setTimeFrom(result.getTime("time_from"));
 			B.setDayOfBooking(result.getDate("day_of_time"));
 			B.setStatus(result.getInt("status"));
-			B.setServiceName(result.getString("service_name"));
 			B.setTimeOfBooking(result.getDate("time_of_booking"));
 			B.setBookingPhone(result.getString("booking_phone"));
 			bookedDates.add(B);
 		}
-		con.close();
 		con.close();
 		return bookedDates;
 	}
@@ -369,6 +368,38 @@ abstract public class BookingDao {
 			Booking B = new Booking();
 			B.setBookingId(result.getInt("booking_id"));
 			B.setServiceId(result.getInt("service_id"));
+			B.setUserId(result.getInt("user_id"));
+			B.setFirstName(result.getString("firstname"));
+			B.setLastName(result.getString("lastname"));
+			B.setAge(result.getInt("age"));
+			B.setDateFrom(result.getDate("date_from"));
+			B.setDateTo(result.getDate("date_to"));
+			B.setTimeFrom(result.getTime("time_from"));
+			B.setDayOfBooking(result.getDate("day_of_time"));
+			B.setStatus(result.getInt("status"));
+			B.setTimeOfBooking(result.getDate("time_of_booking"));
+			B.setBookingPhone(result.getString("booking_phone"));
+			bookedDates.add(B);
+		}
+		con.close();
+		return bookedDates;
+	}
+	
+	public static List<Booking> getTodaysBookings(int userId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		List<Booking> bookedDates = new ArrayList<Booking>();
+
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM booking WHERE user_id = ? AND DATE(time_of_booking) = CURDATE() ORDER BY booking_id DESC LIMIT 3";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, userId);
+		ResultSet result = ps.executeQuery();
+
+		while (result.next()) {
+			Booking B = new Booking();
+			B.setBookingId(result.getInt("booking_id"));
+			B.setServiceId(result.getInt("service_id"));
+			B.setClinicId(result.getInt("clinic_id"));
 			B.setUserId(result.getInt("user_id"));
 			B.setFirstName(result.getString("firstname"));
 			B.setLastName(result.getString("lastname"));

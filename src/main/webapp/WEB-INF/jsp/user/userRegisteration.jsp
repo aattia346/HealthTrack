@@ -2,58 +2,51 @@
 <%@include  file="includes/header.jsp" %>
 
 <div class="login-body">
-            <div class="container login-container">
-                <div class="row">
-                    
-                    <div class="login-header col-sm-4 col-sm-offset-4">
-                        <h3 class="text-center"> <%= t.write("signup") %> </h3>
-                    </div>
-                    
-                    <div class="col-sm-4 col-sm-offset-4 col-xs-12 login-form">
+	<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
+		<form method="post" action="/HealthTrack/signup/submit">
+			<h4 class="waiting-header text-center"><%= t.write("signup") %></h4>
+			
+			<div class="form-group register-name">
+	        	<input type="text" name="firstName" class="form-control" placeholder="<%=t.write("first name") %>" required="required" maxlength="15" value="${oldFirstName}">
+	            <input type="text" name="lastName" class="form-control" placeholder="<%=t.write("last name") %>" required="required" maxlength="15" value="${oldLastName}">
+	        </div>
+			${invalidFirstName}
+            ${invalidLastName}
+	        <div class="form-group">
+	        	<input type="text" name="username" class="form-control" placeholder="<%=t.write("Username") %>" required="required" value="${oldUsername}" maxlength="15">
+	            <div class="waiting-icon"><i class="fa fa-user fa-2x"></i></div>
+	        </div>
+	        ${invalidUsername}
+            ${usernameAlreadyExists}
+	        <div class="form-group">
+	        	<input type="password" name="password" class="form-control" placeholder="<%=t.write("Password") %>" required="required" maxlength="20">
+	            <div class="waiting-icon"><i class="fa fa-lock fa-2x"></i></div>
+	        </div>
+	        ${invalidPassword}
+	         <div class="form-group">
+	        	<input type="password" name="confirmPassword" class="form-control" placeholder="<%=t.write("confirm your password") %>" required="required">
+	            <div class="waiting-icon"><i class="fa fa-check-square fa-2x"></i></div>
+	        </div>
+	        ${passwordNotMatch}
+	        <div class="form-group">
+	        	<input type="text" name="phone" class="form-control" placeholder="<%= t.write("your phone number") +"  "+ t.write("(optional)") %>" value="${oldPhone}">
+	            <div class="waiting-icon"><i class="fa fa-phone fa-2x"></i></div>
+	        </div>
+	        ${invalidPhone}
+	        <div class="form-group">
+	        	<input type="email" name="email" class="form-control" placeholder="<%= t.write("email") %>" required value="${oldEmail}">
+	            <div class="waiting-icon"><i class="fa fa-envelope-open fa-2x"></i></div>
+	        </div>
+	        ${invalidEmail}
+            ${emailAlreadyExists}
+            ${bannedEmail}
+	        <div class="form-group">
+	        	<input type="submit" value="<%= t.write("submit") %>" class="form-control btn btn-primary">
+	            <div class="waiting-icon submit-icon"><i class="fab fa-telegram-plane fa-2x"></i></div>
+	        </div>
+		</form>
+	</div>
 
-                        <form method="post" action="/HealthTrack/signup/submit">
-                            
-                            <div class="form-group register-name">
-                                <input type="text" class="form-control input-sm" name="firstName" placeholder="<%= t.write("first name") %>" required maxlength="15" value="${oldFirstName}"> 
-                                
-                                <input type="text" class="form-control input-sm" name="lastName" placeholder="<%= t.write("last name") %>" required maxlength="15" value="${oldLastName}"> 
-                            	${invalidFirstName}
-                            	${invalidLastName}
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="username" placeholder="<%= t.write("username") %>" required maxlength="15" value="${oldUsername}">                          
-                            	${invalidUsername}
-                            	${usernameAlreadyExists}
-                            </div>
-                             <div class="form-group">
-                                <input type="password" class="form-control" name="password" placeholder="<%= t.write("password") %>" required maxlength="20">
-                            	${invalidPassword}
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="confirmPassword" placeholder="<%= t.write("confirm your password") %>" required>
-                            	${passwordNotMatch}
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="phone" placeholder="<%= t.write("your phone number") +"  "+ t.write("(optional)") %>" value="${oldPhone}">
-                            	${invalidPhone}
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="<%= t.write("email") %>" required value="${oldEmail}">
-                            	${invalidEmail}
-                            	${emailAlreadyExists}
-                            	${bannedEmail}
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="form-control btn btn-primary" value="<%= t.write("submit") %>">
-                            </div>
-                        
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
+</div>
 
 <%@include  file="includes/footer.jsp" %>

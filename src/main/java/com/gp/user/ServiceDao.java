@@ -61,6 +61,31 @@ abstract public class ServiceDao {
 		return service;
 	}
 	
+	public static Service getServiceById(int id) throws
+	InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM service WHERE service_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		
+		Service service = new Service();		
+		service.setServiceId(result.getInt("service_id"));
+		service.setServiceName(result.getString("service_name"));
+		service.setCenterId(result.getInt("center_id"));
+		service.setDeptId(result.getInt("dept_id"));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setSlot(result.getInt("slot"));
+		
+		con.close();
+		return service;
+	}
+	
 	public static List<Service> getServicesByDeptID(int deptId) 
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
