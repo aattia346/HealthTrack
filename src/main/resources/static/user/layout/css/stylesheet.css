@@ -446,10 +446,14 @@ input[type="submit"]{
 
 
 /***************************** Navbar **************************************/
-.mobile-view{
+.mobile-view-login-register , .mobile-view-translation{
 	display: none;
 }
 @media (max-width: 768px){
+	.navbar-brand{
+		font-size: 17px !important;
+    	margin-top: -10px;
+	}
 	.header-area {
 		position: absolute !important;
 		top: 0;
@@ -460,14 +464,13 @@ input[type="submit"]{
 	.top-header-area{
 		height: 70px;
 	}
-	.mobile-view{
-		display: block;
+	.mobile-view-login-register , .mobile-view-translation{
+	display: block;
 	}
-	.mobile-view .login-register{
-		position: absolute;
-	    right: 23px;
-	    width: 95px;
-	    top: 22px;
+	.mobile-view-login-register{
+		right: 27px !important;
+	    width: 205px;
+	    top: 22px !important;
 	    font-size: 11px;
 	}
 	.mobile-view .translation{
@@ -520,7 +523,7 @@ input[type="submit"]{
 		margin-right: 10px;
 	}
 }
-.navbar-brand , .navbar-brand:hover{
+.navbar-brand, .navbar-brand:hover, .navbar-brand:focus{
 	line-height: 46px;
 	color: #f7f7f7;
 	font-size: 21px;
@@ -583,15 +586,17 @@ header{
 /*======================================================================================*/
 
 /***************************** Find Service **************************************/
-
+.main-page-container{
+	margin-bottom: 50px;
+}
 .choose-service .panel-primary , .services-information .panel-primary{
     border: 1px solid #B8B8B9;
     margin-top: 20px;
     padding: 0px;
     border-radius: 20px;
     height: 346px;
-    margin-right: 8%;
-    margin-left: 3%;
+   	margin-right: 2%;
+    margin-left: 0%;
     position: relative;
 }
 #map {
@@ -608,11 +613,12 @@ header{
 .main-page-container h3{
 	margin-top: 0;
     font-weight: 800;
-    color: #fff;
+    color: #2a2a36;
     margin-bottom: 40px;
 }
 .main-page-container{
 	padding-top: 160px;
+	overflow-x: hidden;
 }
 .find-me{
     width: 92%;
@@ -643,6 +649,7 @@ label{
     font-size: 20px;
     font-weight: 800;
     line-height: 0.5;
+    color: #fff;
 }
 .custom-pin{
 	font-size: 23px;

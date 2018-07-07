@@ -113,8 +113,8 @@ for(Service service : servicesOfCenters){
 	locations.add(location);
 }
 %>   
-	<div class="main-page-container">   
-            <h3 class="text-center"><%= t.write("find a location") %></h3>
+	<div class="main-page-container" style="background-image: url(/user/layout/images/emergency.jpg);">   
+            <h3 class="text-center"><%= t.write("What are you looking for?") %></h3>
             <div class="row">
                 
                 <div class="enter-address col-sm-11 col-sm-offset-1">
@@ -137,12 +137,12 @@ for(Service service : servicesOfCenters){
                           <input type="radio" name="service" value="hospital"> <%= t.write("hospitals") %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
                           <input type="radio" name="service" value="center"> <%= t.write("centers") %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
                           <input type="radio" name="service" value="pharmacy"> <%= t.write("pharmacies") %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
-                          <input type="radio" name="service" value="lab"> <%= t.write("labs") %> <i class="fa fa-map-marker-alt custom-pin lab-pin"></i><br>
                   	  </ul>
                   	  <ul class="list-unstyled text-uppercase">
                   	  	  <h4 class="text-center special-services"><%= t.write("Special Services") %></h4>
                           <input type="radio" name="service" value="icu"> <%= t.write("icu") %> <br>
                           <input type="radio" name="service" value="mri"> <%= t.write("mri") %><br>
+                          <input type="radio" name="service" value="incubator"> <%= t.write("Incubator") %><br>
                       </ul>
                       <div class="guide-label text-capitalize">
                       	<div class="available-color">

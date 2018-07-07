@@ -203,7 +203,10 @@
 		  "Confirmed" : "Confirmed",
 		  "Unconfirmed" : "Unconfirmed",
 		  "username" : "username",
-		  "Status" : "Status"
+		  "Status" : "Status",
+		  "What are you looking for?" : "What are you looking for?",
+		  "X-ray" : "X-ray",
+		  "pharmacy" : "Pharmacy"
 		 },
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -417,6 +420,9 @@
 		 "Confirmed" : "تم تأكيد الحجز",
 		 "Unconfirmed" : "لم يتم تأكيد الحجز",
 		 "username" : "أسم المستخدم",
-		 "Status" : "الحاله"
+		 "Status" : "الحاله",
+		 "What are you looking for?" : "عن ماذا تبحث؟",
+		 "X-ray" : "اشعة اكس",
+		 "pharmacy" : "صيدليه"
 	}
 }
