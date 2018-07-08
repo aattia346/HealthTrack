@@ -136,8 +136,8 @@
                     </div>
                      <%  if(showComment){%>
   
-     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Comments") %></a>
-     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showBookings" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Bookings") %></a>
+     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Comments",lang) %></a>
+     <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showBookings" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Bookings",lang) %></a>
    					<% }%>
                 </div>
                 ${checkYourBooking} ${loginFirst}
@@ -290,7 +290,7 @@
                                             </div>
 											<div class="col-12 col-md-6 booking-form-label service-input-to-sm">
                                                 <div class="form-group">
-                                                	<label><%= t.write("to:") %></label> 
+                                                	<label><%= t.write("to:",lang) %></label> 
                                                 </div>
                                             </div>                                           
                                             <div class="col-12 col-md-6">

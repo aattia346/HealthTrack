@@ -195,7 +195,7 @@ var locations = [
         var shortestDistance = 999999999;
     	for(i=0; i<locations.length; i++){
     		if(locations[i][2] == serviceName){
-				$("#emergencyResult").html(" <%= t.write("We Found the nearest service you need ") %> " + "<a href='" +locations[i][5] +"'>" + " <%= t.write("Here") %> " + "</a>").addClass("alert-success").removeClass("hidden").removeClass("alert-danger");
+				$("#emergencyResult").html(" <%= t.write("We Found the nearest service you need ",lang) %> " + "<a href='" +locations[i][5] +"'>" + " <%= t.write("Here",lang) %> " + "</a>").addClass("alert-success").removeClass("hidden").removeClass("alert-danger");
     			var point_a = new google.maps.LatLng( pos.lat, pos.lng );
 	    	    var point_b = new google.maps.LatLng( locations[i][0], locations[i][1] );
 	    	    var directionsService = new google.maps.DirectionsService();

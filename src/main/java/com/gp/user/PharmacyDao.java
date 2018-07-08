@@ -61,7 +61,7 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	
 	Connection con = DBConnection.getConnection();
 	String sql="UPDATE pharmacy "
-			+ "SET pharmacy_name=?, lat=?, lang=?, phone=?, address=?, google_maps_url=? "
+			+ "SET pharmacy_name=?, lat=?, lang=?, phone=?, address=?, google_maps_url=? ,intro=?, admin_id"
 			+ "WHERE pharmacy_id=?";
 	PreparedStatement ps = con.prepareStatement(sql);
 	
@@ -71,7 +71,11 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	ps.setString(4, pharmacy.getPhone());
 	ps.setString(5, pharmacy.getAddress());
 	ps.setString(6,pharmacy.getGoogle_maps_url());
-	ps.setInt(7,pharmacy.getPharmacyId());
+	ps.setString(7, pharmacy.getIntro());
+	ps.setString(8, pharmacy.getWebsite());
+	ps.setInt(9,pharmacy.getAdminId());
+	ps.setInt(10,pharmacy.getPharmacyId());
+	
 	
 	ps.executeUpdate();
 	

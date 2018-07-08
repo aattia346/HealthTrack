@@ -31,7 +31,6 @@ import com.gp.user.PharmacyDao;
 import com.gp.user.Service;
 import com.gp.user.ServiceDao;
 import com.gp.user.Translator;
-import com.gp.user.Translator.langType;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
@@ -110,7 +109,7 @@ public class DashboardController {
 	}
 	
 	@RequestMapping(value="/HealthTrack/admin/{place}/insert", method = RequestMethod.POST)
-	public ModelAndView insertHospital(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
+	public ModelAndView insertPlace(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
 			, @PathVariable("place") String place) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
 		   Translator t = new Translator();
 		    model.addAttribute("lang", cookie);
@@ -153,17 +152,9 @@ public class DashboardController {
 						model.addAttribute("shortName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters",cookie)+ "</p>");
 						errors = true;
 					}
-					/*
-					if(!Validation.validateArStatement(ARname)) {
-						model.addAttribute("invalidARName", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Name")+"</p>");
-						errors = true;
-					}
 					
-					if(ARname.length() < 4) {
-						model.addAttribute("shortARName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters")+ "</p>");
-						errors = true;
-					}
-					*/
+				
+					
 					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
 					model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
 					errors = true;
@@ -177,17 +168,17 @@ public class DashboardController {
 						model.addAttribute("shortIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters",cookie)+"</p>");
 						errors = true;
 					}
-					/*
-					if(!Validation.validateArStatement(ARintro)) {
-						model.addAttribute("invalidARIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the arabic intro")+"</p>");
+					
+					if(!Validation.validateText(ARintro)) {
+						model.addAttribute("invalidARIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the arabic intro",cookie)+"</p>");
 						errors = true;
 					}
 					
 					if(ARintro.length() < 25) {
-						model.addAttribute("shortARIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters")+"</p>");
+						model.addAttribute("shortARIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters",cookie)+"</p>");
 						errors = true;
 					}
-					*/
+					
 					if(!Validation.validateURL(website)) {
 						model.addAttribute("invalidWebsite", "<p class=\"wrong-input \">"+t.write("Invalid url",cookie)+"</p>");
 						errors = true;
@@ -200,12 +191,29 @@ public class DashboardController {
 						model.addAttribute("invalidaddress", "<p class=\"wrong-input \">"+t.write("Invalid Address",cookie)+"</p>");
 						errors = true;
 					}
-					/*
-					if(!Validation.validateArStatement(ARaddress)) {
-						model.addAttribute("invalidARaddress", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Address")+"</p>");
+					
+					if(!Validation.validateText(ARaddress)) {
+						model.addAttribute("invalidARaddress", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Address",cookie)+"</p>");
 						errors = true;
 					}
-					*/
+					if(!Validation.validateName(ARname)) {
+						model.addAttribute("invalidARName", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Name",cookie)+"</p>");
+						errors = true;
+					}
+					if(!Validation.validateText(ARintro)) {
+						model.addAttribute("invalidARIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the arabic intro",cookie)+"</p>");
+						errors = true;
+					}
+					if(ARintro.length() < 25) {
+						model.addAttribute("shortARIntro", "<p class=\"wrong-input \">"+t.write("tha name should be at least 25 characters",cookie)+"</p>");
+						errors = true;
+					}
+					
+					if(ARname.length() < 4) {
+						model.addAttribute("shortARName", "<p class=\"wrong-input \">"+t.write("name should be at least 4 characters",cookie)+ "</p>");
+						errors = true;
+					}
+					
 					
 					if(!Validation.validateURL(url)) {
 						model.addAttribute("invalidUrl", "<p class=\"wrong-input \">"+t.write("Invalid url",cookie)+"</p>");
@@ -246,38 +254,38 @@ public class DashboardController {
 							model.addAttribute("invalidDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name",cookie)+"</p>");
 							errors = true;
 						}
-						/*
-						if(!Validation.validateArStatement(ARdoctorName)) {
-							model.addAttribute("invalidARDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name in Arabic")+"</p>");
+						
+						if(!Validation.validateName(ARdoctorName)) {
+							model.addAttribute("invalidARDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name in Arabic",cookie)+"</p>");
 							errors = true;
 						}
-						*/
+						
 						if(doctorName.length() < 4) {
 							model.addAttribute("shortDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters",cookie)+"</p>");
 							errors = true;
 						}
-						/*
+						
 						if(ARdoctorName.length() < 4) {
-							model.addAttribute("shortARDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters")+"</p>");
+							model.addAttribute("shortARDoctorName", "<p class=\"wrong-input \">"+t.write("tha arabic name should be at least 4 characters",cookie)+"</p>");
 							errors = true;
 						}
-						*/
+						
 						if(!Validation.validateName(specialty)) {
 							model.addAttribute("invalidSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty",cookie)+"</p>");
 							errors = true;
 						}
-						/*
+						
 						if(!Validation.validateName(ARspecialty)) {
-							model.addAttribute("invalidARSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty in Arabic")+"</p>");
+							model.addAttribute("invalidARSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty in Arabic",cookie)+"</p>");
 							errors = true;
 						}
 						
 						if(ARspecialty.length() < 4) {
-							model.addAttribute("shortARSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters")+"</p>");
+							model.addAttribute("shortARSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters",cookie)+"</p>");
 							errors = true;
 						}
 						
-						*/
+						
 						if(specialty.length() < 4) {
 							model.addAttribute("shortSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters",cookie)+"</p>");
 							errors = true;

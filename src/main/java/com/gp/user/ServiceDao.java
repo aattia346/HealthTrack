@@ -337,7 +337,7 @@ abstract public class ServiceDao {
 	public static void insertComment(int userId, int serviceId, String comment) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
 		Connection con = DBConnection.getConnection();
-		String sql="INSERT INTO review (user_id, service_id, comment, time_of_comment) VALUES(?,?,?, now()";
+		String sql="INSERT INTO review (user_id, service_id, comment, time_of_comment) VALUES(?,?,?, now())";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, userId);
 		ps.setInt(2, serviceId);

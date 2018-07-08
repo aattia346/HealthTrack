@@ -132,7 +132,7 @@
                         <td>
                         <div>
                       <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/<%= C.getAdminId() %>/edit" title="<%=t.write("Edit this center",lang) %>"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title="<%=t.write("Delete this center",lang) %>"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-center" href="/HealthTrack/admin/<%= admin.getUsername() %>/center/delete/<%= C.getCenterId() %>" title="<%=t.write("Delete this center",lang) %>"><i class="fa fa-close"></i></a>
                          </div>
                         </td>
                       </tr>

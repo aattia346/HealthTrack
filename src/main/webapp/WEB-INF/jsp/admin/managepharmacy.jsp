@@ -111,9 +111,9 @@
                             <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
                             ${invalidWebsite}
                           </div>
-                          <div class="col-12">
-                        
+                                                
                         </div>
+                          <div class="col-12">
                                              
                       	<div class="form-group">
                       		  <label class=" form-control-label"><%=t.write("Choose the Admin",lang) %></label>
@@ -133,11 +133,11 @@
                               </select>
                               ${invalidAdmin}
                             </div>
-                            
+                            </div>
                            
                             
                             <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit",lang) %> </button>
-                      </div>
+                      
                     </div>
                   </form>
                   
@@ -170,7 +170,7 @@
             </div>
         </div>
         
-        <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/<%=pharmacy.getAdminId() %>/update" method="post">
+        <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/<%=admin.getId() %>/update" method="post">
         	<input type="hidden" name="pharmacyId" value="<%= pharmacy.getPharmacyId() %>">
                     <div class="card">
                       <div class="card-header"><strong><%=t.write("Pharmacy",lang) %></strong><small> <%=t.write("Form",lang) %></small></div>
@@ -239,7 +239,6 @@
                             <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="<%= pharmacy.getWebsite() %>"></div>
                             ${invalidWebsite}
                           </div>
-                         8
                         </div>
                                              
                       	<div class="form-group">

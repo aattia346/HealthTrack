@@ -67,13 +67,15 @@
                       	%>
                       	<tr>
                         <td>${pharmacy.pharmacyId}</td>
-                        <td><a href="/HealthTrack/profile/pharmacy/${pharmacy.adminId}" target="_blank"><%= t.write(pharmacy.getPharmacyName(),lang) %></a></td>
+                        <td><a href="/HealthTrack/profile/pharmacy/<%= pharmacy.getAdminId() %>" target="_blank"><%= t.write(pharmacy.getPharmacyName(),lang) %></a></td>
                         <td>${pharmacy.adminId}</td>
                        
                         <td>${pharmacy.review}</td>
                         <td>
                         <div>
-                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/<%= pharmacy.getAdminId() %>/edit" title="<%=t.write("Edit this pharmacy",lang) %>"><i class="fa fa-edit"></i></a>
+                        <%
+                        System.out.println("pharmacy   wejfnwefkmwe:" + pharmacy.getAdminId());%>
+                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/<%=pharmacy.getAdminId()%>/edit" title="<%=t.write("Edit this pharmacy",lang) %>"><i class="fa fa-edit"></i></a>
                         <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/delete/<%= pharmacy.getPharmacyId()%>" title="<%=t.write("Delete this pharmacy",lang)%>"><i class="fa fa-close"></i></a>
                         </div>
                         </td>

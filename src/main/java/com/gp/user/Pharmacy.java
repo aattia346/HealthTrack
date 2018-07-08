@@ -2,8 +2,8 @@ package com.gp.user;
 
 public class Pharmacy {
 	
-	int pharmacyId;
-	String pharmacyName, phone, address, google_maps_url;
+	int pharmacyId,adminId;
+	String pharmacyName, phone, address, google_maps_url,intro,website;
 	float lat, lang, review;
 	
 	public Pharmacy() {
@@ -12,6 +12,13 @@ public class Pharmacy {
 
 	public int getPharmacyId() {
 		return pharmacyId;
+	}
+
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
+	public int getAdminId() {
+		return adminId;
 	}
 
 	public void setPharmacyId(int pharmacyId) {
@@ -73,5 +80,22 @@ public class Pharmacy {
 	public void setReview(float review) {
 		this.review = review;
 	}
+	
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+	
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
 	
 }

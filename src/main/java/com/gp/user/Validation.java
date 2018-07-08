@@ -114,7 +114,7 @@ abstract public class Validation {
 		
 		
 		
-		if( Pattern.matches("[0-9\\$\\LE]*", fees.trim())) {
+		if( Pattern.matches("[0-9\\$]*", fees.trim())) {
 			return true;
 		}else {
 			return false;

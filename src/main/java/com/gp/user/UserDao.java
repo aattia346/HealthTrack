@@ -148,6 +148,7 @@ abstract public class UserDao {
 		}
 	}
 	
+	
 	public static List<User> getUsers(String type) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
@@ -254,7 +255,7 @@ abstract public class UserDao {
 		return result.getRow() < 10;
 
 	}
-<<<<<<< HEAD
+
 	public static void updateUser(User user)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -273,7 +274,7 @@ abstract public class UserDao {
 		
 	}
 	
-=======
+
 
 	public static boolean isTheUserAuthorized(int userId, String place, int serviceId)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -299,7 +300,7 @@ abstract public class UserDao {
 		
 		return result.getInt("admin_id") == userId;	
 	}
->>>>>>> c8d07d53aafff251e1ee9a05cbf0b0da549ece21
+
 	
 
 }

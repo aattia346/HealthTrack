@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	
 <% 		
@@ -48,81 +49,50 @@
                     <div class="card">
                       <div class="card-header"><strong><%=t.write("User",lang) %></strong><small><%=t.write("Form",lang) %></small></div>
                       <div class="card-body card-block">
-                      
-                       <div class="container">
-                
-					    <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("First Name",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="${oldFirstName}" maxlength="50">
+                      			
+					     <div class="row form-group">
+                          <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("First Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="${oldFirstName}" maxlength="50">
 					             ${invalidFirstName}
                        			 ${shortFirstName}
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("First Name in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter First Name in Arabic",lang) %>" class="form-control" name="ARfirstName" required="required" value="${oldARFirstName}" maxlength="50">
-					          ${invalidARFirstName}
-                              ${shortARFirstName}
-					        </div>
-					    </div>
-					    
-					    <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Last Name",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Last Name",lang) %>" class="form-control" name="lastName" required="required" value="${oldLastName}" maxlength="50">
+                          </div>
+                          </div>
+                          
+                          
+                          
+                          <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="${oldLastName}" maxlength="50">
 					             ${invalidLastName}
                        			 ${shortLastName}
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Last Name in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Last Name in Arabic",lang) %>" class="form-control" name="ARlastName" required="required" value="${oldARLastName}" maxlength="50">
-					          ${invalidARLastName}
-                              ${shortARLastName}
-					        </div>
-					    </div>
-					    
-					    
-					     <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("UserName",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter User Name",lang) %>" class="form-control" name="userName" required="required" value="${oldUserName}" maxlength="50">
+                          </div> 
+                          </div>
+                          
+                          <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("UserName",lang) %></label><input type="text" placeholder="<%=t.write("Enter User Name",lang) %>" class="form-control" name="userName" required="required" value="${oldUserName}" maxlength="50">
 					             ${invalidUserName}
 		                         ${UsernameExist}
 		                         ${shortUserName}
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("UserName in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter User Name in Arabic",lang) %>" class="form-control" name="ARuserName" required="required" value="${oldARUserName}" maxlength="50">
-					          ${invalidARUserName}
-                       		  ${ARUsernameExist}
-                       		  ${shortUserName}
-					        </div>
-					    </div>
-					    
-					    <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Type",lang) %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Enter user Type",lang) %>" class="form-control" name="type" required="required" value="${oldType}">
+                          </div>                        
+                          </div> 
+                              <div class="col-12">                       
+                            <div class="form-group">
+                      		  <label class=" form-control-label"><%=t.write("Choose user type",lang) %></label>
+                              <select id=slct2 name="userType" class="form-control">
+                                <option value="0"><%=t.write("Please select",lang) %></option>
+                               <option value="center"><%=t.write("Center",lang) %></option>
+                               <option value="clinic"><%=t.write("Clinic",lang) %></option>
+                               <option value="pharmacy"><%=t.write("Pharmacy",lang) %></option>
+                               <option value="person"><%=t.write("Person",lang) %></option> 
+                               <option value="hospital"><%=t.write("Hospital",lang) %></option>                               
+                              </select>                                                          
+                            </div> 
+                            </div> 
+					     <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Type",lang) %></label> <input maxlength="50" type="text" placeholder="<%=t.write("Enter user Type",lang) %>" class="form-control" name="type" required="required" value="${oldType}">
 					         ${invalidType}
 					         
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Type in Arabic",lang) %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Enter user Type in Arabic",lang) %>" class="form-control" name="ARtype" required="required" value="${oldType}">
-					         ${invalidType}
-					         
-					        </div>
-					    </div>
-			   
-                     </div>
-                      
-                      
-                       
-                        <div class="row form-group">
+                          </div>
+                     </div>                  
                           <div class="col-12">
                             <div class="form-group"><label class=" form-control-label"><%=t.write("phone",lang) %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number",lang) %>" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
                             ${invalidPhone}
@@ -142,7 +112,7 @@
                             	${passwordNotMatch}
                             </div>
                           
-                        </div>  
+                       </div>
                             
                             <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i><%=t.write("Submit",lang) %></button>
                       </div>
@@ -190,80 +160,46 @@
                       <div class="card-header"><strong><%=t.write("User",lang) %></strong><small><%=t.write("Form",lang) %></small></div>
                       <div class="card-body card-block">
                       
-                       <div class="container">
-                
-					    <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("First Name",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="<%=person.getFirstName() %>" maxlength="50">
+              <div class="row form-group">
+                          <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("First Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="<%=person.getFirstName()%>" maxlength="50">
 					             ${invalidFirstName}
                        			 ${shortFirstName}
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("First Name in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter First Name in Arabic",lang) %>" class="form-control" name="ARfirstName" required="required" value="${oldARFirstName}" maxlength="50">
-					          ${invalidARFirstName}
-                              ${shortARFirstName}
-					        </div>
-					    </div>
-					    
-					    <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Last Name",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Last Name",lang) %>" class="form-control" name="lastName" required="required" value="<%=person.getLastName() %>" maxlength="50">
+                          </div>
+                          </div>
+                          
+                          
+                          
+                          <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="<%=person.getLastName() %>" maxlength="50">
 					             ${invalidLastName}
                        			 ${shortLastName}
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Last Name in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Last Name in Arabic",lang) %>" class="form-control" name="ARlastName" required="required" value="${oldARLastName}" maxlength="50">
-					          ${invalidARLastName}
-                              ${shortARLastName}
-					        </div>
-					    </div>
-					    
-					    
-					     <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("UserName",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter User Name",lang) %>" class="form-control" name="userName" required="required" value="<%=user.getUsername() %>" maxlength="50">
+                          </div> 
+                          </div>
+                          
+                          <div class="col-12">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("UserName",lang) %></label><input type="text" placeholder="<%=t.write("Enter User Name",lang) %>" class="form-control" name="userName" required="required" value="<%=user.getUsername() %>" maxlength="50">
 					             ${invalidUserName}
 		                         ${UsernameExist}
 		                         ${shortUserName}
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("UserName in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter User Name in Arabic",lang) %>" class="form-control" name="ARuserName" required="required" value="${oldARUserName}" maxlength="50">
-					          ${invalidARUserName}
-                       		  ${ARUsernameExist}
-                       		  ${shortUserName}
-					        </div>
-					    </div>
+                          </div>
+                          
+                          </div>
+                         <div class="col-12">                       
+                            <div class="form-group">
+                      		  <label class=" form-control-label"><%=t.write("Choose user type",lang) %></label>
+                              <select id=slct2 name="userType" class="form-control">
+                                <option value="0"><%=t.write(user.getType(),lang) %></option>
+                               <option value="center"><%=t.write("Center",lang) %></option>
+                               <option value="clinic"><%=t.write("Clinic",lang) %></option>
+                               <option value="pharmacy"><%=t.write("Pharmacy",lang) %></option>
+                               <option value="person"><%=t.write("Person",lang) %></option> 
+                                <option value="hospital"><%=t.write("Hospital",lang) %></option>                                
+                              </select>                                                          
+                            </div> 
+                            </div> 
 					    
-					    <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Type",lang) %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Enter user Type",lang) %>" class="form-control" name="type" required="required" value="<%=user.getType()%>">
-					         ${invalidType}
-					         
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Type in Arabic",lang) %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Enter user Type in Arabic",lang) %>" class="form-control" name="ARtype" required="required" value="${oldARType}">
-					         ${invalidType}
-					         
-					        </div>
-					    </div>
-			   
-                     </div>
-                      
-                      
-                       
-                        <div class="row form-group">
+					                   
                           <div class="col-12">
                             <div class="form-group"><label class=" form-control-label"><%=t.write("phone",lang) %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number",lang) %>" class="form-control" name="phone" required="required" value="<%=person.getPhone() %>"></div>
                             ${invalidPhone}

@@ -77,7 +77,7 @@
                         Department D 		= (Department)pageContext.getAttribute("dept");
                         %>
                         	<div class="dept-in-hospital-table">
-	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}"><%= t.write(D.getDeptName(),lang) %>${dept.deptName}</a>
+	                        <a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}"><%= t.write(D.getDeptName(),lang) %></a>  
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}" class="confirm-delete-dept"><i class="fa fa-close" title=<%=t.write("Delete this department",lang) %>> </i> </a>
                         	</div>
                         </c:forEach>

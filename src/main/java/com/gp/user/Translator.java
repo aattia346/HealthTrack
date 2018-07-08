@@ -20,21 +20,18 @@ public class Translator {
 	 private String path;
 	private Map<String , String> translate = new HashMap<String , String>();
 	
-	
 	public Translator() throws ParseException, JSONException, IOException {		
-		
-
 	}
 	
 	public String write(String word,String language) throws IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		File translationFile;
 		if(language.equals("en")) {		
-			translationFile = new File("E:\\GP_folder\\json\\ENtranslation.txt"); 
+			translationFile = new File("E:\\GP_folder\\ENtranslation.json"); 
 			System.out.println("open ENtranslation.txt");
 		}
 		else {
-			translationFile = new File("E:\\GP_folder\\json\\ARtranslation.txt"); 
+			translationFile = new File("E:\\GP_folder\\ARtranslation.json"); 
 			System.out.println("open ARtranslation.txt");
 		}
 		
@@ -47,8 +44,7 @@ public class Translator {
 		JSONObject jsonObject = new JSONObject();
 		
 		jsonObject = (JSONObject) obj.get(language);
-		//System.out.println("jsonObject :"+ jsonObject);
-				
+		//System.out.println("jsonObject :"+ jsonObject);			
 		translate = (Map<String, String>) obj.get(language);
 		//System.out.println("translate :"+ translate);
 		if(translate.get(word) != null) {
@@ -62,18 +58,14 @@ public class Translator {
 		}
 		
 	}
-	 public enum langType {
-		 en,
-		 ar;	 
-	 }
 	
 	 public void fileWriter(String key,String value,String lang) throws IOException, ParseException {
 		    JSONParser parser = new JSONParser();
 			File translationFile;
 			if(lang.equals("en")) {		
-				translationFile = new File("E:\\GP_folder\\json\\ENtranslation.txt"); 
+				translationFile = new File("E:\\GP_folder\\ENtranslation.json"); 
 			}else {
-				translationFile = new File("E:\\GP_folder\\json\\ARtranslation.txt"); 
+				translationFile = new File("E:\\GP_folder\\ARtranslation.json"); 
 			}
 			path = translationFile.getPath();
 					
@@ -104,7 +96,6 @@ public class Translator {
 	    		 fw = new FileWriter(path.replaceAll("\\\\","\\\\\\\\"));	
 	    		 BufferedWriter writer = new BufferedWriter(fw);
 				 writer.write(object.toJSONString());
-				 // System.out.println(translate);
 				 writer.newLine();
 			     writer.close();
 	    		

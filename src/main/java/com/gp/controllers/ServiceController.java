@@ -36,7 +36,7 @@ import com.gp.user.Validation;
 
 @RestController
 public class ServiceController {
-	/*
+	
 	@RequestMapping(value="/HealthTrack/clinic/{clinicId}/BookingClinic/Submit", method = RequestMethod.POST)
     public ModelAndView submitBookingClinic(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("clinicId") int clinicId,ModelAndView mav, ModelMap model, HttpServletRequest request)
     throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
@@ -68,33 +68,33 @@ public class ServiceController {
 			boolean errors = false;
 			
 			if(!Validation.validateName(firstName) || !Validation.validateName(lastName)) {
-				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name") + "</p>");
+				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name",cookie) + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateEmail(email)) {
-				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email") + "</p>");
+				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email",cookie) + "</p>");
 				errors = true;
 			}
 			if(!Validation.validatePhone(phone)) {
-				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number") + "</p>");
+				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number",cookie) + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateText(msg)) {
-				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters") + "</p>");
+				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters",cookie) + "</p>");
 				errors = true;
 			}
 			if(PersonDao.canPersonBook(userId)){
 				request.setAttribute("limitExceed", " ");				
 			}else{
-				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)",cookie) + "</p>");
 				errors = true;
 			}
 			mav.addAllObjects(model);
 			if(errors) {
 				model.addAttribute("clinicId", clinicId);
-				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it") + "</div>");
+				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it",cookie) + "</div>");
 				mav.setViewName("user/profiles/clinic");
 			}else {
 				Booking booking = new Booking();
@@ -113,7 +113,7 @@ public class ServiceController {
 			}
 		}else {
 			model.addAttribute("clinicId", clinicId);
-			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("to book please") + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("login") + "</a>" + t.write("first or") + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("register") + "</a></div>");
+			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("to book please",cookie) + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("login",cookie) + "</a>" + t.write("first or",cookie) + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("register",cookie) + "</a></div>");
 			mav.setViewName("user/profiles/clinic");
 		}
 		
@@ -125,7 +125,7 @@ public class ServiceController {
     public ModelAndView submitBookingDay(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place,ModelAndView mav, ModelMap model, HttpServletRequest request)
     throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		
 		HttpSession session = request.getSession();
@@ -158,40 +158,40 @@ public class ServiceController {
 			boolean errors = false;
 			
 			if(!Validation.validateName(firstName) || !Validation.validateName(lastName)) {
-				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name") + "</p>");
+				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name",cookie) + "</p>");
 				errors = true;
 			}
 			if(!Validation.validateEmail(email)) {
-				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email") + "</p>");
+				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email",cookie) + "</p>");
 				errors = true;
 			}
 			if(!Validation.validatePhone(phone)) {
-				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number") + "</p>");
+				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number",cookie) + "</p>");
 				errors = true;
 			}
 			if(!Validation.validateBookDate(serviceId, bookFromAsDate) || !Validation.validateBookDate(serviceId, bookToAsDate)) {
-				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry this date has been already booked") + "</p>");
+				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry this date has been already booked",cookie) + "</p>");
 				errors = true;
 			}
 			if(bookFromAsDate.after(bookToAsDate)) {
-				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Date") + "</p>");
+				model.addAttribute("invalidDate", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Date",cookie) + "</p>");
 				errors = true;
 			}
 			if(!Validation.validateText(msg)) {
-				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters") + "</p>");
+				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters",cookie) + "</p>");
 				errors = true;
 			}
 			if(PersonDao.canPersonBook(userId)){
 				request.setAttribute("limitExceed", " ");				
 			}else{
-				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)",cookie) + "</p>");
 				errors = true;
 			}
 			mav.addAllObjects(model);
 			if(errors) {
 				model.addAttribute("serviceId", serviceId);
 				model.addAttribute("place", place);
-				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it") + "</div>");
+				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it",cookie) + "</div>");
 				mav.setViewName("user/profiles/service");
 			}else {
 				Booking booking = new Booking();
@@ -213,7 +213,7 @@ public class ServiceController {
 		}else {
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("place", place);
-			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("To book Please") + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("Login") + "</a>" + t.write("First or") + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("Register") + "</a></div>");
+			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("To book Please",cookie) + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("Login",cookie) + "</a>" + t.write("First or",cookie) + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("Register",cookie) + "</a></div>");
 			mav.setViewName("user/profiles/service");
 		}
 		
@@ -225,7 +225,7 @@ public class ServiceController {
     public ModelAndView submitBookingTime(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("serviceId") int serviceId, @PathVariable("place") String place,ModelAndView mav, ModelMap model, HttpServletRequest request)
     throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		int userId 			= Integer.parseInt(request.getParameter("userId"));
 		String firstName 	= request.getParameter("firstName");
@@ -259,39 +259,39 @@ public class ServiceController {
 			try {
 				time = new java.sql.Time(formatter.parse(request.getParameter("time")).getTime());
 			} catch (Exception e) {
-				model.addAttribute("invalidTime", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please choose time") + "</p>");
+				model.addAttribute("invalidTime", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please choose time",cookie) + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateName(firstName) || !Validation.validateName(lastName)) {
-				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name") + "</p>");
+				model.addAttribute("invalidName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Name",cookie) + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateEmail(email)) {
-				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email") + "</p>");
+				model.addAttribute("invalidEmail", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Email",cookie) + "</p>");
 				errors = true;
 			}
 			if(!Validation.validatePhone(phone)) {
-				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number") + "</p>");
+				model.addAttribute("invalidPhone", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid Phone Number",cookie) + "</p>");
 				errors = true;
 			}
 			
 			if(!Validation.validateText(msg)) {
-				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters") + "</p>");
+				model.addAttribute("invalidmsg", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Your message has invalid characters",cookie) + "</p>");
 				errors = true;
 			}
 			if(PersonDao.canPersonBook(userId)){
 				request.setAttribute("limitExceed", " ");				
 			}else{
-				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)") + "</p>");
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)",cookie) + "</p>");
 				errors = true;
 			}
 			mav.addAllObjects(model);
 			if(errors) {
 				model.addAttribute("serviceId", serviceId);
 				model.addAttribute("place", place);
-				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it") + "</div>");
+				model.addAttribute("checkYourBooking", "<div class=\"alert alert-danger text-center\">" + t.write("Your information have some errors, Please check the booking and resend it",cookie) + "</div>");
 				mav.setViewName("user/profiles/service");
 			}else {
 				Booking booking = new Booking();
@@ -312,7 +312,7 @@ public class ServiceController {
 		}else {
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("place", place);
-			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("To book Please") + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("Login") + "</a>" + t.write("First or") + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("Register") + "</a></div>");			mav.setViewName("user/profiles/service");
+			model.addAttribute("loginFirst", "<div class=\"alert alert-danger text-center\">" + t.write("To book Please",cookie) + "<a target=\"_blank\" href=\"/HealthTrack/login\">" + t.write("Login",cookie) + "</a>" + t.write("First or",cookie) + "<a target=\"_blank\" href=\"/HealthTrack/signup\">" + t.write("Register",cookie) + "</a></div>");			mav.setViewName("user/profiles/service");
 		}
 		
 		return mav;
@@ -422,23 +422,23 @@ public class ServiceController {
     public ModelAndView reviewComment(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("place") String place, @PathVariable("userId") int userId, @PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		if(userId == 0) {
-			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please login first") + "</p>");
+			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please login first",cookie) + "</p>");
 		}else if(UserDao.canUserComment(userId, serviceId)) {
 			
 				String comment = request.getParameter("comment");
 							
 				if(!Validation.validateText(comment)) {
-					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment") + "</p>");	
+					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment",cookie) + "</p>");	
 				}else {
 						
 					ServiceDao.insertComment(userId, serviceId, comment);						
 			}
 		}
 				else {
-				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service") + "</p>");
+				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service",cookie) + "</p>");
 			}
 		
 		model.addAttribute("serviceId", serviceId);
@@ -465,21 +465,21 @@ public class ServiceController {
     public ModelAndView clinicComment(@CookieValue(value = "lang", defaultValue="en") String cookie, @PathVariable("userId") int userId, @PathVariable("clinicId") int clinicId, ModelAndView mav, ModelMap model, HttpServletRequest request)
     		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, org.json.simple.parser.ParseException, JSONException, IOException {
 		
-		Translator t = new Translator(cookie);
+		Translator t = new Translator();
 		model.addAttribute("lang", cookie);
 		if(userId == 0) {
-			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please login first") + "</p>");
+			request.setAttribute("commentLoginFirst", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Please login first",cookie) + "</p>");
 		}else if(UserDao.canUserComment(userId, clinicId)) {
 			
 				String comment = request.getParameter("comment");
 							
 				if(!Validation.validateText(comment)) {
-					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment") + "</p>");	
+					request.setAttribute("invalidComment", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid characters in your comment",cookie) + "</p>");	
 				}else {
 					ClinicDao.insertComment(userId, clinicId, comment);
 				}				
 			}else {
-				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service") + "</p>");
+				request.setAttribute("commentsLimitExceeded", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("sorry you reached the maximum number of comments for this service",cookie) + "</p>");
 			}
 		
 		model.addAttribute("clinicId", clinicId);
@@ -558,11 +558,7 @@ public class ServiceController {
 		}
 		return new ModelAndView("redirect:/" +  request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));	
 	}
-<<<<<<< HEAD
 
-	*/
-=======
->>>>>>> c8d07d53aafff251e1ee9a05cbf0b0da549ece21
 	
 	@RequestMapping(value="/HealthTrack/Service/DeleteComment/{place}/{serviceId}/{reviewId}", method = RequestMethod.GET)
 	public ModelAndView deleteComment(HttpServletRequest request, Model model, HttpSession session, @PathVariable("place") String place, @PathVariable("serviceId") int serviceId, @PathVariable("reviewId") int reviewId)

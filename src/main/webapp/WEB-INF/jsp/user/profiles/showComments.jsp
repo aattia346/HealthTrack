@@ -23,7 +23,7 @@
 <% 
 
 	String lang = (String)request.getAttribute("lang");
-	Translator t = new Translator(lang);
+	Translator t = new Translator();
 
 	String username = (String)session.getAttribute("username");
 	
@@ -43,7 +43,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= t.write(service.getServiceName()) + " " + t.write("Reviews") %></title>
+    <title><%= t.write(service.getServiceName(),lang) + " " + t.write("Reviews",lang) %></title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -101,29 +101,24 @@
     </head>    
 <body>
     <div class="translation">
-    	<img title="<%= t.write("english") %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png">
-    	<img id="ar" class="translate" title="<%= t.write("arabic") %>" src="/user/layout/images/egypt.svg">
+    	<img title="<%= t.write("english",lang) %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png">
+    	<img id="ar" class="translate" title="<%= t.write("arabic",lang) %>" src="/user/layout/images/egypt.svg">
     </div>
 	<div class="container">
         <div class="breadcrumbs">
             <div class="col-sm-8">
                 <div class="page-header float-left">
                     <div class="page-title">
-                       <h2><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service") %></a></h2>
+                       <h2><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service",lang) %></a></h2>
                     </div>
                 </div>
             </div>
              <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-<<<<<<< HEAD
-                        <ol class="breadcrumb text-right">
-                           
-                            <li><%= t.write("Comments",lang) %></li>
-                        </ol>
-=======
-                        <h2><%= t.write(service.getServiceName()) + t.write("/") + t.write("Reviews") %></h2>
->>>>>>> c8d07d53aafff251e1ee9a05cbf0b0da549ece21
+
+                        <h2><%= t.write(service.getServiceName(),lang) + t.write("/",lang) + t.write("Reviews",lang) %></h2>
+
                     </div>
                 </div>
             </div>
@@ -135,79 +130,28 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-<<<<<<< HEAD
-                            <strong class="card-title"><%= t.write("Data Table",lang) %></strong>
-=======
-                            <strong class="card-title"><%=t.write("Bookings' detials") %></strong>
->>>>>>> c8d07d53aafff251e1ee9a05cbf0b0da549ece21
+
+                            <strong class="card-title"><%=t.write("Bookings' detials",lang) %></strong>
+
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-<<<<<<< HEAD
-                      	
-                        <th><%= t.write("Service Name",lang) %></th>
-                        <th><%= t.write("PlaceName",lang) %></th>
-                        <th><%= t.write("service_review",lang) %></th>
-                        <th><%= t.write("Comment",lang) %></th>
-                       
-                        
-=======
-                      	<th><%=t.write("Review ID") %></th>
-                        <th><%=t.write("Name") %></th>
-                        <th class="comment-th"><%=t.write("Comment") %></th>
-                        <th><%=t.write("At") %></th>
-                        <th><%=t.write("Action") %></th>
->>>>>>> c8d07d53aafff251e1ee9a05cbf0b0da549ece21
+
+                      	<th><%=t.write("Review ID",lang) %></th>
+                        <th><%=t.write("Name",lang) %></th>
+                        <th class="comment-th"><%=t.write("Comment",lang) %></th>
+                        <th><%=t.write("At",lang) %></th>
+                        <th><%=t.write("Action",lang) %></th>
+
                       </tr>
                     </thead>
                     <tbody>
                     
                     <c:forEach var="review" items="${reviews}">
                       	<tr>
-<<<<<<< HEAD
-                        <td><a href="/HealthTrack/profile/service/${placeType}/<%=S.getServiceId() %>" target="_blank"><%= t.write(S.getServiceName(),lang) %></a></td>
-                        <%String placename = (String)pageContext.getAttribute("placeName"); %>
-                        <td><a href="/HealthTrack/profile/${placeType}/<%=S.getServiceId() %>" target="_blank"><%= t.write(placename,lang) %></a></td>
-                         <td class="depts-td"><%=S.getServiceReview()%></td>
-                        <%
-                        
-                        List<Review> reviews= new ArrayList<Review>();		
-                		reviews=ServiceDao.getServiceReview(ServiceId);
-                		request.setAttribute("reviews",reviews); 
-                		
-                		%>
-                        
-                       
-                        <td>
-                        
-                        	<div class="dept-in-hospital-table">
-                        	<table id="bootstrap-data-table" class="table table-striped table-bordered"><thead>
-                        	<tr>
-                        	<th><%= t.write("Comment",lang) %></th>
-                        	<th><%= t.write("Show Button",lang) %></th>
-                        	<th><%= t.write("Delete Button",lang) %></th>
-                        	</tr>
-                        	</thead>
-                        	<tbody>
-                        	<c:forEach var="review" items="${reviews}">
-                        	<% Review r = (Review)pageContext.getAttribute("review"); %>
-	                        	 <tr>
-	                        	  <td> <%= t.write(r.getComment(),lang) %></td>
-	                        	  <td> <a href="/HealthTrack/user/unban" class="btn btn-success confirm-unBan-user"><%= t.write("show",lang) %></a> </td>
-	                        	  <td><a href="/HealthTrack/admin/<%=username%>/<%=ServiceId %>/<%=placeType%>/review/delete/${review.reviewId}/showComments" class="btn btn-success confirm-unBan-user"><%= t.write("Delete",lang) %></a></td>
-	                        	 </tr>
-	                        	   </c:forEach>
-	                        	  </tbody>
-                        	</table>
-                        	</div>
-                       </td>
-                       
-                      </tr>
-                      
-                    
-=======
+
                         <td>${review.reviewId}</td>
                         <td>${review.userFirstName} ${booking.userLastName}</td>
                         <td>${review.comment}</td>
@@ -216,14 +160,14 @@
 	                        <div>
 	                        	<% Review r = (Review)pageContext.getAttribute("review");
 	                        	System.out.println(r.getShowComment()); %>
-		                    	<% if(r.getShowComment()==0){ %><a class="confirm-show-comment dashboard-btn" href="/HealthTrack/Service/ShowComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Confirm This Booking") %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
-		                     	<a class="confirm-hide-comment dashboard-btn" href="/HealthTrack/Service/HideComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Unconfirm This Booking") %>"><i class="fa fa-close"></i></a> <% } %>
-	                         	<a class="confirm-delete-comment dashboard-btn" href="/HealthTrack/Service/DeleteComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Delete This Booking") %>"><i class="fa fa-trash"></i></a> 	
+		                    	<% if(r.getShowComment()==0){ %><a class="confirm-show-comment dashboard-btn" href="/HealthTrack/Service/ShowComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
+		                     	<a class="confirm-hide-comment dashboard-btn" href="/HealthTrack/Service/HideComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a> <% } %>
+	                         	<a class="confirm-delete-comment dashboard-btn" href="/HealthTrack/Service/DeleteComment/<%= place %>/${serviceId}/${review.reviewId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
 	                         </div>
                         </td>     
                         </tr>                 
                       </c:forEach>
->>>>>>> c8d07d53aafff251e1ee9a05cbf0b0da549ece21
+
                     
                     </tbody>
                   </table>

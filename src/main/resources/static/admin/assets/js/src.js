@@ -70,5 +70,22 @@ $(".confirm-delete-service").click(function(){
     
 });
 
+$(".confirm-delete-center").click(function(){
+    
+    return confirm("Are you sure you want to delete this center?");
+    
+});
+
+$(".confirm-delete-clinic").click(function(){
+    
+    return confirm("Are you sure you want to delete this clinic?");
+    
+});
+$(".confirm-delete-pharmacy").click(function(){
+    
+    return confirm("Are you sure you want to delete this pharmacy?");
+    
+});
+
 });	
 
