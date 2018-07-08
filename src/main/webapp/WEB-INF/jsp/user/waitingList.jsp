@@ -35,8 +35,10 @@
                         </div>
                         ${invalidService}
                         <div class="form-group">
+
                             <input type="submit" value="<%= t.write("submit",lang) %>" class="form-control btn btn-danger">
-                            <div class="waiting-icon submit-icon"><i class="fa fa-send fa-2x"></i></div>
+                            <div class="waiting-icon submit-icon"><i class="fab fa-telegram-plane fa-2x"></i></div>
+
                         </div>
                     </form>
             </div>

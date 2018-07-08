@@ -5,13 +5,10 @@ import java.util.Date;
 
 public class Booking extends Service{
 
-	int bookingId, serviceId, userId;
+	int bookingId, serviceId, userId, age, clinicId, status;
 	String firstName, lastName, bookingPhone, msg, sex;
-	int age, clinicId;
 	Date dateFrom, dateTo, dayOfBooking, timeOfBooking;
 	Time timeFrom;
-	int status;
-	
 	
 	public int getClinicId() {
 		return clinicId;
@@ -82,12 +79,6 @@ public class Booking extends Service{
 	}
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
-	}
-	public int getServiceId() {
-		return serviceId;
-	}
-	public void setServiceId(int serviceId) {
-		this.serviceId = serviceId;
 	}
 	public Date getDateFrom() {
 		return dateFrom;

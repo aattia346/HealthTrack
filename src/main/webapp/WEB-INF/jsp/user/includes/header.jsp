@@ -58,7 +58,9 @@
 	                                <span class="caret"></span>
 	                             </span>
 	                                <ul class="dropdown-menu text-capitalize">
-	                                    <li><a href="#"><%= t.write("my profile",lang) %></a></li>
+
+	                                    <li><a href="/HealthTrack/MyProfile"><%= t.write("my profile",lang) %></a></li>
+
 	                                    <li><a href="#">My Ads</a></li>
 	                                    <li><a href="#">New Item</a></li>
 	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword"><%= t.write("change password",lang) %></a></li>
@@ -106,6 +108,29 @@
                                     <!-- Appointment Button -->
                                     <a href="/HealthTrack/Emergency" class="btn medilife-appoint-btn ml-30"><%= t.write("for",lang) %> <span><%= t.write("emergencies",lang) %></span> <%= t.write("click here",lang) %></a>
                                 </div>
+                         <% if(sessionExist){ %>
+                        <div class="navbar-user">
+	                         <div class="btn-group pull-right">
+	                            <span class="btn btn-default dropdown-toggle btn-sm user-dropdown" data-toggle="dropdown">
+	                                <%= headerUsername %>
+	                                <span class="caret"></span>
+	                             </span>
+	                                <ul class="dropdown-menu text-capitalize">
+	                                    <li><a href="/HealthTrack/MyProfile"><%= t.write("my profile",lang) %></a></li>
+	                                    <li><a href="#">My Ads</a></li>
+	                                    <li><a href="#">New Item</a></li>
+	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword"><%= t.write("change password",lang) %></a></li>
+	                                    <li><a href="/HealthTrack/logout"><%= t.write("logout",lang) %></a></li>
+	                                </ul>
+	                        </div>
+	                        </div>
+	                        <% }else{ %>
+	                        <div class="mobile-view">
+                        		<div class='mobile-view-login-register login-register pull-right text-capitalize'><a href="/HealthTrack/login"><%= t.write("login",lang) %></a>&nbsp; | &nbsp; <a href="/HealthTrack/signup"><%= t.write("signup",lang) %></a></div>
+	                        	<br><br><br>
+	                        <% }%>
+	                       	<div class="mobile-view-translation translation"><img title="<%= t.write("english",lang) %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png"><img id="ar" class="translate" title="<%= t.write("arabic",lang) %>" src="/user/layout/images/egypt.svg"></div>
+	                    </div>
                              </nav>
                         </div>
                     </div>

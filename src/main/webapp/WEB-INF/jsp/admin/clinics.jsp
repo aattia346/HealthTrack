@@ -76,7 +76,7 @@
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/<%= clinic.getAdminId() %>/edit" title="Edit this clinic"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/delete/<%= clinic.getClinicId() %>" title="Delete this hospital"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-clinic" href="/HealthTrack/admin/<%= admin.getUsername() %>/clinic/delete/<%= clinic.getClinicId() %>" title="Delete this hospital"><i class="fa fa-close"></i></a>
                         </div>
                         </td>
                       </tr>

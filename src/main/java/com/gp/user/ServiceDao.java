@@ -61,6 +61,31 @@ abstract public class ServiceDao {
 		return service;
 	}
 	
+	public static Service getServiceById(int id) throws
+	InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM service WHERE service_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		
+		Service service = new Service();		
+		service.setServiceId(result.getInt("service_id"));
+		service.setServiceName(result.getString("service_name"));
+		service.setCenterId(result.getInt("center_id"));
+		service.setDeptId(result.getInt("dept_id"));
+		service.setLastUpdated(result.getDate("last_updated"));
+		service.setFees(result.getString("fees"));
+		service.setServiceReview(result.getFloat("service_review"));
+		service.setSlotType(result.getInt("day_or_time"));
+		service.setSlot(result.getInt("slot"));
+		
+		con.close();
+		return service;
+	}
+	
 	public static List<Service> getServicesByDeptID(int deptId) 
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
@@ -402,8 +427,7 @@ abstract public class ServiceDao {
 	
 		Connection con = DBConnection.getConnection();
 		String sql = "SELECT * FROM review JOIN person ON person.user_id  = review.user_id" + 
-				" WHERE service_id=? AND comment IS NOT NULL" + 
-				" ORDER BY review_id DESC";
+				" WHERE service_id=? AND comment IS NOT NULL";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, serviceId);
 		ResultSet result = ps.executeQuery();
@@ -565,9 +589,7 @@ abstract public class ServiceDao {
 		service.setSlot(result2.getInt("slot"));
 		services.add(service);
 		}
-		
 		con.close();
-		
 		return services;
 	}
 	
@@ -580,7 +602,9 @@ abstract public class ServiceDao {
 		ps.setInt(1, id);
 		ResultSet result = ps.executeQuery();
 		result.next();
-		return result.getInt("NoOfComments");
+		int NoOfComments = result.getInt("NoOfComments");
+		con.close();
+		return NoOfComments;
 	}
 	
 	public static List<Review> get5Comments(int id) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
@@ -603,6 +627,7 @@ abstract public class ServiceDao {
 			review.setTime(result.getDate("time_of_comment"));
 			reviews.add(review);
 		}
+		con.close();
 		return reviews;
 	}
 
@@ -613,7 +638,7 @@ abstract public class ServiceDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, reviewId);
 		ps.executeUpdate();
-		
+		con.close();
 	}
 
 	public static void hideComment(int reviewId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -623,7 +648,7 @@ abstract public class ServiceDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, reviewId);
 		ps.executeUpdate();
-		
+		con.close();
 	}
 
 	public static void deleteComment(int reviewId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -633,6 +658,6 @@ abstract public class ServiceDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, reviewId);
 		ps.executeUpdate();
-		
+		con.close();
 	}
 }

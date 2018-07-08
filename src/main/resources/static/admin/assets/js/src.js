@@ -21,7 +21,23 @@ $(document).ready(function(){
 	        
 	        return confirm("Are you sure you want to verify this booking?");
 	        
-	    });
+	});
+	
+	$(".confirm-show-comment-clinic").click(function(){
+	    
+	    return confirm("Are you sure you want to show this comment?");
+	    
+	});
+	$(".confirm-hide-comment-clinic").click(function(){
+	    
+	    return confirm("Are you sure you want to hide this comment?");
+	    
+	});
+	$(".confirm-delete-comment-clinic").click(function(){
+    
+    return confirm("Are you sure you want to delete this comment?");
+    
+	});
 	$(".confirm-unverify-booking").click(function(){
 	    
 	    return confirm("Are you sure you want to unverify this booking?");

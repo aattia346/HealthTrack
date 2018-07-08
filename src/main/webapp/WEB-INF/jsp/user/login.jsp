@@ -5,52 +5,37 @@
 <%@include  file="includes/header.jsp" %>
 <div class="login-body">
 
+	
+	<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
+		<form method="post" action="/HealthTrack/login/submit">
+			<h4 class="waiting-header text-center"><%= t.write("login",lang) %></h4>
+	        <div class="form-group">
+	        	<input type="text" name="username" class="form-control" placeholder="<%=t.write("Username",lang) %>" required="required" value="${oldUsername}">
+	            <div class="waiting-icon"><i class="fa fa-user fa-2x"></i></div>
+	        </div>
+	        ${invalidUsername}
+	        <div class="form-group">
+	        	<input type="password" name="password" class="form-control" placeholder="<%=t.write("Password",lang) %>" required="required">
+	            <div class="waiting-icon"><i class="fa fa-lock fa-2x"></i></div>
+	        </div>
+	        ${notAuthenticated}
+	        <div class="form-group">
+	        	<input type="submit" value="<%= t.write("submit",lang) %>" class="form-control btn btn-primary">
+	            <div class="waiting-icon submit-icon"><i class="fab fa-telegram-plane fa-2x"></i></div>
+	        </div>
+		</form>
+		
+		<div class="form-group">
+			<a class="text-center" href="/HealthTrack/login/forgetmypassword"><%= t.write("forget your password?",lang) %></a>
+	    </div>
+	    
+	    <div class="form-group register-in-login-page">
+	    	<a href="/HealthTrack/signup" class="btn btn-danger form-control">
+	    		<%= t.write("create new account",lang) %>
+	       	</a>
+	       	<div class="register-icon-login-page"><i class="fa fa-plus fa-2x"></i> </div>
+	    </div>
+	</div>
+</div>
 
-	<div class="container login-container">
-    	<div class="row">
-                    
-        	<div class="login-header col-sm-6 col-sm-offset-4 col-lg-4">
-        		<h3 class="text-center"> LOGIN </h3>
-            </div>
-                    
-            <div class="col-lg-4 col-sm-offset-4 col-xs-12 login-form col-sm-6">
-
-            	<form method="post" action="/HealthTrack/login/submit" >
-                            
-                	<div class="form-group">
-                    	<label><%= t.write("username:",lang) %></label>
-                        <input type="text" class="form-control" name="username" placeholder="<%= t.write("username",lang) %>" required value="${oldUsername}">                          
-                    </div>
-                            
-                    ${invalidUsername}
-                            
-                    <div class="form-group">
-                    	<label><%= t.write("password:",lang) %></label>
-                        <input type="password" class="form-control" name="password" placeholder="<%= t.write("password",lang) %>" required>
-                    </div>
-                            
-          	        ${notAuthenticated}
-                            
-                    <div class="form-group">
-              	      <input type="submit" class="form-control btn btn-primary" value="<%= t.write("submit",lang) %>">
-                    </div>
-                    
-             	</form>
-                        
-                <div class="form-group">
-	                <a class="text-center" href="/HealthTrack/login/forgetmypassword"><%= t.write("forget your password?",lang) %></a>
-                </div>
-                        
-                <div class="text-center">
-                    <a href="/HealthTrack/signup" class="btn btn-danger form-control">
-                       	<i class="fa fa-plus fa-lg"></i> <%= t.write("create new account",lang) %>
-                  	</a>
-                  	
-                </div>
-                        
-        	</div>
-
-     	</div>
-    </div>
- </div>
 <%@include  file="includes/footer.jsp" %>

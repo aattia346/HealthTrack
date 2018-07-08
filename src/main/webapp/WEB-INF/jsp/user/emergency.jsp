@@ -30,22 +30,17 @@ String servicePinColor = null;
 Date today = Calendar.getInstance().getTime();
 String serviceUrl = null;
 Calendar calendar = Calendar.getInstance();
-List<Center> centers = CenterDao.getAllCenters();
-for(Center center : centers){
-	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
-	Location location = new Location(center.getLat(), center.getLang(), center.getCenterName(), "center", serviceUrl, "71e486");
-	locations.add(location);
-}
+
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
 	serviceUrl = "";
-	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), pharmacy.getPharmacyName(), "pharmacy", serviceUrl, "C35ED4");
+	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), "pharmacy", pharmacy.getPharmacyName(), serviceUrl, "C35ED4");
 	locations.add(location);
 }
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
-	Location location = new Location(clinic.getLat(), clinic.getLang(), clinic.getClinicName(), "clinic", serviceUrl, "4089C7");
+	Location location = new Location(clinic.getLat(), clinic.getLang(), "clinic", clinic.getClinicName(), serviceUrl, "4089C7");
 	locations.add(location);
 }
 
@@ -94,7 +89,7 @@ for(Service service : servicesOfCenters){
 	            <section class="emergency-parts">
 	                <div class="row">
 	                        <div class="emergency-part col-sm-4">
-	                            <a href="#" id="INCUBATOR">
+	                            <a href="#" id="Incubator">
 	                                <div class="inner-emergency-part">
 	                                    <p class="text-center"><%= t.write("Incubator",lang) %></p>
 	                                </div>
@@ -108,9 +103,11 @@ for(Service service : servicesOfCenters){
 	                        </a>
 	                    </div>
 	                    <div class="emergency-part col-sm-4">
-	                        <a href="#" id="AMB">
+	                        <a href="#" id="pharmacy">
 	                            <div class="inner-emergency-part">
-	                                <p class="text-center"><%= t.write("Ambulance",lang) %></p>
+
+	                                <p class="text-center"><%= t.write("pharmacy",lang) %></p>
+
 	                            </div>
 	                        </a>
 	                    </div>

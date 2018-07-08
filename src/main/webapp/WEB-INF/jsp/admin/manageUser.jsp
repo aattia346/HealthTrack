@@ -87,12 +87,7 @@
                               </select>                                                          
                             </div> 
                             </div> 
-					     <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Type",lang) %></label> <input maxlength="50" type="text" placeholder="<%=t.write("Enter user Type",lang) %>" class="form-control" name="type" required="required" value="${oldType}">
-					         ${invalidType}
-					         
-                          </div>
-                     </div>                  
+					                  
                           <div class="col-12">
                             <div class="form-group"><label class=" form-control-label"><%=t.write("phone",lang) %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number",lang) %>" class="form-control" name="phone" required="required" value="${oldPhone}"></div>
                             ${invalidPhone}

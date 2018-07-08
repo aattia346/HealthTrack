@@ -24,15 +24,18 @@
 
 	String lang = (String)request.getAttribute("lang");
 	Translator t = new Translator();
-
+	
 	String username = (String)session.getAttribute("username");
 	
-	int serviceId = (Integer)(request.getAttribute("serviceId"));
-	String place = (String)request.getAttribute("place");
-    Service service = ServiceDao.getServiceById(serviceId, place);
+	int clinicId = (Integer)(request.getAttribute("clinicId"));
+	
+	Clinic clinic = ClinicDao.getClinicById(clinicId);
+
     
-    List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
+    List<Booking> bookings = BookingDao.getBookingsByClinicId(clinicId);
 	request.setAttribute("bookings", bookings);
+	
+	User user = UserDao.getUserByUsername(username);
 %>
 
 <!DOCTYPE html>
@@ -40,7 +43,7 @@
     <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%= t.write(service.getServiceName(),lang) + " " + t.write("Bookings",lang) %></title>
+    <title><%= t.write(clinic.getClinicName(),lang) + " " + t.write("Bookings",lang) %></title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -103,83 +106,18 @@
             <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-
-                       <h4><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service",lang) %></a></h4>
-
+                       <h4><a href="/HealthTrack/profile/clinic/<%= user.getId() %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Clinic Page",lang) %></a></h4>
                     </div>
                 </div>
             </div>
              <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
-
-                        <h4><%= t.write(service.getServiceName(),lang) + t.write("/",lang) + t.write("Bookings",lang) %></h4>
-
+                        <h4><%= t.write(clinic.getClinicName(),lang) + t.write("/",lang) + t.write("Bookings",lang) %></h4>
                     </div>
                 </div>
             </div>
         </div>
-        <% if(service.getSlotType() == 1){ %>
-	<div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
-
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong class="card-title"><%=t.write("Bookings' detials",lang) %></strong>
-                        </div>
-                        <div class="card-body">
-                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                    <thead>
-                      <tr>
-
-                      	<th><%=t.write("Booking ID",lang) %></th>
-                        <th><%=t.write("Patient Name",lang) %></th>
-                        <th><%=t.write("Age",lang) %></th>
-                        <th><%=t.write("From",lang) %></th>
-                        <th><%=t.write("To",lang) %></th>
-                        <th><%=t.write("Date Of Booking",lang) %></th>
-                        <th><%=t.write("Phone",lang) %></th>
-                        <th><%=t.write("action",lang) %></th>
-
-                      </tr>
-                    </thead>
-                    <tbody>
-                    
-                    <c:forEach var="booking" items="${bookings}">
-                      	<tr>
-                        <td>${booking.bookingId}</td>
-                        <td>${booking.firstName} ${booking.lastName}</td>
-                        <td>${booking.age}</td>
-                        <td>${booking.dateFrom}</td>
-                        <td>${booking.dateTo}</td>
-                        <td>${booking.timeOfBooking}</td>
-                        <td>${booking.bookingPhone}</td>
-                        <td>
-	                        <div>
-	                        	<% Booking b = (Booking)pageContext.getAttribute("booking"); %>
-		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Service/VerifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
-		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Service/UnverifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a> <% } %>
-	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Service/DeleteBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
-	                         </div>
-                        </td>     
-                        </tr>                 
-                      </c:forEach>
-                    
-                    </tbody>
-                  </table>
-                        </div>
-                    </div>
-                </div>
-
-
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->	
-        
-        <% }else{ %>
-        
         <div class="content mt-3">
             <div class="animated fadeIn">
                 <div class="row">
@@ -187,50 +125,42 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-
                             <strong class="card-title"><%=t.write("Bookings' detials",lang) %></strong>
-
                         </div>
                         <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-
                       	<th><%=t.write("Booking ID",lang) %></th>
                         <th><%=t.write("Patient Name",lang) %></th>
                         <th><%=t.write("Age",lang) %></th>
                         <th><%=t.write("Day",lang) %></th>
-                        <th><%=t.write("Time",lang) %></th>
                         <th><%=t.write("Date Of Booking",lang) %></th>
                         <th><%=t.write("Phone",lang) %></th>
                         <th><%=t.write("action",lang) %></th>
-
                       </tr>
                     </thead>
                     <tbody>
                     
                     <c:forEach var="booking" items="${bookings}">
                       	<tr>
-
                         <td>${booking.bookingId}</td>
                         <td>${booking.firstName} ${booking.lastName}</td>
                         <td>${booking.age}</td>
                         <td>${booking.dayOfBooking}</td>
-                        <td>${booking.timeFrom}</td>
                         <td>${booking.timeOfBooking}</td>
                         <td>${booking.bookingPhone}</td>
                         <td>
 	                        <div>
 		                    	<% Booking b = (Booking)pageContext.getAttribute("booking"); %>
-		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Service/VerifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a><% }else{ %>
-		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Service/UnverifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a><% } %>
-	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Service/DeleteBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
+		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Clinic/VerifyBooking/<%= clinic.getClinicId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a><% }else{ %>
+		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Clinic/UnverifyBooking/<%= clinic.getClinicId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a><% } %>
+	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Clinic/DeleteBooking/<%= clinic.getClinicId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
 	                         </div>
                         </td>     
                         </tr>                 
                       </c:forEach>
                     
-
                     </tbody>
                   </table>
                         </div>
@@ -242,8 +172,6 @@
             </div><!-- .animated -->
         </div><!-- .content -->	
         
-        <% } %>
-
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
@@ -275,6 +203,5 @@
         });
     </script>
     <script src="/admin/assets/js/src.js"></script>
-    <script src="/user/layout/js/src.js"></script>
     </body>
 </html>

@@ -106,18 +106,20 @@
     </div>
 	<div class="container">
         <div class="breadcrumbs">
-            <div class="col-sm-8">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                       <h2><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service",lang) %></a></h2>
-                    </div>
-                </div>
-            </div>
-             <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="page-header float-left">
                     <div class="page-title">
 
-                        <h2><%= t.write(service.getServiceName(),lang) + t.write("/",lang) + t.write("Reviews",lang) %></h2>
+                       <h4><a href="/HealthTrack/profile/service/<%= place %>/<%= serviceId %>"><i class="fa fa-arrow-left"></i><%= t.write("Back To Service",lang) %></a></h4>
+
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-6">
+                <div class="page-header float-left">
+                    <div class="page-title">
+
+                        <h4><%= t.write(service.getServiceName(),lang) + t.write("/",lang) + t.write("Reviews",lang) %></h4>
 
                     </div>
                 </div>
@@ -131,7 +133,7 @@
                     <div class="card">
                         <div class="card-header">
 
-                            <strong class="card-title"><%=t.write("Bookings' detials",lang) %></strong>
+                            <strong class="card-title"><%=t.write("Comments' detials",lang) %></strong>
 
                         </div>
                         <div class="card-body">

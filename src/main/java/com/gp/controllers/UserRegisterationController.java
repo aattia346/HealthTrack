@@ -44,6 +44,9 @@ public class UserRegisterationController {
 			mav.setViewName("redirect:/HealthTrack/login");
 		}else {
 			String username = (String)session.getAttribute("username");
+			if(username == null) {
+				mav.setViewName("redirect:/HealthTrack/login");
+			}
 			Person person = PersonDao.getAllInfoAboutUserByUsername(username);
 			Validation.sendEmail(person.getEmail(), person.getFirstName(), person.getVerificationCode());
 			mav.setViewName("/user/insertCodeWhenForgetPassword");

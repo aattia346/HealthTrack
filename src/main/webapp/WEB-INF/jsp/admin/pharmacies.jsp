@@ -76,7 +76,7 @@
                         <%
                         System.out.println("pharmacy   wejfnwefkmwe:" + pharmacy.getAdminId());%>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/<%=pharmacy.getAdminId()%>/edit" title="<%=t.write("Edit this pharmacy",lang) %>"><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/delete/<%= pharmacy.getPharmacyId()%>" title="<%=t.write("Delete this pharmacy",lang)%>"><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-pharmacy" href="/HealthTrack/admin/<%= admin.getUsername() %>/pharmacy/delete/<%= pharmacy.getPharmacyId()%>" title="<%=t.write("Delete this pharmacy",lang)%>"><i class="fa fa-close"></i></a>
                         </div>
                         </td>
                       </tr>

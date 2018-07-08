@@ -8,9 +8,27 @@ a{
 	font-family: 'El Messiri', sans-serif;
 	overflow: hidden: 
 }
+body {
+	background-color: #F1F2F7 !important;
+}
 /*************************** login page *****************************/
 .login-body{
     background-color: #F1F2F7;
+}
+.register-in-login-page a{
+	border-radius: 0;
+    position: relative;
+}
+.register-icon-login-page{
+	position: absolute;
+    top: 0;
+    right: 3px;
+    font-size: 11px;
+    padding-left: 3px;
+    padding-top: 5px;
+    border-left: 1px solid;
+    color: #fff;
+    line-height: 2.5;
 }
 .admin-login {
 	margin-top: 120px !important;
@@ -428,6 +446,37 @@ input[type="submit"]{
 
 
 /***************************** Navbar **************************************/
+.mobile-view-login-register , .mobile-view-translation{
+	display: none;
+}
+@media (max-width: 768px){
+	.navbar-brand{
+		font-size: 17px !important;
+    	margin-top: -10px;
+	}
+	.header-area {
+		position: absolute !important;
+		top: 0;
+	}
+	.welcome-msg{
+	display: none;
+	}
+	.top-header-area{
+		height: 70px;
+	}
+	.mobile-view-login-register , .mobile-view-translation{
+	display: block;
+	}
+	.mobile-view-login-register{
+		right: 27px !important;
+	    width: 205px;
+	    top: 22px !important;
+	    font-size: 11px;
+	}
+	.mobile-view .translation{
+		margin-bottom: 10px;
+	}
+}
 @media (min-width: 767px)and (max-width: 991px){
 	.container {
     	width: 100%; !important;
@@ -474,7 +523,7 @@ input[type="submit"]{
 		margin-right: 10px;
 	}
 }
-.navbar-brand , .navbar-brand:hover{
+.navbar-brand, .navbar-brand:hover, .navbar-brand:focus{
 	line-height: 46px;
 	color: #f7f7f7;
 	font-size: 21px;
@@ -500,8 +549,8 @@ header{
 	color: #fff;
 }
 .translation img:first-of-type{
-	width: 35px;
-    height: 28px;
+	width: 39px;
+    height: 34px;
     margin: 20px;
     position: absolute;
     top: -9px;
@@ -537,15 +586,17 @@ header{
 /*======================================================================================*/
 
 /***************************** Find Service **************************************/
-
+.main-page-container{
+	margin-bottom: 50px;
+}
 .choose-service .panel-primary , .services-information .panel-primary{
     border: 1px solid #B8B8B9;
     margin-top: 20px;
     padding: 0px;
     border-radius: 20px;
     height: 346px;
-    margin-right: 8%;
-    margin-left: 3%;
+   	margin-right: 2%;
+    margin-left: 0%;
     position: relative;
 }
 #map {
@@ -562,11 +613,12 @@ header{
 .main-page-container h3{
 	margin-top: 0;
     font-weight: 800;
-    color: #fff;
+    color: #2a2a36;
     margin-bottom: 40px;
 }
 .main-page-container{
 	padding-top: 160px;
+	overflow-x: hidden;
 }
 .find-me{
     width: 92%;
@@ -597,6 +649,7 @@ label{
     font-size: 20px;
     font-weight: 800;
     line-height: 0.5;
+    color: #fff;
 }
 .custom-pin{
 	font-size: 23px;
@@ -807,7 +860,7 @@ label{
     background: #F6F6F7;
 }
 .waiting-form{
-	margin-top: 200px;
+	margin-top: 170px !important;
 	background-color: #fff;
 	padding: 4px 13px;
 	margin-bottom: 30px;
@@ -831,13 +884,103 @@ label{
     padding-right: 5px;
     margin-top: -1px;
     padding-top: 3px;
-    padding-bottom: 3px;
+    padding-bottom: 2px;
 }
 .submit-icon {
 	color: #fff;
     font-size: 11px;
     background: #d9534f;
     border-left: 1px solid #fff;
-    padding: 5px 5px;
+    padding: 4px 5px;
 }
 /*****************************************end of waiting list page*****************************************************/
+
+/*****************************************start of user page*****************************************************/
+.user-profile-body{
+	background-color: #E9EBEE;
+}
+.personal-data{
+    border: 1px solid #CED0D4;
+    margin-top: 160px;
+    padding-top: 0px;
+}
+.personal-data-head h3{
+    color: #4b4f56;
+    line-height: 50px;
+    padding-left: 25px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.personal-data-head{
+    background-color: #F6F7F9;
+    margin-top: -20px;
+    height: 50px;
+    border-bottom: 1px solid #CED0D4;
+}
+.personal-data-details{
+    padding: 12px;
+    background-color: #fff;
+    height: 365px;
+}
+.personal-data-details legend{
+    border-bottom: 1px solid #DDDFE2;
+    color: #999DA4;
+    font-size: 18px;
+}
+.personal-data-details label{
+    color: #90949c;
+    font-size: 16px;
+    font-weight: 400;
+}
+.single-personal-info{
+    margin: 5px 0;
+    line-height: 2;
+}
+.bookings-details{
+    background-color: #fff;
+    height: 365px;
+}
+.card-head{
+    background-color: #343A40;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 13%;
+    padding-top: 9px;
+    padding-bottom: 1px;
+}
+.card-body{
+    border: 1px solid #CED0D4;
+    height: 280px;
+}
+.single-booking-info label, .single-booking-info p{
+    font-size: 12px;
+    color: #a3a3a3;
+}
+.single-booking-info p{
+	line-height: 1.3
+}
+.single-booking-info{
+    margin-top: 6px;
+    height: 14%;
+    border-bottom: 1px solid #dddfe2;
+    padding-bottom: 25px;
+}
+.single-booking-info label{
+    color: #767676
+}
+.confirmed{
+    color: #2ed573 !important;
+}
+.card-body .single-booking-info:last-of-type {
+    border-bottom: none;
+}
+.unconfirmed{
+    color: #f00 !important;
+}
+.card-head p{
+	color: #fff;
+	font-weight: 700;
+}
+.all-bookings{
+}
+/*****************************************end of user page*****************************************************/

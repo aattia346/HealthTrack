@@ -43,6 +43,7 @@ DateFormat dayFormat = new SimpleDateFormat("E");
 days[0]				 = dayFormat.format(today);
 daySelect[0]		 = tableFormat.format(today);
 boolean showForm = false;
+boolean showComment =false ;
 String username = (String)session.getAttribute("username");
 User user = new User();
 if(username != null){
@@ -54,9 +55,12 @@ if(username != null){
 	}
 	if(user.getType().equalsIgnoreCase("person")){
 		showForm = true;
+	}else if(user.getType().equalsIgnoreCase("clinic")){
+		showComment=true ;
 	}
 }
 List<Review> comments = ClinicDao.get5Comments(clinicId);
+
 %>
     <!-- Preloader -->
     <div id="preloader">
@@ -73,6 +77,11 @@ List<Review> comments = ClinicDao.get5Comments(clinicId);
                         <h3 class="breadcumb-title"><%= t.write(clinic.getClinicName(),lang) %></h3>
                         <p class="breadcumb-intro"><%= t.write(clinic.getIntro(),lang) %></p>
                     </div>
+                    <%  if(showComment){%>
+  
+     <a href="/HealthTrack/admin/<%=username%>/Clinic/${clinicId}/showComments" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Comments",lang) %></a>
+     <a href="/HealthTrack/admin/<%=username%>/Clinic/${clinicId}/showBookings"" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Bookings",lang) %></a>
+   					<% }%>
                 </div>
                 ${checkYourBooking} ${loginFirst}
             </div>
