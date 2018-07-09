@@ -69,7 +69,7 @@
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/<%= user.getId() %>/edit" title="<%= t.write("Edit this User",lang) %> "><i class="fa fa-edit"></i></a>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/delete/<%=user.getId() %>" title="<%= t.write("Delete this User",lang) %> "><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-user" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/delete/<%=user.getId() %>" title="<%= t.write("Delete this User",lang) %> "><i class="fa fa-close"></i></a>
                         <%if(user.getBan()==1){ %>
                        <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user"><%= t.write("unBan",lang) %></a>
                        

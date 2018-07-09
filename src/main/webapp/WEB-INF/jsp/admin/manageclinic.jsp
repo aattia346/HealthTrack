@@ -320,6 +320,10 @@
                       		  <label class=" form-control-label"><%=t.write("Choose the Admin",lang) %></label>
                               <select name="Admin" class="form-control">
                                 <option value="0"><%=t.write("Please select",lang) %></option>
+                                 <%
+                                User user1 =UserDao.getUserById(clinicAdminId);
+                                String clinicAdminName =user1.getUsername();
+                                %>
                                 <%
                                 	List<User> clinicUsers = UserDao.getUsers("clinic");
                                 	request.setAttribute("users", clinicUsers);
@@ -329,6 +333,7 @@
                                 User u = (User)pageContext.getAttribute("user");
                                 if(!Validation.checkIfTheUserAlreadyAdmin(u.getId() , "clinic")){ %>
 		                             <option value="${user.id}"><%= t.write(u.getUsername(),lang) %></option>
+		                             <option value="<%= clinicAdminId%>"><%= t.write(clinicAdminName,lang) %></option>
 		                             <%	} %>
                                 </c:forEach>
                               </select>

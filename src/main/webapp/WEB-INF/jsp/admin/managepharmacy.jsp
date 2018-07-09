@@ -146,6 +146,7 @@
 	                		String username = (String)session.getAttribute("username");
 	                		User admin = UserDao.getUserByUsername(username);
 		                	int pharmacyAdminId = (int)request.getAttribute("AdminId");
+		                	System.out.println("Amirandkfnksdfnknfksnf pharmacy" + pharmacyAdminId);
 		                	Pharmacy pharmacy = PharmacyDao.getPharmacyById(pharmacyAdminId);
                 	  %>
 <%@include  file="includes/header.jsp" %>
@@ -170,7 +171,7 @@
             </div>
         </div>
         
-        <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/<%=admin.getId() %>/update" method="post">
+        <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/<%=pharmacyAdminId %>/update" method="post">
         	<input type="hidden" name="pharmacyId" value="<%= pharmacy.getPharmacyId() %>">
                     <div class="card">
                       <div class="card-header"><strong><%=t.write("Pharmacy",lang) %></strong><small> <%=t.write("Form",lang) %></small></div>
@@ -180,16 +181,16 @@
                 
 					    <div class="row">
 					        <div class="form-group name1 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Center name",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Center Name",lang) %>" class="form-control" name="name" required="required" value="<%=pharmacy.getPharmacyName() %>" maxlength="50">
+					            <label for="exampleInputEmail1" class="formText"><%=t.write("Pharmacy name",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Enter Pharmacy Name",lang) %>" class="form-control" name="name" required="required" value="<%=pharmacy.getPharmacyName() %>" maxlength="50">
 					             ${invalidName}
 					             ${nameExist}
 					             ${shortName}
 					        </div>
 					
 					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Center name in Arabic",lang) %></label>
-					            <input type="text" placeholder="<%=t.write("Enter Center Name in Arabic",lang) %>" class="form-control" name="ARname" required="required" value="${oldARName}" maxlength="50">
+					            <label for="exampleInputEmail1## Heading ##" class="formText"><%=t.write("Pharmacy name in Arabic",lang) %></label>
+					            <input type="text" placeholder="<%=t.write("Enter Pharmacy Name in Arabic",lang) %>" class="form-control" name="ARname" required="required" value="${oldARName}" maxlength="50">
 					         ${invalidARName}					            
 					         ${shortARName}
 					        </div>
@@ -246,6 +247,11 @@
                               <select name="Admin" class="form-control">
                                 <option value="0"><%=t.write("Please select",lang) %></option>
                                 <%
+                                User user1 =UserDao.getUserById(pharmacyAdminId);
+                                String pharmacyAdminName =user1.getUsername();
+                                System.out.println("pharmacyAdminName" + pharmacyAdminName);
+                                %>
+                                <%
                                 	List<User> hospitalUsers = UserDao.getUsers("pharmacy");
                                 	request.setAttribute("users", hospitalUsers);
                                 %>
@@ -253,7 +259,8 @@
                                 	<%      
                            User u = (User)pageContext.getAttribute("user");
                            if(!Validation.checkIfTheUserAlreadyAdmin(u.getId(), "pharmacy")){%>
-                             <option value="${user.id}"><%= t.write(u.getUsername(),lang) %></option>
+                             <option value="<%=u.getId()%>"><%= t.write(u.getUsername(),lang) %></option>
+                              <option value="<%=pharmacyAdminId%>"><%= t.write(pharmacyAdminName,lang) %></option>
                              <%	} %>
                                 </c:forEach>
                               </select>

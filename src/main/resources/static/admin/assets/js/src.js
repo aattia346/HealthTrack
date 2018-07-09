@@ -12,11 +12,7 @@ $(document).ready(function(){
         return confirm("Are you sure you want to delete this booking?");
         
     });
-	$(".confirm-delete-booking").click(function(){
-        
-        return confirm("Are you sure you want to delete this booking?");
-        
-    });
+	
 	$(".confirm-verify-booking").click(function(){
 	        
 	        return confirm("Are you sure you want to verify this booking?");
@@ -102,6 +98,12 @@ $(".confirm-delete-pharmacy").click(function(){
     return confirm("Are you sure you want to delete this pharmacy?");
     
 });
+$(".confirm-delete-user").click(function(){
+    
+    return confirm("Are you sure you want to delete this user?");
+    
+});
+
 
 });	
 

@@ -79,7 +79,8 @@
                         	<%
                         	Service S = (Service)pageContext.getAttribute("service");
                         	%>
-                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName(),lang) %></a>
+                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName(),lang) %>    ,
+                        		   </a>
                         	</c:forEach>
                         </td>
                         <td>

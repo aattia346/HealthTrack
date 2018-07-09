@@ -61,7 +61,7 @@
                           
                           
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="${oldLastName}" maxlength="50">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter Last Name",lang) %>" class="form-control" name="lastName" required="required" value="${oldLastName}" maxlength="50">
 					             ${invalidLastName}
                        			 ${shortLastName}
                           </div> 
@@ -166,7 +166,7 @@
                           
                           
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="<%=person.getLastName() %>" maxlength="50">
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter Last Name",lang) %>" class="form-control" name="lastName" required="required" value="<%=person.getLastName() %>" maxlength="50">
 					             ${invalidLastName}
                        			 ${shortLastName}
                           </div> 

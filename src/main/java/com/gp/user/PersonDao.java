@@ -41,9 +41,10 @@ abstract public class PersonDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
 		ResultSet result = ps.executeQuery();
+		System.out.println("result" + result);
 		result.next();
 		Person person = new Person();
-		person.setUserId(result.getInt("user_id"));
+		//person.setUserId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
 		person.setLastName((result.getString("lastname")));
 		person.setEmail(result.getString("email"));

@@ -240,6 +240,12 @@
                               <select name="Admin" class="form-control">
                                 <option value="0"><%=t.write("Please select",lang) %></option>
                                 <%
+                                User user1 =UserDao.getUserById(centerAdminId);
+                                String centerAdminName =user1.getUsername();
+                              //  System.out.println("centerAdminId : "+ centerAdminId);
+                                //System.out.println("centerAdminName : "+ centerAdminName);
+                                %>
+                                <%
                                 	List<User> centerUsers = UserDao.getUsers("center");
                                 	request.setAttribute("users", centerUsers);
                                 %>
@@ -248,6 +254,7 @@
                                 User u = (User)pageContext.getAttribute("user");
                                 if(!Validation.checkIfTheUserAlreadyAdmin(u.getId() , "center")){ %>
 		                             <option value="${user.id}"><%= t.write(u.getUsername(),lang) %></option>
+		                            <option value="<%= centerAdminId%>"><%= t.write(centerAdminName ,lang) %></option>
 		                             <%	} %>
                                 </c:forEach>
                               </select>

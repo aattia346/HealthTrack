@@ -74,14 +74,8 @@
                         <td>
                         <div>
                       <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title="<%=t.write("Delete this booking",lang) %>"><i class="fa fa-close"></i></a>
-                         <%if(booking.getStatus()==0){ %>
-                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking"><%=t.write("Confirm",lang) %></a>
-                       
-                        <%}else{ %>
-                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking"><%=t.write("UnConfirm",lang) %></a>
-                       
-                        <%} %>
+                        <a class="dashboard-btn confirm-delete-booking" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/timeSlotBooking/delete/<%= booking.getBookingId() %>" title="<%=t.write("Delete this booking",lang) %>"><i class="fa fa-close"></i></a>
+                        
                         </div>
                         </td>
                       </tr>

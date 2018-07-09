@@ -68,7 +68,7 @@
                       	<tr>
                         <td>${pharmacy.pharmacyId}</td>
                         <td><a href="/HealthTrack/profile/pharmacy/<%= pharmacy.getAdminId() %>" target="_blank"><%= t.write(pharmacy.getPharmacyName(),lang) %></a></td>
-                        <td>${pharmacy.adminId}</td>
+                        <td><%= pharmacy.getAdminId() %></td>
                        
                         <td>${pharmacy.review}</td>
                         <td>

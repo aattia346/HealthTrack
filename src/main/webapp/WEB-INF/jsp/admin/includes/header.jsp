@@ -70,7 +70,7 @@
                             <li><img src="/admin/icons/if_medical_icon_3_1290986.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/centers"><%=t.write("Centers",lang) %></a></li>
                             <li><img src="/admin/icons/if_pill_36347.png" class="my-icon pharmacy-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies"><%=t.write("Pharmacies",lang) %></a></li>
                             <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/services"><%=t.write("Services",lang) %></a></li>
-                            <li><img src="/admin/icons/mri.svg" class="my-icon"><a href="/HealthTrack/admin/<%= admin.getUsername()%>/Comments"><%=t.write("Comments",lang) %></a></li>
+                            
                         </ul>
                     </li>
 

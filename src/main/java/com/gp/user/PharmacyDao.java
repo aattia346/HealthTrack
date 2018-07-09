@@ -29,6 +29,8 @@ public static List<Pharmacy> getAllPharmacies() throws InstantiationException, I
 			pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
 			pharmacy.setLat(result.getFloat("lat"));
 			pharmacy.setLang(result.getFloat("lang"));
+			pharmacy.setAdminId(result.getInt("admin_id"));
+			pharmacy.setWebsite(result.getString("website"));
 
 			pharmacies.add(pharmacy);
 		}
@@ -52,6 +54,7 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
 	pharmacy.setLat(result.getFloat("lat"));
 	pharmacy.setLang(result.getFloat("lang"));
+	pharmacy.setWebsite(result.getString("website"));
 
 	return pharmacy;
 }
@@ -60,20 +63,19 @@ public static void updatePharmacy(Pharmacy pharmacy)
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 	Connection con = DBConnection.getConnection();
-	String sql="UPDATE pharmacy "
-			+ "SET pharmacy_name=?, lat=?, lang=?, phone=?, address=?, google_maps_url=? ,intro=?, admin_id"
-			+ "WHERE pharmacy_id=?";
+	String sql=
+	"UPDATE `pharmacy` SET `pharmacy_name`=? ,`phone`=? ,`address`=? ,`google_maps_url`=? ,`lat`=? ,`lang`=? ,`admin_id`=? ,`website`=? ,`intro`=?  WHERE `pharmacy_id`=? ";
 	PreparedStatement ps = con.prepareStatement(sql);
 	
 	ps.setString(1,pharmacy.getPharmacyName());
-	ps.setFloat(2, pharmacy.getLat());
-	ps.setFloat(3, pharmacy.getLang());
-	ps.setString(4, pharmacy.getPhone());
-	ps.setString(5, pharmacy.getAddress());
-	ps.setString(6,pharmacy.getGoogle_maps_url());
-	ps.setString(7, pharmacy.getIntro());
+	ps.setString(2, pharmacy.getPhone());
+	ps.setString(3, pharmacy.getAddress());
+	ps.setString(4,pharmacy.getGoogle_maps_url());
+	ps.setFloat(5, pharmacy.getLat());
+	ps.setFloat(6, pharmacy.getLang());
+	ps.setInt(7,pharmacy.getAdminId());	
 	ps.setString(8, pharmacy.getWebsite());
-	ps.setInt(9,pharmacy.getAdminId());
+	ps.setString(9, pharmacy.getIntro());
 	ps.setInt(10,pharmacy.getPharmacyId());
 	
 	
@@ -85,8 +87,8 @@ public static void insertPharmacy(Pharmacy pharmacy)
 	
 	Connection con = DBConnection.getConnection();
 	String sql="INSERT INTO pharmacy "
-			+ "(pharmacy_name, lat, lang, phone, address, google_maps_url) "
-			+ "VALUES(?,?,?,?,?,?)";
+			+ "(pharmacy_name, lat, lang, phone, address, google_maps_url,admin_id,website,intro) "
+			+ "VALUES(?,?,?,?,?,?,?,?,?)";
 	PreparedStatement ps = con.prepareStatement(sql);
 	
 	ps.setString(1, pharmacy.getPharmacyName());
@@ -95,6 +97,9 @@ public static void insertPharmacy(Pharmacy pharmacy)
 	ps.setString(4, pharmacy.getPhone());
 	ps.setString(5,pharmacy.getAddress());
 	ps.setString(6, pharmacy.getGoogle_maps_url());
+	ps.setInt(7, pharmacy.getAdminId());
+	ps.setString(8, pharmacy.getWebsite());
+	ps.setString(9, pharmacy.getIntro());
 	
 	ps.executeUpdate();
 	

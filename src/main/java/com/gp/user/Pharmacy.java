@@ -13,13 +13,14 @@ public class Pharmacy {
 	public int getPharmacyId() {
 		return pharmacyId;
 	}
+	public int getAdminId() {
+		return adminId;
+	}
 
 	public void setAdminId(int adminId) {
 		this.adminId = adminId;
 	}
-	public int getAdminId() {
-		return adminId;
-	}
+	
 
 	public void setPharmacyId(int pharmacyId) {
 		this.pharmacyId = pharmacyId;
