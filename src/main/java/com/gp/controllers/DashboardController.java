@@ -574,6 +574,8 @@ public class DashboardController {
 						errors = true;
 					}
 					
+					
+					
 					if(admin == 0) {
 						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital",cookie)+"</p>");
 						errors = true;
@@ -810,6 +812,7 @@ public class DashboardController {
 					String phone		= request.getParameter("phone");
 					String website		= request.getParameter("website");
 					String address		= request.getParameter("address");
+					String Fees		    = request.getParameter("fees");
 					String ARname       =request.getParameter("ARname");
 					String ARintro 		= request.getParameter("ARintro");
 					String ARaddress		= request.getParameter("ARaddress");
@@ -886,6 +889,11 @@ public class DashboardController {
 						model.addAttribute("invalidPhone", "<p class=\"wrong-input \">"+t.write("Invalid Phone length: must be mobile number 11 characters or landline number 8 characters",cookie)+"</p>");
 						errors = true;
 					}
+					if(!Validation.validateFees(Fees)) {
+						model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees",cookie)+" </p>");
+						errors = true;
+					}
+					
 					if(!Validation.validateText(ARaddress)) {
 						model.addAttribute("invalidARaddress", "<p class=\"wrong-input \">"+t.write("Invalid Arabic Address",cookie)+"</p>");
 						errors = true;
@@ -957,6 +965,7 @@ public class DashboardController {
 						clinic.setLang(lang);
 						clinic.setDoctorName(doctorName);
 						clinic.setSpecialty(specialty);
+						clinic.setFees(Fees);
 						ClinicDao.updateClinic(clinic);
 						t.fileWriter(doctorName, ARdoctorName,"ar");
 						t.fileWriter(specialty, ARspecialty,"ar");

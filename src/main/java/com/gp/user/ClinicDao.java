@@ -135,9 +135,8 @@ abstract public class ClinicDao {
 		ps.setString(9, clinic.getGoogle_maps_url());
 		ps.setString(10, clinic.getDoctorName());
 		ps.setString(11, clinic.getSpecialty());
-		ps.setInt(12, clinic.getClinicId());
-		ps.setString(13, clinic.getFees());
-		
+		ps.setString(12, clinic.getFees());
+		ps.setInt(13, clinic.getClinicId());
 		ps.executeUpdate();
 		con.close();
 	}
