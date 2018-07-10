@@ -65,16 +65,16 @@
                         
                         <td><a href="/HealthTrack/profile/user/${user.id}" target="_blank">${user.id}</a></td>
                         <td><%= t.write(user.getUsername()) %></td>
-                        <td><%= t.write(user.getType()) %>${user.type}</td>
+                        <td><%= t.write(user.getType()) %></td>
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/<%= user.getId() %>/edit" title="<%= t.write("Edit this User") %> "><i class="fa fa-edit"></i></a>
                         <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/delete/<%=user.getId() %>" title="<%= t.write("Delete this User") %> "><i class="fa fa-close"></i></a>
                         <%if(user.getBan()==1){ %>
-                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user"><%= t.write("unBan") %></a>
+                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="confirm-unBan-user" title="<%= t.write("unBan") %>"><i class="fa fa-unlock-alt"></i></a>
                        
                         <%}else{ %>
-                        <a href="/HealthTrack/user/ban/<%= admin.getId() %>/${user.id}" class="btn btn-warning confirm-Ban-user"><%= t.write("Ban") %></a>
+                        <a href="/HealthTrack/user/ban/<%= admin.getId() %>/${user.id}" class="confirm-Ban-user" title="<%= t.write("Ban") %>"><i class="fa fa-ban"></i></a>
                        
                         <%} %>
                        

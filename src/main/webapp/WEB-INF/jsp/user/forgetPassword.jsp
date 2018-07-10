@@ -1,6 +1,6 @@
 <% String title="Forget Your Password"; %>
 <%@include  file="includes/header.jsp" %>
-<div class="">
+<div class="container">
 
 <div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
 	<form method="post" action="/HealthTrack/forgetmypassword/submit">

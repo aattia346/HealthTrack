@@ -281,7 +281,7 @@ public class UserLoginController {
 		if(username != null) {		
 			session.invalidate();
 		}
-		mav.setViewName("/user/login");
+		mav.setViewName("redirect:/HealthTrack/login");
 		return mav;	
 	}
 	

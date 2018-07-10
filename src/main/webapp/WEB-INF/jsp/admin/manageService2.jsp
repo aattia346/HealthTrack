@@ -70,8 +70,8 @@
                                 </c:forEach>
                               </select>
                                ${invalidName}
-                        ${nameExist}
-                         ${shortName}                            
+	                           ${nameExist}
+	                           ${shortName}                            
                             </div>
                           
 

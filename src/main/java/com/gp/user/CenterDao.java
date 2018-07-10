@@ -132,6 +132,22 @@ abstract public class CenterDao {
 		ps.executeUpdate();
 	}
 
+	public static int countCenters() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();		
+		String sql = "SELECT COUNT(center_id) AS NumOfUsers FROM center";
+		PreparedStatement ps = con.prepareStatement(sql);		
+		ResultSet result = ps.executeQuery();	
+		result.next();
+		
+		int numOfUsers = result.getInt("NumOfUsers");
+		
+		con.close();
+		
+		return numOfUsers;
+		
+	}
+
 }
 
 	

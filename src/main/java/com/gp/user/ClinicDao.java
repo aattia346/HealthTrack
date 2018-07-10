@@ -335,5 +335,21 @@ abstract public class ClinicDao {
 		con.close();
 		return B;
 	}
+	
+	public static int countClinics() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();		
+		String sql = "SELECT COUNT(clinic_id) AS NumOfUsers FROM clinic";
+		PreparedStatement ps = con.prepareStatement(sql);		
+		ResultSet result = ps.executeQuery();	
+		result.next();
+		
+		int numOfUsers = result.getInt("NumOfUsers");
+		
+		con.close();
+		
+		return numOfUsers;
+		
+	}
 
 }

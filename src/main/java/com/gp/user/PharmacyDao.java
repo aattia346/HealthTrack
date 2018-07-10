@@ -29,7 +29,9 @@ public static List<Pharmacy> getAllPharmacies() throws InstantiationException, I
 			pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
 			pharmacy.setLat(result.getFloat("lat"));
 			pharmacy.setLang(result.getFloat("lang"));
-
+			pharmacy.setAdminId(result.getInt("admin_id"));
+			pharmacy.setIntro(result.getString("intro"));
+			pharmacy.setWebsite(result.getString("website"));
 			pharmacies.add(pharmacy);
 		}
 		return pharmacies;
@@ -52,6 +54,9 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
 	pharmacy.setLat(result.getFloat("lat"));
 	pharmacy.setLang(result.getFloat("lang"));
+	pharmacy.setAdminId(result.getInt("admin_id"));
+	pharmacy.setIntro(result.getString("intro"));
+	pharmacy.setWebsite(result.getString("website"));
 
 	return pharmacy;
 }
@@ -76,7 +81,7 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	ps.executeUpdate();
 	
 }
-public static void insertPharmacy(Pharmacy pharmacy)
+	public static void insertPharmacy(Pharmacy pharmacy)
 		throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	
 	Connection con = DBConnection.getConnection();
@@ -96,6 +101,20 @@ public static void insertPharmacy(Pharmacy pharmacy)
 	
 }
 
-
+	public static int countPharmacies() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	
+	Connection con = DBConnection.getConnection();		
+	String sql = "SELECT COUNT(pharmacy_id) AS NumOfUsers FROM pharmacy";
+	PreparedStatement ps = con.prepareStatement(sql);		
+	ResultSet result = ps.executeQuery();	
+	result.next();
+	
+	int numOfUsers = result.getInt("NumOfUsers");
+	
+	con.close();
+	
+	return numOfUsers;
+	
+	}
 
 }

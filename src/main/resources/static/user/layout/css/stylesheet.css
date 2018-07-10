@@ -67,8 +67,8 @@ body {
     margin-bottom: 20px;
 }
 .wrong-input{
-    color: #f00;
-    font-size: 12px;
+    color: #f00 !important;
+    font-size: 12px !important;
 }
 .admin-login-submit-btn{
 	padding:0 !important;
@@ -318,9 +318,9 @@ input[type="submit"]{
 	font-weight: bold;
 }
 .reviewSucceeded{
-	color: #37ff12;
-    font-size: 17px;
-    font-weight: 800;
+	color: #37ff12 !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
 }
 .reviewFailed{
 	font-size: 17px;
@@ -446,12 +446,44 @@ input[type="submit"]{
 
 
 /***************************** Navbar **************************************/
+.mobile-review-navbar-user, .mobile-view{
+	display: none;
+}
+.mobile-view-emergency{
+	display: none;
+}
 .mobile-view-login-register , .mobile-view-translation{
 	display: none;
 }
 @media (max-width: 768px){
+	.mobile-review-navbar-user{
+		display: block;
+	}
+	.mobile-view-emergency , .mobile-view-emergency:hover , .mobile-view-emergency:focus{
+		display: block;
+	    position: absolute;
+	    top: 69px;
+	    margin-left: 0;
+	    background-color: #f00;
+	    width: 100%;
+	    color: #fff;
+	    font-weight: 600;
+	    font-size: 13px;
+	    text-decoration: none;
+	}
+	.mobile-view-emergency:hover{
+		color: #337ab7;
+    	background: #fafafa;
+	}
+	.medilife-appoint-btn, .medilife-appoint-btn:hover, .medilife-appoint-btn:focus{
+		width: 160%;
+		font-size: 14px;
+	}
+	.mobile-view-login-register {
+		direction: rtl;
+	}
 	.navbar-brand{
-		font-size: 17px !important;
+		font-size: 13px !important;
     	margin-top: -10px;
 	}
 	.header-area {
@@ -461,11 +493,14 @@ input[type="submit"]{
 	.welcome-msg{
 	display: none;
 	}
+	.main-header-area{
+		background-color: #081F3E;
+	}
 	.top-header-area{
-		height: 70px;
+		display: none;
 	}
 	.mobile-view-login-register , .mobile-view-translation{
-	display: block;
+		display: block;
 	}
 	.mobile-view-login-register{
 		right: 27px !important;
@@ -694,6 +729,36 @@ label{
 }
 .lab-pin{
 	color: #76c9d6;
+}
+.service-content h5{
+	color: #081F3E !important;
+}
+.service-content h5:hover{
+	color: #006CFF !important;
+}
+.medica-about-us-area{
+	background-color: #F1F2F7;
+}
+.medica-about-content h2{
+	font-size: 44px;
+    margin-bottom: 30px;
+    color: #081f3e;
+    font-weight: 700;
+}
+.about-us-btn {
+	text-align: left;
+    line-height: 35px;
+    padding-left: 20px;
+}
+.about-us-btn span , .about-us-btn span:focus{
+	text-align: center;
+    line-height: 50px;
+}
+.about-us-btn-1{
+	width: 185px;
+}
+#about{
+	background-color: #fff;
 }
 /*======================================================================================*/
 /*======================================================================================*/
@@ -981,6 +1046,42 @@ label{
 	color: #fff;
 	font-weight: 700;
 }
-.all-bookings{
-}
 /*****************************************end of user page*****************************************************/
+
+/*****************************************start of footer *****************************************************/
+.footer-logo h2{
+	font-size: 30px;
+    font-weight: 800;
+    color: #006CFF;
+}
+.footer-logo h2 span{
+	color: #fff;
+}
+.widget-title h2 {
+	color: #006CFF;
+	font-weight: 700;
+}
+.footer-widget-area p{
+	font-size: 18px;
+}
+.footer-logo:hover, .footer-logo:focus {
+	text-decoration: none;
+}
+footer {
+	margin-top: 125px;
+}
+.footer-social-info a:first-of-type svg:hover{
+	color: #D62221;
+}
+.footer-social-info a:nth-of-type(2) svg:hover{
+	color: #4267B2;
+}
+.footer-social-info a:nth-of-type(3) svg:hover{
+	color: #CB2027;
+}
+.footer-social-info a:nth-of-type(4) svg:hover{
+	color: #2AA9E0;
+}
+.footer-logo a:hover, .footer-logo a:focus{
+	text-decoration: none;
+}

@@ -27,11 +27,10 @@
 	    <script src="/admin/assets/js/lib/data-table/buttons.colVis.min.js"></script>
 	    <script src="/admin/assets/js/lib/data-table/datatables-init.js"></script>
 
-
     <script type="text/javascript">
         $(document).ready(function() {
           $('#bootstrap-data-table-export').DataTable();
-        } );
+	    });
     </script>
 	    
 	    <script>
@@ -52,9 +51,36 @@
 	            } );
 	        } )( jQuery );
 	    </script>
+	    <script>
+	    	var cookie = document.cookie;
+	    	console.log(cookie);
+		switch(cookie){	
+			case "lang=en": 
+				break;
+			case "lang=ar":
+				break;
+			default:
+				document.cookie = "lang=en;path=/";
+				location.reload();
+				break;
+		}
+		
+		$(".translate").click(function(){
+	    	
+	    	"use strict";
+
+	    	var id = $(this).attr("id");
+	    	    	
+	    	document.cookie = "lang=" + id + ";path=/"; 
+	    	    	    	
+	    	location.reload();
+	    	
+	    	});
+	    </script>
 	    <script src="/user/layout/js/jquery-3.2.1.min.js"></script>
 		<script src="/user/layout/js/bootstrap.min.js"></script>
 		<script src="/admin/assets/js/src.js"></script>
+		
     </body>
 </html>
 

@@ -48,7 +48,7 @@
                 <div class="row h-100">
                     <div class="col-12 h-100">
                         <div class="h-100 d-md-flex justify-content-between align-items-center text-capitalize">
-                            <p class="welcome-msg"><%= t.write("welcome to healthtrack") %></p>
+                            <p class="welcome-msg"><%= t.write("welcome to Health Service Navigator") %></p>
                         	<div class="translation"><img title="<%= t.write("english") %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png"><img id="ar" class="translate" title="<%= t.write("arabic") %>" src="/user/layout/images/egypt.svg"></div>
                         </div>
                         <% if(sessionExist){ %>
@@ -60,8 +60,6 @@
 	                             </span>
 	                                <ul class="dropdown-menu text-capitalize">
 	                                    <li><a href="/HealthTrack/MyProfile"><%= t.write("my profile") %></a></li>
-	                                    <li><a href="#">My Ads</a></li>
-	                                    <li><a href="#">New Item</a></li>
 	                                    <li><a href="/HealthTrack/<%= headerUsername %>/changePassword"><%= t.write("change password") %></a></li>
 	                                    <li><a href="/HealthTrack/logout"><%= t.write("logout") %></a></li>
 	                                </ul>
@@ -90,25 +88,25 @@
                                     <!-- Menu Area -->
                                     <ul class="navbar-nav ml-auto text-capitalize">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html"><%= t.write("home") %></a>
+                                            <a class="nav-link" href="/HealthTrack"><%= t.write("home") %></a>
                                         </li>
                                         
                                         <li class="nav-item">
-                                            <a class="nav-link" href="about-us.html"><%= t.write("about us") %></a>
+                                            <a class="nav-link" href="/HealthTrack#about"><%= t.write("about us") %></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="services.html"><%= t.write("services") %></a>
+                                            <a class="nav-link" href="/HealthTrack#services"><%= t.write("services") %></a>
                                         </li>
                                        
                                         <li class="nav-item">
-                                            <a class="nav-link" href="contact.html"><%= t.write("contact") %></a>
+                                            <a class="nav-link" href="/HealthTrack#contact"><%= t.write("contact") %></a>
                                         </li>
                                     </ul>
                                     <!-- Appointment Button -->
                                     <a href="/HealthTrack/Emergency" class="btn medilife-appoint-btn ml-30"><%= t.write("for") %> <span><%= t.write("emergencies") %></span> <%= t.write("click here") %></a>
                                 </div>
                          <% if(sessionExist){ %>
-                        <div class="navbar-user">
+                        <div class="mobile-review-navbar-user navbar-user col-sm-hidden">
 	                         <div class="btn-group pull-right">
 	                            <span class="btn btn-default dropdown-toggle btn-sm user-dropdown" data-toggle="dropdown">
 	                                <%= headerUsername %>
@@ -122,7 +120,7 @@
 	                                    <li><a href="/HealthTrack/logout"><%= t.write("logout") %></a></li>
 	                                </ul>
 	                        </div>
-	                        </div>
+	                     </div>
 	                        <% }else{ %>
 	                        <div class="mobile-view">
                         		<div class='mobile-view-login-register login-register pull-right text-capitalize'><a href="/HealthTrack/login"><%= t.write("login") %></a>&nbsp; | &nbsp; <a href="/HealthTrack/signup"><%= t.write("signup") %></a></div>
@@ -130,6 +128,7 @@
 	                        <% }%>
 	                       	<div class="mobile-view-translation translation"><img title="<%= t.write("english") %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png"><img id="ar" class="translate" title="<%= t.write("arabic") %>" src="/user/layout/images/egypt.svg"></div>
 	                    </div>
+					    	<a href="/HealthTrack/Emergency" class="mobile-view-emergency text-center">For <span>Emergencies</span> Click Here</a>
                              </nav>
                         </div>
                     </div>

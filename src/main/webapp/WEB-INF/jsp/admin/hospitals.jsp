@@ -54,7 +54,7 @@
                       	<th><%=t.write("ID") %></th>
                         <th><%=t.write("Name") %></th>
                         <th><%=t.write("Admin") %></th>
-                        <th><%=t.write("Departments") %></th>
+                        <th class="td-hide-centers"><%=t.write("Departments") %></th>
                         <th><%=t.write("Review") %></th>
                         <th><%=t.write("Action") %></th>
                       </tr>
@@ -71,13 +71,13 @@
                         <td>${hospital.hospitalId}</td>
                         <td><a href="/HealthTrack/profile/hospital/${hospital.adminId}" target="_blank"><%= t.write(hospital.getHospitalName()) %></a></td>
                         <td>${hospital.adminId}</td>
-                        <td class="depts-td">
+                        <td class="depts-td td-hide-centers">
                         <c:forEach var="dept" items="${depts}">
                         <%
                         Department D 		= (Department)pageContext.getAttribute("dept");
                         %>
                         	<div class="dept-in-hospital-table">
-	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}"><%= t.write(D.getDeptName()) %>${dept.deptName}</a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/departments#dept-${dept.deptId}"><%= t.write(D.getDeptName()) %></a>
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}" class="confirm-delete-dept"><i class="fa fa-close" title=<%=t.write("Delete this department") %>> </i> </a>
                         	</div>
                         </c:forEach>
@@ -114,7 +114,7 @@
 	                      </form>
                         
                         </td>
-                        <td>${hospital.review}</td>
+                        <td><%= Math.round(hospital.getReview()*10.0)/10.0 %></td>
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/<%= hospital.getAdminId() %>/edit" title=<%=t.write("Edit this hospital") %>><i class="fa fa-edit"></i></a>

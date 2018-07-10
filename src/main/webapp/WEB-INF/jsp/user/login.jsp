@@ -2,8 +2,7 @@
 <% String title="Login";%>
 
 <%@include  file="includes/header.jsp" %>
-<div class="login-body">
-	
+<div class="container">
 	<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
 		<form method="post" action="/HealthTrack/login/submit">
 			<h4 class="waiting-header text-center"><%= t.write("login") %></h4>
@@ -36,3 +35,8 @@
 	</div>
 </div>
 <%@include  file="includes/footer.jsp" %>
+<script>
+	$(document).ready(function(){
+		$("input[name='username']").focus();
+	});
+</script>

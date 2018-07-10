@@ -61,7 +61,7 @@
                       <tr>
                       	<th><%=t.write("ID") %></th>
                         <th><%=t.write("Name") %></th>
-                        <th><%=t.write("Hospital or Center") %></th>
+                        <th><%=t.write("Place") %></th>
                         <th><%=t.write("Review") %></th>
                         <th>Action</th>
                       </tr>
@@ -74,16 +74,15 @@
                         <td><a href="/HealthTrack/profile/service/${service.serviceId}" target="_blank"><%= t.write(s.getServiceName()) %></a></td>
                         
                         <%
-                        	
-                        	String placeType;
+                        	String placeType = null;
                         	if(s.getCenterId() == 0){
                         		placeType = "hospital";
                         	}else{
                         		placeType = "center";
-                        	}
+                        	}           
                         %>
                         
-                        <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank"><%= t.write(s.getHospitalName()) %> <%= t.write(s.getCenterName()) %></a></td>
+                        <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank"><% if(s.getCenterName() == null){ %> <%= t.write(s.getHospitalName()) %> <% }else{ %> <%= t.write(s.getCenterName()) %>  <% } %></a></td>
                         <td>${service.serviceReview}</td>
                         <td>
                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/${service.serviceId}/edit" title="<%=t.write("Edit this Service") %>"><i class="fa fa-edit"></i></a>
@@ -97,7 +96,7 @@
                   </table>
                         </div>
                     </div>
-                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Service2/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Service") %> </a>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Service/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Service") %> </a>
                 </div>
 
 

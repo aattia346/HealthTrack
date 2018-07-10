@@ -54,8 +54,9 @@
                       	<th><%=t.write("Booking Id") %></th>
                         <th><%=t.write("User Id") %></th>
                         <th><%=t.write("Service Id") %></th>
-                        <th><%=t.write("Date") %></th>
-                        <th><%=t.write("Action") %></th>
+                        <th><%=t.write("from") %></th>
+                        <th><%=t.write("to") %></th>
+                        <th><%=t.write("Manage") %></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -70,17 +71,17 @@
                         <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank">${booking.userId}</a></td>
                         <td><a href="/HealthTrack/profile/service/${booking.serviceId}" target="_blank">${booking.serviceId}</a></td>
                      
-                        <td>From:${booking.dateFrom} ${booking.timeFrom}>>>
-                          To:${booking.dateTo}</td>                  
+                        <td>${booking.dateFrom} ${booking.timeFrom}</td> 
+                        <td>${booking.dateTo}</td>                  
                         <td>
                         <div>
                       <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title=<%=t.write("Delete this booking") %>><i class="fa fa-close"></i></a>
+                        <a class="dashboard-btn confirm-delete-booking" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/delete/<%= booking.getBookingId() %>" title=<%=t.write("Delete this booking") %>><i class="fa fa-trash"></i></a>
                          <%if(booking.getStatus()==0){ %>
-                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-success confirm-verify-booking"><%=t.write("Confirm") %></a>
+                       <a href="/HealthTrack/booking/confirm/<%= admin.getId() %>/${booking.bookingId}" class="confirm-verify-booking" title=<%=t.write("confirm") %>><i class="fa fa-check-circle"></i></a>
                        
                         <%}else{ %>
-                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="btn btn-warning confirm-unverify-booking"><%=t.write("UnConfirm") %></a>
+                        <a href="/HealthTrack/booking/unconfirm/<%= admin.getId() %>/${booking.bookingId}" class="confirm-unverify-booking" title=<%=t.write("unConfirm") %>><i class="fa fa-close"></i></a>
                        
                         <%} %>
                         </div>

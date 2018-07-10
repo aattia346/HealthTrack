@@ -57,7 +57,7 @@
                         <th><%=t.write("Name") %></th>
                         <th><%=t.write("Hospital") %></th>
                         <th><%=t.write("Admin") %></th>
-                        <th><%=t.write("Services") %></th>
+                        <th class="td-hide-centers"><%=t.write("Services") %></th>
                         <th><%=t.write("Action") %></th>
                       </tr>
                     </thead>
@@ -72,18 +72,21 @@
                       	<tr id="dept-${D.deptId}">
                         <td>${dept.deptId}</td>
                         <td><%= t.write(D.getDeptName()) %></td>
-                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName()) %>${dept.hospitalName}</a></td>
+                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName()) %></a></td>
                         <td>${dept.adminId}</td>
-                        <td>
+                        <td class="td-hide-centers">
                         	<c:forEach var="service" items="${services}">
                         	<%
                         	Service S = (Service)pageContext.getAttribute("service");
                         	%>
-                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName()) %></a>
+                        	<div class="dept-in-hospital-table">
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}"><%= t.write(S.getServiceName()) %></a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/delete/service/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title=<%=t.write("Delete this department") %>> </i> </a>
+                        	</div>                        	
                         	</c:forEach>
                         </td>
                         <td>
-                        <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i><%=t.write("Delete") %> </a>
+                        <a title="<%=t.write("Delete") %>" class="dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i></a>
                         </td>
                       </tr>
                       

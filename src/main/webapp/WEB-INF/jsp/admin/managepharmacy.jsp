@@ -136,8 +136,7 @@
                         ${nameExist}
                         ${shortName}
                         <div class="form-group"><label class=" form-control-label"><%=t.write("Intro") %></label><textarea placeholder="<%=t.write("Say something about the pharmacy") %>" class="form-control" name="intro" required="required" maxlength="254"><%= pharmacy.getIntro() %></textarea></div>
-                        ${invalidIntro} ${shortIntro}
-                      
+                        ${invalidIntro} ${shortIntro}                     
                         <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL") %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps") %>" class="form-control" name="url" required="required" value="<%= pharmacy.getGoogle_maps_url() %>"></div>
                         ${invalidUrl}
                         <div class="row form-group">

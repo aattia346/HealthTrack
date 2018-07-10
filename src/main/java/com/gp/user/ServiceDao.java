@@ -56,6 +56,7 @@ abstract public class ServiceDao {
 		service.setSlot(result.getInt("slot"));
 		service.setLang(result.getFloat("lang"));
 		service.setLat(result.getFloat("lat"));
+		service.setIntro(result.getString("intro"));
 		
 		con.close();
 		return service;
@@ -304,6 +305,7 @@ abstract public class ServiceDao {
 		services.add("MRI");
 		services.add("ICU");
 		services.add("CT");
+		services.add("Incubator");
 		
 		return services;
 	}
@@ -660,4 +662,32 @@ abstract public class ServiceDao {
 		ps.executeUpdate();
 		con.close();
 	}
+	
+	public static int countServices() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();		
+		String sql = "SELECT COUNT(service_id) AS NumOfUsers FROM service";
+		PreparedStatement ps = con.prepareStatement(sql);		
+		ResultSet result = ps.executeQuery();	
+		result.next();
+		
+		int numOfUsers = result.getInt("NumOfUsers");
+		
+		con.close();
+		
+		return numOfUsers;
+		
+	}
+
+	public static void deleteService(int serviceId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql="DELETE FROM service WHERE service_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, serviceId);
+		ps.executeUpdate();
+		con.close();
+		
+	}
+
 }

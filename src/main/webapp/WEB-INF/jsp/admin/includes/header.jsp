@@ -1,10 +1,19 @@
 <%@page import="com.gp.user.Translator"%>
+<%@page import="com.gp.user.ContactDao"%>
+<%@page import="com.gp.user.Contact"%>
+<%@page import="java.util.List"%> 
 <%@page import="org.apache.commons.text.WordUtils" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     
     	String lang = (String)request.getAttribute("lang");
 
     	Translator t = new Translator(lang);
+    	
+    	int unseenContacts = ContactDao.countUnseenContacts();
+    	
+    	List<Contact> contacts = ContactDao.getUnseenContacts();
+    	request.setAttribute("contacts", contacts);
     
     %>
 
@@ -38,10 +47,32 @@
 	    <link rel="stylesheet" href="/admin/assets/scss/style.css">
 	    <link rel="stylesheet" href="/admin/assets/css/stylesheet.css">
 	    <link href="/admin/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
-	     <link rel="stylesheet" href="/admin/assets/css/lib/datatable/dataTables.bootstrap.min.css">
-	    
-	
-    </head>    
+	    <link rel="stylesheet" href="/admin/assets/css/lib/datatable/dataTables.bootstrap.min.css">    
+    </head>        
+    <style>
+    	.translation {
+    		position: relative;
+    	}
+    	.translation img:first-of-type{
+			width: 39px;
+		    height: 34px;
+		    margin: 20px;
+		    position: absolute;
+		    top: -15px;
+		    right: 90px;
+		    cursor: pointer;
+		}
+		.translation img:nth-of-type(2){
+			width: 53px;
+		    height: 44px;
+		    margin: 20px;
+		    margin-right: -7px;
+		    position: absolute;
+		    top: -19px;
+		    right: 60px;
+		    cursor: pointer;
+		}
+    </style>
 <body>
 
 <aside id="left-panel" class="left-panel">
@@ -117,22 +148,15 @@
                         <div class="dropdown for-notification">
                           <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell"></i>
-                            <span class="count bg-danger">5</span>
+                            <span class="count bg-danger"><%= unseenContacts %></span>
                           </button>
                           <div class="dropdown-menu" aria-labelledby="notification">
-                            <p class="red"><%=t.write("You have 3 Notification") %></p>
-                            <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <i class="fa fa-check"></i>
-                                <p><%=t.write("Server #1 overloaded.") %></p>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <i class="fa fa-info"></i>
-                                <p><%=t.write("Server #2 overloaded.") %></p>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <i class="fa fa-warning"></i>
-                                <p><%=t.write("Server #3 overloaded.") %></p>
-                            </a>
+                            <p class="red"><%=t.write("You have") + " " + unseenContacts + " " + t.write("Notifications") %></p>
+                            	<c:forEach var="contact" items="${contacts}">
+                            		<a class="dropdown-item media bg-flat-color" href="/HealthTrack/Contacts/admin/<%= admin.getUsername() %>/${contact.contactId}">
+                            			<p><%= t.write("Contact") %>#${contact.contactId}  <%= t.write("from") %> ${contact.name}</p>
+                            		</a>
+                            	</c:forEach>
                           </div>
                         </div>
                     </div>
@@ -145,34 +169,18 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i><%=t.write("My Profile") %></a>
+                                <a class="nav-link" href="/HealthTrack/admin/dashboard"><i class="fa fa- user"></i><%=t.write("Dashboard") %></a>
 
-                                <a class="nav-link" href="#"><i class="fa fa- user"></i><%=t.write("Notifications") %> <span class="count">13</span></a>
+                                <a class="nav-link" href="#"><i class="fa fa- user"></i><%=t.write("Contacts") %> <span class="count"><%= ContactDao.countUnseenContacts() %></span></a>
 
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i><%=t.write("Settings") %></a>
+                                <a class="nav-link" href="/HealthTrack/<%= admin %>/changePassword"><i class="fa fa -cog"></i><%=t.write("Change Password") %></a>
 
-                                <a class="nav-link" href="#"><i class="fa fa-power -off"></i><%=t.write("Logout") %></a>
+                                <a class="nav-link" href="/HealthTrack/admin/logout"><i class="fa fa-power -off"></i><%=t.write("Logout") %></a>
                         </div>
                     </div>
-
-                    <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
-                            <i class="flag-icon flag-icon-us"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="language" >
-                            <div class="dropdown-item">
-                                <span class="flag-icon flag-icon-fr"></span>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-es"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-us"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-it"></i>
-                            </div>
-                        </div>
+                    <div class="translation">
+                   		<img title="<%= t.write("english") %>" id="en" class="translate text-capitalize" src="/user/layout/images/england.png">
+                   		<img id="ar" class="translate" title="<%= t.write("arabic") %>" src="/user/layout/images/egypt.svg">
                     </div>
 
                 </div>

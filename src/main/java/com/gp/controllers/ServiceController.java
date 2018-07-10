@@ -692,7 +692,7 @@ public class ServiceController {
 		if (username == null) {
 			mav.setViewName("/admin/login");
 		} else {
-			if (Validation.checkIfSomethingExists(place + "_id", place, placeId)) {
+			if (Validation.checkIfSomethingExists(place + "_id", place, placeId) && Validation.checkIfTheUserIsAdmin(username)) {
 				HospitalDao.deleteSomthing(place, place + "_id", Integer.parseInt(placeId));
 				mav.setViewName(
 						"redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + placeType + "/" + url);
@@ -806,4 +806,16 @@ public class ServiceController {
 		return new ModelAndView(
 				"redirect:/" + request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 	}
+	
+	@RequestMapping(value = "/HealthTrack/admin/{username}/delete/service/{serviceId}", method = RequestMethod.GET)
+	public ModelAndView deleteService(HttpServletRequest request, Model model, HttpSession session, @PathVariable("serviceId") int serviceId, @PathVariable("username") String username)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		if (username.equals((String) session.getAttribute("username")) && Validation.checkIfTheUserIsAdmin(username)) {
+			ServiceDao.deleteService(serviceId);
+		}
+		return new ModelAndView(
+				"redirect:/" + request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
+	}
+	
 }

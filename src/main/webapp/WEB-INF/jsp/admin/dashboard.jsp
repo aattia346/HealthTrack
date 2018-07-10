@@ -1,5 +1,10 @@
 <%@page import="com.gp.user.User"%>
 <%@page import="com.gp.user.UserDao"%>
+<%@page import="com.gp.user.HospitalDao"%>
+<%@page import="com.gp.user.ClinicDao"%>
+<%@page import="com.gp.user.CenterDao"%>
+<%@page import="com.gp.user.PharmacyDao"%>
+<%@page import="com.gp.user.ServiceDao"%>
 <% 	String title = "Dashboard";
 	String username = (String)session.getAttribute("username");
 	User admin = UserDao.getUserByUsername(username);
@@ -27,19 +32,18 @@
             </div>
         </div>
 
-        <div class="content mt-3">
+		<div class="content mt-3">
 
             <div class="col-sm-12">
-                <div class="alert  alert-success alert-dismissible fade show" role="alert">
-                  <span class="badge badge-pill badge-success"><%=t.write("Success") %></span> <%=t.write("You successfully read this important alert message.") %>
+                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                  <span class="badge badge-pill badge-danger"><%=t.write("Warning") %></span> <%=t.write("You successfully read this important alert message.<br> If you are not the authorized person you will be sued") %>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             </div>
 
-
-           <div class="col-sm-6 col-lg-3">
+			<div class="col-sm-6 col-lg-3">
                 <div class="card text-white bg-flat-color-1">
                     <div class="card-body pb-0">
                         <div class="dropdown float-right">
@@ -48,16 +52,70 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
+                                    <a class="dropdown-item" href="/HealthTrack/admin/<%= username %>/users"><%= t.write("Manage") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+							<span class="count"><%= UserDao.countUsers() %></span>
                         </h4>
-                        <p class="text-light"><%=t.write("Members online") %></p>
+                        <p class="text-light"><%=t.write("Members") %></p>
+
+
+                        <div class="chart-wrapper px-0" style="height:70px;" height="70"/>
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--/.col-->
+            
+            <div class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-flat-color-5">
+                    <div class="card-body pb-0">
+                        <div class="dropdown float-right">
+                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu-content">
+      								<a class="dropdown-item" href="/HealthTrack/admin/<%= username %>/hospitals"><%= t.write("Manage") %></a>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mb-0">
+                            <span class="count"><%= HospitalDao.countHospitals() %></span>
+                        </h4>
+                         <p class="text-light"><%=t.write("Hospitals") %></p>
+                        <div class="chart-wrapper px-0" style="height:70px;" height="70"/>
+                            <canvas id="widgetChart1"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--/.col-->
+
+           <div class="col-sm-6 col-lg-3">
+                <div class="card text-white bg-flat-color-6">
+                    <div class="card-body pb-0">
+                        <div class="dropdown float-right">
+                            <button class="btn bg-transparent dropdown-toggle theme-toggle text-light" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown-menu-content">
+                                    <a class="dropdown-item" href="/HealthTrack/admin/<%= username %>/clinics"><%= t.write("Manage") %></a>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="mb-0">
+                            <span class="count"><%= ClinicDao.countClinics() %></span>
+                        </h4>
+                         <p class="text-light"><%=t.write("Clinics") %></p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70"/>
                             <canvas id="widgetChart1"></canvas>
@@ -78,16 +136,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
+                                    <a class="dropdown-item" href="/HealthTrack/admin/<%= username %>/pharmacies"><%= t.write("Manage") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count"><%= PharmacyDao.countPharmacies() %></span>
                         </h4>
-                        <p class="text-light"><%=t.write("Members online") %></p>
+                        	<p class="text-light"><%=t.write("Pharmacies") %></p>
 
                         <div class="chart-wrapper px-0" style="height:70px;" height="70"/>
                             <canvas id="widgetChart2"></canvas>
@@ -107,16 +163,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
+                                    <a class="dropdown-item" href="/HealthTrack/admin/<%= username %>/services"><%= t.write("Manage") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count"><%= ServiceDao.countServices() %></span>
                         </h4>
-                        <p class="text-light"><%=t.write("Members online") %></p>
+                        <p class="text-light"><%=t.write("Medical Services") %></p>
 
                     </div>
 
@@ -136,16 +190,14 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <div class="dropdown-menu-content">
-                                    <a class="dropdown-item" href="#"><%=t.write("Action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Another action") %></a>
-                                    <a class="dropdown-item" href="#"><%=t.write("Something else here") %></a>
+                                    <a class="dropdown-item" href="/HealthTrack/admin/<%= username %>/centers"><%= t.write("Manage") %></a>
                                 </div>
                             </div>
                         </div>
                         <h4 class="mb-0">
-                            <span class="count">10468</span>
+                            <span class="count"><%= CenterDao.countCenters() %></span>
                         </h4>
-                        <p class="text-light"><%=t.write("Members online") %></p>
+                        <p class="text-light"><%=t.write("Medical Centers") %></p>
 
                         <div class="chart-wrapper px-3" style="height:70px;" height="70"/>
                             <canvas id="widgetChart4"></canvas>
@@ -154,4 +206,5 @@
                     </div>
                 </div>
             </div>
+            <!--/.col-->
 <%@include  file="includes/footer.jsp" %>

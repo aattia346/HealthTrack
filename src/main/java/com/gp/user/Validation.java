@@ -234,6 +234,8 @@ abstract public class Validation {
 			admin = true;
 		}
 		
+		con.close();
+		
 		return admin;
 	}
 	

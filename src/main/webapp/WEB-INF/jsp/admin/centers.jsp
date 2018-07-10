@@ -57,7 +57,7 @@
                       	<th><%=t.write("ID") %></th>
                         <th><%=t.write("Name") %></th>
                         <th><%=t.write("Admin") %></th>
-                        <th><%=t.write("Services") %></th>
+                        <th class="td-hide-centers"><%=t.write("Services") %></th>
                         <th><%=t.write("Review") %></th>
                         <th><%=t.write("Action") %></th>
                       </tr>
@@ -81,7 +81,7 @@
                         <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank"><%=t.write(C.getCenterName()) %></a></td>
                         <td>${center.adminId}</td>
                         
-                        <td class="depts-td">
+                        <td class="depts-td td-hide-centers">
                         <c:forEach var="service" items="${services}">
                         <%
                         Service S=(Service)pageContext.getAttribute("service");
@@ -92,39 +92,7 @@
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title=<%=t.write("Delete this Service") %>> </i> </a>
                         	</div>
                         </c:forEach>
-                        <a class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title=<%=t.write("Add new Service") %>><i class="fa fa-plus"></i></a>
-                        <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/service/add" class="add-dept hidden add-dept-<%=C.getCenterId() %>">
-	                        	<input type="hidden" value="<%=C.getCenterId()%>" name="centerId">
-	                        	<select name="service" class="form-control select-new-dept">
-                                <%
-                                	List<String> allServices 			= ServiceDao.getServices();
-                                	
-                                	List<String> servicesNames			= new ArrayList<String>();
-                                	List<String> servicesList			= new ArrayList<String>();
-
-                                	for(Service s : services){
-                                		servicesNames.add(s.getServiceName());
-                                		;
-                                	}
-                                	for(String s : allServices){
-                                		if(!servicesNames.contains(s)){
-                                			servicesList.add(s);
-                                		}
-                                	}
-                                	request.setAttribute("serv", servicesList); %>
-                                	<%
-                                	String L =(String)pageContext.getAttribute("serv");
-                                	%>
-                               		<option value="0"><%=t.write("select a Service") %></option>
-                           			<c:forEach var="service" items="${serv}">  
-			                       		<option value="${service}"><%= t.write(L) %> </option>
-		                           </c:forEach>
-                                	<%	
-                                %>
-                                </select>
-                                <button class="btn submit-dept btn-success btn-sm" type="submit"><i class="fa fa-send"></i></button>
-	                      </form>
-                        
+                        <a href="/HealthTrack/admin/<%= username %>/Service/add" class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title=<%=t.write("Add new Service") %>><i class="fa fa-plus"></i></a>                        
                         </td>
                         <td>${center.review}</td>
                         <td>
