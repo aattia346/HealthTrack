@@ -176,6 +176,7 @@
                     <div class="card">
                       <div class="card-header"><strong><%=t.write("Pharmacy",lang) %></strong><small> <%=t.write("Form",lang) %></small></div>
                       <div class="card-body card-block">
+
                       
                       <div class="container">
                 
@@ -230,6 +231,7 @@
                     
                        
                         <div class="form-group"><label class=" form-control-label"><%=t.write("Google Maps URL",lang) %></label><input type="text" placeholder="<%=t.write("Enter the link of the location of google maps",lang) %>" class="form-control" name="url" required="required" value="<%= pharmacy.getGoogle_maps_url() %>"></div>
+
                         ${invalidUrl}
                         <div class="row form-group">
                           <div class="col-12">

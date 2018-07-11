@@ -3,9 +3,13 @@
 <% String title="Login";%>
 
 <%@include  file="includes/header.jsp" %>
+<<<<<<< HEAD
 <div class="login-body">
 
 	
+=======
+<div class="container">
+>>>>>>> fd4ffbeb8a30a0c6b1dbd8c4a02ff2817631c8d1
 	<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
 		<form method="post" action="/HealthTrack/login/submit">
 			<h4 class="waiting-header text-center"><%= t.write("login",lang) %></h4>
@@ -37,5 +41,14 @@
 	    </div>
 	</div>
 </div>
+<<<<<<< HEAD
 
 <%@include  file="includes/footer.jsp" %>
+=======
+<%@include  file="includes/footer.jsp" %>
+<script>
+	$(document).ready(function(){
+		$("input[name='username']").focus();
+	});
+</script>
+>>>>>>> fd4ffbeb8a30a0c6b1dbd8c4a02ff2817631c8d1

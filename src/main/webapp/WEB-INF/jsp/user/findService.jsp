@@ -114,6 +114,11 @@ for(Service service : servicesOfCenters){
 }
 
 %>   
+	<style>
+		.reviewSucceeded{
+			margin-top: 25px;
+		}
+	</style>
 	<div class="main-page-container" style="background-image: url(/user/layout/images/emergency.jpg);">   
             <h3 class="text-center"><%= t.write("What are you looking for?",lang) %></h3>
 
@@ -163,9 +168,93 @@ for(Service service : servicesOfCenters){
                 </div>
                 
                 <div class="col-sm-8" id="map"></div>
-            </div>
-        
+            </div>        
 </div>
+
+<div class="medilife-features-area section-padding-100" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="features-content">
+                        <h2><%=t.write("We always put our patients first",lang) %></h2>
+                        <p><%=t.write("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.Lorem ipsum dolor sit amet, consec tetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.",lang) %></p>
+                        <a href="#services" class="btn medilife-btn mt-50 about-us-btn about-us-btn-1"><%=t.write("View the services",lang) %> <span>+</span></a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="features-thumbnail">
+                        <img src="/user/layout/images/profiles/bg-img/about1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<section class="medica-about-us-area section-padding-100-20" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="medica-about-content">
+                        <h2><%=t.write("Our Main Services",lang) %></h2>
+                        <p><%=t.write("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam;8 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.",lang) %></p>
+                        <a href="#about" class="btn medilife-btn mt-50 about-us-btn"><%=t.write("About Us",lang) %><span>+</span></a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+                        <!-- Single Service Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-service-area d-flex">
+                                <div class="service-icon col-sm-4">
+                                    <i class="fa fa-hospital"></i>
+                                </div>
+                                <div class="service-content col-sm-8">
+                                    <h5><%=t.write("Hospital",lang) %></h5>
+                                    <p><%=t.write("Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.",lang) %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Service Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-service-area d-flex">
+                                <div class="service-icon col-sm-4">
+                                    <i class="fa fa-child"></i>
+                                </div>
+                                <div class="service-content col-sm-8">
+                                    <h5><%=t.write("Incubator",lang) %></h5>
+                                    <p><%=t.write("Dolor sit amet, consecte tuer elit, sed diam nonummy nibh euismod tincidunt ut ldolore magna.",lang) %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Service Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-service-area d-flex">
+                                <div class="service-icon col-sm-4">
+                                    <i class="fa fa-user-md"></i>
+                                </div>
+                                <div class="service-content col-sm-8">
+                                    <h5><%=t.write("Clinic",lang) %></h5>
+                                    <p><%=t.write("Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.",lang) %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Service Area -->
+                        <div class="col-12 col-sm-6">
+                            <div class="single-service-area d-flex">
+                                <div class="service-icon col-sm-4">
+                                    <i class="fa fa-ambulance"></i>
+                                </div>
+                                <div class="service-content col-sm-8">
+                                    <h5><%=t.write("Emergency Room",lang) %></h5>
+                                    <p><%=t.write("Dolor sit amet, consecte tuer elit, sed diam nonummy nibh euismod tincidunt ut ldolore magna.",lang) %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 <%@include  file="includes/footer.jsp" %>
 <script>
 var selectedService = "all";

@@ -5,6 +5,9 @@
 /*======================================================================================*/
 
 /***************************** Admin Dashboard **************************************/
+.bg-flat-color-6{
+	background: #138496; 
+}
 .brand-dashboard{
 	font-size: 13px !important;
 	font-weight: 700;
@@ -34,7 +37,18 @@
 .open aside.left-panel .navbar .navbar-nav li a .menu-icon {
    display: none;
 }
-
+.bg-flat-color:nth-of-type(odd){
+	background-color: #F86C6B;
+}
+.bg-flat-color:nth-of-type(even){
+	background-color: #138496;
+}
+.bg-flat-color p{
+	color: #fff;
+}
+.bg-flat-color p:hover{
+	color: #878787
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
@@ -50,9 +64,10 @@
     font-size: 15px;
     background-color: #2196F3;
     border-radius: 3px 0 0 3px;
-    margin: 5px 1px;
+    margin: -4px 1px;
     color: #fff;
     font-weight: bold;
+    max-height: 33px;
 }
 .dept-in-hospital-table a:nth-of-type(2){
 	background: #2196f3;
@@ -104,6 +119,14 @@
 /*======================================================================================*/
 
 /***************************** Admin Dashboard/Departments **************************************/
-.dashboard-btn-delete-dept{
-	color: #fff !important;
+
+/*======================================================================================*/
+/*======================================================================================*/
+
+/***************************** Admin Dashboard/Centers **************************************/
+
+@media screen and (max-width: 800px){
+	.td-hide-centers{
+		display: none;
+	}	
 }

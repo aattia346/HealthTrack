@@ -64,17 +64,21 @@
                       	<tr>
                         
                         <td><a href="/HealthTrack/profile/user/${user.id}" target="_blank">${user.id}</a></td>
+
                         <td><%= t.write(user.getUsername(),lang) %></td>
                         <td><%= t.write(user.getType(),lang) %></td>
+
                         <td>
                         <div>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/<%= user.getId() %>/edit" title="<%= t.write("Edit this User",lang) %> "><i class="fa fa-edit"></i></a>
                         <a class="dashboard-btn confirm-delete-user" href="/HealthTrack/admin/<%= admin.getUsername() %>/user/delete/<%=user.getId() %>" title="<%= t.write("Delete this User",lang) %> "><i class="fa fa-close"></i></a>
                         <%if(user.getBan()==1){ %>
-                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user"><%= t.write("unBan",lang) %></a>
+
+                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="confirm-unBan-user" title="<%= t.write("unBan",lang) %>"><i class="fa fa-unlock-alt"></i></a>
                        
                         <%}else{ %>
-                        <a href="/HealthTrack/user/ban/<%= admin.getId() %>/${user.id}" class="btn btn-warning confirm-Ban-user"><%= t.write("Ban",lang) %></a>
+                        <a href="/HealthTrack/user/ban/<%= admin.getId() %>/${user.id}" class="confirm-Ban-user" title="<%= t.write("Ban",lang) %>"><i class="fa fa-ban"></i></a>
+
                        
                         <%} %>
                        

@@ -94,7 +94,7 @@
             </div><!-- .animated -->
         </div><!-- .content -->
 
-    </div><!-- /#right-panel -->
+  <!-- /#right-panel -->
 
     <!-- Right Panel -->
 

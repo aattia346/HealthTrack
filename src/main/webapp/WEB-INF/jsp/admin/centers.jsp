@@ -56,12 +56,14 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
+
                       	<th><%=t.write("ID",lang) %></th>
                         <th><%=t.write("Name",lang) %></th>
                         <th><%=t.write("Admin",lang) %></th>
-                        <th><%=t.write("Services",lang) %></th>
+                        <th class="td-hide-centers"><%=t.write("Services",lang) %></th>
                         <th><%=t.write("Review",lang) %></th>
                         <th><%=t.write("Action",lang) %></th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -83,7 +85,7 @@
                         <td><a href="/HealthTrack/profile/center/${center.adminId}" target="_blank"><%=t.write(C.getCenterName(),lang) %></a></td>
                         <td>${center.adminId}</td>
                         
-                        <td class="depts-td">
+                        <td class="depts-td td-hide-centers">
                         <c:forEach var="service" items="${services}">
                         <%
                         Service S=(Service)pageContext.getAttribute("service");
@@ -94,8 +96,11 @@
 	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/service/delete/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title=<%=t.write("Delete this Service",lang) %>> </i> </a>
                         	</div>
                         </c:forEach>
+
+
+
                         <a class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title=<%=t.write("Add new Service",lang) %>><i class="fa fa-plus"></i></a>
-                        <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/service/add" class="add-dept hidden add-dept-<%=C.getCenterId() %>">
+                        <form method="post" action="/HealthTrack/admin/<%= admin.getUsername() %>/service/addNewService" class="add-dept hidden add-dept-<%=C.getCenterId() %>">
 	                        	<input type="hidden" value="<%=C.getCenterId()%>" name="centerId">
 	                        	<select name="service" class="form-control select-new-dept">
                                 <%
@@ -127,6 +132,9 @@
                                 <button class="btn submit-dept btn-success btn-sm" type="submit"><i class="fa fa-send"></i></button>
 	                      </form>
                         
+
+                     <!-- <a href="/HealthTrack/admin/<%= username %>/Service/add" class="btn add-dept-in-hospital-table" id="add-dept-<%=C.getCenterId() %>" title=<%=t.write("Add new Service",lang) %>><i class="fa fa-plus"></i></a>          -->                  
+
                         </td>
                         <td>${center.review}</td>
                         <td>

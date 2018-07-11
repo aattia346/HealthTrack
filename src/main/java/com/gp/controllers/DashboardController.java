@@ -79,9 +79,10 @@ public class DashboardController {
 
 	@RequestMapping(value="/HealthTrack/admin/{adminUsername}/{place}/add", method = RequestMethod.GET)
 	public ModelAndView dashboard(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, @PathVariable("adminUsername") String adminUsername
-			, @PathVariable("place") String place
-			, HttpSession session) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
-		Translator t =new Translator();
+
+			, @PathVariable("place") String place, HttpSession session) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException, JSONException, IOException {
+				Translator t =new Translator();
+
 		model.addAttribute("lang", cookie);
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
@@ -425,12 +426,13 @@ public class DashboardController {
 				int hospitalId 	= Integer.parseInt(request.getParameter("hospitalId"));
 				String deptName = request.getParameter("dept");
 				String ARdeptName = request.getParameter("ARdept");
+				/*
 				if(!Validation.validateName(ARdeptName)) {
 					model.addAttribute("invalidARdeptName", "<p class=\"wrong-input \">"+t.write("Invalid department name in Arabic",cookie)+"</p>");
 					error=true; //there is some action should done later
 				}
-				
-				if((!deptName.equals("0")) & (error==false)) {
+				*/
+				if((!deptName.equals("0"))) {
 					HospitalDao.insertDepartment(deptName, hospitalId);
 					//t.translate2Arabic(deptName, ARdeptName);
 			}
@@ -934,7 +936,9 @@ public class DashboardController {
 						errors = true;
 					}
 					if(admin == 0) {
-						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the hospital",cookie)+"</p>");
+
+						model.addAttribute("invalidAdmin", "<p class=\"wrong-input \">"+t.write("Please Select the admin of the clinic",cookie)+"</p>");
+
 						errors = true;
 					}
 					if(!Validation.validateURL(url)) {
@@ -1267,8 +1271,9 @@ public class DashboardController {
 	}
 */
 //**********************************Booking ***********************************
-	///HealthTrack/profile/booking/delete/{userId}/{bookingId}
+
 	@RequestMapping(value="/HealthTrack/admin/{username}/booking/{BookingType}/delete/{bookingId}", method = RequestMethod.GET)
+
 	public ModelAndView deleteBooking(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, ModelAndView mav, HttpServletRequest request
 			, @PathVariable("bookingId") String bookingId, @PathVariable("BookingType") String BookingType)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
@@ -1279,7 +1284,6 @@ public class DashboardController {
 			mav.setViewName("/admin/login");
 		}else {
 			if(Validation.checkIfTheUserIsAdmin(username) && Validation.checkIfSomethingExists("booking_id", "booking" , bookingId)) {	
-				//BookingDao.deleteBooking(bookingId);
 				HospitalDao.deleteSomthing("booking" , "booking_id" , Integer.parseInt(bookingId));
 				mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" +BookingType);
 			}else {
@@ -1726,23 +1730,24 @@ public class DashboardController {
 //***************************************Services***********************************************
 				
 	@RequestMapping(value="/HealthTrack/admin/service/insert", method = RequestMethod.POST)
-	public ModelAndView insertService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request
-			) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
-		    Translator t =new Translator();
+
+	public ModelAndView insertService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException, ParseException, JSONException, IOException {
+	       Translator t =new Translator();
 		    model.addAttribute("lang", cookie);
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
 				if(Validation.checkIfTheUserIsAdmin(username)) {
 					
 					String serviceName	 	= request.getParameter("serviceName");
-					int place               =Integer.parseInt(request.getParameter("place"));
+					int place               = Integer.parseInt(request.getParameter("place"));
 					String fees		        = request.getParameter("fees");
 					String Type		        = request.getParameter("type");
 										
 					boolean errors = false;					
 					
 					if(!Validation.validateFees(fees)) {
-						model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees",cookie)+"</p>");
+						model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees",cookie)+" </p>");
 						errors = true;
 					}
 					
@@ -1798,10 +1803,10 @@ public class DashboardController {
 			if(Validation.checkIfTheUserIsAdmin(username)) {
 				
 				int hospitalId 	= Integer.parseInt(request.getParameter("hospitalId"));
-				String deptName = request.getParameter("dept");
+				String ServiceName = request.getParameter("service");
 				
-				if(!deptName.equals("0")) {
-					HospitalDao.insertDepartment(deptName, hospitalId);
+				if(!ServiceName.equals("0")) {
+					HospitalDao.insertDepartment(ServiceName, hospitalId);
 			}
 			mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
 		}
@@ -1809,6 +1814,24 @@ public class DashboardController {
 		return mav;
 	}
 		
-	
+	@RequestMapping(value="/HealthTrack/admin/{username}/Service/add", method = RequestMethod.GET)
+	public ModelAndView addService(@CookieValue(value="lang", defaultValue="en") String cookie,ModelMap model, ModelAndView mav , HttpSession session, HttpServletRequest request, @PathVariable("username") String username)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+		    
+		model.addAttribute("lang", cookie);
+		    
+		String adminUsername = (String) session.getAttribute("username");
+		if(adminUsername == null) {
+			mav.setViewName("redirect:/HealthTrack/admin/login");
+		}else if(adminUsername.equals(username)){
+			model.addAttribute("action","add");
+			mav.setViewName("admin/manageServices");
+		}else {
+			mav.setViewName("redirect:/HealthTrack");
+		}
+		return mav;
+	}
+}	
 
-}
+
+

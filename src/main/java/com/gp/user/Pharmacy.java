@@ -2,14 +2,19 @@ package com.gp.user;
 
 public class Pharmacy {
 	
-	int pharmacyId,adminId;
-	String pharmacyName, phone, address, google_maps_url,intro,website;
+
+	int pharmacyId, adminId;
+	String pharmacyName, phone, address, google_maps_url, website, intro;
+
 	float lat, lang, review;
 	
 	public Pharmacy() {
 		super();
 	}
 
+	
+	
+	
 	public int getPharmacyId() {
 		return pharmacyId;
 	}

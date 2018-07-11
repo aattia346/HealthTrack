@@ -51,11 +51,13 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
+
                       	<th><%=t.write("Booking Id",lang) %></th>
                         <th><%=t.write("User Id",lang) %></th>
                         <th><%=t.write("Service Id",lang) %></th>
                         <th><%=t.write("Time From",lang) %></th>
                         <th><%=t.write("Action",lang) %></th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -70,12 +72,14 @@
                         <td><a href="/HealthTrack/profile/user/${booking.userId}" target="_blank">${booking.userId}</a></td>
                         <td><a href="/HealthTrack/profile/service/${booking.serviceId}" target="_blank">${booking.serviceId}</a></td>
                      
-                        <td> From:  ${booking.timeFrom}</td>                  
+                        <td> ${booking.timeFrom}</td>                  
                         <td>
                         <div>
                       <!--  <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i> Delete</a>  --> 
+
                         <a class="dashboard-btn confirm-delete-booking" href="/HealthTrack/admin/<%= admin.getUsername() %>/booking/timeSlotBooking/delete/<%= booking.getBookingId() %>" title="<%=t.write("Delete this booking",lang) %>"><i class="fa fa-close"></i></a>
                         
+
                         </div>
                         </td>
                       </tr>

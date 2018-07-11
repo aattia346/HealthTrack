@@ -1,8 +1,12 @@
 <% String title="Recover your Password"; %>
 <%@include  file="includes/header.jsp" %>
 
+<<<<<<< HEAD
 <div class="login-body">
 
+=======
+<div class="container">
+>>>>>>> fd4ffbeb8a30a0c6b1dbd8c4a02ff2817631c8d1
 	<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
 		<form method="post" action="/HealthTrack/login/recovermypassword/submit">
 			<h4 class="waiting-header text-center"><%= t.write("remember your passwored",lang) %></h4>

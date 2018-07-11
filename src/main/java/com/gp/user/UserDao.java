@@ -298,7 +298,27 @@ abstract public class UserDao {
 		
 		result.next();
 		
-		return result.getInt("admin_id") == userId;	
+		int adminId = result.getInt("admin_id");
+		
+		con.close();
+		
+		return  adminId == userId;	
+	}
+	
+	public static int countUsers() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();		
+		String sql = "SELECT COUNT(user_id) AS NumOfUsers FROM user";
+		PreparedStatement ps = con.prepareStatement(sql);		
+		ResultSet result = ps.executeQuery();	
+		result.next();
+		
+		int numOfUsers = result.getInt("NumOfUsers");
+		
+		con.close();
+		
+		return numOfUsers;
+		
 	}
 
 	

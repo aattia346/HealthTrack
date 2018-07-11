@@ -53,12 +53,14 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
+
                       	<th><%=t.write("ID",lang) %></th>
                         <th><%=t.write("Name",lang) %></th>
                         <th><%=t.write("Hospital",lang) %></th>
                         <th><%=t.write("Admin",lang) %></th>
-                        <th><%=t.write("Services",lang) %></th>
+                        <th class="td-hide-centers"><%=t.write("Services",lang) %></th>
                         <th><%=t.write("Action",lang) %></th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -71,20 +73,26 @@
                       %>
                       	<tr id="dept-${D.deptId}">
                         <td>${dept.deptId}</td>
+
                         <td><%= t.write(D.getDeptName(),lang) %></td>
-                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName(),lang) %>${dept.hospitalName}</a></td>
+                        <td><a href="/HealthTrack/profile/hospital/${dept.adminId}" target="_blank"><%= t.write(D.getHospitalName(),lang) %></a></td>
+
                         <td>${dept.adminId}</td>
-                        <td>
+                        <td class="td-hide-centers">
                         	<c:forEach var="service" items="${services}">
                         	<%
                         	Service S = (Service)pageContext.getAttribute("service");
                         	%>
-                        		<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}" class="dept-in-hospital-table"><%= t.write(S.getServiceName(),lang) %>    ,
-                        		   </a>
+
+                        	<div class="dept-in-hospital-table">
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername()%>/services#service-${service.serviceId}"><%= t.write(S.getServiceName(),lang) %></a>
+	                        	<a href="/HealthTrack/admin/<%= admin.getUsername() %>/delete/service/${service.serviceId}" class="confirm-delete-service"><i class="fa fa-close" title=<%=t.write("Delete this department",lang) %>> </i> </a>
+                        	</div>                        	
                         	</c:forEach>
                         </td>
                         <td>
-                        <a class="btn btn-danger dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i><%=t.write("Delete",lang) %> </a>
+                        <a title="<%=t.write("Delete",lang) %>" class="dashboard-btn dashboard-btn-delete-dept confirm-delete-dept" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/deleteDepartment/${dept.deptId}"><i class="fa fa-close"></i></a>
+
                         </td>
                       </tr>
                       

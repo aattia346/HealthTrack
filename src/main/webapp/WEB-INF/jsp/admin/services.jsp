@@ -59,10 +59,12 @@
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
+
                       	<th><%=t.write("ID",lang) %></th>
                         <th><%=t.write("Name",lang) %></th>
-                        <th><%=t.write("Hospital or Center",lang) %></th>
+                        <th><%=t.write("Place",lang) %></th>
                         <th><%=t.write("Review",lang) %></th>
+
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -74,16 +76,19 @@
                         <td><a href="/HealthTrack/profile/service/${service.serviceId}" target="_blank"><%= t.write(s.getServiceName(),lang) %></a></td>
                         
                         <%
-                        	
-                        	String placeType;
+                        	String placeType = null;
                         	if(s.getCenterId() == 0){
                         		placeType = "hospital";
                         	}else{
                         		placeType = "center";
-                        	}
+                        	}           
                         %>
                         
-                        <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank"><%= t.write(s.getHospitalName(),lang) %> <%= t.write(s.getCenterName(),lang) %></a></td>
+
+                       <!-- <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank"><%= t.write(s.getHospitalName(),lang) %> <%= t.write(s.getCenterName(),lang) %></a></td> --> 
+
+                        <td><a href="/HealthTrack/profile/<%= placeType %>/${service.adminId}" target="_blank"><% if(s.getCenterName() == null){ %> <%= t.write(s.getHospitalName(),lang) %> <% }else{ %> <%= t.write(s.getCenterName(),lang) %>  <% } %></a></td>
+
                         <td>${service.serviceReview}</td>
                         <td>
                        <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/service/${service.serviceId}/edit" title="<%=t.write("Edit this Service",lang) %>"><i class="fa fa-edit"></i></a>
@@ -97,7 +102,9 @@
                   </table>
                         </div>
                     </div>
+
                      <a href="/HealthTrack/admin/<%= admin.getUsername() %>/Service2/add" class="btn btn-primary"><i class="fa fa-plus"></i><%=t.write("Add New Service",lang) %> </a>
+
                 </div>
 
 

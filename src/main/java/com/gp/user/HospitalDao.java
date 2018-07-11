@@ -199,4 +199,20 @@ abstract public class HospitalDao {
 		
 	}
 	
+	public static int countHospitals() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();		
+		String sql = "SELECT COUNT(hospital_id) AS NumOfUsers FROM hospital";
+		PreparedStatement ps = con.prepareStatement(sql);		
+		ResultSet result = ps.executeQuery();	
+		result.next();
+		
+		int numOfUsers = result.getInt("NumOfUsers");
+		
+		con.close();
+		
+		return numOfUsers;
+		
+	}
+	
 }
