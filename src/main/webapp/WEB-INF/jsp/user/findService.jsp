@@ -39,26 +39,56 @@ Calendar calendar = Calendar.getInstance();
 
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
-	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
-	Location location = new Location(center.getLat(), center.getLang(), t.write(center.getCenterName()), "center", serviceUrl, "71e486");
+	String pinColor = null;
+	if(center.getDimmed() == 1){
+		serviceUrl = center.getGoogleMapsUrl();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
+		pinColor = "71e486";
+	}
+	Location location = new Location(center.getLat(), center.getLang(), t.write(center.getCenterName()), "center", serviceUrl, pinColor);
 	locations.add(location);
 }
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
-	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), t.write(pharmacy.getPharmacyName()) + " " + t.write("at") + " " + t.write(pharmacy.getAddress()) , "pharmacy", pharmacy.getGoogle_maps_url(), "C35ED4");
+	String pinColor = null;
+	if(pharmacy.getDimmed() == 1){
+		serviceUrl = pharmacy.getGoogleMapsUrl();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "";
+		pinColor = "C35ED4";
+	}
+	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), t.write(pharmacy.getPharmacyName()) + " " + t.write("at") + " " + t.write(pharmacy.getAddress()) , "pharmacy", serviceUrl, pinColor);
 	locations.add(location);
 }
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
-	Location location = new Location(clinic.getLat(), clinic.getLang(), t.write(clinic.getClinicName()), "clinic", serviceUrl, "4089C7");
+	String pinColor = null;
+	if(clinic.getDimmed() == 1){
+		serviceUrl = clinic.getGoogle_maps_url();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
+		pinColor = "4089C7";
+	}
+	Location location = new Location(clinic.getLat(), clinic.getLang(), t.write(clinic.getClinicName()), "clinic", serviceUrl, pinColor);
 	locations.add(location);
 }
 
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
-	serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
-	Location location = new Location(hospital.getLat(), hospital.getLang(), t.write(hospital.getHospitalName()), "hospital", serviceUrl, "ff6e6e");
+	String pinColor = null;
+	if(hospital.getDimmed() == 1){
+		serviceUrl = hospital.getGoogleMapsUrl();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
+		pinColor = "ff6e6e";
+	}
+	Location location = new Location(hospital.getLat(), hospital.getLang(), t.write(hospital.getHospitalName()), "hospital", serviceUrl, pinColor);
 	locations.add(location);
 }
 
@@ -142,6 +172,9 @@ for(Service service : servicesOfCenters){
                           <input type="radio" name="service" value="hospital"> <%= t.write("hospitals") %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
                           <input type="radio" name="service" value="center"> <%= t.write("centers") %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
                           <input type="radio" name="service" value="pharmacy"> <%= t.write("pharmacies") %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
+                  	  	  <div class="not-registered-location">
+                      		<i class="fa fa-map-marker-alt custom-pin"></i> <span><%= t.write("Not registered in our navigator") %></span>
+                      	</div>
                   	  </ul>
                   	  <ul class="list-unstyled text-uppercase">
                   	  	  <h4 class="text-center special-services"><%= t.write("Special Services") %></h4>

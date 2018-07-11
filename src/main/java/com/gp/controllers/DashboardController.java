@@ -279,7 +279,7 @@ public class DashboardController {
 						pharmacy.setPharmacyName(name);
 						pharmacy.setPhone(phone);
 						pharmacy.setAddress(address);
-						pharmacy.setGoogle_maps_url(url);
+						pharmacy.setGoogleMapsUrl(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.insertPharmacy(pharmacy);
@@ -822,7 +822,7 @@ public class DashboardController {
 						pharmacy.setPharmacyName(name);
 						pharmacy.setPhone(phone);
 						pharmacy.setAddress(address);
-						pharmacy.setGoogle_maps_url(url);
+						pharmacy.setGoogleMapsUrl(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.updatePharmacy(pharmacy);
@@ -952,7 +952,7 @@ public class DashboardController {
 						pharmacy.setPharmacyName(name);
 						pharmacy.setPhone(phone);
 						pharmacy.setAddress(address);
-						pharmacy.setGoogle_maps_url(url);
+						pharmacy.setGoogleMapsUrl(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						PharmacyDao.updatePharmacy(pharmacy);

@@ -26,12 +26,14 @@ public static List<Pharmacy> getAllPharmacies() throws InstantiationException, I
 			pharmacy.setPharmacyName(result.getString("pharmacy_name"));
 			pharmacy.setPhone(result.getString("phone"));
 			pharmacy.setAddress(result.getString("address"));
-			pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
+			pharmacy.setGoogleMapsUrl(result.getString("google_maps_url"));
 			pharmacy.setLat(result.getFloat("lat"));
 			pharmacy.setLang(result.getFloat("lang"));
 			pharmacy.setAdminId(result.getInt("admin_id"));
 			pharmacy.setIntro(result.getString("intro"));
 			pharmacy.setWebsite(result.getString("website"));
+			pharmacy.setDimmed(result.getInt("dimmed"));
+			
 			pharmacies.add(pharmacy);
 		}
 		return pharmacies;
@@ -51,12 +53,13 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	pharmacy.setPharmacyName(result.getString("pharmacy_name"));
 	pharmacy.setPhone(result.getString("phone"));
 	pharmacy.setAddress(result.getString("address"));
-	pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
+	pharmacy.setGoogleMapsUrl(result.getString("google_maps_url"));
 	pharmacy.setLat(result.getFloat("lat"));
 	pharmacy.setLang(result.getFloat("lang"));
 	pharmacy.setAdminId(result.getInt("admin_id"));
 	pharmacy.setIntro(result.getString("intro"));
 	pharmacy.setWebsite(result.getString("website"));
+	pharmacy.setDimmed(result.getInt("dimmed"));
 
 	return pharmacy;
 }
@@ -75,7 +78,7 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	ps.setFloat(3, pharmacy.getLang());
 	ps.setString(4, pharmacy.getPhone());
 	ps.setString(5, pharmacy.getAddress());
-	ps.setString(6,pharmacy.getGoogle_maps_url());
+	ps.setString(6,pharmacy.getGoogleMapsUrl());
 	ps.setInt(7,pharmacy.getPharmacyId());
 	
 	ps.executeUpdate();
@@ -95,7 +98,7 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	ps.setFloat(3, pharmacy.getLang());
 	ps.setString(4, pharmacy.getPhone());
 	ps.setString(5,pharmacy.getAddress());
-	ps.setString(6, pharmacy.getGoogle_maps_url());
+	ps.setString(6, pharmacy.getGoogleMapsUrl());
 	
 	ps.executeUpdate();
 	

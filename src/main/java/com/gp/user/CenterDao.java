@@ -32,6 +32,7 @@ abstract public class CenterDao {
 		center.setAddress(result.getString("address"));
 		center.setIntro(result.getString("intro"));
 		center.setGoogleMapsUrl(result.getString("google_maps_url"));
+		center.setDimmed(result.getInt("dimmed"));
 		
 		return center;
 	}
@@ -59,11 +60,13 @@ abstract public class CenterDao {
 			center.setAddress(result.getString("address"));
 			center.setIntro(result.getString("intro"));
 			center.setGoogleMapsUrl(result.getString("google_maps_url"));
+			center.setDimmed(result.getInt("dimmed"));
 			centers.add(center);
 		}
 		return centers;
 	
 	}
+	
 	public static void updateCenter(Center center)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -87,6 +90,7 @@ abstract public class CenterDao {
 		ps.executeUpdate();
 		
 	}
+	
 	public static void insertCenter(Center center)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -109,6 +113,7 @@ abstract public class CenterDao {
 		ps.executeUpdate();
 		
 	}
+	
 	public static List<String> getServices(){
 		
 		List<String> services = new ArrayList<String>();

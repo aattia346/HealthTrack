@@ -32,6 +32,7 @@ abstract public class HospitalDao {
 		hospital.setAddress(result.getString("address"));
 		hospital.setIntro(result.getString("intro"));
 		hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+		hospital.setDimmed(result.getInt("dimmed"));
 		return hospital;
 	}
 	
@@ -73,6 +74,8 @@ abstract public class HospitalDao {
 			hospital.setAddress(result.getString("address"));
 			hospital.setIntro(result.getString("intro"));
 			hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+			hospital.setDimmed(result.getInt("dimmed"));
+			
 			hospitals.add(hospital);
 			}
 		return hospitals;
@@ -174,7 +177,6 @@ abstract public class HospitalDao {
 		return exist;
 	}
 
-	
 	public static void updateHospital(Hospital hospital)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		

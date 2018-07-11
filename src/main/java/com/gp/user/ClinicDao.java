@@ -39,6 +39,7 @@ abstract public class ClinicDao {
 			clinic.setWebsite(result.getString("website"));
 			clinic.setNumOfSessions(result.getInt("number_of_sessions"));
 			clinic.setFees(result.getString("fees"));
+			clinic.setDimmed(result.getInt("dimmed"));
 			
 			clinics.add(clinic);
 		}
@@ -75,6 +76,7 @@ abstract public class ClinicDao {
 		clinic.setWebsite(result.getString("website"));
 		clinic.setNumOfSessions(result.getInt("number_of_sessions"));
 		clinic.setFees(result.getString("fees"));
+		clinic.setDimmed(result.getInt("dimmed"));
 		con.close();
 		return clinic;
 	}
@@ -303,7 +305,6 @@ abstract public class ClinicDao {
 		}
 		return reviews;	
 	}
-
 
 	public static Booking getBookingOfClinicById(int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
