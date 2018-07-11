@@ -176,9 +176,11 @@ for(Service service : servicesOfCenters){
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="features-content">
+
                         <h2><%=t.write("We always put our patients first",lang) %></h2>
                         <p><%=t.write("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.Lorem ipsum dolor sit amet, consec tetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.",lang) %></p>
                         <a href="#services" class="btn medilife-btn mt-50 about-us-btn about-us-btn-1"><%=t.write("View the services",lang) %> <span>+</span></a>
+
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -195,9 +197,11 @@ for(Service service : servicesOfCenters){
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="medica-about-content">
+
                         <h2><%=t.write("Our Main Services",lang) %></h2>
                         <p><%=t.write("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam;8 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.",lang) %></p>
                         <a href="#about" class="btn medilife-btn mt-50 about-us-btn"><%=t.write("About Us",lang) %><span>+</span></a>
+
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
@@ -209,8 +213,10 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-hospital"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5><%=t.write("Hospital",lang) %></h5>
-                                    <p><%=t.write("Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.",lang) %></p>
+
+                                    <h5><%= t.write("hospitals",lang) %></h5>
+                                    <p><%= t.write("hospitals part",lang) %></p>
+
                                 </div>
                             </div>
                         </div>
@@ -221,8 +227,10 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-child"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5><%=t.write("Incubator",lang) %></h5>
-                                    <p><%=t.write("Dolor sit amet, consecte tuer elit, sed diam nonummy nibh euismod tincidunt ut ldolore magna.",lang) %></p>
+
+                                    <h5><%= t.write("Incubators",lang) %></h5>
+                                    <p><%= t.write("service part",lang) %></p>
+
                                 </div>
                             </div>
                         </div>
@@ -233,8 +241,10 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-user-md"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5><%=t.write("Clinic",lang) %></h5>
-                                    <p><%=t.write("Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.",lang) %></p>
+
+                                    <h5><%= t.write("Clinic",lang) %></h5>
+                                    <p><%= t.write("clinic part",lang) %></p>
+
                                 </div>
                             </div>
                         </div>
@@ -245,8 +255,10 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-ambulance"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5><%=t.write("Emergency Room",lang) %></h5>
-                                    <p><%=t.write("Dolor sit amet, consecte tuer elit, sed diam nonummy nibh euismod tincidunt ut ldolore magna.",lang) %></p>
+
+                                    <h5><%= t.write("Emergency",lang) %></h5>
+                                    <p><%= t.write("emergency part",lang) %></p>
+
                                 </div>
                             </div>
                         </div>
@@ -312,7 +324,7 @@ var locations = [
           });
                   
         google.maps.event.addListener(marker, 'click', function() {
-            window.open(this.url , '_blank');
+k            window.open(this.url , '_blank');
         });
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
