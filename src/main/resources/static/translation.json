@@ -219,8 +219,19 @@
 		  "Manage" : "Manage",
 		  "Booking Id" : "Booking Id",
 		  "User Id" : "User Id",
-		  "Service Id" : "Service Id"
-		 },
+		  "Service Id" : "Service Id",
+		  "our services part" : "Health service navigator is a medical problem solving depending on website for finding a medical service in a hospital, clinical and medical health care center. You book the service and wait to be confirmed for the patient visit to any service availability.after verifying your location you can search for a certain service (ICU,Incubators,MRI sessions).<br>If you want to get more info about hospitals and book your service please sign in.<br>After getting your reservation, we’ll be grateful to rate the service and post a comment.",
+		  "Our Main Services" : "Our Main Services",
+		  "About Us" : "About Us",
+		  "hospitals part" : "Hospitals with active locators is a member in our company, so feel safe when you book one of its services. The hospitals with passive ones have the required service but we don’t sure if it’s available right now for you or not.",
+		  "Incubators" : "Incubators",
+		  "service part" : "Dear customer,be sure when you book with a member hospital, which has an active locator, it’ll be honest in updating the availability of the service for you.",
+		  "clinic part" : "Health Service Navigator helps you to find the nearest clinic to your location and all information you need about it and its doctor and you can book it too.",
+		  "emergency part" : "In emegencies we have much time to ask friend or relatives about the neareast service i need urgently and if i found it you can not assure its availability our website helps you to know that",
+		  "about us part" : "SOSHealth is a medical problem solving website for finding a medical service in medical centers and booking it,<br>we trust our member hospitals 100% in updating the availability and being honest with you financially..",
+		  "We always put our patients first" : "We always put our patients first",
+		  "Contact Us " : "Contact Us "
+		  	},
 	"ar" : {
 		"username:" : ":أسم المستخدم",
 		"password:" : ":كلمة المرور",
@@ -449,6 +460,18 @@
 		 "Manage" : "إداره",
 		 "Booking Id" : "رقم الحجز",
 		 "User Id" : "رقم المستخدم",
-		 "Service Id" : "رقم الخدمه"
+		 "Service Id" : "رقم الخدمه",
+		 "our services part" : "   هو موقع إلكتروني يساعدك في إيجاد الخدمة الطبية المرادة في المستشفيات والعيادات والمراكز الصحية كما انه يوفر لك خدمة حجز احدى الخدمات الطبية الاتية (حضانات أطفال- أسرة عناية مركزة- جلسة أشعة رنين مغناطيسي)  <br> وإذا كنت ترغب في الحصول على مزيد من المعلومات حول المستشفيات وحجز الخدمة ، يرجى تسجيل الدخول",
+		 "Our Main Services" : "خدماتنا الرئيسيه",
+		 "About Us" : "عنا",
+		 "hospitals part" : "المستشفيات التي تحتوي على محددات  نشطة هي عضو في شركتنا ، لذا أشعر بالأمان عند حجز إحدى خدماتها.",
+		 "Incubators" : "حضّانات",
+		 "service part" : "عزيزي العميل, تأكد أن من خلال حجزك لهذة الخدمة من الشركة العضوة أن هذه الخدمة ستكون متاحة لك.",
+		 "clinic part" : "موقعنا يساعدك على معرفه أقرب عياده مناسبه لك ومعرفه كافة التفاصيل اللى تحتاجها وايضا يمكنك الحجز",
+		 "emergency part" : "فى كثير من حالات الطوارئ نحن لانملك الوقت الكافى لكى نسال الاصدقاء والاقارب عن المساعده موقعنا يقدم لك المساعده الامثل فى ايجاد اقرب خدمه متاحه.",
+		 "We always put our patients first" : "دائما نضع عملائنا فى المقدمه",
+		 "Contact Us " : "أتصل بنا ",
+		 "about us part" : " ايجاد لك الخدمة الطبية المرادة وحجزها لك<br>كما يضمن لك الامانة في المعاملات المالية مع المستشفيات الاعضاء وفيه تحديث اتاحية الخدمات لديهم"
+		 
 	}
 }

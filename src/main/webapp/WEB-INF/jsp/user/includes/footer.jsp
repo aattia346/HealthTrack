@@ -9,7 +9,7 @@
                             <div class="footer-logo">
                                 <a href="/HealthTrack"><h2>HEALTH SERVICE <span> NAVIGATOR </span></h2></a>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.</p>
+                            <p><%= t.write("about us part")%>
                             <div class="footer-social-info">
                                 <a href="#contact"><i class="fab fa-google-plus fa-3x" aria-hidden="true"></i></a>
                                 <a href="#contact"><i class="fab fa-facebook-square fa-3x" aria-hidden="true"></i></a>
@@ -26,13 +26,13 @@
                             </div>
                             <div class="footer-contact-form">
                                 <form action="/HealthTrack/Contact/Submit" method="post">
-                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="name" id="footer-name" placeholder="Name" required="required">
+                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="name" id="footer-name" placeholder="<%= t.write("name") %>" required="required">
                                     ${invalidName}
-                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="footer-email" placeholder="Email" required="required">
+                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="email" id="footer-email" placeholder="<%= t.write("email") %>" required="required">
                                     ${invalidEmail}
-                                    <textarea name="msg" class="form-control border-top-0 border-right-0 border-left-0" id="footerMessage" placeholder="Message" required="required"></textarea>
+                                    <textarea name="msg" class="form-control border-top-0 border-right-0 border-left-0" id="footerMessage" placeholder="<%= t.write("message") %>" required="required"></textarea>
                                     ${invalidMsg}
-                                    <button type="submit" class="btn medilife-btn about-us-btn">Contact Us <span>+</span></button>
+                                    <button type="submit" class="btn medilife-btn about-us-btn"><%= t.write("Contact Us ") %><span>+</span></button>
                                 	${contactSucceed}
                                 </form>
                             </div>

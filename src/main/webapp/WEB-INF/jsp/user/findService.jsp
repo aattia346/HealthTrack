@@ -172,8 +172,8 @@ for(Service service : servicesOfCenters){
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="features-content">
-                        <h2>We always put our patients first</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.Lorem ipsum dolor sit amet, consec tetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.</p>
+                        <h2><%= t.write("We always put our patients first") %></h2>
+                        <p><%= t.write("about us part") %></p>
                         <a href="#services" class="btn medilife-btn mt-50 about-us-btn about-us-btn-1">View the services <span>+</span></a>
                     </div>
                 </div>
@@ -191,9 +191,9 @@ for(Service service : servicesOfCenters){
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="medica-about-content">
-                        <h2>Our Main Services</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.</p>
-                        <a href="#about" class="btn medilife-btn mt-50 about-us-btn">About Us<span>+</span></a>
+                        <h2><%= t.write("Our Main Services") %></h2>
+                        <p><%= t.write("our services part") %></p>
+                        <a href="#about" class="btn medilife-btn mt-50 about-us-btn"><%= t.write("About Us") %><span>+</span></a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
@@ -205,8 +205,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-hospital"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5>Hospital</h5>
-                                    <p>Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
+                                    <h5><%= t.write("hospitals") %></h5>
+                                    <p><%= t.write("hospitals part") %></p>
                                 </div>
                             </div>
                         </div>
@@ -217,8 +217,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-child"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5>Incubator</h5>
-                                    <p>Dolor sit amet, consecte tuer elit, sed diam nonummy nibh euismod tincidunt ut ldolore magna.</p>
+                                    <h5><%= t.write("Incubators") %></h5>
+                                    <p><%= t.write("service part") %></p>
                                 </div>
                             </div>
                         </div>
@@ -229,8 +229,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-user-md"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5>Clinic</h5>
-                                    <p>Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
+                                    <h5><%= t.write("Clinic") %></h5>
+                                    <p><%= t.write("clinic part") %></p>
                                 </div>
                             </div>
                         </div>
@@ -241,8 +241,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-ambulance"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-                                    <h5>Emergency Room</h5>
-                                    <p>Dolor sit amet, consecte tuer elit, sed diam nonummy nibh euismod tincidunt ut ldolore magna.</p>
+                                    <h5><%= t.write("Emergency") %></h5>
+                                    <p><%= t.write("emergency part") %></p>
                                 </div>
                             </div>
                         </div>

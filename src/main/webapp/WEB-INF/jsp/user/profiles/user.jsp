@@ -263,5 +263,5 @@
 <%@include  file="../includes/footer.jsp" %>
 <script>
 console.log($("body").height()- 630);
-$(".all-bookings").css("height" , $("body").height()- 630);
+$(".all-bookings").css("height" , $("body").height()- 1100);
 </script>
