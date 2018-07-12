@@ -215,6 +215,18 @@ $(document).ready(function(){
     	$("#stickyHeader-sticky-wrapper").slideToggle(500);
     });
     
+    $(".booking-info").mouseenter(function(){
+    	$(this).children(".booking-card").children(".card-head").children(".delete-booking-icon").show();
+    });
+    
+    $(".booking-info").mouseleave(function(){
+    	$(this).children(".booking-card").children(".card-head").children(".delete-booking-icon").hide();
+    });
+    
+    $(".confirm-user-delete-booking").click(function(){
+    	return confirm("Are you sure you want to cancel this booking?");
+    });
+    
 });	
 
 //:: ScrollUp Active Code

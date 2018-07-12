@@ -42,7 +42,7 @@ for(Center center : centers){
 	String pinColor = null;
 	if(center.getDimmed() == 1){
 		serviceUrl = center.getGoogleMapsUrl();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
 		pinColor = "71e486";
@@ -55,7 +55,7 @@ for(Pharmacy pharmacy : pharmacies){
 	String pinColor = null;
 	if(pharmacy.getDimmed() == 1){
 		serviceUrl = pharmacy.getGoogleMapsUrl();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "";
 		pinColor = "C35ED4";
@@ -69,7 +69,7 @@ for(Clinic clinic : clinics){
 	String pinColor = null;
 	if(clinic.getDimmed() == 1){
 		serviceUrl = clinic.getGoogle_maps_url();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
 		pinColor = "4089C7";
@@ -83,7 +83,7 @@ for(Hospital hospital : hospitals){
 	String pinColor = null;
 	if(hospital.getDimmed() == 1){
 		serviceUrl = hospital.getGoogleMapsUrl();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
 		pinColor = "ff6e6e";
@@ -97,7 +97,7 @@ List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
 	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();	
 	calendar.setTime(today);
-	//calendar.add(Calendar.DAY_OF_MONTH, -1);
+	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";
@@ -122,7 +122,7 @@ List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
 	serviceUrl = "/HealthTrack/profile/service/center/"+service.getServiceId();	
 	calendar.setTime(today);
-	//calendar.add(Calendar.DAY_OF_MONTH, -1);
+	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";

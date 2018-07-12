@@ -231,7 +231,18 @@
 		  "about us part" : "SOSHealth is a medical problem solving website for finding a medical service in medical centers and booking it,<br>we trust our member hospitals 100% in updating the availability and being honest with you financially..",
 		  "We always put our patients first" : "We always put our patients first",
 		  "Contact Us " : "Contact Us ",
-		  "Not registered in our navigator" : "Not registered in our navigator"
+		  "Not registered in our navigator" : "Not registered in our navigator",
+		  " you successfully booked a service in health service navigator" : " you successfully booked a service in health service navigator",
+		  " you successfully booked a service in health service navigator please follow the instructions of hospital to confirm your booking":
+		  " you successfully booked a service in health service navigator please follow the instructions of hospital to confirm your booking",
+		  "Cancel the booking" : "Cancel the booking",
+		  "please follow the instructions of hospital to confirm your booking" : "please follow the instructions of hospital to confirm your booking",
+		  "Hello " : "Hello ",
+		  "you successfully booked in health service navigator" : "you successfully booked in health service navigator",
+		  "please follow the instructions of clinic to confirm your booking" : "please follow the instructions of clinic to confirm your booking",
+		  " you successfully booked through SoSHealth" : " you successfully booked through SoSHealth",
+		  "Your booking has been confirmed" : "Your booking has been confirmed",
+		  "Your booking has been cancelled": "Your booking has been cancelled"
 		  	},
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -473,7 +484,17 @@
 		 "We always put our patients first" : "دائما نضع عملائنا فى المقدمه",
 		 "Contact Us " : "أتصل بنا ",
 		 "about us part" : " ايجاد لك الخدمة الطبية المرادة وحجزها لك<br>كما يضمن لك الامانة في المعاملات المالية مع المستشفيات الاعضاء وفيه تحديث اتاحية الخدمات لديهم",
-		 "Not registered in our navigator" : "غير مسجله على موقعنا"
-		 
+		 "Not registered in our navigator" : "غير مسجله على موقعنا",
+		 " you successfully booked a service in health service navigator please follow the instructions of hospital to confirm your booking":
+		 " لقد قمت بحجز الخدمه بنجاح من فضلك قم باتباع التعليمات المذكوره فى صفحه المستشفى لتأكيد الحجز.",
+		 "Cancel the booking" : "إلغاء الحجز",
+		 " you successfully booked a service in health service navigator" : "لقد قمت بحجز الخدمه بنجاح",
+		 "please follow the instructions of hospital to confirm your booking" : "من فضلك قم باتباع التعليمات المذكوره فى صفحه المستشفى لتأكيد الحجز",
+		 "Hello " : "مرحبا ",
+		 " you successfully booked in health service navigator" : "لقد حجزت بنجاح فى موقعنا",
+		 "please follow the instructions of clinic to confirm your booking" : "من فضلك اتبع التعليمات على صفحه العياده لتأكيد الحجز.",
+		 " you successfully booked through SoSHealth" : "لقد قمت بحجز الخدمه بنجاح من خلال SoSHealth",
+		 "Your booking has been confirmed" : "لقد تم تأكيد الحجز بنجاح",
+		 "Your booking has been cancelled" : "تم الغاء الحجز الخاص بك"
 	}
 }

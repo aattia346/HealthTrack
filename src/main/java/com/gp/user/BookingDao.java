@@ -155,7 +155,6 @@ abstract public class BookingDao {
 		B.setStatus(result.getInt("status"));
 		B.setTimeOfBooking(result.getDate("time_of_booking"));
 		B.setBookingPhone(result.getString("booking_phone"));
-		B.setAdminId(result.getInt("admin_id"));
 
 		con.close();
 		return B;
@@ -415,5 +414,52 @@ abstract public class BookingDao {
 		}
 		con.close();
 		return bookedDates;
+	}
+	
+	public static int getBookingOwner(int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT user_id AS bookingOwner FROM booking WHERE booking_id = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, bookingId);
+		ResultSet result = ps.executeQuery();
+		
+		result.next();
+		
+		int bookingOwner = result.getInt("bookingOwner");
+		
+		con.close();
+		
+		return bookingOwner;
+	}
+
+	public static Booking getSimpleInfoAboutBookingById(int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql = "SELECT * FROM booking WHERE booking_id=?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, bookingId);
+
+		ResultSet result = ps.executeQuery();
+		result.next();
+
+		Booking B = new Booking();
+		B.setBookingId(result.getInt("booking_id"));
+		B.setServiceId(result.getInt("service_id"));
+		B.setUserId(result.getInt("user_id"));
+		B.setFirstName(result.getString("firstname"));
+		B.setLastName(result.getString("lastname"));
+		B.setAge(result.getInt("age"));
+		B.setDateFrom(result.getDate("date_from"));
+		B.setDateTo(result.getDate("date_to"));
+		B.setTimeFrom(result.getTime("time_from"));
+		B.setDayOfBooking(result.getDate("day_of_time"));
+		B.setStatus(result.getInt("status"));
+		B.setTimeOfBooking(result.getDate("time_of_booking"));
+		B.setBookingPhone(result.getString("booking_phone"));
+
+		con.close();
+		return B;
 	}
 }

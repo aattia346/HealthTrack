@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,15 +31,14 @@ import com.gp.user.Translator;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
+import com.gp.user.WhatsappSender;
 
 @RestController
 public class ServiceController {
 
 	@RequestMapping(value = "/HealthTrack/clinic/{clinicId}/BookingClinic/Submit", method = RequestMethod.POST)
 	public ModelAndView submitBookingClinic(@CookieValue(value = "lang", defaultValue = "en") String cookie,
-			@PathVariable("clinicId") int clinicId, ModelAndView mav, ModelMap model, HttpServletRequest request)
-			throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException,
-			org.json.simple.parser.ParseException, JSONException, IOException {
+			@PathVariable("clinicId") int clinicId, ModelAndView mav, ModelMap model, HttpServletRequest request) throws Exception {
 
 		Translator t = new Translator(cookie);
 		model.addAttribute("lang", cookie);
@@ -116,6 +114,10 @@ public class ServiceController {
 				booking.setSex(sex);
 				booking.setDayOfBooking(dayAsDate);
 				BookingDao.insertBookingClinic(booking);
+				String whatsUpMessage = t.write("Hello ") + firstName + " " + lastName + " " +
+						t.write(" you successfully booked through SoSHealth") + " " + t.write("on") + " " + day + " " + t.write("please follow the instructions of clinic to confirm your booking");
+				WhatsappSender.sendMessage("2" + phone.toString(), whatsUpMessage);
+
 				PersonDao.increaseBookings(userId);
 				mav.setViewName("redirect:/HealthTrack/MyProfile");
 			}
@@ -136,9 +138,7 @@ public class ServiceController {
 	@RequestMapping(value = "/HealthTrack/{place}/Service/{serviceId}/BookingDay/Submit", method = RequestMethod.POST)
 	public ModelAndView submitBookingDay(@CookieValue(value = "lang", defaultValue = "en") String cookie,
 			@PathVariable("serviceId") int serviceId, @PathVariable("place") String place, ModelAndView mav,
-			ModelMap model, HttpServletRequest request)
-			throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException,
-			org.json.simple.parser.ParseException, JSONException, IOException {
+			ModelMap model, HttpServletRequest request) throws Exception {
 
 		Translator t = new Translator(cookie);
 		model.addAttribute("lang", cookie);
@@ -167,7 +167,7 @@ public class ServiceController {
 		model.addAttribute("oldPhone", phone);
 		model.addAttribute("oldmsg", msg);
 		model.addAttribute("oldEmail", email);
-
+		
 		if (userId != 0) {
 
 			boolean errors = false;
@@ -232,6 +232,10 @@ public class ServiceController {
 				booking.setMsg(msg);
 				booking.setSex(sex);
 				BookingDao.insertBookingDays(booking);
+				String whatsUpMessage = t.write("Hello ") + firstName + " " + lastName + " " +
+						t.write(" you successfully booked through SoSHealth") + " " + t.write("from") + " " + bookFrom + 
+						" " + t.write("to") + " " + bookTo + " " + t.write("please follow the instructions of hospital to confirm your booking");
+				WhatsappSender.sendMessage("2" + phone.toString(), whatsUpMessage);
 				PersonDao.increaseBookings(userId);
 				model.addAttribute("username", username);
 				mav.setViewName("user/profiles/user");
@@ -254,9 +258,7 @@ public class ServiceController {
 	@RequestMapping(value = "/HealthTrack/{place}/Service/{serviceId}/BookingTime/Submit", method = RequestMethod.POST)
 	public ModelAndView submitBookingTime(@CookieValue(value = "lang", defaultValue = "en") String cookie,
 			@PathVariable("serviceId") int serviceId, @PathVariable("place") String place, ModelAndView mav,
-			ModelMap model, HttpServletRequest request)
-			throws ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException,
-			org.json.simple.parser.ParseException, JSONException, IOException {
+			ModelMap model, HttpServletRequest request) throws Exception {
 
 		Translator t = new Translator(cookie);
 		model.addAttribute("lang", cookie);
@@ -347,6 +349,11 @@ public class ServiceController {
 				booking.setSex(sex);
 				booking.setDayOfBooking(dayAsDate);
 				BookingDao.insertBookingTimes(booking);
+				String whatsUpMessage = t.write("Hello ") + firstName + " " + lastName + " " +
+						t.write(" you successfully booked through SoSHealth") + " " + t.write("on") + " " + day + 
+						" " + time + " " + t.write("please follow the instructions of hospital to confirm your booking");
+				WhatsappSender.sendMessage("2" + phone.toString(), whatsUpMessage);
+
 				PersonDao.increaseBookings(userId);
 				mav.setViewName("user/profiles/user");
 			}
@@ -368,10 +375,12 @@ public class ServiceController {
 	@RequestMapping(value = "/healthTrack/Service/VerifyBooking/{place}/{serviceId}/{bookingId}", method = RequestMethod.GET)
 	public ModelAndView verifyBooking(@PathVariable("place") String place,
 			@CookieValue(value = "lang", defaultValue = "en") String cookie, @PathVariable("bookingId") int bookingId,
-			@PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			@PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request) throws Exception {
 
 		model.addAttribute("lang", cookie);
+		
+		Translator t = new Translator(cookie);
+		
 		if (!Validation.checkIfSomethingExists("booking_id", "booking", Integer.toString(bookingId))
 				|| !Validation.checkIfSomethingExists("service_id", "service", Integer.toString(serviceId))) {
 			mav.setViewName("redirect:/HealthTrack");
@@ -385,6 +394,7 @@ public class ServiceController {
 				Booking booking = BookingDao.getBookingById(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.verifyBooking(bookingId);
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been confirmed"));
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
 				} else {
@@ -400,10 +410,10 @@ public class ServiceController {
 	@RequestMapping(value = "/healthTrack/Clinic/VerifyBooking/{clinicId}/{bookingId}", method = RequestMethod.GET)
 	public ModelAndView verifyBookingClinic(@CookieValue(value = "lang", defaultValue = "en") String cookie,
 			@PathVariable("bookingId") int bookingId, @PathVariable("clinicId") int clinicId, ModelAndView mav,
-			ModelMap model, HttpServletRequest request)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			ModelMap model, HttpServletRequest request) throws Exception {
 
 		model.addAttribute("lang", cookie);
+		Translator t = new Translator(cookie);
 
 		if (!Validation.checkIfSomethingExists("booking_id", "booking", Integer.toString(bookingId))
 				|| !Validation.checkIfSomethingExists("clinic_id", "clinic", Integer.toString(clinicId))) {
@@ -418,6 +428,7 @@ public class ServiceController {
 				Booking booking = ClinicDao.getBookingOfClinicById(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.verifyBooking(bookingId);
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been confirmed"));
 					mav.setViewName("redirect:/"
 							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 				} else {
@@ -462,14 +473,13 @@ public class ServiceController {
 
 		return mav;
 	}
+	
 	@RequestMapping(value = "/healthTrack/Clinic/DeleteBooking/{clinicId}/{bookingId}", method = RequestMethod.GET)
 	public ModelAndView deleteBookingClinic(@CookieValue(value = "lang", defaultValue = "en") String cookie,
 			@PathVariable("bookingId") int bookingId, @PathVariable("clinicId") int clinicId, ModelAndView mav,
-			ModelMap model, HttpServletRequest request)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-
-		model.addAttribute("lang", cookie);
-
+			ModelMap model, HttpServletRequest request) throws Exception {
+		model.addAttribute("lang", cookie);		
+		Translator t = new Translator(cookie);
 		if (!Validation.checkIfSomethingExists("booking_id", "booking", Integer.toString(bookingId))
 				|| !Validation.checkIfSomethingExists("clinic_id", "clinic", Integer.toString(clinicId))) {
 			mav.setViewName("redirect:/HealthTrack");
@@ -483,6 +493,7 @@ public class ServiceController {
 				Booking booking = ClinicDao.getBookingOfClinicById(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.deleteBooking(bookingId);
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been cancelled"));
 					mav.setViewName("redirect:/"
 							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 				} else {
@@ -494,6 +505,7 @@ public class ServiceController {
 
 		return mav;
 	}
+	
 	@RequestMapping(value = "/healthTrack/Service/UnverifyBooking/{place}/{serviceId}/{bookingId}", method = RequestMethod.GET)
 	public ModelAndView unverifyBooking(@PathVariable("place") String place,
 			@CookieValue(value = "lang", defaultValue = "en") String cookie, @PathVariable("bookingId") int bookingId,
@@ -528,10 +540,11 @@ public class ServiceController {
 	@RequestMapping(value = "/healthTrack/Service/DeleteBooking/{place}/{serviceId}/{bookingId}", method = RequestMethod.GET)
 	public ModelAndView deleteBooking(@PathVariable("place") String place,
 			@CookieValue(value = "lang", defaultValue = "en") String cookie, @PathVariable("bookingId") int bookingId,
-			@PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+			@PathVariable("serviceId") int serviceId, ModelAndView mav, ModelMap model, HttpServletRequest request) throws Exception {
 
 		model.addAttribute("lang", cookie);
+		
+		Translator t = new Translator(cookie);
 		if (!Validation.checkIfSomethingExists("booking_id", "booking", Integer.toString(bookingId))) {
 			mav.setViewName("redirect:/HealthTrack/profile/service/" + serviceId);
 		} else {
@@ -544,6 +557,7 @@ public class ServiceController {
 				Booking booking = BookingDao.getBookingById(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.deleteBooking(bookingId);
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been cancelled"));
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
 				} else {
