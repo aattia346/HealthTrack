@@ -26,12 +26,14 @@ public static List<Pharmacy> getAllPharmacies() throws InstantiationException, I
 			pharmacy.setPharmacyName(result.getString("pharmacy_name"));
 			pharmacy.setPhone(result.getString("phone"));
 			pharmacy.setAddress(result.getString("address"));
-			pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
+			pharmacy.setGoogleMapsUrl(result.getString("google_maps_url"));
 			pharmacy.setLat(result.getFloat("lat"));
 			pharmacy.setLang(result.getFloat("lang"));
 			pharmacy.setAdminId(result.getInt("admin_id"));
 			pharmacy.setWebsite(result.getString("website"));
 
+			pharmacy.setDimmed(result.getInt("dimmed"));
+			
 
 			pharmacies.add(pharmacy);
 		}
@@ -52,7 +54,7 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	pharmacy.setPharmacyName(result.getString("pharmacy_name"));
 	pharmacy.setPhone(result.getString("phone"));
 	pharmacy.setAddress(result.getString("address"));
-	pharmacy.setGoogle_maps_url(result.getString("google_maps_url"));
+	pharmacy.setGoogleMapsUrl(result.getString("google_maps_url"));
 	pharmacy.setLat(result.getFloat("lat"));
 	pharmacy.setLang(result.getFloat("lang"));
 
@@ -60,6 +62,7 @@ IllegalAccessException, ClassNotFoundException, SQLException {
 	pharmacy.setIntro(result.getString("intro"));
 
 	pharmacy.setWebsite(result.getString("website"));
+	pharmacy.setDimmed(result.getInt("dimmed"));
 
 	return pharmacy;
 }
@@ -73,9 +76,10 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	PreparedStatement ps = con.prepareStatement(sql);
 	
 	ps.setString(1,pharmacy.getPharmacyName());
+
 	ps.setString(2, pharmacy.getPhone());
 	ps.setString(3, pharmacy.getAddress());
-	ps.setString(4,pharmacy.getGoogle_maps_url());
+	ps.setString(4,pharmacy.getGoogleMapsUrl());
 	ps.setFloat(5, pharmacy.getLat());
 	ps.setFloat(6, pharmacy.getLang());
 	ps.setInt(7,pharmacy.getAdminId());	
@@ -83,6 +87,7 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	ps.setString(9, pharmacy.getIntro());
 	ps.setInt(10,pharmacy.getPharmacyId());
 	
+
 	
 	ps.executeUpdate();
 	
@@ -101,14 +106,40 @@ public static void updatePharmacy(Pharmacy pharmacy)
 	ps.setFloat(3, pharmacy.getLang());
 	ps.setString(4, pharmacy.getPhone());
 	ps.setString(5,pharmacy.getAddress());
-	ps.setString(6, pharmacy.getGoogle_maps_url());
+	ps.setString(6, pharmacy.getGoogleMapsUrl());
 	ps.setInt(7, pharmacy.getAdminId());
 	ps.setString(8, pharmacy.getWebsite());
 	ps.setString(9, pharmacy.getIntro());
+
 	
 	ps.executeUpdate();
 	
 }
+	
+	
+	public static void insertDimmedPharmacy(Pharmacy pharmacy)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO pharmacy "
+				+ "(pharmacy_name, lat, lang, phone, address, google_maps_url,admin_id,website,intro,dimmed) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, pharmacy.getPharmacyName());
+		ps.setFloat(2, pharmacy.getLat());
+		ps.setFloat(3, pharmacy.getLang());
+		ps.setString(4, pharmacy.getPhone());
+		ps.setString(5,pharmacy.getAddress());
+		ps.setString(6, pharmacy.getGoogleMapsUrl());
+		ps.setInt(7, pharmacy.getAdminId());
+		ps.setString(8, pharmacy.getWebsite());
+		ps.setString(9, pharmacy.getIntro());
+		ps.setInt(10, pharmacy.getDimmed());
+		
+		ps.executeUpdate();
+		
+	}
 
 	public static int countPharmacies() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	

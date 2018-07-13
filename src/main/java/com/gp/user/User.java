@@ -2,13 +2,21 @@ package com.gp.user;
 
 public class User {
 	
-	int id, verificationCode, ban;
+	int id, verificationCode, ban, dimmed;
 	String username, password, type;
 	
 	public User() {
 		super();
 	}
 	
+	public int getDimmed() {
+		return dimmed;
+	}
+
+	public void setDimmed(int dimmed) {
+		this.dimmed = dimmed;
+	}
+
 	public int getBan() {
 		return ban;
 	}

@@ -1,10 +1,11 @@
 package com.gp.user;
 
-public class Pharmacy {
+public class Pharmacy extends User{
 	
 
 	int pharmacyId, adminId;
-	String pharmacyName, phone, address, google_maps_url, website, intro;
+
+	String pharmacyName, phone, address, googleMapsUrl, website, intro;
 
 	float lat, lang, review;
 	
@@ -55,12 +56,13 @@ public class Pharmacy {
 		this.address = address;
 	}
 
-	public String getGoogle_maps_url() {
-		return google_maps_url;
+
+	public String getGoogleMapsUrl() {
+		return googleMapsUrl;
 	}
 
-	public void setGoogle_maps_url(String google_maps_url) {
-		this.google_maps_url = google_maps_url;
+	public void setGoogleMapsUrl(String googleMapsUrl) {
+		this.googleMapsUrl = googleMapsUrl;
 	}
 
 	public float getLat() {

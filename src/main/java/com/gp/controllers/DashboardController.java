@@ -59,7 +59,8 @@ public class DashboardController {
 	public ModelAndView adminPlaces(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		model.addAttribute("lang", cookie);
-		System.out.println("cookie:"+ cookie);
+		System.out.println("adminUsername : "+ adminUsername);
+		
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
 			if(username != null) {
@@ -156,11 +157,7 @@ public class DashboardController {
 					
 				
 					
-					if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
-					model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
-					errors = true;
-						
-					}
+					
 					if(!Validation.validateText(intro)) {
 						model.addAttribute("invalidIntro", "<p class=\"wrong-input \">"+t.write("Invalid characters in the intro",cookie)+"</p>");
 						errors = true;
@@ -234,7 +231,46 @@ public class DashboardController {
 							errors = true;
 						}
 					}
-					if(place.equalsIgnoreCase("clinic")) {
+					if(errors == false) {
+					 if(place.equalsIgnoreCase("DimmedHospitals")){
+						 if(Validation.checkIfSomethingExists("hospital_name", "hospital", name)) {
+								model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+								errors = true;
+									
+								}
+						 
+						  String[] depts 		= request.getParameterValues("depts");
+						    if(errors==false) {
+							Hospital hospital = new Hospital();
+							hospital.setHospitalName(name);
+							hospital.setAdminId(admin);
+							hospital.setPhone(phone);
+							hospital.setWebsite(website);
+							hospital.setAddress(address);
+							hospital.setIntro(intro);
+							hospital.setGoogleMapsUrl(url);
+							hospital.setLat(lat);
+							hospital.setLang(lang);	
+							hospital.setDimmed(1);
+							HospitalDao.insertDimmedHospital(hospital);
+							t.fileWriter(name,ARname,"ar");
+							t.fileWriter(intro,ARintro,"ar");
+							t.fileWriter(address,ARaddress,"ar");
+							
+							Hospital H = HospitalDao.getHospitalById(admin);
+							
+							for(String dept: depts) {
+									HospitalDao.insertDepartment(dept, H.getHospitalId());
+							}
+							mav.setViewName("redirect:/HealthTrack/admin/"+username+"/hospitals");
+						    }else {
+								model.addAttribute("action","add");
+								mav.addAllObjects(model);
+								mav.setViewName("/admin/manage"+place);
+							}
+						}
+					
+					 else if(place.equalsIgnoreCase("clinic")) {
 						String fees             =request.getParameter("fees");
 						String doctorName		= request.getParameter("doctorName");
 						String specialty		= request.getParameter("specialty");
@@ -245,6 +281,11 @@ public class DashboardController {
 						model.addAttribute("oldSpecialty"	, specialty);
 						model.addAttribute("oldARDoctorName"	, ARdoctorName);
 						model.addAttribute("oldARSpecialty"	, ARspecialty);
+						if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
+							model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+							errors = true;
+								
+							}
 						
 						if(!Validation.validateFees(fees)) {
 							model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees",cookie)+" </p>");
@@ -317,17 +358,148 @@ public class DashboardController {
 								
 								mav.setViewName("redirect:/HealthTrack/admin/"+username+"/clinics");
 							}else {
-								mav.setViewName("redirect/:HealthTrack/admin/login");
+								model.addAttribute("action","add");
+								mav.addAllObjects(model);
+								mav.setViewName("/admin/manage"+place);
 							}
 						
 					}
+					 else if(place.equalsIgnoreCase("DimmedClinics")) {
+						String fees             =request.getParameter("fees");
+						String doctorName		= request.getParameter("doctorName");
+						String specialty		= request.getParameter("specialty");
+						String ARdoctorName		= request.getParameter("ARdoctorName");
+						String ARspecialty		= request.getParameter("ARspecialty");
+						model.addAttribute("oldFees",fees);
+						model.addAttribute("oldDoctorName"	, doctorName);
+						model.addAttribute("oldSpecialty"	, specialty);
+						model.addAttribute("oldARDoctorName"	, ARdoctorName);
+						model.addAttribute("oldARSpecialty"	, ARspecialty);
+						if(Validation.checkIfSomethingExists("clinic_name","clinic", name)) {
+							model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+							errors = true;
+								
+							}
+						
+						if(!Validation.validateFees(fees)) {
+							model.addAttribute("invalidFees", "<p class=\"wrong-input \">"+t.write("Invalid Fees",cookie)+" </p>");
+							errors = true;
+						}
+						
+						if(!Validation.validateName(doctorName)) {
+							model.addAttribute("invalidDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name",cookie)+"</p>");
+							errors = true;
+						}
+						
 					
-					if(errors == false) {
+						
+						if(doctorName.length() < 4) {
+							model.addAttribute("shortDoctorName", "<p class=\"wrong-input \">"+t.write("tha name should be at least 4 characters",cookie)+"</p>");
+							errors = true;
+						}
+						
+						
+						
+						if(!Validation.validateName(specialty)) {
+							model.addAttribute("invalidSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty",cookie)+"</p>");
+							errors = true;
+						}
+						if(!Validation.validateName(ARdoctorName)) {
+							model.addAttribute("invalidARDoctorName", "<p class=\"wrong-input \">"+t.write("Invalid doctor Name in Arabic",cookie)+"</p>");
+							errors = true;
+						}
+						if(ARdoctorName.length() < 4) {
+							model.addAttribute("shortARDoctorName", "<p class=\"wrong-input \">"+t.write("tha arabic name should be at least 4 characters",cookie)+"</p>");
+							errors = true;
+						}
+						
+						if(!Validation.validateName(ARspecialty)) {
+							model.addAttribute("invalidARSpeciality", "<p class=\"wrong-input \">"+t.write("Invalid Specialty in Arabic",cookie)+"</p>");
+							errors = true;
+						}
+						
+						if(ARspecialty.length() < 4) {
+							model.addAttribute("shortARSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters",cookie)+"</p>");
+							errors = true;
+						}
+						
+						
+						if(specialty.length() < 4) {
+							model.addAttribute("shortSpecialityName", "<p class=\"wrong-input \">"+t.write("tha Specialty should be at least 4 characters",cookie)+"</p>");
+							errors = true;
+						}
+						
+							if(errors == false) {
+								Clinic clinic =new Clinic();
+								clinic.setClinicName(name);
+								clinic.setAdminId(admin);
+								clinic.setPhone(phone);
+								clinic.setWebsite(website);
+								clinic.setAddress(address);
+								clinic.setFees(fees);
+								clinic.setIntro(intro);
+								clinic.setGoogle_maps_url(url);
+								clinic.setLat(lat);
+								clinic.setLang(lang);
+								clinic.setDoctorName(doctorName);
+								clinic.setSpecialty(specialty);
+								clinic.setDimmed(1);
+								ClinicDao.insertDimmedClinic(clinic);
+								t.fileWriter(doctorName, ARdoctorName,"ar");
+								t.fileWriter(specialty, ARspecialty,"ar");
+								t.fileWriter(name,ARname,"ar");
+								t.fileWriter(intro,ARintro,"ar");
+								t.fileWriter(address,ARaddress,"ar");
+								
+								mav.setViewName("redirect:/HealthTrack/admin/"+username+"/clinics");
+							}else {
+								model.addAttribute("action","add");
+								mav.addAllObjects(model);
+								mav.setViewName("/admin/manage"+place);
+							}
+						
+					}
+					 else if(place.equalsIgnoreCase("pharmacy")) {
+							if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
+								model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+								errors = true;	
+								}
+							//String[] services 		= request.getParameterValues("services");
+							if(errors==false) {
+							Pharmacy pharmacy = new Pharmacy();
+							pharmacy.setPharmacyName(name);
+							pharmacy.setAdminId(admin);
+							pharmacy.setPhone(phone);
+							pharmacy.setWebsite(website);
+							pharmacy.setAddress(address);
+							pharmacy.setGoogleMapsUrl(url);
+							pharmacy.setLat(lat);
+							pharmacy.setLang(lang);
+							pharmacy.setIntro(intro);
+							PharmacyDao.insertPharmacy(pharmacy);
+							t.fileWriter(name,ARname,"ar");
+							t.fileWriter(intro,ARintro,"ar");
+							t.fileWriter(address,ARaddress,"ar");
+							mav.setViewName("redirect:/HealthTrack/admin/"+username+"/pharmacies");
+	                       
+							}else {
+								model.addAttribute("action","add");
+								mav.addAllObjects(model);
+								mav.setViewName("/admin/manage"+place);
+							}
+						}
 					
-					 if(place.equalsIgnoreCase("hospital")){
+					
+					
+					 else if(place.equalsIgnoreCase("hospital")){
+						 if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
+								model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+								errors = true;
+									
+								}
 						 
-					String[] depts 		= request.getParameterValues("depts");
-					
+					  String[] depts 		= request.getParameterValues("depts");
+					    if(errors==false) {
 						Hospital hospital = new Hospital();
 						hospital.setHospitalName(name);
 						hospital.setAdminId(admin);
@@ -350,9 +522,19 @@ public class DashboardController {
 						}
 						mav.setViewName("redirect:/HealthTrack/profile/hospital/"+admin);
 						
+					}else {
+						model.addAttribute("action","add");
+						mav.addAllObjects(model);
+						mav.setViewName("/admin/manage"+place);
 					}
+					 }
 					else if(place.equalsIgnoreCase("center")) {
+						if(Validation.checkIfSomethingExists(place+"_name", place, name)) {
+							model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+							errors = true;	
+							}
 						//String[] services 		= request.getParameterValues("services");
+						if(errors==false) {
 						Center center = new Center();
 						center.setCenterName(name);
 						center.setAdminId(admin);
@@ -369,37 +551,84 @@ public class DashboardController {
 						t.fileWriter(address,ARaddress,"ar");
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/centers");
                        
-						
+						}else {
+							model.addAttribute("action","add");
+							mav.addAllObjects(model);
+							mav.setViewName("/admin/manage"+place);
+						}
+					}
+					else if(place.equalsIgnoreCase("DimmedCenters")) {
+						if(Validation.checkIfSomethingExists("center_name", "center", name)) {
+							model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+							errors = true;
+								
+							}
+						//String[] services 		= request.getParameterValues("services");
+						if(errors==false) {
+						Center center = new Center();
+						center.setCenterName(name);
+						center.setAdminId(admin);
+						center.setPhone(phone);
+						center.setWebsite(website);
+						center.setAddress(address);
+						center.setIntro(intro);
+						center.setGoogleMapsUrl(url);
+						center.setLat(lat);
+						center.setLang(lang);
+						center.setDimmed(1);
+						CenterDao.inserDimmedtCenter(center);
+						t.fileWriter(name,ARname,"ar");
+						t.fileWriter(intro,ARintro,"ar");
+						t.fileWriter(address,ARaddress,"ar");
+						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/centers");
+                       
+						}else {
+							model.addAttribute("action","add");
+							mav.addAllObjects(model);
+							mav.setViewName("/admin/manage"+place);
+						}
 					}
 					
-					else if(place.equalsIgnoreCase("Pharmacy")) {
-						
+					
+					else if(place.equalsIgnoreCase("DimmedPharmacy")) {
+						if(Validation.checkIfSomethingExists("pharmacy_name", "pharmacy", name)) {
+							model.addAttribute("nameExist", "<p class=\"wrong-input \">"+t.write("This place already exists",cookie)+"</p>");
+							errors = true;	
+							}
+						//String[] services 		= request.getParameterValues("services");
+						if(errors==false) {
 						Pharmacy pharmacy = new Pharmacy();
 						pharmacy.setPharmacyName(name);
+						pharmacy.setAdminId(admin);
 						pharmacy.setPhone(phone);
+						pharmacy.setWebsite(website);
 						pharmacy.setAddress(address);
-						pharmacy.setGoogle_maps_url(url);
+						pharmacy.setGoogleMapsUrl(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
-						pharmacy.setAdminId(admin);
 						pharmacy.setIntro(intro);
-						pharmacy.setWebsite(website);
-						PharmacyDao.insertPharmacy(pharmacy);
+						pharmacy.setDimmed(1);
+						PharmacyDao.insertDimmedPharmacy(pharmacy);
 						t.fileWriter(name,ARname,"ar");
 						t.fileWriter(intro,ARintro,"ar");
 						t.fileWriter(address,ARaddress,"ar");
 						mav.setViewName("redirect:/HealthTrack/admin/"+username+"/pharmacies");
+                       
+						}else {
+							model.addAttribute("action","add");
+							mav.addAllObjects(model);
+							mav.setViewName("/admin/manage"+place);
+						}
 					}
+				
 					
 					
-					}
-					else {
+					
+					}else {
 						model.addAttribute("action","add");
 						mav.addAllObjects(model);
 						mav.setViewName("/admin/manage"+place);
 					}
-					
-
 				
 				}else {
 					mav.setViewName("redirect/:HealthTrack/admin/login");
@@ -1100,7 +1329,7 @@ public class DashboardController {
 						pharmacy.setPharmacyName(name);
 						pharmacy.setPhone(phone);
 						pharmacy.setAddress(address);
-						pharmacy.setGoogle_maps_url(url);
+						pharmacy.setGoogleMapsUrl(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						pharmacy.setAdminId(admin);
@@ -1244,7 +1473,7 @@ public class DashboardController {
 						pharmacy.setPharmacyName(name);
 						pharmacy.setPhone(phone);
 						pharmacy.setAddress(address);
-						pharmacy.setGoogle_maps_url(url);
+						pharmacy.setGoogleMapsUrl(url);
 						pharmacy.setLat(lat);
 						pharmacy.setLang(lang);
 						pharmacy.setAdminId(admin);

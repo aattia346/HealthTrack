@@ -39,6 +39,7 @@ abstract public class ClinicDao {
 			clinic.setWebsite(result.getString("website"));
 			clinic.setNumOfSessions(result.getInt("number_of_sessions"));
 			clinic.setFees(result.getString("fees"));
+			clinic.setDimmed(result.getInt("dimmed"));
 			
 			clinics.add(clinic);
 		}
@@ -75,6 +76,7 @@ abstract public class ClinicDao {
 		clinic.setWebsite(result.getString("website"));
 		clinic.setNumOfSessions(result.getInt("number_of_sessions"));
 		clinic.setFees(result.getString("fees"));
+		clinic.setDimmed(result.getInt("dimmed"));
 		con.close();
 		return clinic;
 	}
@@ -100,6 +102,33 @@ abstract public class ClinicDao {
 		ps.setString(10, clinic.getDoctorName());
 		ps.setString(11, clinic.getSpecialty());
 		ps.setString(12, clinic.getFees());		
+		
+		ps.executeUpdate();
+		con.close();
+	}
+	
+	public static void insertDimmedClinic(Clinic clinic)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO clinic "
+				+ "(clinic_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url, doctor_clinic_name, specialty, fees,dimmed) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, clinic.getClinicName());
+		ps.setInt(2, clinic.getAdminId());
+		ps.setFloat(3, clinic.getLat());
+		ps.setFloat(4, clinic.getLang());
+		ps.setString(5,clinic.getPhone());
+		ps.setString(6, clinic.getWebsite());
+		ps.setString(7,clinic.getAddress());
+		ps.setString(8, clinic.getIntro());
+		ps.setString(9, clinic.getGoogle_maps_url());
+		ps.setString(10, clinic.getDoctorName());
+		ps.setString(11, clinic.getSpecialty());
+		ps.setString(12, clinic.getFees());	
+		ps.setInt(13, clinic.getDimmed());
 		
 		ps.executeUpdate();
 		con.close();
@@ -302,7 +331,6 @@ abstract public class ClinicDao {
 		}
 		return reviews;	
 	}
-
 
 	public static Booking getBookingOfClinicById(int bookingId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 

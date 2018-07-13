@@ -1,8 +1,8 @@
 package com.gp.user;
 
-public class Clinic {
+public class Clinic extends User{
 	
-	int clinicId, adminId, numOfSessions;
+	int clinicId, adminId, numOfSessions, dimmed;
 	String clinicName, doctorName, specialty, phone, address, google_maps_url,intro,website, fees;
 	float lat, lang, review;
 	

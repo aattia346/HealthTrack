@@ -32,6 +32,7 @@ abstract public class HospitalDao {
 		hospital.setAddress(result.getString("address"));
 		hospital.setIntro(result.getString("intro"));
 		hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+		hospital.setDimmed(result.getInt("dimmed"));
 		return hospital;
 	}
 	
@@ -73,6 +74,8 @@ abstract public class HospitalDao {
 			hospital.setAddress(result.getString("address"));
 			hospital.setIntro(result.getString("intro"));
 			hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+			hospital.setDimmed(result.getInt("dimmed"));
+			
 			hospitals.add(hospital);
 			}
 		return hospitals;
@@ -127,6 +130,29 @@ abstract public class HospitalDao {
 		ps.executeUpdate();
 		
 	}
+	public static void insertDimmedHospital(Hospital hospital)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO hospital "
+				+ "(hospital_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url,dimmed) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, hospital.getHospitalName());
+		ps.setInt(2, hospital.getAdminId());
+		ps.setFloat(3, hospital.getLat());
+		ps.setFloat(4, hospital.getLang());
+		ps.setString(5, hospital.getPhone());
+		ps.setString(6, hospital.getWebsite());
+		ps.setString(7, hospital.getAddress());
+		ps.setString(8, hospital.getIntro());
+		ps.setString(9, hospital.getGoogleMapsUrl());
+		ps.setInt(10, hospital.getDimmed());
+		
+		ps.executeUpdate();
+		
+	}
 	
 	public static List<String> getDepts(){
 		
@@ -174,7 +200,6 @@ abstract public class HospitalDao {
 		return exist;
 	}
 
-	
 	public static void updateHospital(Hospital hospital)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		

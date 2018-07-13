@@ -28,11 +28,11 @@ public class Translator {
 		File translationFile;
 		if(language.equals("en")) {		
 			translationFile = new File("E:\\GP_folder\\ENtranslation.json"); 
-			System.out.println("open ENtranslation.txt");
+			//System.out.println("open ENtranslation.txt");
 		}
 		else {
 			translationFile = new File("E:\\GP_folder\\ARtranslation.json"); 
-			System.out.println("open ARtranslation.txt");
+			//System.out.println("open ARtranslation.txt");
 		}
 		
 		path = translationFile.getPath();
@@ -48,11 +48,11 @@ public class Translator {
 		translate = (Map<String, String>) obj.get(language);
 		//System.out.println("translate :"+ translate);
 		if(translate.get(word) != null) {
-			System.out.println("translate not equal null");
+			//System.out.println("translate not equal null");
 			return translate.get(word);
 			
 		}else {
-			System.out.println("translate is equal to null");
+			//System.out.println("translate is equal to null");
 			return word;
 			
 		}
@@ -89,7 +89,7 @@ public class Translator {
 			 }else {
 			       System.out.println("not available attribute");
 			  }
-			    System.out.println(translate);
+			    //System.out.println(translate);
 			
 			        
 	    	try { 		

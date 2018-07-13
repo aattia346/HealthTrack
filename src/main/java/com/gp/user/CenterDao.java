@@ -32,6 +32,7 @@ abstract public class CenterDao {
 		center.setAddress(result.getString("address"));
 		center.setIntro(result.getString("intro"));
 		center.setGoogleMapsUrl(result.getString("google_maps_url"));
+		center.setDimmed(result.getInt("dimmed"));
 		
 		return center;
 	}
@@ -59,11 +60,13 @@ abstract public class CenterDao {
 			center.setAddress(result.getString("address"));
 			center.setIntro(result.getString("intro"));
 			center.setGoogleMapsUrl(result.getString("google_maps_url"));
+			center.setDimmed(result.getInt("dimmed"));
 			centers.add(center);
 		}
 		return centers;
 	
 	}
+	
 	public static void updateCenter(Center center)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -87,6 +90,7 @@ abstract public class CenterDao {
 		ps.executeUpdate();
 		
 	}
+	
 	public static void insertCenter(Center center)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		
@@ -109,6 +113,30 @@ abstract public class CenterDao {
 		ps.executeUpdate();
 		
 	}
+	public static void inserDimmedtCenter(Center center)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="INSERT INTO center "
+				+ "(center_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url,dimmed) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, center.getCenterName());
+		ps.setInt(2, center.getAdminId());
+		ps.setFloat(3, center.getLat());
+		ps.setFloat(4, center.getLang());
+		ps.setString(5, center.getPhone());
+		ps.setString(6, center.getWebsite());
+		ps.setString(7,center.getAddress());
+		ps.setString(8, center.getIntro());
+		ps.setString(9, center.getGoogleMapsUrl());
+		ps.setInt(10, center.getDimmed());
+		
+		ps.executeUpdate();
+		
+	}
+	
 	public static List<String> getServices(){
 		
 		List<String> services = new ArrayList<String>();

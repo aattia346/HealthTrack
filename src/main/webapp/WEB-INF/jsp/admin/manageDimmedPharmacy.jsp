@@ -36,16 +36,16 @@
                         <ol class="breadcrumb text-right">
                             <li><a href="/HealthTrack/admin/dashboard"><%=t.write("Dashboard",lang) %></a></li>
                             <li><a href="/HealthTrack/admin/<%= admin.getUsername()%>/pharmacies"><%=t.write("Pharmacies",lang) %></a></li>
-                            <li><%=t.write("Add New Pharmacy",lang) %></li>
+                            <li><%=t.write("Add New Dimmed Pharmacy",lang) %></li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
         
-        <form class="col-lg-12" action="/HealthTrack/admin/pharmacy/insert" method="post">
+        <form class="col-lg-12" action="/HealthTrack/admin/DimmedPharmacy/insert" method="post">
                     <div class="card">
-                      <div class="card-header"><strong><%=t.write("Pharmacy",lang) %></strong><small><%=t.write("Form",lang) %></small></div>
+                      <div class="card-header"><strong><%=t.write("Dimmed Pharmacy",lang) %></strong><small><%=t.write("Form",lang) %></small></div>
                       <div class="card-body card-block">
                       
                       <div class="container">

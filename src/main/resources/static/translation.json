@@ -231,7 +231,8 @@
 		  "emergency part" : "In emegencies we have much time to ask friend or relatives about the neareast service i need urgently and if i found it you can not assure its availability our website helps you to know that",
 		  "about us part" : "SOSHealth is a medical problem solving website for finding a medical service in medical centers and booking it,<br>we trust our member hospitals 100% in updating the availability and being honest with you financially..",
 		  "We always put our patients first" : "We always put our patients first",
-		  "Contact Us " : "Contact Us "
+		  "Contact Us " : "Contact Us ",
+		  "Not registered in our navigator" : "Not registered in our navigator"
 		  	},
 	"ar" : {
 		"username:" : ":��� ��������",
@@ -580,7 +581,8 @@
 		 "emergency part" : "فى كثير من حالات الطوارئ نحن لانملك الوقت الكافى لكى نسال الاصدقاء والاقارب عن المساعده موقعنا يقدم لك المساعده الامثل فى ايجاد اقرب خدمه متاحه.",
 		 "We always put our patients first" : "دائما نضع عملائنا فى المقدمه",
 		 "Contact Us " : "أتصل بنا ",
-		 "about us part" : " ايجاد لك الخدمة الطبية المرادة وحجزها لك<br>كما يضمن لك الامانة في المعاملات المالية مع المستشفيات الاعضاء وفيه تحديث اتاحية الخدمات لديهم"
+		 "about us part" : " ايجاد لك الخدمة الطبية المرادة وحجزها لك<br>كما يضمن لك الامانة في المعاملات المالية مع المستشفيات الاعضاء وفيه تحديث اتاحية الخدمات لديهم",
+		 "Not registered in our navigator" : "غير مسجله على موقعنا"
 		 
 >>>>>>> 829d587b16254443c600c6ba1beec8a15563d941
 	}

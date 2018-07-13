@@ -152,6 +152,7 @@
                         </div>
                     </div>
                      <a href="/HealthTrack/admin/<%= admin.getUsername() %>/center/add" class="btn btn-primary"><i class="fa fa-plus"></i> <%=t.write("Add New Center",lang) %></a>
+                     <a href="/HealthTrack/admin/<%= admin.getUsername() %>/DimmedCenters/add" class="btn btn-dimmed"><i class="fa fa-plus"></i><%=t.write("Add Dimmed Center",lang) %> </a>
                 </div>
 
 

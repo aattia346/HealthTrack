@@ -704,6 +704,12 @@ label{
 .service-pin{
 	color: #0ff;
 }
+.not-registered-location{
+	position: absolute;
+    bottom: 140px;
+    right: 10px;
+    margin-bottom: 4px;
+}
 .special-services{
 	color: #fff;
     background-color: #337ab7;

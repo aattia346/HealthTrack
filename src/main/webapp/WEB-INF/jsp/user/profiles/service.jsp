@@ -35,6 +35,8 @@
 
 <% 	boolean showComment =false ;
 	boolean showForm = false;
+	boolean AddHospitalServiceAvailability =false ;
+	boolean AddCenterServiceAvailability =false ;
 	User user = new User();
 	String usernameSession = (String)hospitalSession.getAttribute("username");
 	if(usernameSession != null){
@@ -42,7 +44,13 @@
 		if(user.getType().equalsIgnoreCase("person")){
 			showForm = true;
 		}
-		if((user.getType().equalsIgnoreCase("hospital")) || (user.getType().equalsIgnoreCase("center"))){
+		
+		if((user.getType().equalsIgnoreCase("hospital"))) {
+			AddHospitalServiceAvailability =true ;
+			showComment=true ;
+		}
+		if(user.getType().equalsIgnoreCase("center")){
+			AddCenterServiceAvailability= true ;
 			showComment=true ;
 		}
 		if(PersonDao.canPersonBook(user.getId())){
@@ -138,7 +146,11 @@
   
      <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showComments" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Comments",lang) %></a>
      <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showBookings" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Bookings",lang) %></a>
+
    					<% }%>
+   					<%if(AddHospitalServiceAvailability){ %>
+   					  <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/AddAvailability" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Add  Bookings",lang) %></a>
+   					<%} %>
                 </div>
                 ${checkYourBooking} ${loginFirst}
             </div>

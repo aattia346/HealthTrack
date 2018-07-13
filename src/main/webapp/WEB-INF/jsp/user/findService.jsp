@@ -39,26 +39,64 @@ Calendar calendar = Calendar.getInstance();
 
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
-	serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
-	Location location = new Location(center.getLat(), center.getLang(), t.write(center.getCenterName(),lang), "center", serviceUrl, "71e486");
+
+	String pinColor = null;
+	if(center.getDimmed() == 1){
+		serviceUrl = center.getGoogleMapsUrl();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
+		pinColor = "71e486";
+	}
+	Location location = new Location(center.getLat(), center.getLang(), t.write(center.getCenterName(),lang), "center", serviceUrl, pinColor);
+
 	locations.add(location);
 }
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
-	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), t.write(pharmacy.getPharmacyName(),lang) + " " + t.write("at",lang) + " " + t.write(pharmacy.getAddress(),lang) , "pharmacy", pharmacy.getGoogle_maps_url(), "C35ED4");
+
+	String pinColor = null;
+	if(pharmacy.getDimmed() == 1){
+		serviceUrl = pharmacy.getGoogleMapsUrl();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "";
+		pinColor = "C35ED4";
+	}
+	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), t.write(pharmacy.getPharmacyName(),lang) + " " + t.write("at",lang) + " " + t.write(pharmacy.getAddress(),lang) , "pharmacy", serviceUrl, pinColor);
+
 	locations.add(location);
 }
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
-	Location location = new Location(clinic.getLat(), clinic.getLang(), t.write(clinic.getClinicName(),lang), "clinic", serviceUrl, "4089C7");
+
+	String pinColor = null;
+	if(clinic.getDimmed() == 1){
+		serviceUrl = clinic.getGoogle_maps_url();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
+		pinColor = "4089C7";
+	}
+	Location location = new Location(clinic.getLat(), clinic.getLang(), t.write(clinic.getClinicName(),lang), "clinic", serviceUrl, pinColor);
+
 	locations.add(location);
 }
 
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
-	serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
-	Location location = new Location(hospital.getLat(), hospital.getLang(), t.write(hospital.getHospitalName(),lang), "hospital", serviceUrl, "ff6e6e");
+
+	String pinColor = null;
+	if(hospital.getDimmed() == 1){
+		serviceUrl = hospital.getGoogleMapsUrl();
+		pinColor = "333333";
+	}else{
+		serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
+		pinColor = "ff6e6e";
+	}
+	Location location = new Location(hospital.getLat(), hospital.getLang(), t.write(hospital.getHospitalName(),lang), "hospital", serviceUrl, pinColor);
+
 	locations.add(location);
 }
 
@@ -140,11 +178,16 @@ for(Service service : servicesOfCenters){
                       <div class="panel-body">
                       <ul class="list-unstyled">
 
+
                           <input type="radio" name="service" value="all" checked> <%= t.write("all",lang) %><br>
                           <input type="radio" name="service" value="clinic"><%= t.write("clinics",lang) %><i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
                           <input type="radio" name="service" value="hospital"> <%= t.write("hospitals",lang) %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
                           <input type="radio" name="service" value="center"> <%= t.write("centers",lang) %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
                           <input type="radio" name="service" value="pharmacy"> <%= t.write("pharmacies",lang) %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
+                           <div class="not-registered-location">
+                      		<i class="fa fa-map-marker-alt custom-pin"></i> <span><%= t.write("Not registered in our navigator",lang) %></span>
+                      	</div>
+
                   	  </ul>
                   	  <ul class="list-unstyled text-uppercase">
                   	  	  <h4 class="text-center special-services"><%= t.write("Special Services",lang) %></h4>
