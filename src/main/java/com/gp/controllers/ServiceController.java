@@ -688,6 +688,28 @@ public class ServiceController {
 		}
 		return mav;
 	}
+	@RequestMapping(value = "/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/{url}/add", method = RequestMethod.GET)
+	public ModelAndView AddHAvailability(@CookieValue(value = "lang", defaultValue = "en") String cookie, Model model,
+			HttpSession session, ModelAndView mav, @PathVariable("url") String url,
+			@PathVariable("adminUsername") String adminUsername, @PathVariable("serviceId") int serviceId,
+			@PathVariable("place") String place)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		model.addAttribute("lang", cookie);
+		model.addAttribute("serviceId", serviceId);
+		model.addAttribute("place", place);
+		model.addAttribute("action","add");
+		String username = (String) session.getAttribute("username");
+		if (username != null) {
+			if (username.equalsIgnoreCase(adminUsername)) {
+				mav.setViewName("/user/profiles/" + url);
+			} else {
+				mav.setViewName("redirect:/HealthTrack/login");
+			}
+		} else {
+			mav.setViewName("/login");
+		}
+		return mav;
+	}
 
 	@RequestMapping(value = "/HealthTrack/admin/{username}/{serviceId}/{placeType}/{place}/delete/{placeId}/{url}", method = RequestMethod.GET)
 	public ModelAndView deleteHospital(@CookieValue(value = "lang", defaultValue = "en") String cookie, Model model,

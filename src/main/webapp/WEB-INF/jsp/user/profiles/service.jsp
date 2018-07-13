@@ -149,7 +149,7 @@
 
    					<% }%>
    					<%if(AddHospitalServiceAvailability){ %>
-   					  <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/AddAvailability" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Add  Bookings",lang) %></a>
+   					  <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/manageAvailableHService/add" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Add  Availability for service ",lang) %></a>
    					<%} %>
                 </div>
                 ${checkYourBooking} ${loginFirst}

@@ -18,6 +18,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 int clinicId = (Integer)request.getAttribute("clinicId");
+System.out.println(" clinicId "+   clinicId);
 
 Clinic clinic = ClinicDao.getClinicById(clinicId);
 
@@ -45,6 +46,7 @@ daySelect[0]		 = tableFormat.format(today);
 boolean showForm = false;
 boolean showComment =false ;
 String username = (String)session.getAttribute("username");
+System.out.println(" username "+   username);
 User user = new User();
 if(username != null){
 	user = UserDao.getUserByUsername(username);
