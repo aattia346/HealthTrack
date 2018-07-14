@@ -18,26 +18,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 int clinicId = (Integer)request.getAttribute("clinicId");
-System.out.println(" clinicId "+   clinicId);
-
 Clinic clinic = ClinicDao.getClinicById(clinicId);
-
 String title = clinic.getClinicName(); 
 %>
 <%@include  file="../includes/header.jsp" %>
 <% 
-
 Calendar calendar = Calendar.getInstance();
 Date today = Calendar.getInstance().getTime();
-
 SimpleDateFormat tableFormat = new SimpleDateFormat("E d/M");
 String todayInTableFormat = tableFormat.format(today);
-
 SimpleDateFormat todayFormat = new SimpleDateFormat ("yyyy-MM-dd");
 String todayInMyFormat = todayFormat.format(today);
-
 HashMap<String,Appointment> apps = ClinicDao.getAppointmentOfClinic(clinicId);
-
 String[] days		 = new String[7];
 String[] daySelect	 = new String[7];
 DateFormat dayFormat = new SimpleDateFormat("E");
@@ -46,7 +38,6 @@ daySelect[0]		 = tableFormat.format(today);
 boolean showForm = false;
 boolean showComment =false ;
 String username = (String)session.getAttribute("username");
-System.out.println(" username "+   username);
 User user = new User();
 if(username != null){
 	user = UserDao.getUserByUsername(username);
@@ -62,7 +53,6 @@ if(username != null){
 	}
 }
 List<Review> comments = ClinicDao.get5Comments(clinicId);
-
 %>
     <!-- Preloader -->
     <div id="preloader">
@@ -357,4 +347,4 @@ List<Review> comments = ClinicDao.get5Comments(clinicId);
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&callback=hospitalMarker">
     </script>
-  <!-- <%@include  file="../includes/footer.jsp" %> -->  
+    <%@include  file="../includes/footer.jsp" %>

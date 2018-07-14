@@ -200,27 +200,26 @@ abstract public class ServiceDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, centerId);
 		ResultSet result = ps.executeQuery();
-		
 		List<Service> services = new ArrayList<Service>();
 		
 		while(result.next()) {
-		Service service = new Service();
-		service.setServiceId(result.getInt("service_id"));
-		service.setServiceName(result.getString("service_name"));
-		service.setCenterId(result.getInt("center_id"));
-		service.setCenterName(result.getString("center_name"));
-		service.setLastUpdated(result.getDate("last_updated"));
-		service.setFees(result.getString("fees"));
-		service.setAdminId(result.getInt("admin_id"));
-		service.setGoogleMapsUrl(result.getString("google_maps_url"));
-		service.setAddress(result.getString("address"));
-		service.setServiceReview(result.getFloat("service_review"));
-		service.setLat(result.getFloat("lat"));
-		service.setLang(result.getFloat("lang"));
-		service.setWebsite(result.getString("website"));
-		service.setSlotType(result.getInt("day_or_time"));
-		service.setSlot(result.getInt("slot"));
-		services.add(service);
+			Service service = new Service();
+			service.setServiceId(result.getInt("service_id"));
+			service.setServiceName(result.getString("service_name"));
+			service.setCenterId(result.getInt("center_id"));
+			service.setCenterName(result.getString("center_name"));
+			service.setLastUpdated(result.getDate("last_updated"));
+			service.setFees(result.getString("fees"));
+			service.setAdminId(result.getInt("admin_id"));
+			service.setGoogleMapsUrl(result.getString("google_maps_url"));
+			service.setAddress(result.getString("address"));
+			service.setServiceReview(result.getFloat("service_review"));
+			service.setLat(result.getFloat("lat"));
+			service.setLang(result.getFloat("lang"));
+			service.setWebsite(result.getString("website"));
+			service.setSlotType(result.getInt("day_or_time"));
+			service.setSlot(result.getInt("slot"));
+			services.add(service);
 		}
 		con.close();
 		return services;

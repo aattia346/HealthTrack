@@ -10,15 +10,11 @@
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
-int centerId = (Integer)request.getAttribute("centerId");
-Center center = CenterDao.getCenterById(centerId);
-
-List<Service> services = new ArrayList<Service>();
-services = ServiceDao.getServicesOfCenter(centerId);
+int centerAdminId = (Integer)request.getAttribute("centerId");
+Center center = CenterDao.getCenterById(centerAdminId);
+List<Service> services = ServiceDao.getServicesOfCenter(center.getCenterId());
 request.setAttribute("services", services);
-
 Date today = Calendar.getInstance().getTime();
-
 String title = center.getCenterName();
 %>
 <%@include  file="../includes/header.jsp" %>
@@ -81,9 +77,15 @@ String title = center.getCenterName();
 					            Calendar calendar = Calendar.getInstance();
 			                	calendar.setTime(today);
 			                	calendar.add(Calendar.DAY_OF_MONTH, -1);
-	                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
-                                <a class="text-capitalize" href="#"><%= t.write("available today",lang) %></a>
-                                <% } %>
+			                	if(service.getSlotType() == 1){
+		                         	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){ %>
+	                                <a class="text-capitalize" href="#"><%= t.write("available today",lang) %></a>
+	                                <% } 
+                                }else{
+                                	if(Validation.validateBookTime(service.getServiceId(), calendar.getTime().toString(), "center")){ %>
+	                                <a class="text-capitalize" href="#"><%= t.write("available today",lang) %></a>
+	                                <% } 
+                                 }  %>
                             </div>
                         </div>
                         <!-- Post Content -->

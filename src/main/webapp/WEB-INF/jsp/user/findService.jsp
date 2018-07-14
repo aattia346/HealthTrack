@@ -24,88 +24,75 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include  file="includes/header.jsp" %> 
 <%
-
 List<Float> 	lats  = new ArrayList<Float>();
 List<Float> 	langs = new ArrayList<Float>();
 List<String> 	names = new ArrayList<String>();
 List<String> 	types = new ArrayList<String>();
 List<String> 	urls  = new ArrayList<String>();
 List<Location> 	locations = new ArrayList<Location>();
-
 String servicePinColor = null;
 Date today = Calendar.getInstance().getTime();
 String serviceUrl = null;
 Calendar calendar = Calendar.getInstance();
-
 List<Center> centers = CenterDao.getAllCenters();
 for(Center center : centers){
-
 	String pinColor = null;
 	if(center.getDimmed() == 1){
 		serviceUrl = center.getGoogleMapsUrl();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "/HealthTrack/profile/center/"+center.getAdminId();
 		pinColor = "71e486";
 	}
 	Location location = new Location(center.getLat(), center.getLang(), t.write(center.getCenterName(),lang), "center", serviceUrl, pinColor);
-
 	locations.add(location);
 }
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
-
 	String pinColor = null;
 	if(pharmacy.getDimmed() == 1){
 		serviceUrl = pharmacy.getGoogleMapsUrl();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "";
 		pinColor = "C35ED4";
 	}
 	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), t.write(pharmacy.getPharmacyName(),lang) + " " + t.write("at",lang) + " " + t.write(pharmacy.getAddress(),lang) , "pharmacy", serviceUrl, pinColor);
-
 	locations.add(location);
 }
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
-
 	String pinColor = null;
 	if(clinic.getDimmed() == 1){
 		serviceUrl = clinic.getGoogle_maps_url();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
 		pinColor = "4089C7";
 	}
 	Location location = new Location(clinic.getLat(), clinic.getLang(), t.write(clinic.getClinicName(),lang), "clinic", serviceUrl, pinColor);
-
 	locations.add(location);
 }
-
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
-
 	String pinColor = null;
 	if(hospital.getDimmed() == 1){
 		serviceUrl = hospital.getGoogleMapsUrl();
-		pinColor = "333333";
+		pinColor = "a3a3a3";
 	}else{
 		serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
 		pinColor = "ff6e6e";
 	}
 	Location location = new Location(hospital.getLat(), hospital.getLang(), t.write(hospital.getHospitalName(),lang), "hospital", serviceUrl, pinColor);
-
 	locations.add(location);
 }
-
 SimpleDateFormat formatter = new SimpleDateFormat("E");  
 List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
 	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();	
 	calendar.setTime(today);
-	//calendar.add(Calendar.DAY_OF_MONTH, -1);
+	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";
@@ -125,12 +112,11 @@ for(Service service : servicesOfHospital){
 	Location location = new Location(service.getLat(), service.getLang(), t.write(service.getServiceName(),lang), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }
-
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
 	serviceUrl = "/HealthTrack/profile/service/center/"+service.getServiceId();	
 	calendar.setTime(today);
-	//calendar.add(Calendar.DAY_OF_MONTH, -1);
+	calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";
@@ -150,7 +136,6 @@ for(Service service : servicesOfCenters){
 	Location location = new Location(service.getLat(), service.getLang(), t.write(service.getServiceName(),lang), service.getServiceName(), serviceUrl, servicePinColor);
 	locations.add(location);
 }
-
 %>   
 	<style>
 		.reviewSucceeded{
@@ -159,7 +144,6 @@ for(Service service : servicesOfCenters){
 	</style>
 	<div class="main-page-container" style="background-image: url(/user/layout/images/emergency.jpg);">   
             <h3 class="text-center"><%= t.write("What are you looking for?",lang) %></h3>
-
             <div class="row">
                 
                 <div class="enter-address col-sm-11 col-sm-offset-1">
@@ -177,24 +161,20 @@ for(Service service : servicesOfCenters){
                       </div>
                       <div class="panel-body">
                       <ul class="list-unstyled">
-
-
                           <input type="radio" name="service" value="all" checked> <%= t.write("all",lang) %><br>
                           <input type="radio" name="service" value="clinic"><%= t.write("clinics",lang) %><i class="fa fa-map-marker-alt custom-pin clinic-pin"></i><br>
                           <input type="radio" name="service" value="hospital"> <%= t.write("hospitals",lang) %> <i class="fa fa-map-marker-alt custom-pin hospital-pin"></i><br>
                           <input type="radio" name="service" value="center"> <%= t.write("centers",lang) %> <i class="fa fa-map-marker-alt custom-pin center-pin"></i><br>
                           <input type="radio" name="service" value="pharmacy"> <%= t.write("pharmacies",lang) %> <i class="fa fa-map-marker-alt custom-pin pharmacy-pin"></i><br>
-                           <div class="not-registered-location">
+                  	  	  <div class="not-registered-location">
                       		<i class="fa fa-map-marker-alt custom-pin"></i> <span><%= t.write("Not registered in our navigator",lang) %></span>
                       	</div>
-
                   	  </ul>
                   	  <ul class="list-unstyled text-uppercase">
                   	  	  <h4 class="text-center special-services"><%= t.write("Special Services",lang) %></h4>
                           <input type="radio" name="service" value="icu"> <%= t.write("icu",lang) %> <br>
                           <input type="radio" name="service" value="mri"> <%= t.write("mri",lang) %><br>
                           <input type="radio" name="service" value="incubator"> <%= t.write("Incubator",lang) %><br>
-
                       </ul>
                       <div class="guide-label text-capitalize">
                       	<div class="available-color">
@@ -219,11 +199,9 @@ for(Service service : servicesOfCenters){
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="features-content">
-
-                        <h2><%=t.write("We always put our patients first",lang) %></h2>
-                        <p><%=t.write("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.Lorem ipsum dolor sit amet, consec tetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.",lang) %></p>
-                        <a href="#services" class="btn medilife-btn mt-50 about-us-btn about-us-btn-1"><%=t.write("View the services",lang) %> <span>+</span></a>
-
+                        <h1><%= t.write("We always put our patients first",lang) %></h1>
+                        <p><%= t.write("about us part",lang) %></p>
+                        <a href="#services" class="btn medilife-btn mt-50 about-us-btn about-us-btn-1">View the services <span>+</span></a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -240,11 +218,9 @@ for(Service service : servicesOfCenters){
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="medica-about-content">
-
-                        <h2><%=t.write("Our Main Services",lang) %></h2>
-                        <p><%=t.write("Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam;8 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.",lang) %></p>
-                        <a href="#about" class="btn medilife-btn mt-50 about-us-btn"><%=t.write("About Us",lang) %><span>+</span></a>
-
+                        <h2><%= t.write("Our Main Services",lang) %></h2>
+                        <p><%= t.write("our services part",lang) %></p>
+                        <a href="#about" class="btn medilife-btn mt-50 about-us-btn"><%= t.write("About Us",lang) %><span>+</span></a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-8">
@@ -256,10 +232,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-hospital"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-
                                     <h5><%= t.write("hospitals",lang) %></h5>
                                     <p><%= t.write("hospitals part",lang) %></p>
-
                                 </div>
                             </div>
                         </div>
@@ -270,10 +244,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-child"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-
                                     <h5><%= t.write("Incubators",lang) %></h5>
                                     <p><%= t.write("service part",lang) %></p>
-
                                 </div>
                             </div>
                         </div>
@@ -284,10 +256,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-user-md"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-
                                     <h5><%= t.write("Clinic",lang) %></h5>
                                     <p><%= t.write("clinic part",lang) %></p>
-
                                 </div>
                             </div>
                         </div>
@@ -298,10 +268,8 @@ for(Service service : servicesOfCenters){
                                     <i class="fa fa-ambulance"></i>
                                 </div>
                                 <div class="service-content col-sm-8">
-
                                     <h5><%= t.write("Emergency",lang) %></h5>
                                     <p><%= t.write("emergency part",lang) %></p>
-
                                 </div>
                             </div>
                         </div>
@@ -335,9 +303,7 @@ var locations = [
 		
 	<% }%>
                          ];
-
           var infowindow = new google.maps.InfoWindow();
-
           for (i = 0; i < locations.length; i++) {
         	  
         	  if(selectedService.toLowerCase() == "all" && allSelected.includes(locations[i][4].toLowerCase())){ 		  
@@ -350,7 +316,6 @@ var locations = [
             	  setPin = true;
               }
             if(setPin){
-
             var pinIcon = new google.maps.MarkerImage(
             "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|".concat(locations[i][3]), 
             null, /* size is determined at runtime */
@@ -367,7 +332,7 @@ var locations = [
           });
                   
         google.maps.event.addListener(marker, 'click', function() {
-k            window.open(this.url , '_blank');
+            window.open(this.url , '_blank');
         });
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
@@ -381,24 +346,20 @@ k            window.open(this.url , '_blank');
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function() {
       searchBox.setBounds(map.getBounds());
     });
-
     var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
-
       if (places.length == 0) {
         return;
       }
         
       //markers = [];
-
       // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function(place) {
@@ -413,7 +374,6 @@ k            window.open(this.url , '_blank');
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25)
         };
-
         // Create a marker for each place.
         markers.push(new google.maps.Marker({
           map: map,
@@ -421,7 +381,6 @@ k            window.open(this.url , '_blank');
           title: place.name,
           position: place.geometry.location
         }));
-
         if (place.geometry.viewport) {
           // Only geocodes have viewport.
           bounds.union(place.geometry.viewport);
@@ -464,7 +423,6 @@ k            window.open(this.url , '_blank');
       
           }
   }
-
 </script>
 <script
  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF4-LBT961bTAMeLJr6Pt1-b9FOjljREg&libraries=places&callback=initAutocomplete"

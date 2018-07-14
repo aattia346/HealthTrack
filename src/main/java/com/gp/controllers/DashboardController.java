@@ -59,7 +59,6 @@ public class DashboardController {
 	public ModelAndView adminPlaces(@CookieValue(value="lang", defaultValue="en") String cookie,Model model, HttpSession session, ModelAndView mav, @PathVariable("adminUsername") String adminUsername, @PathVariable("place") String place)
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		model.addAttribute("lang", cookie);
-		System.out.println("adminUsername : "+ adminUsername);
 		
 		if(Validation.checkIfTheUserIsAdmin(adminUsername)) {
 			String username = (String)session.getAttribute("username");
@@ -91,10 +90,7 @@ public class DashboardController {
 				if(username != null) {
 					if(username.equalsIgnoreCase(adminUsername)) {
 						
-						//t.translate2English("Amiar","amira");
 						model.addAttribute("action","add");
-						String x=t.write("username",cookie);
-						System.out.println(x);
 						mav.setViewName("/admin/manage"+place);
 					}else {
 						mav.setViewName("redirect/:HealthTrack/admin/login");
@@ -704,7 +700,6 @@ public class DashboardController {
 					if(username.equalsIgnoreCase(adminUsername)) {
 						model.addAttribute("action", "edit");
 						model.addAttribute("AdminId", AdminId);
-						System.out.println("AdminId pharmacy" + AdminId);
 						mav.addAllObjects(model);
 						mav.setViewName("/admin/manage" + place );
 						
@@ -843,7 +838,6 @@ public class DashboardController {
 						t.fileWriter(address, ARaddress, "ar");
 						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/hospitals");
 					}else {
-						System.out.println("true");
 						model.addAttribute("action","edit");
 						model.addAttribute("AdminId", AdminId);
 						mav.addAllObjects(model);
@@ -1010,7 +1004,6 @@ public class DashboardController {
 						
 						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/centers");
 					}else {
-						System.out.println("true");
 						model.addAttribute("action","edit");
 						model.addAttribute("AdminId",AdminId);
 						mav.addAllObjects(model);
@@ -1341,7 +1334,6 @@ public class DashboardController {
 						t.fileWriter(address,ARaddress,"ar");
 						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/pharmacies");
 					}else {
-						System.out.println("true");
 						model.addAttribute("action","edit");
 						model.addAttribute("AdminId", AdminId);
 						
@@ -1483,7 +1475,6 @@ public class DashboardController {
 						t.fileWriter(address,ARaddress,"ar");
 						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/pharmacies");
 					}else {
-						System.out.println("true");
 						model.addAttribute("action","edit");
 						model.addAttribute("AdminId", AdminId);
 						mav.addAllObjects(model);
@@ -1939,9 +1930,7 @@ public class DashboardController {
 						
 						mav.setViewName("redirect:/HealthTrack/admin/" + username + "/users");
 					}else {
-						System.out.println("true");
 						model.addAttribute("action","edit");
-						//model.addAttribute("AdminId", AdminId);
 						mav.addAllObjects(model);
 						mav.setViewName("/admin/manageUser");
 					}

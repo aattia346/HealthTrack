@@ -31,8 +31,7 @@ public class UserLoginController {
 		
 	@RequestMapping(value="/HealthTrack/WaitingList", method = RequestMethod.GET)
     public ModelAndView waitingList(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) {
-		model.addAttribute("lang", cookie);
-		
+		model.addAttribute("lang", cookie);		
         return new ModelAndView("/user/waitingList");
     }
 	
@@ -52,7 +51,6 @@ public class UserLoginController {
     public ModelAndView showForm(ModelMap model, ModelAndView mav, HttpServletRequest request,@CookieValue(value = "lang", defaultValue="en") String cookie){
 		model.addAttribute("lang", cookie);
 		HttpSession session = request.getSession();
-		System.out.println(cookie);
 		String username = (String)session.getAttribute("username");
 		
 		if(username == null) {

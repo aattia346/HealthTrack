@@ -17,8 +17,12 @@
 <%@page import="com.gp.user.ClinicDao"%>
 <%@page import="com.gp.user.Pharmacy"%>
 <%@page import="com.gp.user.PharmacyDao"%>
+
+<% String title="Emergency";  %>
+
+<%@include  file="includes/header.jsp" %>
+
 <% 
-String title="Emergency"; 
 List<Float> 	lats  = new ArrayList<Float>();
 List<Float> 	langs = new ArrayList<Float>();
 List<String> 	names = new ArrayList<String>();
@@ -33,21 +37,43 @@ Calendar calendar = Calendar.getInstance();
 
 List<Pharmacy> pharmacies = PharmacyDao.getAllPharmacies();
 for(Pharmacy pharmacy : pharmacies){
-	serviceUrl = "";
-	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), "pharmacy", pharmacy.getPharmacyName(), serviceUrl, "C35ED4");
+	String pinColor = null;
+	if(pharmacy.getDimmed() == 1){
+		serviceUrl = pharmacy.getGoogleMapsUrl();
+		pinColor = "a3a3a3";
+	}else{
+		serviceUrl = "";
+		pinColor = "C35ED4";
+	}	
+	Location location = new Location(pharmacy.getLat(), pharmacy.getLang(), "pharmacy", t.write(pharmacy.getPharmacyName(),lang) + " " + t.write("at",lang) + " " + t.write(pharmacy.getAddress(),lang) , serviceUrl, pinColor);
 	locations.add(location);
 }
 List<Clinic> clinics = ClinicDao.getAllClinics();
 for(Clinic clinic : clinics){
 	serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
-	Location location = new Location(clinic.getLat(), clinic.getLang(), "clinic", clinic.getClinicName(), serviceUrl, "4089C7");
+	String pinColor = null;
+	if(clinic.getDimmed() == 1){
+		serviceUrl = clinic.getGoogle_maps_url();
+		pinColor = "a3a3a3";
+	}else{
+		serviceUrl = "/HealthTrack/profile/clinic/"+clinic.getAdminId();
+		pinColor = "4089C7";
+	}
+	Location location = new Location(clinic.getLat(), clinic.getLang(), "clinic", t.write(clinic.getClinicName(),lang), serviceUrl, pinColor);
 	locations.add(location);
 }
 
 List<Hospital> hospitals = HospitalDao.getAllHospitals();
 for(Hospital hospital : hospitals){
-	serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
-	Location location = new Location(hospital.getLat(), hospital.getLang(), "hospital", hospital.getHospitalName(), serviceUrl, "ff6e6e");
+	String pinColor = null;
+	if(hospital.getDimmed() == 1){
+		serviceUrl = hospital.getGoogleMapsUrl();
+		pinColor = "a3a3a3";
+	}else{
+		serviceUrl = "/HealthTrack/profile/hospital/"+hospital.getAdminId();
+		pinColor = "ff6e6e";
+	}
+	Location location = new Location(hospital.getLat(), hospital.getLang(), "hospital", t.write(hospital.getHospitalName(),lang), serviceUrl, pinColor);
 	locations.add(location);
 }
 
@@ -60,7 +86,8 @@ for(Service service : servicesOfHospital){
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
-			locations.add(location);		}
+			locations.add(location);
+		}
 		
 	} else if(service.getSlotType()==2){
 		if(Validation.validateBookTime(service.getServiceId(), formatter.format(calendar.getTime()), "hospital")){
@@ -68,20 +95,21 @@ for(Service service : servicesOfHospital){
 			locations.add(location);
 		}
 	}
-}
+} 
 
 List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
 	serviceUrl = "/HealthTrack/profile/service/center/"+service.getServiceId();
 	calendar.setTime(today);
 	//calendar.add(Calendar.DAY_OF_MONTH, -1);
-	if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
-		Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
-		locations.add(location);
+	if(service.getSlotType() == 1){
+		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
+			Location location = new Location(service.getLat(), service.getLang(), service.getServiceName(), service.getServiceName(), serviceUrl, servicePinColor);
+			locations.add(location);
+		}
 	}
-}
+} 
 %>
-<%@include  file="includes/header.jsp" %>
 
 <div class="emergency-body">
 	<h1 class="text-center emergency-header"> <%= t.write("you are looking for",lang) %> </h1>

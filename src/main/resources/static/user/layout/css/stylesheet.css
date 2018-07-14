@@ -706,9 +706,12 @@ label{
 }
 .not-registered-location{
 	position: absolute;
-    bottom: 140px;
+    bottom: 125px;
     right: 10px;
     margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #a3a3a3;
 }
 .special-services{
 	color: #fff;
@@ -766,12 +769,18 @@ label{
 #about{
 	background-color: #fff;
 }
+.panel-body ul input:last-of-type{
+	margin-bottom: 25px;
+}
 /*======================================================================================*/
 /*======================================================================================*/
 
 /***************************** Clinic **************************************/
 .medilife-btn-appointment{
 	padding: 6px 55px 6px 12px !important;
+}
+.medilife-btn-appointment span{
+	line-height: 50px;
 }
 .breadcumb-intro{
 	color: #081F3E;
@@ -967,6 +976,13 @@ label{
 /*****************************************end of waiting list page*****************************************************/
 
 /*****************************************start of user page*****************************************************/
+.delete-booking-icon, .delete-booking-icon:hover{
+	position: absolute;
+    top: 35px;
+    right: 22px;
+    color: #fff;
+    display: none;
+}
 .user-profile-body{
 	background-color: #E9EBEE;
 }
@@ -1024,7 +1040,7 @@ label{
     height: 280px;
 }
 .single-booking-info label, .single-booking-info p{
-    font-size: 12px;
+    font-size: 11px;
     color: #a3a3a3;
 }
 .single-booking-info p{

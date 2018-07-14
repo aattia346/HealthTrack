@@ -95,49 +95,49 @@ public class UserRegisterationController {
 		model.addAttribute("oldEmail", email);
 		
 		boolean errors = true;
-		/*
+		
 		if(!Validation.validateName(firstName)) {
-			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid First Name") + "</p>");
+			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid First Name", cookie) + "</p>");
 			errors = false;
 		}
 		if(!Validation.validateName(lastName)) {
-			model.addAttribute("invalidLastName", "<p class=\"wrong-input wrong-input-register-input-2\">" + t.write("Invalid Last Name") + "</p>");
+			model.addAttribute("invalidLastName", "<p class=\"wrong-input wrong-input-register-input-2\">" + t.write("Invalid Last Name", cookie) + "</p>");
 			errors = false;
 		}
 		if(!Validation.validateUsername(username)) {
-			model.addAttribute("invalidUsername", "<p class=\"wrong-input\">" + t.write("Invalid username") + "</p>");
+			model.addAttribute("invalidUsername", "<p class=\"wrong-input\">" + t.write("Invalid username", cookie) + "</p>");
 			errors = false;
 		}
 		if(Validation.checkIfSomethingExists("username", "user", username)) {
-			model.addAttribute("usernameAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this username has been taken") + "</p>");
+			model.addAttribute("usernameAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this username has been taken", cookie) + "</p>");
 			errors = false;
 		}
 		if(password.length()<6) {
-			model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters") + "</p>");
+			model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters", cookie) + "</p>");
 			errors = false;
 		}
 		if(!password.equals(confirmPassword)) {
-			model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match") + "</p>");
+			model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match", cookie) + "</p>");
 			errors = false;
 		}
 		if(!Validation.validatePhone(phone)) {
-			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">" + t.write("Invalid Phone Number") + "</p>");
+			model.addAttribute("invalidPhone", "<p class=\"wrong-input\">" + t.write("Invalid Phone Number", cookie) + "</p>");
 			errors = false;
 		}
 		if(!Validation.validateEmail(email)) {
-			model.addAttribute("invalidEmail", "<p class=\"wrong-input\">" + t.write("Invalid Email") + "</p>");
+			model.addAttribute("invalidEmail", "<p class=\"wrong-input\">" + t.write("Invalid Email", cookie) + "</p>");
 			errors = false;
 		}
 		if(Validation.checkIfSomethingExists("email", "person", email)) {
-			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this email alreay exists") + "</p>");
+			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this email alreay exists", cookie) + "</p>");
 			errors = false;
 		}
 		
 		if(Validation.checkEmailBan("email")) {
-			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">" + t.write("Sorry this email is banned") + "</p>");
+			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">" + t.write("Sorry this email is banned", cookie) + "</p>");
 			errors = false;
 		}
-	*/
+	
 		if(errors) {
 			//create the info of login
 			String encryptedPassword = Validation.encryptePssword(password);

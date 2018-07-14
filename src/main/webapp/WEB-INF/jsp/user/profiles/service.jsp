@@ -53,10 +53,12 @@
 			AddCenterServiceAvailability= true ;
 			showComment=true ;
 		}
-		if(PersonDao.canPersonBook(user.getId())){
-			request.setAttribute("limitExceed", " ");
-		}else{
-			request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)",lang) + "</p>");
+		if(user.getType().equalsIgnoreCase("person")){
+			if(PersonDao.canPersonBook(user.getId())){
+				request.setAttribute("limitExceed", " ");
+			}else{
+				request.setAttribute("limitExceed", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Sorry you have reached the maximum number of bookings per day(3)",lang) + "</p>");
+			}
 		}
 	}
 	
@@ -148,9 +150,6 @@
      <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/showBookings" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Manage Bookings",lang) %></a>
 
    					<% }%>
-   					<%if(AddHospitalServiceAvailability){ %>
-   					  <a href="/HealthTrack/admin/<%=usernameSession%>/<%=S.getServiceId()%>/<%=place%>/manageAvailableHService/add" class="btn-lg btn btn-imperial"><i class="fa fa-plus"></i> <%= t.write("Add  Availability for service ",lang) %></a>
-   					<%} %>
                 </div>
                 ${checkYourBooking} ${loginFirst}
             </div>

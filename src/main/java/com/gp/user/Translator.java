@@ -27,12 +27,10 @@ public class Translator {
 		JSONParser parser = new JSONParser();
 		File translationFile;
 		if(language.equals("en")) {		
-			translationFile = new File("E:\\GP_folder\\ENtranslation.json"); 
-			//System.out.println("open ENtranslation.txt");
+			translationFile = new File("C:\\Users\\Ahmed\\Desktop\\ENtranslation.json"); 
 		}
 		else {
-			translationFile = new File("E:\\GP_folder\\ARtranslation.json"); 
-			//System.out.println("open ARtranslation.txt");
+			translationFile = new File("C:\\Users\\Ahmed\\Desktop\\ARtranslation.json"); 
 		}
 		
 		path = translationFile.getPath();
@@ -44,15 +42,11 @@ public class Translator {
 		JSONObject jsonObject = new JSONObject();
 		
 		jsonObject = (JSONObject) obj.get(language);
-		//System.out.println("jsonObject :"+ jsonObject);			
 		translate = (Map<String, String>) obj.get(language);
-		//System.out.println("translate :"+ translate);
 		if(translate.get(word) != null) {
-			//System.out.println("translate not equal null");
 			return translate.get(word);
 			
 		}else {
-			//System.out.println("translate is equal to null");
 			return word;
 			
 		}
@@ -63,9 +57,9 @@ public class Translator {
 		    JSONParser parser = new JSONParser();
 			File translationFile;
 			if(lang.equals("en")) {		
-				translationFile = new File("E:\\GP_folder\\ENtranslation.json"); 
+				translationFile = new File("src\\main\\resources\\static\\ENtranslation.json"); 
 			}else {
-				translationFile = new File("E:\\GP_folder\\ARtranslation.json"); 
+				translationFile = new File("src\\main\\resources\\static\\ARtranslation.json"); 
 			}
 			path = translationFile.getPath();
 					
@@ -89,9 +83,6 @@ public class Translator {
 			 }else {
 			       System.out.println("not available attribute");
 			  }
-			    //System.out.println(translate);
-			
-			        
 	    	try { 		
 	    		 fw = new FileWriter(path.replaceAll("\\\\","\\\\\\\\"));	
 	    		 BufferedWriter writer = new BufferedWriter(fw);

@@ -33,6 +33,7 @@
     
     List<Booking> bookings = BookingDao.getBookingsByServiceId(serviceId);
 	request.setAttribute("bookings", bookings);
+	
 %>
 
 <!DOCTYPE html>
@@ -159,9 +160,9 @@
                         <td>
 	                        <div>
 	                        	<% Booking b = (Booking)pageContext.getAttribute("booking"); %>
-		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Service/VerifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
-		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Service/UnverifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a> <% } %>
-	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Service/DeleteBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
+		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Service/Verify/Booking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a> <% }else{ %>
+		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Service/Unverify/Booking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a> <% } %>
+	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Service/Delete/Booking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
 	                         </div>
                         </td>     
                         </tr>                 
@@ -222,9 +223,9 @@
                         <td>
 	                        <div>
 		                    	<% Booking b = (Booking)pageContext.getAttribute("booking"); %>
-		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Service/VerifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a><% }else{ %>
-		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Service/UnverifyBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a><% } %>
-	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Service/DeleteBooking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
+		                    	<% if(b.getStatus()==0){ %><a class="confirm-verify-booking dashboard-btn" href="/healthTrack/Service/Verify/Booking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Confirm This Booking",lang) %>"><i class="fa fa-check-circle"></i></a><% }else{ %>
+		                     	<a class="confirm-unverify-booking dashboard-btn" href="/healthTrack/Service/Unverify/Booking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Unconfirm This Booking",lang) %>"><i class="fa fa-close"></i></a><% } %>
+	                         	<a class="dashboard-btn confirm-delete-booking" href="/healthTrack/Service/Delete/Booking/<%= place + "/" + service.getServiceId() %>/${booking.bookingId}" title="<%=t.write("Delete This Booking",lang) %>"><i class="fa fa-trash"></i></a> 	
 	                         </div>
                         </td>     
                         </tr>                 

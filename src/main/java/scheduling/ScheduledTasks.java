@@ -1,8 +1,5 @@
 package scheduling;
 
-
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,13 +11,13 @@ import com.gp.user.ServiceDao;
 import com.gp.user.Validation;
 import com.gp.user.WaitingRequest;
 import com.gp.user.WaitingRequestDao;
+import com.gp.user.WhatsappSender;
 
 @Component
 public class ScheduledTasks {
 
-
     @Scheduled(fixedRate = 86400000)
-    public void reportCurrentTime() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException {
+    public void reportCurrentTime() throws Exception {
 
     	List<WaitingRequest> requests = WaitingRequestDao.getAllUnrespondedRequests();
     	
@@ -32,10 +29,13 @@ public class ScheduledTasks {
     		
     		for(Service s :services) {
     			if(Validation.validateBookDate(s.getServiceId(), Calendar.getInstance().getTime())) {
-    				//send whatsup message to request.getPhone();
-    				System.out.println(s.getServiceId());
+    				
+    				String message = "Hello " + request.getName() + " we found what you are looking for " +
+    						s.getServiceName() + " available in " + s.getAddress() + "\r\n Good luck";
+    				WhatsappSender.sendMessage("2" + request.getPhone() , message);
     			}else {
-    				System.out.println("no");
+    				String message = "Hello " + request.getName() + " we are still looking for " + s.getServiceName() + " for you " + "\r\n" + "Good luck";
+    				WhatsappSender.sendMessage("2" + request.getPhone() , message);
     			}
     		}
     		

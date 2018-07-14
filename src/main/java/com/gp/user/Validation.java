@@ -335,7 +335,6 @@ abstract public class Validation {
 			String todayAsString = format.format(today);
 			
 			int numOfBookings = BookingDao.getBookingsOfTheDay(serviceId, todayAsString);
-			System.out.println(numOfBookings);
 			if(numOfBookings < numberOfTableRows) {
 				valid = true;
 			}else {
