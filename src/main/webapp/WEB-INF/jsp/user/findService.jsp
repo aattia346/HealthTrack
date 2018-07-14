@@ -199,11 +199,7 @@ for(Service service : servicesOfCenters){
             <div class="row align-items-center">
                 <div class="col-12 col-lg-6">
                     <div class="features-content">
-<<<<<<< HEAD
                         <h1><%= t.write("We always put our patients first",lang) %></h1>
-=======
-                        <h2><%= t.write("We always put our patients first",lang) %></h2>
->>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720
                         <p><%= t.write("about us part",lang) %></p>
                         <a href="#services" class="btn medilife-btn mt-50 about-us-btn about-us-btn-1">View the services <span>+</span></a>
                     </div>
