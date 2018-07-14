@@ -484,6 +484,14 @@
 		 "We always put our patients first" : "دائما نضع عملائنا فى المقدمه",
 		 "Contact Us " : "أتصل بنا ",
 		 "about us part" : " ايجاد لك الخدمة الطبية المرادة وحجزها لك<br>كما يضمن لك الامانة في المعاملات المالية مع المستشفيات الاعضاء وفيه تحديث اتاحية الخدمات لديهم",
+<<<<<<< HEAD:src/main/resources/static/ENtranslation.json
+=======
+<<<<<<< HEAD
+		 "Not registered in our navigator" : "غير مسجله على موقعنا"
+		 
+>>>>>>> 829d587b16254443c600c6ba1beec8a15563d941
+=======
+>>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720:src/main/resources/static/translation.json
 		 "Not registered in our navigator" : "غير مسجله على موقعنا",
 		 " you successfully booked a service in health service navigator please follow the instructions of hospital to confirm your booking":
 		 " لقد قمت بحجز الخدمه بنجاح من فضلك قم باتباع التعليمات المذكوره فى صفحه المستشفى لتأكيد الحجز.",
@@ -496,5 +504,9 @@
 		 " you successfully booked through SoSHealth" : "لقد قمت بحجز الخدمه بنجاح من خلال SoSHealth",
 		 "Your booking has been confirmed" : "لقد تم تأكيد الحجز بنجاح",
 		 "Your booking has been cancelled" : "تم الغاء الحجز الخاص بك"
+<<<<<<< HEAD:src/main/resources/static/ENtranslation.json
+=======
+>>>>>>> 111e7d2ad30d39282dcc365581a1424e3a7f7f12
+>>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720:src/main/resources/static/translation.json
 	}
 }

@@ -399,6 +399,7 @@ public class ServiceController {
 				Booking booking = BookingDao.getBooking(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.verifyBooking(bookingId);
+<<<<<<< HEAD
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been confirmed",cookie));
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
@@ -434,6 +435,9 @@ public class ServiceController {
 				if (UserDao.isTheUserAuthorized(user.getId(), place, serviceId)) {
 					BookingDao.verifyBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been confirmed",cookie));
+=======
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been confirmed",cookie));
+>>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
 				} else {
@@ -467,7 +471,11 @@ public class ServiceController {
 				Booking booking = ClinicDao.getBookingOfClinicById(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.verifyBooking(bookingId);
+<<<<<<< HEAD
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been confirmed",cookie));
+=======
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been confirmed",cookie));
+>>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720
 					mav.setViewName("redirect:/"
 							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 				} else {
@@ -532,7 +540,11 @@ public class ServiceController {
 				Booking booking = ClinicDao.getBookingOfClinicById(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.deleteBooking(bookingId);
+<<<<<<< HEAD
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been cancelled",cookie));
+=======
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been cancelled",cookie));
+>>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720
 					mav.setViewName("redirect:/"
 							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 				} else {
@@ -625,7 +637,11 @@ public class ServiceController {
 				Booking booking = BookingDao.getBooking(bookingId);
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.deleteBooking(bookingId);
+<<<<<<< HEAD
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been cancelled",cookie));
+=======
+					WhatsappSender.sendMessage("2" + booking.getPhone() , t.write("Your booking has been cancelled",cookie));
+>>>>>>> 6d630369249ad61a4f4e11ef6e0415e6b4547720
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
 				} else {
