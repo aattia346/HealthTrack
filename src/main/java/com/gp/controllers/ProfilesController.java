@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gp.user.Booking;
 import com.gp.user.BookingDao;
 import com.gp.user.ClinicDao;
+import com.gp.user.Translator;
 import com.gp.user.User;
 import com.gp.user.UserDao;
 import com.gp.user.Validation;
+import com.gp.user.WhatsappSender;
 
 @RestController
 public class ProfilesController {
@@ -117,16 +119,15 @@ public class ProfilesController {
 	
 	@RequestMapping(value="/HealthTrack/profile/booking/delete/{userId}/{bookingId}", method = RequestMethod.GET)   
 	public ModelAndView deleteBooking(ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request, @PathVariable("userId") int userId, @PathVariable("bookingId") int bookingId, ModelAndView mav) 
-    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		
+    throws Exception {
 		m.addAttribute("lang", cookie);
-		if(Validation.validateNumber(bookingId) & Validation.checkIfSomethingExists("id", "booking", Integer.toString(bookingId))
+		Translator t = new Translator();
+		if(Validation.validateNumber(bookingId) & Validation.checkIfSomethingExists("booking_id", "booking", Integer.toString(bookingId))
 				& Validation.validateNumber(userId) & Validation.checkIfSomethingExists("user_id", "user", Integer.toString(userId))) {
-			
 			Booking B = BookingDao.getBookingById(bookingId);
-			if(B.getUserId()==userId) {
-				
+			if(B.getUserId()==userId) {		
 				BookingDao.deleteBooking(bookingId);
+				WhatsappSender.sendMessage("2" + B.getPhone() , t.write("Your booking has been cancelled",cookie));
 				mav.setViewName("/user/profiles/user");
 			}
 		}else {
@@ -135,6 +136,27 @@ public class ProfilesController {
         return mav;
 	}
 	
+	@RequestMapping(value="/HealthTrack/profile/user/booking/delete/{userId}/{bookingId}", method = RequestMethod.GET)   
+	public ModelAndView deleteBookingByUser(HttpSession session, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie, HttpServletRequest request, @PathVariable("userId") int userId, @PathVariable("bookingId") int bookingId, ModelAndView mav) 
+    throws Exception {
+		m.addAttribute("lang", cookie);
+		Translator t = new Translator();
+		String username = (String) session.getAttribute("username");
+		User user = UserDao.getUserByUsername(username);
+		if(user.getId() == userId) {
+			int bookingOwner = BookingDao.getBookingOwner(bookingId);
+			if(bookingOwner == userId) {		
+				Booking B = BookingDao.getSimpleInfoAboutBookingById(bookingId);
+				BookingDao.deleteBooking(bookingId);
+				WhatsappSender.sendMessage("2" + B.getBookingPhone() , t.write("Your booking has been cancelled",cookie));
+				mav.setViewName("/user/profiles/user");
+			}
+		}else {
+			mav.setViewName("/user/login");
+		}
+        return mav;
+	}
+
 	@RequestMapping(value="/HealthTrack/profile/clinic/{userId}", method = RequestMethod.GET)
     public ModelAndView clinicProfile(@PathVariable("userId") int id, ModelAndView mav, ModelMap m, @CookieValue(value = "lang", defaultValue="en") String cookie) 
     throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {

@@ -98,10 +98,16 @@
                         <div class="bookings-details">
                         
                         <c:forEach var="booking" items="${todaysBookings}">
+                        <% Booking booking = (Booking)pageContext.getAttribute("booking"); %>
                         	<div class="booking-info col-sm-4">
                                <div class="booking-card">
                                    <div class="card-head">
+
                                        <p><%= t.write("Booking No.",lang) %> <strong>${booking.bookingId}</strong></p>
+                                       <a href="/HealthTrack/profile/user/booking/delete/<%= user.getId() %>/<%= booking.getBookingId() %>" title="<%= t.write("Cancel the booking",lang) %>" class="delete-booking-icon confirm-user-delete-booking">
+                                       		<i class="far fa-times-circle"></i>
+                                       </a>
+
                                    </div>
                                    <div class="card-body">
                                         <div class="single-booking-info">
@@ -181,10 +187,27 @@
                         </div>
                         <div class="bookings-details all-bookings">
   						<c:forEach var="booking" items="${allBookings}">
+  						<% Booking booking = (Booking)pageContext.getAttribute("booking"); %>
                         	<div class="booking-info col-sm-3">
                                <div class="booking-card">
                                    <div class="card-head">
+
                                        <p><%= t.write("Booking No.",lang) %><strong>${booking.bookingId}</strong></p>
+                                   	   <% if(booking.getClinicId() != 0){ %>
+                                       	<a href="/HealthTrack/profile/clinic/delete/booking/<%= user.getId() %>/<%= booking.getBookingId() %>" title="<%= t.write("Cancel the booking",lang) %>" class="delete-booking-icon confirm-user-delete-booking">
+                                       		<i class="far fa-times-circle"></i>
+                                       </a>
+                                       <% }else if(booking.getCenterId()!=0){ %>
+                                             <a href="/healthTrack/profile/Center/booking/delete/<%= user.getId() %>/<%= booking.getBookingId() %>" title="<%= t.write("Cancel the booking",lang) %>" class="delete-booking-icon confirm-user-delete-booking">
+                                       		<i class="far fa-times-circle"></i>
+                                       </a>                                 
+                                       <% } else{ %>
+                                       	<a href="/HealthTrack/profile/booking/delete/<%= user.getId() %>/<%= booking.getBookingId() %>" title="<%= t.write("Cancel the booking",lang) %>" class="delete-booking-icon confirm-user-delete-booking">
+                                       		<i class="far fa-times-circle"></i>
+                                       </a>
+                                       
+                                       <% } %>
+
                                    </div>
                                    <div class="card-body">
                                         <div class="single-booking-info">

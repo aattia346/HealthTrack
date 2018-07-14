@@ -31,8 +31,7 @@ public class UserLoginController {
 		
 	@RequestMapping(value="/HealthTrack/WaitingList", method = RequestMethod.GET)
     public ModelAndView waitingList(@CookieValue(value = "lang", defaultValue="en") String cookie, ModelMap model) {
-		model.addAttribute("lang", cookie);
-		
+		model.addAttribute("lang", cookie);		
         return new ModelAndView("/user/waitingList");
     }
 	
