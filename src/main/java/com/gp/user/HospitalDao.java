@@ -36,6 +36,26 @@ abstract public class HospitalDao {
 		return hospital;
 	}
 	
+	public static Hospital getDimmedHospitalById(int id) throws InstantiationException,
+	IllegalAccessException, ClassNotFoundException, SQLException {
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM hospital WHERE hospital_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet result = ps.executeQuery();
+		result.next();
+		Hospital hospital = new Hospital();
+		hospital.setHospitalId(result.getInt("hospital_id"));
+		hospital.setHospitalName(result.getString("hospital_name"));
+		hospital.setLat(result.getFloat("lat"));
+		hospital.setLang(result.getFloat("lang"));
+		hospital.setReview(result.getFloat("hospital_review"));
+		hospital.setGoogleMapsUrl(result.getString("google_maps_url"));
+		hospital.setDimmed(result.getInt("dimmed"));
+		return hospital;
+	}
+	
 	public static List<Department> getDeptsByHospitalID(int hospitalId) 
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
@@ -135,20 +155,15 @@ abstract public class HospitalDao {
 		
 		Connection con = DBConnection.getConnection();
 		String sql="INSERT INTO hospital "
-				+ "(hospital_name, admin_id, lat, lang, phone, website, address, intro, google_maps_url,dimmed) "
-				+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+				+ "(hospital_name, lat, lang, google_maps_url,dimmed) "
+				+ "VALUES(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setString(1, hospital.getHospitalName());
-		ps.setInt(2, hospital.getAdminId());
-		ps.setFloat(3, hospital.getLat());
-		ps.setFloat(4, hospital.getLang());
-		ps.setString(5, hospital.getPhone());
-		ps.setString(6, hospital.getWebsite());
-		ps.setString(7, hospital.getAddress());
-		ps.setString(8, hospital.getIntro());
-		ps.setString(9, hospital.getGoogleMapsUrl());
-		ps.setInt(10, hospital.getDimmed());
+		ps.setFloat(2, hospital.getLat());
+		ps.setFloat(3, hospital.getLang());
+		ps.setString(4, hospital.getGoogleMapsUrl());
+		ps.setInt(5, hospital.getDimmed());
 		
 		ps.executeUpdate();
 		
@@ -237,6 +252,24 @@ abstract public class HospitalDao {
 		con.close();
 		
 		return numOfUsers;
+		
+	}
+
+	public static void updateDimmedHospital(Hospital hospital) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		Connection con = DBConnection.getConnection();
+		String sql="UPDATE hospital "
+				+ "SET hospital_name=?, lat=?, lang=?, google_maps_url=? "
+				+ "WHERE hospital_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, hospital.getHospitalName());
+		ps.setFloat(2, hospital.getLat());
+		ps.setFloat(3, hospital.getLang());
+		ps.setString(4, hospital.getGoogleMapsUrl());
+		ps.setInt(5, hospital.getHospitalId());
+		
+		ps.executeUpdate();
 		
 	}
 	

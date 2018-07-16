@@ -11,12 +11,9 @@
 
 %>
 
-<<<<<<< HEAD
 <div class="login-body">
 
-=======
 <div class="container">
->>>>>>> fd4ffbeb8a30a0c6b1dbd8c4a02ff2817631c8d1
 	<div class="col-sm-4 col-sm-offset-4 waiting-form insert admin-login">
 	<form method="post" action="/HealthTrack/changePassword/submit">
 		<h4 class="waiting-header text-center"><%= t.write("set a new password",lang) %></h4>

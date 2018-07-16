@@ -152,12 +152,7 @@
                                 </c:forEach>
                               </select>
 					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Department Name in Arabic",lang) %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Enter Department Name in Arabic",lang) %>" class="form-control" name="ARdepts" required="required" value="${oldAddress}">
-					      
-					        </div>
+					        
 					    </div>
                               
                               
@@ -169,7 +164,7 @@
                   </form>
                   
                   <% }else if(action.equalsIgnoreCase("edit")){
-                	  		String title = "Edit New Hospital";
+                	  		String title = "Edit Hospital";
 	                		String username = (String)session.getAttribute("username");
 	                		User admin = UserDao.getUserByUsername(username);
 		                	int hospitalAdminId = (int)request.getAttribute("AdminId");
@@ -199,6 +194,7 @@
         
         <form class="col-lg-12" action="/HealthTrack/admin/hospital/<%= hospital.getAdminId() %>/update" method="post">
         	<input type="hidden" name="hospitalId" value="<%= hospital.getHospitalId() %>">
+        	<input type="hidden" name="adminId" value="<%= hospital.getAdminId() %>">
                      <div class="card">
                       <div class="card-header"><strong><%=t.write("Hospital",lang) %></strong><small><%=t.write("Form",lang) %> </small></div>
                       <div class="card-body card-block">
@@ -268,61 +264,6 @@
                           </div>
                          
                         </div>
-                                             
-                      	<div class="form-group">
-                      		  <label class=" form-control-label"><%=t.write("Choose the Admin",lang) %></label>
-                              <select name="Admin" class="form-control">
-                                <option value="0"><%=t.write("Please select",lang) %></option>
-                                  <%
-                                User user1 =UserDao.getUserById(hospitalAdminId);
-                                String hospitalAdminName =user1.getUsername();
-                                %>
-                                <%
-                                	List<User> hospitalUsers = new ArrayList<User>();
-                                	hospitalUsers = UserDao.getUsers("hospital");
-                                	request.setAttribute("users", hospitalUsers);
-                                %>
-                                <c:forEach var="user" items="${users}">
-                           <%      
-                           User u = (User)pageContext.getAttribute("user");
-                           if(!Validation.checkIfTheUserAlreadyAdmin(u.getId(), "hospital")){%>
-                             <option value="${user.id}"><%= t.write(u.getUsername(),lang) %></option>
-                              <option value="<%= hospitalAdminId%>"><%= t.write(hospitalAdminName,lang) %></option>
-                             <%	} %>
-                                </c:forEach>
-                              </select>
-                              ${invalidAdmin}
-                            </div>
-                            
-                            <div class="form-group">
-                              <%
-                                	List<String> depts = HospitalDao.getDepts();
-                                	request.setAttribute("depts", depts);
-                                %>
-                      		  <label class=" form-control-label"><%=t.write("Please select the Departments of the new Hospital",lang) %></label>
-                      		   
-                               <div class="row">
-					        <div class="form-group name1 col-md-6">
-					            <select name="depts" class="form-control" multiple="multiple">
-                              
-                                <c:forEach var="dept" items="${depts}">
-                                 <%
-				                    String  List 		= (String)pageContext.getAttribute("dept");
-				                 %>
-                                	<option value="${dept}"><%=t.write(List,lang)%></option>
-                                </c:forEach>
-                              </select>
-					        </div>
-					
-					        <div class="form-group name2 col-md-6">
-					            <label for="exampleInputEmail1" class="formText"><%=t.write("Department Name in Arabic",lang) %></label>
-					           <input maxlength="50" type="text" placeholder="<%=t.write("Enter Department Name in Arabic",lang) %>" class="form-control" name="ARdepts" required="required" value="${oldAddress}">
-					      
-					        </div>
-					    </div>
-                              
-                              
-                            </div>
                             
                             <button type="submit" class="btn btn-primary col-sm-12"><i class="fa fa-send"></i> <%=t.write("Submit",lang) %></button>
                       </div>

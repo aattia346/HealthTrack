@@ -120,7 +120,8 @@ public class ServiceController {
 				WhatsappSender.sendMessage("2" + phone.toString(), whatsUpMessage);
 
 				PersonDao.increaseBookings(userId);
-				mav.setViewName("redirect:/HealthTrack/MyProfile");
+				model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+				mav.setViewName("/user/profiles/user");
 			}
 		} else {
 			model.addAttribute("clinicId", clinicId);
@@ -239,6 +240,8 @@ public class ServiceController {
 				WhatsappSender.sendMessage("2" + phone.toString(), whatsUpMessage);
 				PersonDao.increaseBookings(userId);
 				model.addAttribute("username", username);
+				model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+
 				mav.setViewName("user/profiles/user");
 			}
 		} else {
@@ -356,7 +359,7 @@ public class ServiceController {
 						t.write(" you successfully booked through SoSHealth",cookie) + " " + t.write("on",cookie) + " " + day + 
 						" " + time + " " + t.write("please follow the instructions of hospital to confirm your booking",cookie);
 				WhatsappSender.sendMessage("2" + phone.toString(), whatsUpMessage);
-
+				model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
 				PersonDao.increaseBookings(userId);
 				mav.setViewName("user/profiles/user");
 			}
@@ -400,8 +403,8 @@ public class ServiceController {
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.verifyBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been confirmed",cookie));
-					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
-							+ "/showBookings");
+					model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+					mav.setViewName("/user/profiles/user");
 				} else {
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
@@ -434,8 +437,9 @@ public class ServiceController {
 				if (UserDao.isTheUserAuthorized(user.getId(), place, serviceId)) {
 					BookingDao.verifyBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been confirmed",cookie));
-					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
-							+ "/showBookings");
+					model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+
+					mav.setViewName("/user/profiles/user");
 				} else {
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
@@ -468,9 +472,9 @@ public class ServiceController {
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.verifyBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been confirmed",cookie));
-					mav.setViewName("redirect:/"
-							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
-				} else {
+					model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+					mav.setViewName("/user/profiles/user");
+					} else {
 					mav.setViewName("redirect:/"
 							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 				}
@@ -533,9 +537,9 @@ public class ServiceController {
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.deleteBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been cancelled",cookie));
-					mav.setViewName("redirect:/"
-							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
-				} else {
+					model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+					mav.setViewName("/user/profiles/user");
+					} else {
 					mav.setViewName("redirect:/"
 							+ request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 				}
@@ -626,8 +630,9 @@ public class ServiceController {
 				if (booking.getAdminId() == user.getId()) {
 					BookingDao.deleteBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been cancelled",cookie));
-					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
-							+ "/showBookings");
+					model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+
+					mav.setViewName("/user/profiles/user");
 				} else {
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
@@ -658,8 +663,9 @@ public class ServiceController {
 				if (UserDao.isTheUserAuthorized(user.getId(), place, serviceId)) {
 					BookingDao.deleteBooking(bookingId);
 					WhatsappSender.sendMessage("2" + booking.getBookingPhone() , t.write("Your booking has been cancelled",cookie));
-					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
-							+ "/showBookings");
+					model.addAttribute("whatsupNotification", "<div class=\"alert alert-success whatsupNotification\">" + t.write("We sent you a whats app notification to confirm your booking", cookie) + "</div>");
+
+					mav.setViewName("/user/profiles/user");
 				} else {
 					mav.setViewName("redirect:/HealthTrack/admin/" + username + "/" + serviceId + "/" + place
 							+ "/showBookings");
@@ -797,6 +803,7 @@ public class ServiceController {
 		}
 		return mav;
 	}
+	
 	@RequestMapping(value = "/HealthTrack/admin/{adminUsername}/{serviceId}/{place}/{url}/add", method = RequestMethod.GET)
 	public ModelAndView AddHAvailability(@CookieValue(value = "lang", defaultValue = "en") String cookie, Model model,
 			HttpSession session, ModelAndView mav, @PathVariable("url") String url,
@@ -956,6 +963,51 @@ public class ServiceController {
 		if (username.equals((String) session.getAttribute("username")) && Validation.checkIfTheUserIsAdmin(username)) {
 			ServiceDao.deleteService(serviceId);
 		}
+		return new ModelAndView(
+				"redirect:/" + request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
+	}
+	
+	@RequestMapping(value = "/HealthTrack/Service/ShowComment/{username}/{reviewId}", method = RequestMethod.GET)
+	public ModelAndView showCommentAdmin(HttpServletRequest request, Model model, HttpSession session, @PathVariable("reviewId") int reviewId, @PathVariable("username") String username)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		String sessionUsername = (String) session.getAttribute("username");
+		if(sessionUsername != null && sessionUsername.equals(username)) {
+			if(Validation.checkIfTheUserIsAdmin(sessionUsername)) {
+				ServiceDao.showComment(reviewId);
+			}
+		}
+		
+		return new ModelAndView(
+				"redirect:/" + request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
+	}
+	
+	@RequestMapping(value = "/HealthTrack/Service/HideComment/{username}/{reviewId}", method = RequestMethod.GET)
+	public ModelAndView hideCommentAdmin(HttpServletRequest request, Model model, HttpSession session, @PathVariable("reviewId") int reviewId, @PathVariable("username") String username)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		String sessionUsername = (String) session.getAttribute("username");
+		if(sessionUsername != null && sessionUsername.equals(username)) {
+			if(Validation.checkIfTheUserIsAdmin(sessionUsername)) {
+				ServiceDao.hideComment(reviewId);
+			}
+		}
+		
+		return new ModelAndView(
+				"redirect:/" + request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
+	}
+	
+	@RequestMapping(value = "/HealthTrack/Service/DeleteComment/{username}/{reviewId}", method = RequestMethod.GET)
+	public ModelAndView deleteCommentAdmin(HttpServletRequest request, Model model, HttpSession session, @PathVariable("reviewId") int reviewId, @PathVariable("username") String username)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		String sessionUsername = (String) session.getAttribute("username");
+		if(sessionUsername != null && sessionUsername.equals(username)) {
+			if(Validation.checkIfTheUserIsAdmin(sessionUsername)) {
+				ServiceDao.deleteComment(reviewId);
+			}
+		}
+		
 		return new ModelAndView(
 				"redirect:/" + request.getHeader("Referer").substring(request.getHeader("Referer").indexOf("//") + 1));
 	}

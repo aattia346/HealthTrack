@@ -13,7 +13,7 @@ abstract public class PersonDao {
 		Connection con = DBConnection.getConnection();
 		String sql="INSERT INTO person(user_id, firstname, lastname, email, phone, verified) VALUES(?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, person.getUserId());
+		ps.setInt(1, person.getId());
 		ps.setString(2, person.getFirstName());
 		ps.setString(3, person.getLastName());
 		ps.setString(4, person.getEmail());
@@ -43,7 +43,7 @@ abstract public class PersonDao {
 		ResultSet result = ps.executeQuery();
 		result.next();
 		Person person = new Person();
-		person.setUserId(result.getInt("user_id"));
+		person.setId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
 		person.setLastName((result.getString("lastname")));
 		person.setEmail(result.getString("email"));
@@ -65,7 +65,7 @@ abstract public class PersonDao {
 		result.next();
 
 		Person person = new Person();
-		person.setUserId(result.getInt("user_id"));
+		person.setId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
 		person.setFirstName(result.getString("lastname"));
 		person.setUsername(result.getString("username"));
@@ -88,7 +88,7 @@ abstract public class PersonDao {
 		result.next();
 		
 		Person person = new Person();
-		person.setUserId(result.getInt("user_id"));
+		person.setId(result.getInt("user_id"));
 		person.setFirstName(result.getString("firstname"));
 		person.setLastName(result.getString("lastname"));
 		person.setUsername(result.getString("username"));
@@ -149,7 +149,7 @@ abstract public class PersonDao {
 		ps.setString(3,person.getEmail());
 		ps.setString(4,person.getPhone());
 		ps.setInt(5,person.getVerified());
-		ps.setInt(6,person.getUserId());
+		ps.setInt(6,person.getId());
 		ps.executeUpdate();
 		
 	}

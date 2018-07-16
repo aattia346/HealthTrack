@@ -147,7 +147,7 @@ public class UserRegisterationController {
 			//start the storage to the database		
 			
 			Person person = new Person();
-			person.setUserId(user.getId());
+			person.setId(user.getId());
 			person.setFirstName(firstName);
 			person.setLastName(lastName);
 			person.setEmail(email);
@@ -174,6 +174,103 @@ public class UserRegisterationController {
 			registerMav.addAllObjects(model);
 			return registerMav;
 		}
+    }
+	
+	@RequestMapping(value = "/HealthTrack/Profile/Edit", method = RequestMethod.POST)
+    public ModelAndView editUser(@CookieValue(value = "lang", defaultValue="en") String cookie,HttpServletRequest request, ModelMap model, ModelAndView mav)
+    throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException,
+    NoSuchAlgorithmException, AddressException, ParseException, JSONException, IOException {
+				
+		Translator t = new Translator();
+		model.addAttribute("lang", cookie);
+		
+		int id					= Integer.parseInt((String)request.getParameter("id"));
+		String firstName		= request.getParameter("firstName");
+		String lastName			= request.getParameter("lastName");
+		String oldPassword		= request.getParameter("oldPassword");
+		String newPassword		= request.getParameter("newPassword");
+		String confirmPassword	= request.getParameter("confirmPassword");
+		String email			= request.getParameter("email");
+		
+		User U = UserDao.getUserById(id);
+		
+		model.addAttribute("oldFirstName", firstName);
+		model.addAttribute("oldLastName", lastName);
+		model.addAttribute("oldEmail", email);
+		
+		boolean errors = true;
+		
+		if(!Validation.encryptePssword(oldPassword).equals(U.getPassword())) {
+			model.addAttribute("incorrectPassword", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("wronge password", cookie) + "</p>");
+			errors = false;
+		}
+		
+		if(!Validation.validateName(firstName)) {
+			model.addAttribute("invalidFirstName", "<p class=\"wrong-input wrong-input-register-page-1\">" + t.write("Invalid First Name", cookie) + "</p>");
+			errors = false;
+		}
+		if(!Validation.validateName(lastName)) {
+			model.addAttribute("invalidLastName", "<p class=\"wrong-input wrong-input-register-input-2\">" + t.write("Invalid Last Name", cookie) + "</p>");
+			errors = false;
+		}
+		if(newPassword.length()<6) {
+			model.addAttribute("invalidPassword", "<p class=\"wrong-input\">" + t.write("Password shouldn't be less than 6 characters", cookie) + "</p>");
+			errors = false;
+		}
+		if(!newPassword.equals(confirmPassword)) {
+			model.addAttribute("passwordNotMatch", "<p class=\"wrong-input\">" + t.write("Password doesn't match", cookie) + "</p>");
+			errors = false;
+		}
+		if(!Validation.validateEmail(email)) {
+			model.addAttribute("invalidEmail", "<p class=\"wrong-input\">" + t.write("Invalid Email", cookie) + "</p>");
+			errors = false;
+		}
+		if(Validation.checkIfSomethingExists("email", "person", email)) {
+			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this email alreay exists", cookie) + "</p>");
+			errors = false;
+		}
+		
+		if(Validation.checkEmailBan("email")) {
+			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">" + t.write("Sorry this email is banned", cookie) + "</p>");
+			errors = false;
+		}
+	
+		if(errors) {
+			//create the info of login
+			String encryptedPassword = Validation.encryptePssword(newPassword);
+			int verificationCode = Validation.generateCode();
+			User user = new User();
+			user.setId(id);
+			user.setPassword(encryptedPassword);
+			user.setVerificationCode(verificationCode);
+			//start the storage to the database		
+			
+			Person person = new Person();
+			person.setId(user.getId());
+			person.setFirstName(firstName);
+			person.setLastName(lastName);
+			person.setEmail(email);
+			person.setVerified(0);
+			PersonDao.updatePerson(person);
+			
+			Validation.sendEmail(email, firstName,verificationCode);
+			//and after storing the data redirect to the profile
+			model.addAttribute("id"			, user.getId());
+			model.addAttribute("username"	, user.getUsername());
+			model.addAttribute("password"	, user.getPassword());
+			model.addAttribute("firstName"	, person.getFirstName());
+			model.addAttribute("lastName"	, person.getLastName());
+			model.addAttribute("email"		, person.getEmail());
+			model.addAttribute("phone"		, person.getPhone());
+			model.addAttribute("type"		, user.getType());
+			mav.addAllObjects(model);
+			mav.setViewName("/user/verificationPage");
+		}else {
+			model.addAttribute("alert"		, "alert alert-danger");
+			mav.addAllObjects(model);
+			mav.setViewName("/user/profiles/user");
+		}
+		return mav;
     }
 
 }

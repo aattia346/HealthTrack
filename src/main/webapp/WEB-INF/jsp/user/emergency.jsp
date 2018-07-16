@@ -120,6 +120,7 @@ for(Service service : servicesOfCenters){
 	                            <a href="#" id="Incubator">
 	                                <div class="inner-emergency-part">
 	                                    <p class="text-center"><%= t.write("Incubator",lang) %></p>
+	                                    <i class="fa fa-child fa-5x"></i>
 	                                </div>
 	                            </a>
 	                        </div>
@@ -127,6 +128,7 @@ for(Service service : servicesOfCenters){
 	                        <a href="#" id="ICU">
 	                            <div class="inner-emergency-part">
 	                                <p class="text-center"><%= t.write("ICU",lang) %></p>
+	                                <i class="fa fa-procedures fa-5x"></i>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -135,7 +137,7 @@ for(Service service : servicesOfCenters){
 	                            <div class="inner-emergency-part">
 
 	                                <p class="text-center"><%= t.write("pharmacy",lang) %></p>
-
+									<i class="fa fa-pills fa-5x"></i>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -143,6 +145,7 @@ for(Service service : servicesOfCenters){
 	                        <a href="#" id="MRI">
 	                            <div class="inner-emergency-part">
 	                                <p class="text-center"><%= t.write("mri",lang) %></p>
+	                                <img src="/admin/icons/mri.svg">
 	                            </div>
 	                        </a>
 	                    </div>
@@ -150,6 +153,7 @@ for(Service service : servicesOfCenters){
 	                        <a href="#" id="Delivery">
 	                            <div class="inner-emergency-part">
 	                                <p class="text-center"><%= t.write("Delivery",lang) %></p>
+	                                <i class="fa fa-child fa-5x"></i>
 	                            </div>
 	                        </a>
 	                    </div>
@@ -157,6 +161,7 @@ for(Service service : servicesOfCenters){
 	                        <a href="#" id="hospital">
 	                            <div class="inner-emergency-part">
 	                                <p class="text-center"><%= t.write("hospital",lang) %></p>
+	                                <i class="fa fa-hospital-alt fa-5x"></i>
 	                            </div>
 	                        </a>
 	                    </div>

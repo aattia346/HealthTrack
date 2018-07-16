@@ -914,12 +914,25 @@ label{
 }
 .inner-emergency-part p {
 	color: #fff;
-	font-size: 35px;
-	font-weight: 600;
-	line-height: 180px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 65px;
 }
 .emergency-part a:hover {
 	text-decoration: none;
+}
+.inner-emergency-part svg{
+	display: block;
+    margin: auto;
+    color: #fff;
+    margin-top: -13px;
+    margin-bottom: 30px;
+}
+.inner-emergency-part img{
+	height: 112px;
+    display: block;
+    margin: auto;
+    margin-top: -25px;
 }
 /*****************************************end of emergency page*****************************************************/
 
@@ -976,6 +989,31 @@ label{
 /*****************************************end of waiting list page*****************************************************/
 
 /*****************************************start of user page*****************************************************/
+.edit-profile{
+	position: absolute;
+    bottom: 10px;
+    right: 25px;
+}
+.profile-errors{
+	position: absolute;
+	top: 350px;
+	z-index: 5;
+	width: 85%;
+	text-align: center;
+}
+.single-personal-input input{
+	margin-top: 13px;
+    height: 32px;
+    border: none;
+    border-bottom: 1px solid #dedede;
+    width: 80%;
+    margin-left: 20px;
+}
+.whatsupNotification{
+	margin-top: 170px;
+	margin-bottom: -110px;
+	text-align: center;
+}
 .delete-booking-icon, .delete-booking-icon:hover{
 	position: absolute;
     top: 35px;

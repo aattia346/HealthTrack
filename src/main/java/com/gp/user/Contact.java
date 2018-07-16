@@ -1,10 +1,14 @@
 package com.gp.user;
 
+import java.util.Date;
+
 public class Contact {
 	
-	private int contactId;
+	private int contactId, seen;
 	
 	private String name, email, msg;
+	
+	Date contactTime;
 	
 	public Contact(String name, String email, String msg) {
 		super();
@@ -15,6 +19,24 @@ public class Contact {
 
 	public Contact() {
 		super();
+	}
+	
+	
+
+	public Date getContactTime() {
+		return contactTime;
+	}
+
+	public void setContactTime(Date contactTime) {
+		this.contactTime = contactTime;
+	}
+
+	public int getSeen() {
+		return seen;
+	}
+
+	public void setSeen(int seen) {
+		this.seen = seen;
 	}
 
 	public int getContactId() {

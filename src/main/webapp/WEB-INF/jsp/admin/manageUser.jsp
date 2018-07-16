@@ -78,7 +78,7 @@
                             <div class="form-group">
                       		  <label class=" form-control-label"><%=t.write("Choose user type",lang) %></label>
                               <select id=slct2 name="userType" class="form-control">
-                                <option value="0"><%=t.write("Please select",lang) %></option>
+                                <option value="0" disabled="disabled"><%=t.write("Please select",lang) %></option>
                                <option value="center"><%=t.write("Center",lang) %></option>
                                <option value="clinic"><%=t.write("Clinic",lang) %></option>
                                <option value="pharmacy"><%=t.write("Pharmacy",lang) %></option>
@@ -117,12 +117,12 @@
                  
 
 	<% }else if(action.equalsIgnoreCase("edit")){
-                	  		String title = "Edit New User";
-	                		String username = (String)session.getAttribute("username");
-	                		User admin = UserDao.getUserByUsername(username);
-		                	int userId = (int)request.getAttribute("userId");
-		                	User user = UserDao.getUserById(userId);
-		                	String Type = user.getType();
+            	String title = "Edit New User";
+	       		String username = (String)session.getAttribute("username");
+	      		User admin = UserDao.getUserByUsername(username);
+	        	int userId = (int)request.getAttribute("userId");
+	        	User user = UserDao.getUserById(userId);
+	        	String Type = user.getType();
 		                	
                 	  %>
 <%@include  file="includes/header.jsp" %>
@@ -146,9 +146,6 @@
                 </div>
             </div>
         </div>
-        <% 
-        	Person person =PersonDao.getPersonByUserID(userId);
-        	%>
         <form class="col-lg-12" action="/HealthTrack/admin/user/<%= userId %>/update" method="post">
         	<input type="hidden" name="userId" value="<%=userId%>">
                      <div class="card">
@@ -156,22 +153,6 @@
                       <div class="card-body card-block">
                       
               <div class="row form-group">
-                          <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("First Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter First Name",lang) %>" class="form-control" name="firstName" required="required" value="<%=person.getFirstName()%>" maxlength="50">
-					             ${invalidFirstName}
-                       			 ${shortFirstName}
-                          </div>
-                          </div>
-                          
-                          
-                          
-                          <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Last Name",lang) %></label> <input type="text" placeholder="<%=t.write("Enter Last Name",lang) %>" class="form-control" name="lastName" required="required" value="<%=person.getLastName() %>" maxlength="50">
-					             ${invalidLastName}
-                       			 ${shortLastName}
-                          </div> 
-                          </div>
-                          
                           <div class="col-12">
                             <div class="form-group"><label class=" form-control-label"><%=t.write("UserName",lang) %></label><input type="text" placeholder="<%=t.write("Enter User Name",lang) %>" class="form-control" name="userName" required="required" value="<%=user.getUsername() %>" maxlength="50">
 					             ${invalidUserName}
@@ -184,25 +165,17 @@
                             <div class="form-group">
                       		  <label class=" form-control-label"><%=t.write("Choose user type",lang) %></label>
                               <select id=slct2 name="userType" class="form-control">
-                                <option value="0"><%=t.write(user.getType(),lang) %></option>
+                                <option selected="selected" disabled="disabled">...</option>
                                <option value="center"><%=t.write("Center",lang) %></option>
                                <option value="clinic"><%=t.write("Clinic",lang) %></option>
                                <option value="pharmacy"><%=t.write("Pharmacy",lang) %></option>
                                <option value="person"><%=t.write("Person",lang) %></option> 
                                 <option value="hospital"><%=t.write("Hospital",lang) %></option>                                
-                              </select>                                                          
+                              </select>          
+                              ${typeNull}                                                
                             </div> 
                             </div> 
-					    
-					                   
-                          <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("phone",lang) %></label><input maxlength="11" type="text" placeholder="<%=t.write("Phone Number",lang) %>" class="form-control" name="phone" required="required" value="<%=person.getPhone() %>"></div>
-                            ${invalidPhone}
-                          </div>
-                          <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Email",lang) %></label><input type="text" placeholder="<%=t.write("Enter email",lang) %>" class="form-control"  required="required" name="email" value="<%=person.getEmail() %>"></div>
-                            ${invalidEmail}
-                          </div>
+	                         
                            <div class="col-12">
                            <div class="form-group"><label class=" form-control-label"><%=t.write("Password",lang) %></label>
                                 <input type="password" class="form-control" name="password" placeholder="<%=t.write("Password",lang) %>" required maxlength="20"></div>

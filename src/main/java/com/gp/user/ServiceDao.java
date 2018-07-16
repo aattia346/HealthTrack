@@ -699,5 +699,29 @@ abstract public class ServiceDao {
 		con.close();
 		
 	}
+	
+public static List<Review> getAllComments() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+		
+		List<Review> reviews = new ArrayList<Review>();
+		
+		Connection con = DBConnection.getConnection();
+		String sql="SELECT * FROM review JOIN person ON person.user_id  = review.user_id WHERE comment IS NOT NULL";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet result = ps.executeQuery();
+				
+		while(result.next()) {
+			Review review = new Review();
+			review.setReviewId(result.getInt("review_id"));
+			review.setUserFirstName(result.getString("firstname"));
+			review.setUserLastName(result.getString("lastname"));
+			review.setComment(result.getString("comment"));
+			review.setTime(result.getDate("time_of_comment"));
+			review.setShowComment(result.getInt("show_comment"));
+			reviews.add(review);		
+		}
+		con.close();
+		return reviews;
+	}
+
 
 }

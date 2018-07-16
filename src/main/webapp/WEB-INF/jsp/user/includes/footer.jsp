@@ -31,7 +31,7 @@
                     <div class="col-12 col-sm-6 col-lg-6">
                         <div class="footer-widget-area">
                             <div class="widget-title">
-                                <h2>Contact Form</h2>
+                                <h2><%= t.write("Contact Us") %></h2>
                             </div>
                             <div class="footer-contact-form">
                                 <form action="/HealthTrack/Contact/Submit" method="post">

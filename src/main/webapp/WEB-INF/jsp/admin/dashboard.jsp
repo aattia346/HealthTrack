@@ -36,7 +36,7 @@
 
             <div class="col-sm-12">
 
-                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
                   <span class="badge badge-pill badge-danger"><%=t.write("Warning",lang) %></span> <%=t.write("You successfully read this important alert message.<br> If you are not the authorized person you will be sued",lang) %>
 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

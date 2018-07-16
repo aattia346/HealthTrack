@@ -70,7 +70,7 @@ String title = center.getCenterName();
                     <div class="single-blog-area mb-100">
                         <!-- Post Thumbnail -->
                         <div class="blog-post-thumbnail">
-                            <img src="/user/layout/images/profiles/blog-img/Delivery.png">
+                            <img src="/user/layout/images/profiles/blog-img/${service.getServiceName()}.png">
                             <!-- Post Date -->
                             <div class="post-date">
                             <%	Service service = (Service)pageContext.getAttribute("service");

@@ -226,7 +226,7 @@ $(document).ready(function(){
     $(".confirm-user-delete-booking").click(function(){
     	return confirm("Are you sure you want to cancel this booking?");
     });
-    
+            
 });	
 
 //:: ScrollUp Active Code

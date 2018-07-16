@@ -440,6 +440,7 @@
                                         <a href="#map"><%= t.write("find the location google maps",lang)%></a>
                                     </div>
                                     <!-- Single Contact Info -->
+                                    <br><br>
                                     <div class="single-contact-info single-contact-info-icon-money">
                                         <div class="single-contact-info-icon"><i class="fas fa-money-bill-alt fa-3x"></i></div>
                                         <p class="text-center"><%= S.getFees() %></p>

@@ -105,7 +105,7 @@
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" maxlength="200" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="${oldWebsite}"></div>
                             ${invalidWebsite}
                           </div>
                          
@@ -137,7 +137,7 @@
                   </form>
                   
                   <% }else if(action.equalsIgnoreCase("edit")){
-                	  		String title = "Edit New Center";
+                	  		String title = "Edit Center";
 	                		String username = (String)session.getAttribute("username");
 	                		User admin = UserDao.getUserByUsername(username);
 		                	int centerAdminId = (int)request.getAttribute("AdminId");
@@ -165,7 +165,7 @@
             </div>
         </div>
         
-        <form class="col-lg-12" action="/HealthTrack/admin/hospital/<%= center.getAdminId() %>/update" method="post">
+        <form class="col-lg-12" action="/HealthTrack/admin/center/<%= center.getAdminId() %>/update" method="post">
         	<input type="hidden" name="centerId" value="<%= center.getCenterId() %>">
                     <div class="card">
                       <div class="card-header"><strong><%=t.write("Center",lang) %></strong><small><%=t.write("Form",lang) %> </small></div>
@@ -229,7 +229,7 @@
                             ${invalidPhone}
                           </div>
                           <div class="col-12">
-                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="<%= center.getWebsite() %>"></div>
+                            <div class="form-group"><label class=" form-control-label"><%=t.write("Website",lang) %></label><input type="text" maxlength="200" placeholder="<%=t.write("Website url",lang) %>" class="form-control"  required="required" name="website" value="<%= center.getWebsite() %>"></div>
                             ${invalidWebsite}
                           </div>
                          

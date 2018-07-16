@@ -52,8 +52,18 @@
 %>
 <div class="user-profile-body">
 <div class="container">
-
+${whatsupNotification}
 <div class="row">
+								<div class="${alert} profile-errors col-sm-12">
+	                            	${incorrectPassword}
+	                            	${invalidFirstName} 
+	                            	${invalidLastName} 
+	                            	${invalidPassword} 
+	                            	${passwordNotMatch}
+	                            	${invalidEmail}
+	                            	${emailAlreadyExists}
+	                            	${bannedEmail}
+                            	</div>
                 <div class="col-sm-5">
                     <div class="personal-data">
                         <div class="personal-data-head">
@@ -87,6 +97,29 @@
                                     <p class="col-sm-7"><a href="#allBookings"><%= PersonDao.countUserBookings(user.getId()) %></a></p>
                                 </div>
                             </fieldset>
+                            <form class="hidden" method="post" action="/HealthTrack/Profile/Edit">
+                            	<input type="hidden" name="id" value="<%= user.getId() %>">
+                            	<div class="single-personal-input">
+                                    <input class="col-sm-6" name="firstName" value="${oldFirstName}" placeholder="<%= t.write("first name",lang) %>">
+                                	<input class="col-sm-6" name="lastName" value="${oldLastName}" placeholder="<%= t.write("last name",lang) %>">
+                                </div>
+                                <div class="single-personal-input">
+                                    <input class="col-sm-12" name="email" value="${oldEmail}" placeholder="<%= t.write("email",lang) %>">
+                                </div>
+                                <div class="single-personal-input">
+                                    <input type="password" class="col-sm-12" name="oldPassword" placeholder="<%= t.write("old password",lang) %>">
+                                </div>
+                                <div class="single-personal-input">
+                                    <input type="password" class="col-sm-12" name="newPassword" placeholder="<%= t.write("new password",lang) %>">
+                                </div>
+                                <div class="single-personal-input">
+                                    <input type="password" class="col-sm-12" name="confirmPassword" placeholder="<%= t.write("Confirm password",lang) %>">
+                                </div>
+                                <div class="single-personal-input">
+                                    <input class="col-sm-12 btn btn-success" value="<%= t.write("Submit") %>" type="submit">
+                                </div>
+                            </form>
+                            <a class="pull-right edit-profile" id="editProfile"> <%= t.write("edit my profile") %></a>                        	
                         </div>
                     </div>
                 </div>
@@ -285,6 +318,12 @@
 </div>
 <%@include  file="../includes/footer.jsp" %>
 <script>
-console.log($("body").height()- 630);
 $(".all-bookings").css("height" , $("body").height()- 1100);
+$("#editProfile").click(function(){
+	$(".personal-data-details fieldset").toggleClass("hidden");
+	$(".personal-data-details form").toggleClass("hidden");
+});
+setTimeout(function(){ 
+	$(".profile-errors").hide(); 
+	}, 5000);
 </script>

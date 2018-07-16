@@ -7,12 +7,12 @@ $(document).ready(function(){
 		$("."+id).slideToggle();
 		
 	});
+	
 	$(".confirm-delete-booking").click(function(){
         
         return confirm("Are you sure you want to delete this booking?");
         
-    });
-	
+    });	
 	$(".confirm-verify-booking").click(function(){
 	        
 	        return confirm("Are you sure you want to verify this booking?");
@@ -51,8 +51,8 @@ $(document).ready(function(){
 	});
 	$(".confirm-delete-comment").click(function(){
     
-    return confirm("Are you sure you want to delete this comment?");
-    
+		return confirm("Are you sure you want to delete this comment?");
+		
 	});
    $(".confirm-Ban-user").click(function(){
 	    
@@ -104,6 +104,11 @@ $(".confirm-delete-user").click(function(){
     
 });
 
+$(".confirm-delete-contact").click(function(){
+    
+    return confirm("Are you sure you want to delete this contact?");
+    
+});
 
 });	
 

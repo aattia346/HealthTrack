@@ -121,7 +121,9 @@
                         <td><%= Math.round(hospital.getReview()*10.0)/10.0 %></td>
                         <td>
                         <div>
+                        <% if(hospital.getDimmed()== 0){ %>
                         <a class="dashboard-btn" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/<%= hospital.getAdminId() %>/edit" title=<%=t.write("Edit this hospital",lang) %>><i class="fa fa-edit"></i></a>
+                       	<% } %>
                         <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/hospital/delete/<%= hospital.getHospitalId() %>" title=<%=t.write("Delete this hospital",lang) %>><i class="fa fa-close"></i></a>
                         </div>
                         </td>

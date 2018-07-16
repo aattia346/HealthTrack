@@ -72,20 +72,19 @@ abstract public class CenterDao {
 		
 		Connection con = DBConnection.getConnection();
 		String sql="UPDATE center "
-				+ "SET center_name=?, admin_id=?, lat=?, lang=?, phone=?, website=?, address=?, intro=?, google_maps_url=? "
+				+ "SET center_name=?, lat=?, lang=?, phone=?, website=?, address=?, intro=?, google_maps_url=? "
 				+ "WHERE center_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setString(1,center.getCenterName());
-		ps.setInt(2, center.getAdminId());
-		ps.setFloat(3, center.getLat());
-		ps.setFloat(4, center.getLang());
-		ps.setString(5, center.getPhone());
-		ps.setString(6, center.getWebsite());
-		ps.setString(7, center.getAddress());
-		ps.setString(8, center.getIntro());
-		ps.setString(9,center.getGoogleMapsUrl());
-		ps.setInt(10,center.getCenterId());
+		ps.setFloat(2, center.getLat());
+		ps.setFloat(3, center.getLang());
+		ps.setString(4, center.getPhone());
+		ps.setString(5, center.getWebsite());
+		ps.setString(6, center.getAddress());
+		ps.setString(7, center.getIntro());
+		ps.setString(8,center.getGoogleMapsUrl());
+		ps.setInt(9,center.getCenterId());
 		
 		ps.executeUpdate();
 		

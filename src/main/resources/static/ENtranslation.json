@@ -242,7 +242,8 @@
 		  "please follow the instructions of clinic to confirm your booking" : "please follow the instructions of clinic to confirm your booking",
 		  " you successfully booked through SoSHealth" : " you successfully booked through SoSHealth",
 		  "Your booking has been confirmed" : "Your booking has been confirmed",
-		  "Your booking has been cancelled": "Your booking has been cancelled"
+		  "Your booking has been cancelled": "Your booking has been cancelled",
+		  "Contact Us" : "Contact Us"
 		  	},
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -495,6 +496,7 @@
 		 "please follow the instructions of clinic to confirm your booking" : "من فضلك اتبع التعليمات على صفحه العياده لتأكيد الحجز.",
 		 " you successfully booked through SoSHealth" : "لقد قمت بحجز الخدمه بنجاح من خلال SoSHealth",
 		 "Your booking has been confirmed" : "لقد تم تأكيد الحجز بنجاح",
-		 "Your booking has been cancelled" : "تم الغاء الحجز الخاص بك"
+		 "Your booking has been cancelled" : "تم الغاء الحجز الخاص بك",
+		 "Contact Us" : "أتصل بنا"
 	}
 }

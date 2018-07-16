@@ -92,7 +92,7 @@ List<Service> servicesOfHospital = ServiceDao.getAllServicesOfHospitals();
 for(Service service : servicesOfHospital){
 	serviceUrl = "/HealthTrack/profile/service/hospital/"+service.getServiceId();	
 	calendar.setTime(today);
-	calendar.add(Calendar.DAY_OF_MONTH, -1);
+	//calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";
@@ -116,7 +116,7 @@ List<Service> servicesOfCenters = ServiceDao.getAllServicesOfCenters();
 for(Service service : servicesOfCenters){
 	serviceUrl = "/HealthTrack/profile/service/center/"+service.getServiceId();	
 	calendar.setTime(today);
-	calendar.add(Calendar.DAY_OF_MONTH, -1);
+	//calendar.add(Calendar.DAY_OF_MONTH, -1);
 	if(service.getSlotType()==1){
 		if(Validation.validateBookDate(service.getServiceId(), calendar.getTime())){
 			servicePinColor = "52BC5F";

@@ -67,10 +67,8 @@
                         <td><%= t.write(user.getType(),lang) %></td>
                         <td>
                         <div>
-                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/bannedUser/delete/<%=user.getId() %>" title="<%= t.write("Delete this User",lang) %>"><i class="fa fa-close"></i></a>
-                       
-                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="btn btn-success confirm-unBan-user"><%= t.write("unBan",lang) %></a>                    
-                       
+	                        <a class="dashboard-btn confirm-delete-hospital" href="/HealthTrack/admin/<%= admin.getUsername() %>/bannedUser/delete/<%=user.getId() %>" title="<%= t.write("Delete this User",lang) %>"><i class="fa fa-close"></i></a> 
+	                       <a href="/HealthTrack/user/unban/<%= admin.getId() %>/${user.id}" class="confirm-unBan-user" title="<%= t.write("unBan",lang) %>"><i class="fa fa-unlock-alt"></i></a>                    	                                     
                         </div>
                         </td>
                       </tr>

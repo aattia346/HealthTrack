@@ -14,7 +14,7 @@
     	int unseenContacts = ContactDao.countUnseenContacts();
     	
     	List<Contact> contacts = ContactDao.getUnseenContacts();
-    	request.setAttribute("contacts", contacts);
+    	request.setAttribute("unseencontacts", contacts);
 
     %>
 
@@ -122,6 +122,13 @@
                             <li><i class="fa fa-ban"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/bannedUsers"><%=t.write("Banned Users",lang) %></a></li>
                         </ul>
                     </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-plus-square"></i><%=t.write("Others",lang) %></a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-phone-square"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/Contacts"><%=t.write("Contacts",lang) %></a></li>
+                            <li><i class="fa fa-comment"></i><a href="/HealthTrack/admin/<%= admin.getUsername()%>/Comments"><%=t.write("Comments",lang) %></a></li>
+                        </ul>
+                    </li>
                     
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -154,8 +161,8 @@
                           <div class="dropdown-menu" aria-labelledby="notification">
 
                             <p class="red"><%=t.write("You have",lang) + " " + unseenContacts + " " + t.write("Notifications",lang) %></p>
-                            	<c:forEach var="contact" items="${contacts}">
-                            		<a class="dropdown-item media bg-flat-color" href="/HealthTrack/Contacts/admin/<%= admin.getUsername() %>/${contact.contactId}">
+                            	<c:forEach var="contact" items="${unseencontacts}">
+                            		<a class="dropdown-item media bg-flat-color" href="/HealthTrack/admin/<%= admin.getUsername() %>/Contacts#contact-${contact.contactId}">
                             			<p><%= t.write("Contact",lang) %>#${contact.contactId}  <%= t.write("from",lang) %> ${contact.name}</p>
                             		</a>
                             	</c:forEach>

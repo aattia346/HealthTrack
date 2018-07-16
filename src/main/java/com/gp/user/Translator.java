@@ -2,7 +2,6 @@ package com.gp.user;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONException;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,31 +22,11 @@ public class Translator {
 	}
 	
 	public String write(String word,String language) throws IOException, ParseException {
-		JSONParser parser = new JSONParser();
-		File translationFile;
-		if(language.equals("en")) {		
-			translationFile = new File("C:\\Users\\Ahmed\\Desktop\\ENtranslation.json"); 
-		}
-		else {
-			translationFile = new File("C:\\Users\\Ahmed\\Desktop\\ARtranslation.json"); 
-		}
-		
-		path = translationFile.getPath();
-				
-		FileReader fr = new FileReader(path.replaceAll("\\\\","\\\\\\\\"));
-		
-		JSONObject obj = (JSONObject) parser.parse(fr);
-		  
-		JSONObject jsonObject = new JSONObject();
-		
-		jsonObject = (JSONObject) obj.get(language);
-		translate = (Map<String, String>) obj.get(language);
+	
 		if(translate.get(word) != null) {
 			return translate.get(word);
-			
 		}else {
 			return word;
-			
 		}
 		
 	}
@@ -98,6 +76,39 @@ public class Translator {
 			 }
 		
 	 } 
+	 
+	 public Translator(String language) throws ParseException, JSONException, IOException {
+		 
+		 	translate.clear();
+			
+			JSONParser parser = new JSONParser();
+					
+			File translationFile = new File("src\\main\\resources\\static\\ENtranslation.json"); 
+			
+			String path = translationFile.getPath();
+					
+			FileReader fr = new FileReader(path.replaceAll("\\\\","\\\\\\\\"));
+			
+			JSONObject obj = (JSONObject) parser.parse(fr);
+			  
+			JSONObject jsonObject = new JSONObject();
+			
+			jsonObject = (JSONObject) obj.get(language);
+					
+			translate = (Map<String, String>) obj.get(language);
+			
+		}
+		
+		public String write(String word) {
+			
+			if(translate.get(word) != null) {
+				return translate.get(word);
+			}else {
+				return word;
+			}
+			
+		}
+
 	
 	
 }
