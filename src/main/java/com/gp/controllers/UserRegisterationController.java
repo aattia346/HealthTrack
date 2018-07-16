@@ -193,6 +193,7 @@ public class UserRegisterationController {
 		String email			= request.getParameter("email");
 		
 		User U = UserDao.getUserById(id);
+		Person P = PersonDao.getPersonByUserID(id);
 		
 		model.addAttribute("oldFirstName", firstName);
 		model.addAttribute("oldLastName", lastName);
@@ -225,11 +226,6 @@ public class UserRegisterationController {
 			model.addAttribute("invalidEmail", "<p class=\"wrong-input\">" + t.write("Invalid Email", cookie) + "</p>");
 			errors = false;
 		}
-		if(Validation.checkIfSomethingExists("email", "person", email)) {
-			model.addAttribute("emailAlreadyExists", "<p class=\"wrong-input\">" + t.write("Sorry this email alreay exists", cookie) + "</p>");
-			errors = false;
-		}
-		
 		if(Validation.checkEmailBan("email")) {
 			model.addAttribute("bannedEmail", "<p class=\"wrong-input\">" + t.write("Sorry this email is banned", cookie) + "</p>");
 			errors = false;
@@ -239,31 +235,21 @@ public class UserRegisterationController {
 			//create the info of login
 			String encryptedPassword = Validation.encryptePssword(newPassword);
 			int verificationCode = Validation.generateCode();
-			User user = new User();
-			user.setId(id);
-			user.setPassword(encryptedPassword);
-			user.setVerificationCode(verificationCode);
+			U.setPassword(encryptedPassword);
+			U.setVerificationCode(verificationCode);
+			UserDao.updateUser(U);
 			//start the storage to the database		
 			
 			Person person = new Person();
-			person.setId(user.getId());
+			person.setId(U.getId());
 			person.setFirstName(firstName);
 			person.setLastName(lastName);
 			person.setEmail(email);
 			person.setVerified(0);
+			person.setPhone(P.getPhone());
 			PersonDao.updatePerson(person);
 			
 			Validation.sendEmail(email, firstName,verificationCode);
-			//and after storing the data redirect to the profile
-			model.addAttribute("id"			, user.getId());
-			model.addAttribute("username"	, user.getUsername());
-			model.addAttribute("password"	, user.getPassword());
-			model.addAttribute("firstName"	, person.getFirstName());
-			model.addAttribute("lastName"	, person.getLastName());
-			model.addAttribute("email"		, person.getEmail());
-			model.addAttribute("phone"		, person.getPhone());
-			model.addAttribute("type"		, user.getType());
-			mav.addAllObjects(model);
 			mav.setViewName("/user/verificationPage");
 		}else {
 			model.addAttribute("alert"		, "alert alert-danger");
