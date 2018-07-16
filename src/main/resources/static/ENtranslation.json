@@ -223,7 +223,7 @@
 		  "our services part" : "Health service navigator is a medical problem solving depending on website for finding a medical service in a hospital, clinical and medical health care center. You book the service and wait to be confirmed for the patient visit to any service availability.after verifying your location you can search for a certain service (ICU,Incubators,MRI sessions).<br>If you want to get more info about hospitals and book your service please sign in.<br>After getting your reservation, we’ll be grateful to rate the service and post a comment.",
 		  "Our Main Services" : "Our Main Services",
 		  "About Us" : "About Us",
-		  "hospitals part" : "Hospitals with active locators is a member in our company, so feel safe when you book one of its services. The hospitals with passive ones have the required service but we don’t sure if it’s available right now for you or not.",
+		  "hospitals part" : "Hospitals with active locators is a member in our company, so feel safe when you book one of its services.",
 		  "Incubators" : "Incubators",
 		  "service part" : "Dear customer,be sure when you book with a member hospital, which has an active locator, it’ll be honest in updating the availability of the service for you.",
 		  "clinic part" : "Health Service Navigator helps you to find the nearest clinic to your location and all information you need about it and its doctor and you can book it too.",
@@ -243,7 +243,8 @@
 		  " you successfully booked through SoSHealth" : " you successfully booked through SoSHealth",
 		  "Your booking has been confirmed" : "Your booking has been confirmed",
 		  "Your booking has been cancelled": "Your booking has been cancelled",
-		  "Contact Us" : "Contact Us"
+		  "Contact Us" : "Contact Us",
+		  "Back To Home Page" : "Back To Home Page"
 		  	},
 	"ar" : {
 		"username:" : ":أسم المستخدم",
@@ -497,6 +498,8 @@
 		 " you successfully booked through SoSHealth" : "لقد قمت بحجز الخدمه بنجاح من خلال SoSHealth",
 		 "Your booking has been confirmed" : "لقد تم تأكيد الحجز بنجاح",
 		 "Your booking has been cancelled" : "تم الغاء الحجز الخاص بك",
-		 "Contact Us" : "أتصل بنا"
+		 "Contact Us" : "أتصل بنا",
+		 "Back To Home Page" : "العوده الى الصفحه الرئيسيه",
+		 "Sorry! Page not found" : "عذرا! الصفحه غير موجوده"
 	}
 }
